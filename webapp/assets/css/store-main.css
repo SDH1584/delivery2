@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+/* 가게이름 */
+h2 {
+	text-align:left;
+    padding: 30px 10px 0px 0px;
+    font-size: 28px; 
+    float:left;
+	}
+
+/* 가게 활성화버튼 */
+#store-name button{
+	float:left;
+	margin: 20px 10px 20px 0px; 
+	width:15%; height:46px; 
+	background-color:#5f0081; 
+	border-color:#5f0080;
+	border-radius:5px; 
+	color:#fff; 
+	font-size:12px; 
+	font-weight:bold;
+}
+
+/* 표공통 */
+h3{
+	font-size : 13px; 
+	font-weight: bold;
+	text-align:left;
+	margin: 15px 0px 15px 0px;
+
+}
+
+table{width:480px; text-align:center;}
+th{
+	padding: 25px 0px 23px 0px; 
+	border-top:2px solid #522772;
+	text-align:center; 
+	font-size: 12px;}
+td{
+	padding: 22px 0px 23px 0px; 
+	border-top:1px solid #e3e3e3;
+	text-align:center; 
+	font-size: 12px;}
+.td-btn{padding:0px;}
+.last td{
+	border-bottom: 1px solid #522772;
+}
+
+table button{height:34px;}
+/* 주문예약 영역 */
+#reserve-list{
+	float:left;
+}
+
+#reserve-list h3{float:left;}
+
+
+/* 예약막기버튼 */
+#reserve-list>button{
+	float:left;
+	width:100px; height:34px; 
+	border:1px solid #5f0080; color: #5f0080; 
+	border-radius:3px; 
+	font-size: 12px; 
+	background-color:#fff;
+	margin:5px 0px 0px 10px;
+}
+
+/* 승인주문 영역 */
+#order-list{
+	float:right;
+	padding-left:20px;
+}
+
+
+
+/* 주문 상세내역 */
+.modal-body th, .modal-body td{ font-size : 12px; padding: 3px;}
+.modal-body table{margin-top:10px;}
+tfoot td{border-top:1px dashed #111;}
+#detail-each{border-left: 1px dashed #ddd; padding-left:20px;}
+caption {font-weight:bolder;}
