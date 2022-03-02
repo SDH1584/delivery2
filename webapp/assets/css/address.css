@@ -1,0 +1,233 @@
+@charset "UTF-8";
+/****************************************************************/
+/* 초기화 관련 ***************************************************/
+/****************************************************************/
+
+/* 여백 초기화 */
+body, div, ul, li, dl, dt, ol, h1, h2, h3, h4, h5, h6, 
+input, fieldset, legend, p, select, table, th, td, tr,
+textarea, button, form {margin: 0; padding: 0;}
+
+body	{font-size:12px; font-family: "맑은 고딕", 돋움, 굴림; text-align:center; color: #333; background-color: #fff;}
+
+ul, ol	{list-style-type: none; }
+a:link {text-decoration: none; color: #000000; } 
+a:visited {text-decoration: none; color: #000000; }
+a:active {text-decoration: none; color: #000000; }
+a:hover {text-decoration: none; color: #000000; }
+
+
+.clearfix{*zoom:1;}
+.clearfix:before, .clearfix:after {display: block; content: ""; line-height: 0;}
+.clearfix:after {clear: both;}
+
+#wrap {
+    width: 1000px;
+    margin: 0px auto;
+    
+}
+
+#header {
+    width: 1000px; 
+    padding: 5px 0px 10px 0px; 
+}
+
+#wrap {
+/* background-color:  #c1c1ff; */
+border-bottom: 1px solid #a6a6a6;
+}
+
+#footer{
+    margin:0 auto; /* 가운데 정렬*/
+    width: 1000px;
+    border-top: #5F0080 1px solid;
+    border-bottom: #5F0080 1px solid;
+}
+
+#nav>ul {
+    margin: 10px 0px 10px 0px;
+    }
+
+
+.ullink1>li{
+float: left;
+width: 165px;
+height: 26px;
+font-size: 16px;
+font-weight: 700;
+text-align: left;
+}
+
+.ullink2{
+	float: right;
+}
+
+.ullink2>li{
+float: left;
+height: 26px;
+font-size: 12px;
+color : #333;
+font-weight: 400;
+text-align: center;
+margin-top: 7px;
+padding: 0px 12px 0px 12px
+}
+
+
+.aside {
+    float: left; 
+    width: 160px; 
+    margin-top: 20px;
+    margin-bottom: 20px;
+    }
+    
+    .aside ul {width: 160px;
+    }
+    
+    .aside ul>li {
+
+    margin: 5px 0px 0px 0px; 
+    padding: 15px 0px 15px 0px;
+    font-size: 14px; 
+    text-align: center; 
+    background-color: #FAFAFA;
+    border-bottom: 1px solid #f2f2f2;
+    }
+
+    #aside-top {
+        padding: 30px 0px 30px 0px; 
+        font-weight: bold;
+        color:#fff;
+        background-color: #5F0080;
+    }
+    
+#myreview{
+    background-color: #60008021;
+    font-weight: bold;
+}
+
+
+
+.link2:hover{
+    color: #5F0080;    
+}
+
+.h2img{
+    max-width: 100%; /* 이미지 테이블 크기에 자동 맞춤*/
+    vertical-align: bottom; /* 이미지 공백 없애기*/
+    object-fit: fill;
+}
+
+/* 배송지관리 */
+#main {
+    float: right;
+    margin-top: 20px;
+    width: 798px;
+}
+
+#address-header{
+	padding:30px 0px 20px 0px;
+}
+
+#main h3{
+	font-size:24px;
+	float:left;
+}
+#newAddress{
+	font-size:16px;
+	font-weight:bold;
+	color: #333;
+	float:right;
+	border : 1px none #fff;
+	background-color:#fff;
+}
+
+#main #addressTable{
+	width:100%;
+	border-collapse:separate;
+}
+
+#addressTable th{
+	font-size: 14px;
+	padding: 17px 0px 20px 0px;
+	border-top: 2px solid #333;
+	border-bottom: 1px solid #333 !important;
+	text-align: center;
+}
+
+#addressTable td{
+	
+	border-bottom:1px solid #f4f4f4;
+	font-size: 14px;
+
+}
+
+#addressTable td.address{
+	font-size:16px;
+	padding: 20px;
+	text-align:left;
+}
+
+#default-adress{
+	font-size:12px;
+	font-weight:bold;
+	border-radius:12px;
+	background-color:#f7f7f7;
+	padding: 5px;
+}
+.addressModify{
+	border:1px none #fff;
+}
+
+
+/* 주소입력창 */
+.modal-body button{
+	padding: 10px;
+	margin-left:15px;
+	border: 1px solid #5F0080;
+	border-radius: 5px;
+    background-color: #5F0080;
+    color:#fff;
+    width: 45%; height:44px;
+    font-size:14px;
+}
+.modal-body input{
+	width:100%; height:42px;
+	border:1px solid #e2e2e2;
+	font-size:14px;
+	padding: 0px 10px 0px 10px;
+	margin: 10px 0px 10px 0px;
+}
+.modal-body label{
+	font-size:14px;
+	font-weight:400;
+	margin-top:15px;
+	text-align:left;
+	width:100%;
+}
+#addressMain{
+	float:left;
+	width:78%;
+}
+#addressSearch{
+	float:right;
+	width:110px;
+	margin: 10px 0px 0px 0px;
+	background-color: #fff;
+	color:#5F0080;
+	border:1px solid #5F0080;
+}
+
+.footerh1>li{
+    float: left; 
+    margin-right: 20px;
+    text-align: center;
+}
+
+.footerh1{
+    margin-left: 230px;
+}
+
+.footerh2{
+    text-align: left;
+}

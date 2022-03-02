@@ -1,0 +1,114 @@
+@charset "UTF-8";
+
+.aside {
+    float: left; 
+    width: 160px; 
+    margin-top: 20px;
+    }
+    
+    .aside ul {width: 160px;
+    }
+    
+    .aside ul>li {
+
+    margin: 5px 0px 0px 0px; 
+    padding: 15px 0px 15px 0px;
+    font-size: 14px; 
+    text-align: center; 
+    background-color: #FAFAFA;
+    border-bottom: 1px solid #f2f2f2;
+    }
+
+    #aside-top {
+        padding: 30px 0px 30px 0px; 
+        font-weight: bold;
+        color:#fff;
+        background-color: #5F0080;
+    }
+    
+#myreview{
+    background-color: #60008021;
+    font-weight: bold;
+}
+
+/* 리뷰 */
+#main{float:right;
+padding:35px 0px 0px 20px;
+text-align:left;}
+
+#main h3{
+	font-size: 24px;
+	font-weight:bold;
+	margin-bottom: 20px;
+}
+.review-box{
+	width:780px;
+}
+.review-box table{
+	width:100%;
+	font-size:14px;
+	border-top:1px solid #e3e3e3;
+	margin-top: 20px;
+}
+.review-box th{
+	padding:20px 0px 18px 0px;
+}
+.review-box img{
+	width:100%;
+	height:300px;
+	object-fit:cover;
+}
+.review-box p{
+	padding:0px 0px 20px 0px;
+	width:100%;
+	font-size:14px;	
+}
+.review-menu{
+	font-size:12px !important;
+	font-weight: bold;
+	color:#666;
+	margin-top:20px;
+}
+button {
+    padding: 10px;
+	margin-left:15px;
+	border: 1px solid #5F0080;
+	border-radius: 5px;
+    background-color: #5F0080;
+    color:#fff;
+
+}
+
+td.btn{
+	width:100%;
+	text-align:right !important;
+	padding: 7px 0px 0px 0px !important;
+}
+
+
+/* 답글 */
+.reply{
+	background-color: #ddd;
+	width:100%; height:auto;
+	padding:20px;
+}
+.reply-content{
+	padding:20px 0px 0px 0px !important;
+}
+.reply span{
+	font-size:14px;
+	font-weight: bold;
+
+}
+#replyModal p{
+	text-align:left;
+	width: 100%;
+	font-size: 16px;
+	margin-bottom: 10px;
+}
+textarea{
+	width:100%; height:300px;
+	border:1px solid #e2e2e2;
+	font-size: 16px;
+	padding:10px;
+}

@@ -1,0 +1,104 @@
+@charset "UTF-8";
+
+/* 가게이름 */
+h2 {
+	text-align:left;
+    padding: 30px 10px 0px 0px;
+    font-size: 28px; 
+	}
+
+/* 기간별 조회 */
+#select-period{
+	width:100%;
+	padding: 14px 0px 17px 0px;
+	margin-top: 20px;
+	border: 1px solid #ddd;
+}
+#select-period h3{
+	float:left;
+	font-size: 16px;
+	color:#5f0080;
+	margin:7px 0px 0px 0px;
+	padding-left:29px;
+
+}
+#select-period ul{
+	float:left;
+	border: 1px solid #ddd;
+	margin-left: 25px;
+	padding: 5px 0px 5px 0px;
+}
+#select-period li{
+	float:left; 
+	font-size: 14px;
+	font-weight: bold;
+	color:#666;
+	width: 55px; height: 20px;
+	border-right: 1px solid #ddd;
+}
+
+#select-period form li{
+	width:100px;
+}
+
+#dash {width:30px!important ;}
+#select-period input{
+	width:90%; height:100%;
+	border:1px none #fff;
+	margin-left: 10px;
+}
+#select-period button{
+	float:left;
+	margin:0px 25px 0px 25px;
+	height:30px;
+	background-color:#5f0080;
+	font-size:14px;
+	font-weight: bold;
+	color:#fff;
+	border:1px none #fff;
+	padding: 0px 10px 0px 10px;
+	
+}
+
+/* 표공통 */
+h3{
+	font-size : 16px; 
+	font-weight: bold;
+	text-align:left;
+	margin: 25px 0px 15px 0px;
+
+}
+th{
+	padding: 25px 0px 23px 0px; 
+	border-top:2px solid #522772;
+	text-align:center; 
+	font-size: 14px;}
+td{
+	padding: 22px 0px 23px 0px; 
+	border-top:1px solid #e3e3e3;
+	text-align:center; 
+	font-size: 14px;}
+
+.last td{
+	border-bottom: 1px solid #522772;
+}
+
+/* 매출통계 */
+#total-sales{ float:left;}
+#total-sales table{width:400px; text-align:center;}
+
+/* 주문내역 */
+#order-list{
+	float:right;
+	padding-left:20px;
+}
+#order-list table{width:555px; text-align:center;}
+
+
+
+/* 주문 상세내역 */
+.modal-body th, .modal-body td{ font-size : 12px; padding: 3px;}
+.modal-body table{margin-top:10px;}
+tfoot td{border-top:1px dashed #111;}
+#detail-each{border-left: 1px dashed #ddd; padding-left:20px;}
+caption {font-weight:bolder;}

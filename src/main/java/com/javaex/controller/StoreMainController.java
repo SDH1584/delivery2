@@ -11,7 +11,7 @@ public class StoreMainController {
 	public String main() {
 		System.out.println("StoreMainController.main");
 		
-		return "store-detail/order-first";
+		return "store/review-manage";
 	}
 	
 	
