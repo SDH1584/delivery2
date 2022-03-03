@@ -8,8 +8,8 @@
 <title>Insert title here</title>
 
 <link href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/assets/css/main.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/assets/css/inquiryList.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/assets/css/total.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/assets/css/user-mypage/inquiryList.css" rel="stylesheet">
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.js"></script>
@@ -55,33 +55,15 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+							<tr data-toggle="collapse" data-target="#demo3" class="accordion-toggle">
 							<td>2022-02-24</td>
 							<td>1234456</td>
 							<td>포인트</td>
-							<td><a href="">포인트 미지급문의드립니다 </a></td>
+							<td>포인트 미지급문의드립니다</td>
 							<td>답변대기중</td>
 						</tr>
 						<tr>
-							<td>2022-02-24</td>
-							<td>1234456</td>
-							<td>포인트</td>
-							<td><a href="">포인트 미지급문의드립니다 </a></td>
-							<td>답변대기중</td>
-						</tr>
-						<tr>
-							<td>2022-02-24</td>
-							<td>1234456</td>
-							<td>포인트</td>
-							<td><a href="">포인트 미지급문의드립니다 </a></td>
-							<td>답변대기중</td>
-						</tr>
-						<tr>
-							<td>2022-02-24</td>
-							<td>1234456</td>
-							<td>포인트</td>
-							<td><a href="">포인트 미지급문의드립니다 </a></td>
-							<td>답변대기중</td>
+							<td colspan="5" class="hiddenRow"><div id="demo3" class="accordian-body collapse">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div></td>
 						</tr>
 						<tr data-toggle="collapse" data-target="#demo3" class="accordion-toggle">
 							<td>2022-02-24</td>

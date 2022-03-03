@@ -1,0 +1,181 @@
+@charset "UTF-8";
+
+#container {
+	float:left;
+	border-top: #60008027 2px solid;
+	padding:40px 0px 20px 0px;
+
+}
+
+
+/* 상단 지도+가게정보 영역*/
+#wrap2{
+	float:left;
+	width: 1000px;
+	margin: 10px 0px 80px 0px;
+}
+
+#listtitle {
+	padding: 40px 0px 50px 0px;
+	text-align: center;
+}
+
+#listtitle h1 {
+	display: inline-block;
+	font-size: 28px;
+	font-weight: bold;
+	text-align: left;
+	color: #666;
+	background-color: #fff;
+}
+
+#map-area{
+	float:left;
+}
+
+#map{
+	float: left;
+    width: 500px; 
+    height: 250px; 
+	border: #60008027  1px solid; 
+};
+
+#store-info-area{
+	float:left;
+}
+
+#store-info{
+	float:left;
+	width: 495px;
+	height: 250px;
+	padding: 5px;
+	background-color: #fff !important;
+	border: #60008027 1px solid;
+	text-align: left;
+}
+
+
+#storeLogo {
+	border:#60008027 1px solid;
+	border-radius: 20px;
+	margin: 10px;
+	width: 130px;
+	height: 130px;
+}
+
+#name {
+	font-size: 20px;
+	color: #333;
+}
+
+#delivery-num {
+	font-size: 13px;
+	font-weight: 400px;
+	color: #333;
+}
+
+#reserve-btn{
+	width: 480px;
+	background-color: #fff;
+	border:#5F0080 1px solid;
+	border-radius: 10px;
+	padding: 10px;
+	color:#5F0080;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+#delivery-address {
+	font-size: 13px;
+	font-weight: 400px;
+	color: #333;
+}
+
+#delivery-hp {
+	font-size: 13px;
+	font-weight: 400px;
+	color: #333;
+}
+
+#recommend {
+	font-size: 13px;
+	font-weight: 400px;
+	color: #333;
+}
+
+
+#storelist {
+	margin-left: 12px;
+	margin-right: 12px; height : 300px;
+	font-size: 13px;
+	margin-top: 30px;
+	color: #999;
+	width: 180px;
+	float: left;
+	height: 300px;
+}
+
+#storelistfirst {
+	margin-left: 0px;
+	margin-right: 12px;
+	height: 300px;
+	font-size: 13px;
+	margin-top: 30px;
+	color: #999;
+	width: 180px;
+	float: left;
+}
+
+#storelistlast {
+	margin-left: 10px;
+	float : right; 
+	height : 300px;
+	font-size: 13px;
+	margin-top: 30px;
+	color: #999;
+	width: 180px;
+	float: left;
+	height: 300px;
+	float: right;
+}
+
+
+
+#storelistLogo {
+	float: left;
+	display: block;
+	width: 100%;
+	height: 150px;
+	margin-left: auto;
+	margin-bottom: 20px;
+}
+
+button {
+	color: #ffffff;
+	background-color: #5F0080;
+	font-weight: 400px;
+	width: 95px;
+	height:40px;
+}
+/*click{
+	width: 115px;
+	background-color: #5F0080;
+	border:#5F0080 1px solid;
+	border-radius: 10px;
+	margin-top: 10px;
+	color: #fff;
+	font-size: 14px;
+	font-weight: bold;
+}
+*/
+
+.click{
+	width: 115px;
+	background-color: #ffffff;
+	border:#5F0080 1px solid;
+	border-radius: 10px;
+	margin-top: 10px;
+	color: #5F0080;
+	font-size: 15px;
+	font-weight: bold;
+}
