@@ -15,11 +15,12 @@ public class JinUserController {
 		return "user/cateList";
 	}
 	
-	
+	// 선택 리스트
 	@RequestMapping("/storeList")
 	public String storeList() {
 		System.out.println("JinUserController/storeList");
 
 		return "user/storeList";
 	}
+	
 }
