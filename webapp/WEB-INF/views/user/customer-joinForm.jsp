@@ -6,7 +6,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="${pageContext.request.contextPath}/assets/css/main.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath}/assets/css/user.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/user/user.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.12.4.js"></script>
+
 </head>
 <body>
 	<div id="wrap" class="box-gray clearfix">
@@ -80,9 +83,33 @@
 		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 	</div>
 
-
 </body>
 <script type="text/javascript">
+	$("#btn_submit").on("click", function() {
+		console.log("가입하기 버튼 클릭");
+		
+		var id = $("#c_id").val();
+		var pw = $("#c_pass").val();
+		var phone = $("#c_phone").val();
+		var addr = $("#c_addr").val();
+		
+		if(id == "") {
+			alert("아이디를 입력해 주세요.");
+			return false;
+		}
+		if(pw == "") {
+			alert("비밀번호를 입력해 주세요.");
+			return false;
+		}
+		if(phone == "") {
+			alert("휴대전화 번호를 입력해 주세요.");
+			return false;
+		}
+		if(addr == "") {
+			alert("주소를 입력해 주세요.");
+			return false;
+		}
+		return true;
+	});
 </script>
-
 </html>

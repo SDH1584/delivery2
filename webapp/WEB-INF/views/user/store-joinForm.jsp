@@ -6,7 +6,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="${pageContext.request.contextPath}/assets/css/main.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath}/assets/css/user.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/user/user.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.12.4.js"></script>
+
 </head>
 <body>
 	<div id="wrap" class="box-gray clearfix">
@@ -39,7 +42,7 @@
 								<tr>
 									<th>아이디 <span class="ico">*</span>
 									</th>
-									<td><input type="text" name="s_id" value="" label="아이디" placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합">
+									<td><input type="text" id="s_id" name="s_id" value="" label="아이디" placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합">
 										<button type="button" id="" class="btn btn_default">중복확인</button></td>
 								</tr>
 								<tr>
@@ -93,4 +96,42 @@
 		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 	</div>
 </body>
+<script type="text/javascript">
+	$("#btn_submit").on("click", function() {
+		console.log("가입하기 버튼 클릭");
+		
+		var id = $("#s_id").val();
+		var pw = $("#s_pass").val();
+		var regNum = $("#s_regNum");
+		var name = $("#s_name");
+		var phone = $("#s_phone").val();
+		var addr = $("#s_addr").val();
+		
+		if(id == "") {
+			alert("아이디를 입력해 주세요.");
+			return false;
+		}
+		if(pw == "") {
+			alert("비밀번호를 입력해 주세요.");
+			return false;
+		}
+		if(regNum == "") {
+			alert("사업자 등록번호를 입력해 주세요.");
+			return false;
+		}
+		if(name == "") {
+			alert("상호명을 입력해 주세요.");
+			return false;
+		}
+		if(phone == "") {
+			alert("휴대전화 번호를 입력해 주세요.");
+			return false;
+		}
+		if(addr == "") {
+			alert("주소를 입력해 주세요.");
+			return false;
+		}
+		return true;
+	});
+</script>
 </html>
