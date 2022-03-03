@@ -105,41 +105,40 @@
 
 
 #storelist {
-	margin-left: 12px;
-	margin-right: 12px; height : 300px;
+	margin-left: 11px;
+	margin-right: 11px; height : 300px;
 	font-size: 13px;
 	margin-top: 30px;
 	color: #999;
-	width: 180px;
+	width: 170px;
 	float: left;
 	height: 300px;
 }
+/*
 
-#storelistfirst {
+#storelist:nth-child(1+5n){
 	margin-left: 0px;
 	margin-right: 12px;
 	height: 300px;
 	font-size: 13px;
 	margin-top: 30px;
-	color: #999;
+	color: red;
 	width: 180px;
 	float: left;
 }
-
-#storelistlast {
+#storelist:nth-child(5n){
 	margin-left: 10px;
 	float : right; 
 	height : 300px;
 	font-size: 13px;
 	margin-top: 30px;
-	color: #999;
+	color: blue;
 	width: 180px;
 	float: left;
 	height: 300px;
 	float: right;
 }
-
-
+*/
 
 #storelistLogo {
 	float: left;

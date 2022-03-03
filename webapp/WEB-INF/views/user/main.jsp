@@ -71,29 +71,29 @@
 		<!-- 가게리스트 -->
 		<!-- container -->
 
-		<!-- //container -->
 		<div id="container" class="clearfix">
-
-			<div id="storelistfirst" class="clearfix">
-				<img id="storelistLogo" src="./assets/img/blacklogo.png" /> 교촌치킨 <br> 2/6명<br>
+			
+			<div id="storelist" class="clearfix">
+				<img id="storelistLogo" src="${pageContext.request.contextPath}/assets/images/1.png" /> 교촌치킨 <br> 2/6명<br>
 				<button type="button" class="click">상세정보보기</button>
 			</div>
 			<div id="storelist" class="clearfix">
-				<img id="storelistLogo" src="../assets/img/blacklogo.png" /> 가게 <br> n/m명<br>
+				<img id="storelistLogo" src="${pageContext.request.contextPath}/assets/images/1.png" /> ${pageContext.request.contextPath} <br> n/m명<br>
 				<button type="button" class="click">상세정보보기</button>
 			</div>
 			<div id="storelist" class="clearfix">
-				<img id="storelistLogo" src="../assets/img/blacklogo.png" /> 가게 <br> n/m명<br>
+				<img id="storelistLogo" src="${pageContext.request.contextPath}/assets/images/1.png" /> 가게 <br> n/m명<br>
 				<button type="button" class="click">상세정보보기</button>
 			</div>
 			<div id="storelist" class="clearfix">
-				<img id="storelistLogo" src="../assets/img/blacklogo.png" /> 가게 <br> n/m명<br>
+				<img id="storelistLogo" src="${pageContext.request.contextPath}/assets/images/1.png" /> 가게 <br> n/m명<br>
 				<button type="button" class="click">상세정보보기</button>
 			</div>
-			<div id="storelistlast" class="clearfix">
-				<img id="storelistLogo" src="../assets/img/blacklogo.png" /> 가게 <br> n/m명<br>
+			<div id="storelist" class="clearfix">
+				<img id="storelistLogo" src="${pageContext.request.contextPath}/assets/images/1.png" /> 가게 <br> n/m명<br>
 				<button type="button" class="click">상세정보보기</button>
 			</div>
+			<!-- 
 			<div id="storelistfirst" class="clearfix">
 				<img id="storelistLogo" src="../assets/img/blacklogo.png" /> 교촌치킨 <br> 2/6명<br>
 				<button type="button" class="click">상세정보보기</button>
@@ -114,7 +114,7 @@
 				<img id="storelistLogo" src="../assets/img/blacklogo.png" /> 가게 <br> n/m명<br>
 				<button type="button" class="click">상세정보보기</button>
 			</div>
-
+			 -->
 		</div>
 	</div>
 
@@ -155,19 +155,11 @@
 		});
 
 		// 마커 정보
-		var locations = [ {
-			place : "서울대학교",
-			lat : 37.45988,
+			var locations = [ {
+			place : "서울대입구역",
+			lat : 37.48388,
 			lng : 126.9519
-		}, {
-			place : "연세대학교",
-			lat : 37.56578,
-			lng : 126.9386
-		}, {
-			place : "고려대학교",
-			lat : 37.59080,
-			lng : 127.0278
-		}, ];
+		} ];
 
 		//인포윈도우
 		var infowindow = new google.maps.InfoWindow();
