@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${pageContext.request.contextPath}/assets/css/main.css" rel="stylesheet" type="text/css">
+
+<link href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/assets/css/total.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/assets/css/user/user.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -24,7 +27,7 @@
 						<li class="c_join">
 							<div class="inner_join">
 								<img id="join_icon" src="${pageContext.request.contextPath}/assets/images/customer-join.png">
-								<h2>개인 회원</h2>
+								<h3>개인 회원</h3>
 								<span class="join_guide_txt">나에게 딱 맞는 배달정보를 찾는 분</span>
 							</div>
 							<div class="btn_area">
@@ -34,7 +37,7 @@
 						<li class="c_join s_join">
 							<div class="inner_join">
 								<img id="join_icon" src="${pageContext.request.contextPath}/assets/images/store-join.png">
-								<h2>사업자 회원</h2>
+								<h3>사업자 회원</h3>
 								<span class="join_guide_txt">가게를 등록해서 손님을 모으고 싶은 분</span>
 							</div>
 							<div class="btn_area">
