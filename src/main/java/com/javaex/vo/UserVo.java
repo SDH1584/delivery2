@@ -5,36 +5,26 @@ public class UserVo {
 	private int no;
 	private String id;
 	private String password;
-	private String name;
-	private String gender;
-
-	// 생성자
-	public UserVo() {
-	}
-
-	public UserVo(String id, String password, String name, String gender) {
-		this.id = id;
-		this.password = password;
-		this.name = name;
-		this.gender = gender;
-	}
-
-	public UserVo(int no, String password, String name, String gender) {
-		this.no = no;
-		this.password = password;
-		this.name = name;
-		this.gender = gender;
-	}
-
-	public UserVo(int no, String id, String password, String name, String gender) {
+	private String hp;
+	private String email;
+	private String profile_img;
+	private int user_code;
+	
+	//생성자
+	public UserVo() {}
+	
+	public UserVo(int no, String id, String password, String hp, String email, String profile_img, int user_code) {
+		super();
 		this.no = no;
 		this.id = id;
 		this.password = password;
-		this.name = name;
-		this.gender = gender;
+		this.hp = hp;
+		this.email = email;
+		this.profile_img = profile_img;
+		this.user_code = user_code;
 	}
 
-	// 메소드 gs
+	//메소드 gs
 	public int getNo() {
 		return no;
 	}
@@ -59,26 +49,43 @@ public class UserVo {
 		this.password = password;
 	}
 
-	public String getName() {
-		return name;
+	public String getHp() {
+		return hp;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setHp(String hp) {
+		this.hp = hp;
 	}
 
-	public String getGender() {
-		return gender;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setGender(String gender) {
-		this.gender = gender;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	// 메소드 일반
+	public String getProfile_img() {
+		return profile_img;
+	}
+
+	public void setProfile_img(String profile_img) {
+		this.profile_img = profile_img;
+	}
+
+	public int getUser_code() {
+		return user_code;
+	}
+
+	public void setUser_code(int user_code) {
+		this.user_code = user_code;
+	}
+
+	//메소드 일반
 	@Override
 	public String toString() {
-		return "UserVo [no=" + no + ", id=" + id + ", password=" + password + ", name=" + name + ", gender=" + gender
-				+ "]";
+		return "UserVo [no=" + no + ", id=" + id + ", password=" + password + ", hp=" + hp + ", email=" + email
+				+ ", profile_img=" + profile_img + ", user_code=" + user_code + "]";
 	}
+	
 }

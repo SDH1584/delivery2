@@ -47,7 +47,9 @@ public class UserController {
 	public String c_join(@ModelAttribute UserVo userVo) {
 		System.out.println("userController/c_join");
 
-		return "redirect:user/loginForm";
+		userService.customerJoin(userVo);
+		
+		return "redirect:/user/loginForm";
 	}
 
 	// 가게 회원가입
@@ -55,7 +57,7 @@ public class UserController {
 	public String s_join(@ModelAttribute UserVo userVo) {
 		System.out.println("userController/s_join");
 
-		return "redirect:user/loginForm";
+		return "redirect:/user/loginForm";
 	}
 
 	// 로그인 폼

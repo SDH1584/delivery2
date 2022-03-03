@@ -12,4 +12,11 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 
+	// 사용자 회원가입
+	public int customerJoin(UserVo userVo) {
+		System.out.println("userService/customerJoin");
+		
+		return userDao.insertCustomer(userVo);
+	}
+	 
 }

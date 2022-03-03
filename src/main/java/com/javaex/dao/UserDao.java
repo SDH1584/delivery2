@@ -12,11 +12,11 @@ public class UserDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	// 회원정보 가져오기 ->회원정보 수정폼
-	public UserVo selectUser(int no) {
-		System.out.println("userDao/selectUserByNo");
+	// 회원정보 저장
+	public int insertCustomer(UserVo userVo) {
+		System.out.println("userDao/insertCustomer");
 		
-		return sqlSession.selectOne("user.selectUserByNo", no);
+		return sqlSession.insert("user.insertCustomer", userVo);
 	}
 	
 }
