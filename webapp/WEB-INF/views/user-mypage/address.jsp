@@ -9,8 +9,9 @@
 <title>Insert title here</title>
 
 <link href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/assets/css/main.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/assets/css/address.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/assets/css/total.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/assets/css/user-mypage/address.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/assets/css/mypage.css" rel="stylesheet">
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.js"></script>
@@ -26,9 +27,19 @@
 		<!-- contents -->
 		<div id="contents" class="clearfix">
 
-			<!-- 마이페이지 aside -->
-			<c:import url="/WEB-INF/views/includes/aside/aside-mypage.jsp"></c:import>
-
+			<!-- aside-->
+			<div id="aside">
+				<ul>
+					<li id="aside-top">마이페이지</li>
+					<li><a href="https://www.naver.com/" class="link2">회원정보수정</a></li>
+					<li><a href="https://www.naver.com/" class="link2">주소 등록/수정</a></li>
+					<li><a href="https://www.naver.com/" class="link2">주문내역</a></li>
+					<li><a href="https://www.naver.com/" class="link2">포인트 확인</a></li>
+					<li><a href="https://www.naver.com/" class="link2">리뷰내역</a></li>
+					<li><a href="https://www.naver.com/" class="link2">고객센터</a></li>
+				</ul>
+			</div>
+			<!-- aside-->
 
 			<div id="main">
 				<div id="address-header" class="clearfix">
@@ -52,7 +63,7 @@
 						<td>집</td>
 						<td>010-1234-1234</td>
 						<td><button type="button" class="addressModify">
-								<img src="${pageContext.request.contextPath}/assets/images/btn_modify.jpg">
+								<img src="${pageContext.request.contextPath}/assets/images/btn_modify.JPG">
 							</button></td>
 					</tr>
 					<tr>
@@ -61,7 +72,7 @@
 						<td>부모님 집</td>
 						<td>010-1234-1234</td>
 						<td><button type="button" class="addressModify">
-								<img src="${pageContext.request.contextPath}/assets/images/btn_modify.jpg">
+								<img src="${pageContext.request.contextPath}/assets/images/btn_modify.JPG">
 							</button></td>
 					</tr>
 					<tr>
@@ -70,7 +81,7 @@
 						<td>학교</td>
 						<td>010-1234-1234</td>
 						<td><button type="button" class="addressModify">
-								<img src="${pageContext.request.contextPath}/assets/images/btn_modify.jpg">
+								<img src="${pageContext.request.contextPath}/assets/images/btn_modify.JPG">
 							</button></td>
 					</tr>
 				</table>
@@ -130,5 +141,12 @@
 		console.log("닫기");
 		$("#addressModal").modal('hide');
 	});
+	
+	/* 주소등록창 닫기 */
+	$(".address-close").on("click", function() {
+		console.log("닫기");
+		$("#addressModal").modal('hide');
+	});
+	
 </script>
 </html>
