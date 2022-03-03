@@ -74,4 +74,5 @@ public class UserController {
 		return "redirect:/";
 	}
 
+	//주변가게예약
 }
