@@ -49,13 +49,3 @@
 </div>
 <!-- //store-name -->
 
-<div class="store-menu">
-	<ul class="clearfix">
-		<li class="sel-menu"><a id="sel-menu" href="">메뉴</a></li>
-		<li><a href="">예약리스트</a></li>
-		<li><a href="">가게상세정보</a></li>
-		<li><a href="">리뷰</a></li>
-	</ul>
-</div>
-<!-- //store menu -->
-

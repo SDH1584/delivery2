@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+/* 가게메뉴바 */
+.store-menu ul>li {
+    float: left; 
+    width: 246px; 
+    font-size: 16px;
+    font-weight:700;
+    border: 1px solid #e2e2e2;
+    background-color:#fafafa;
+    padding: 15px 0px 15px 0px;
+    margin-bottom:80px;
+}
+
+.store-menu a{
+	color:#666;
+}
+
+#description{
+	background-color:#ffffff;
+    border-bottom: none;
+}
+
+#description a{
+    color: #5F0080;
+}
+
+
+
+/* 가게상세정보 */
+#store-info {float:left; margin: 100px 0px 0px 50px; border-collapse:collapse;}
+#store-info td, #store-info th {padding: 5px 0px 5px 0px; text-align: left;}
+#store-info th {font-size: 14px;}
+#map {float:left; width:280px; height:280px; margin: 20px 0px 0px 150px; border:1px solid #000000;}
+
+#notice {float:left; width: 950px; border-collapse: collapse; margin: 80px 0px 30px 30px;} 
+#notice td, #notice th {padding: 10px 0px 10px 0px;}
+#notice th {padding-left: 10px; border-bottom:1px solid #808080; text-align:left; font-size: bold; font-size: 14px; color: #5F0080;}
+#notice td {text-align: left; padding-left: 10px;}
+
+
+#info1, #info2, #info3, #info4, #info5{float:left; border-collapse: collapse; margin-top: 50px; margin-left: 30px; width: 460px;}
+#info1 td, #info1 th, #info2 td, #info2 th, #info3 td, #info3 th, #info4 td, #info4 th, #info5 td, #info5 th {padding: 10px 0px 10px 10px; text-align: left;}
+#info1 th, #info2 th, #info3 th, #info4 th, #info5 th {
+    font-weight: bold; 
+    font-size: 14px; 
+    border-bottom: 1px solid #808080; 
+    color: #5F0080;
+}
+
+.day {font-weight: bold; font-size: 14px;}
+
+

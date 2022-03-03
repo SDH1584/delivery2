@@ -11,12 +11,11 @@
 <title>Insert title here</title>
 <link href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/assets/css/store-detail/store-detail-header.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/assets/css/store-detail/customer-order.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/assets/css/store-detail/order-change-attendee.css" rel="stylesheet">
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.js"></script>
 </head>
-
 
 
 <body>
@@ -25,7 +24,8 @@
 
 		<!-- 가게상세 해더 -->
 		<c:import url="/WEB-INF/views/includes/store-detail-header.jsp"></c:import>
-		
+
+
 		<div class="store-menu">
 			<ul class="clearfix">
 				<li id="sel-menu"><a href="">메뉴</a></li>
@@ -35,6 +35,7 @@
 			</ul>
 		</div>
 		<!-- //store menu -->
+
 
 		<!-- container -->
 		<div id="container" class="clearfix">
@@ -216,49 +217,60 @@
 
 
 			</div>
-			<!-- menu -->
+
+
 
 			<div id="order">
 				<form action="">
 					<table id="order-detail">
 						<tr>
-							<th>참여인원</th>
-							<td colspan="3"><input type='button' onclick='count("minus")' value='-' class="btn-xs" /> <span id="result">1</span> <input type='button' onclick='count("plus")' value='+' class="btn-xs" /></td>
+							<th>예약 마감(주문 시간)</th>
+							<td colspan="3">2월 19일 19:30</td>
 						</tr>
 						<tr>
 							<th>최대 주문가능 수량</th>
-							<td colspan="3">10인분</td>
+							<td colspan="3">2/10인분</td>
+						</tr>
+						<tr>
+							<th>현재 참여 인원</th>
+							<td colspan="3">2/5</td>
 						</tr>
 						<tr>
 							<th>주문 금액</th>
-							<td colspan="3">26,000 / 25,000</td>
+							<td colspan="3">23,000 / 25,000</td>
 						</tr>
 						<tr>
 							<th>배달료</th>
 							<td colspan="3">3,000</td>
-						</tr>
-						<tr>
-							<td colspan="4">*최소 주문 금액을 채울 경우 혼자서도 주문 가능합니다</td>
 						</tr>
 					</table>
 					<div id="order-menu-box">
 						<table id="order-menu-table">
 							<tbody>
 								<tr>
+									<td class="delete">
+										<button class="del-btn">x</button>
+									</td>
 									<td class="order-menu">기네스 몬스터 와퍼 세트<br>(+사이다 + 치즈감자)
 									</td>
 									<td class="order-price">11,000원</td>
 								</tr>
 								<tr>
+									<td class="delete">
+										<button class="del-btn">x</button>
+									</td>
 									<td class="order-menu">기네스 몬스터 와퍼</td>
 									<td class="order-price">9,000원</td>
 								</tr>
 								<tr>
+									<td></td>
 									<td class="order-menu">개인 배달료</td>
 									<td class="order-price">+600원</td>
+								</tr>
 							</tbody>
 							<tfoot>
 								<tr>
+									<td></td>
 									<td class="order-menu">결제예정금액</td>
 									<td class="order-price">20,600원</td>
 								</tr>
@@ -269,39 +281,43 @@
 					<div id="order-delivery">
 						<div class="order-deli">배달 주소</div>
 						<div class="order-deli">서울시 관악구 남부순환로 1820 302호</div>
-						<div class="order-deli">
-							<button type="button" id="adress-change">배달 주소 변경</button>
-						</div>
 						<div class="order-deli">가게 사장님께</div>
 						<div class="order-deli">
 							<input type="text" name="store-require" value="">
 						</div>
-						<div class="order-deli">라이더님께</div>
-						<div class="order-deli">
-							<input type="text" name="store-require" value="">
-						</div>
-						<div class="order-deli">
-							<input type="checkbox" id="group-order" name="group-order" value=""> <label for="group-order">단체 주문</label>
-						</div>
 					</div>
 
-					<button type="submit">예약 만들기</button>
-					<button type="submit">바로 주문하기</button>
+					<button type="submit">예약 수정</button>
+					<button type="submit">예약 취소</button>
 				</form>
 
 			</div>
+
 		</div>
 		<!-- //container -->
 
-		<!-- 푸터 -->
-		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
+		<!-- footer -->
+		<div id="footer">
+			<div class="clearfix">
+				<ul class="footerh1">
+					<li>이용약관</li>
+					<li>개인정보처리방침</li>
+					<li>회원등급정책</li>
+					<li>회사소개</li>
+					<li>요기요사장님</li>
+					<li>입점문의</li>
+					<li>공지사항</li>
+				</ul>
+			</div>
+		</div>
+		<!-- //footer -->
 
 	</div>
 	<!-- //wrap -->
 
 	<!-- 메뉴 상세 모달 -->
-	<div id="menuModal" class="modal fade bs-example-modal-sm">
-		<div class="modal-dialog modal-sm">
+	<div id="menuModal" class="modal fade">
+		<div class="modal-dialog">
 			<div class="modal-content clearfix">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -312,8 +328,10 @@
 
 				<div class="modal-body">
 					<img src="./menu.jpg" width="100px" height="100px">
-					<h5>앵그리트러플 와퍼 세트</h5>
-					<p>황홀한 풍미 속 강렬한 매콤팜 앵그리 트러플리얼 와퍼 ＋ 프렌치프라이R ＋ 콜라R</p>
+					<h5>와퍼 세트</h5>
+					<p>
+						리얼 와퍼 ＋ 프렌치프라이R ＋ 콜라R <br> 버거킹 대표 메뉴
+					</p>
 					<table>
 						<thead>
 							<tr>
@@ -327,49 +345,49 @@
 							</tr>
 							<tr>
 								<td><input type="radio" name="r-option1" value="콜라" checked="checked"><label>콜라</label></td>
-								<td class="price">+0</td>
+								<td>+0</td>
 							</tr>
 							<tr>
 								<td><input type="radio" name="r-option1" value="사이다"><label>사이다</label></td>
-								<td class="price">+0</td>
+								<td>+0</td>
 							</tr>
 							<tr>
 								<td><input type="radio" name="r-option1" value="콜라l"><label>콜라 사이즈업</label></td>
-								<td class="price">+500</td>
+								<td>+500</td>
 							</tr>
 							<tr>
 								<td><input type="radio" name="r-option1" value="사이다l"><label>사이다 사이즈업</label></td>
-								<td class="price">+500</td>
+								<td>+500</td>
 							</tr>
 							<tr>
 								<th colspan="2">사이드 변경</th>
 							</tr>
 							<tr>
 								<td><input type="radio" name="r-option2" value="감자튀김" checked="checked"><label>감자튀김</label></td>
-								<td class="price">+0</td>
+								<td>+0</td>
 							</tr>
 							<tr>
 								<td><input type="radio" name="r-option2" value="감자튀김l"><label>감자튀김 사이즈업</label></td>
-								<td class="price">+500</td>
+								<td>+500</td>
 							</tr>
 							<tr>
 								<td><input type="radio" name="r-option1" value="치즈감자"><label>치즈감자</label></td>
-								<td class="price">+2000</td>
+								<td>+2000</td>
 							</tr>
 							<tr>
 								<th colspan="2">사이드 추가</th>
 							</tr>
 							<tr>
 								<td><input type="checkbox" name="c-option1" value="치즈스틱"><label>치즈스틱</label></td>
-								<td class="price">+2000</td>
+								<td>+2000</td>
 							</tr>
 							<tr>
 								<td><input type="checkbox" name="c-option1" value="치킨너겟"><label>치킨너겟</label></td>
-								<td class="price">+4000</td>
+								<td>+4000</td>
 							</tr>
 							<tr>
 								<td><input type="checkbox" name="c-option1" value="어니언링"><label>어니언링</label></td>
-								<td class="price">+3500</td>
+								<td>+3500</td>
 							</tr>
 						</tbody>
 						<tfoot>
@@ -379,11 +397,11 @@
 							</tr>
 							<tr>
 								<th>주문금액</th>
-								<td class="total-price">12000원</td>
+								<td>12000원</td>
 							</tr>
 						</tfoot>
 					</table>
-					<button type="submit">주문표에 추가</button>
+					<button type="button" class="btn-default btn-lg">주문표에 추가</button>
 
 				</div>
 				<!-- modal-body -->
@@ -453,5 +471,6 @@
 		$("#menuModal").modal('show');
 	});
 </script>
+
 
 </html>

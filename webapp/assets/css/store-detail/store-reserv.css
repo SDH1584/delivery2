@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+/* 가게메뉴바 */
+.store-menu ul>li {
+    float: left; 
+    width: 246px; 
+    font-size: 16px;
+    font-weight:700;
+    border: 1px solid #e2e2e2;
+    background-color:#fafafa;
+    padding: 15px 0px 15px 0px;
+    margin-bottom:80px;
+}
+
+.store-menu a{
+	color:#666;
+}
+
+#resv-list{
+	background-color:#ffffff;
+    border-bottom: none;
+}
+
+#resv-list a{
+    color: #5F0080;
+}
+
+
+/* 예약리스트 */
+#table-description {float:left; text-align: left; padding: 0px 0px 20px 10px; font-size:13px; color:#999;}
+
+.reserve-table{width: 1000px; border-collapse:collapse;}
+.reserve-table th{padding:20px 0px 20px 0px; font-size:13px; border-top:2px solid #353535; border-bottom:1px solid #A6A6A6;}
+.reserve-table td {padding:15px 0px 15px 0px;  border-bottom:1px solid #A6A6A6;}
+.status {font-weight: bold; background-color: #5F0080; color:#fff;}
+#last {border-bottom:2px solid #353535;}
+
