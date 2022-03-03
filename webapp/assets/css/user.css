@@ -1,0 +1,296 @@
+@charset "UTF-8";
+
+/* 공통 회원가입 페이지 */
+#both_join {
+    
+}
+
+#both_join .tlt_both {
+    padding: 35px 0 35px;
+    font-size: 42px;
+    text-align: center;
+    font-weight: 500;
+}
+
+#both_join ul {
+    list-style: none;
+}
+
+#both_join ul li {
+    float: left;
+    width: 385px;
+    margin: 0;
+    padding: 0 40px 64px;
+    border: 1px solid #eee;
+    background-color: #fff;
+}
+
+#both_join ul li.c_join {
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #eee;
+}
+
+#both_join .inner_join {
+    text-align: center;
+    color: #333;
+    background-color: #fff;
+    height: 230px;
+    padding: 98px 0 0;
+}
+
+#both_join #join_icon {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 8px;
+}
+
+#both_join .join_guide_txt {
+    font-size: 18px;
+    color: #666;
+    line-height: 1.5;
+}
+
+#both_join .btn_area {
+    padding: 0;
+    text-align: center;
+}
+
+#both_join ul li.s_join {
+    float: right;
+}
+
+/* 사용자/사업자 회원가입 페이지 */
+#join_page {
+    width: 640px;
+    margin: 0 auto;
+}
+
+.tit_page_join {
+    width: 798px;
+    margin: 0 auto;
+    padding: 50px 0 51px;
+}
+
+.tit_page_join h2.tit_join, #mypage #edit_page h2.tit_edit {
+    font-weight: 700;
+    font-size: 28px;
+    color: #333;
+    line-height: 35px;
+    text-align: center;
+    letter-spacing: -1px;
+}
+
+#join_page .page_sub, #mypage #edit_page .page_sub {
+    padding-bottom: 10px;
+    font-size: 12px;
+    color: #666;
+    line-height: 17px;
+    text-align: right;
+}
+
+#join_page .ico, #mypage #edit_page .ico {
+    padding-right: 2px;
+    color: #ee6a7b;
+}
+
+#join_page .tbl_join, #mypage #edit_page .tbl_edit {
+    width: 100%;
+    border-top: 2px solid #333;
+    border-bottom: 1px solid #f4f4f4;
+}
+
+#join_page .tbl_join .fst th, #mypage #edit_page .tbl_edit .fst th {
+    padding-top: 29px;
+}
+
+#join_page .tbl_join .fst td, #mypage #edit_page .tbl_edit .fst td {
+    padding-top: 19px;
+}
+
+#join_page .tbl_join .lst td, #mypage #edit_page .tbl_edit .lst td {
+    padding-bottom: 19px;
+}
+
+#join_page .tbl_join th, #mypage #edit_page .tbl_edit th {
+    width: 139px;
+    padding: 20px 0 0 20px;
+    font-weight: 700;
+    font-size: 14px;
+    color: #333;
+    line-height: 20px;
+    vertical-align: top;
+    text-align: left;
+}
+
+#join_page .tbl_join td, #mypage #edit_page .tbl_edit td {
+    padding: 10px 0;
+    border-top: 0;
+    font-size: 14px;
+    vertical-align: top;
+    text-align: left;
+}
+
+#join_page input[type=text], #join_page input[type=password],
+#mypage #edit_page input[type=text], #mypage #edit_page input[type=password] {
+    width: 302px;
+    height: 44px;
+    padding: 0 14px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    color: #333;
+    line-height: 20px;
+    border-radius: 3px;
+    background-color: #fff;
+    vertical-align: top;
+}
+
+#join_page .btn, #mypage #edit_page .btn {
+    display: inline-block;
+    width: 120px;
+    margin-left: 5px;
+    vertical-align: top;
+
+    border-radius: 3px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 40px;
+    text-align: center;
+    outline: none;
+}
+
+#join_page .btn_default, #mypage #edit_page .btn {
+    border: 1px solid #5f0080;
+    background-color: #fff;
+    color: #5f0080;
+}
+
+#join_page #btn_area {
+    padding: 40px 0  40px 0;
+    text-align: center;
+}
+
+#join_page .btn_join, #mypage #edit_page .btn_edit {
+    width: 240px;
+    height: 56px;
+    font-size: 16px;
+    line-height: 54px;
+    border: 1px solid #5f0081;
+    background-color: #5f0080;
+    color: #fff;
+}
+
+#join_page #profile_photo {
+	width: 100px;
+	height: 100px;
+	margin-bottom: 5px;
+}
+
+#join_page #c_photo, #join_page #s_photo {
+	
+}
+
+/* 로그인 페이지 */
+/* 로그인 타이틀 페이지 */
+#login_page {
+    width: 340px;
+    margin: 0 auto 60px auto;
+    padding-top: 80px;
+    letter-spacing: -0.6px;
+}
+
+/* 로그인 타이틀 */
+.tit_page_login h3.tit_login {
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 20px;
+    text-align: center;
+}
+
+#login_page #login_form {
+    padding-top: 36px;
+    color: #333;
+}
+
+#login_page .login_box {
+    text-align: center;
+}
+
+#login_page input[type=text], #login_page input[type=password] {
+    width: 300px;
+    height: 52px;
+    padding: 0 19px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #fff;
+    font-size: 14px;
+    line-height: 20px;
+    outline: none;
+}
+
+#login_page input[type=password] {
+    margin-top: 10px;
+}
+
+#login_page .chk_area {
+    overflow: hidden;
+    padding-bottom: 28px;
+}
+
+#login_page .chk_box {
+    float: left;
+    margin-top: 9px;
+    position: relative;
+    padding: 0 0 3px 22px;
+    font-size: 13px;
+    line-height: 20px;
+}
+
+#login_page .chk_box input[type=checkbox] {
+    position: absolute;
+    left: 0;
+    top: 4px;
+}
+
+#login_page .login_search {
+    float: right;
+    padding-top: 13px;
+}
+
+#login_page .login_search .id_search, #login_page .login_search .pass_search {
+    float: left;
+    font-size: 13px
+}
+
+#login_page .login_search .bar {
+    float: left;
+    width: 1px;
+    height: 11px;
+    margin: 4px 6px 0;
+    background-color: #333;
+}
+
+.btn_login, .btn_join {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    height: 54px;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 51px;
+}
+
+.btn_login {
+    color: #fff;
+    border: 1px solid #5f0081;
+    background-color: #5f0080;
+}
+
+.btn_join {
+    color: #5f0080;
+    border: 1px solid #5f0081;
+    background-color: #fff;
+    margin-top: 10px;
+}

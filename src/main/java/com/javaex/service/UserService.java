@@ -11,12 +11,5 @@ public class UserService {
 	
 	@Autowired
 	private UserDao userDao;
-	
-	// 회원정보 수정폼
-	public UserVo modifyForm(int no) {
-		System.out.println("userService/modifyForm");
-		
-		return userDao.selectUser(no);	
-	}
-	
+
 }
