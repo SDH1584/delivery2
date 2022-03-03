@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
@@ -9,8 +8,8 @@
 <title>Insert title here</title>
 
 <link href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/assets/css/point.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/assets/css/main.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/assets/css/store-main.css" rel="stylesheet">
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.js"></script>
@@ -20,41 +19,22 @@
 <body>
 	<div id="wrap" class="box-gray clearfix">
 
+		<!-- 고객 헤더 -->
 
-		<div id="header" class="clearfix">
-			<a href="https://www.naver.com/"><img src="C:\javastudy\assets\img\캡처.PNG"></a>
-		</div>
+		<c:import url="/WEB-INF/views/includes/customer-header.jsp"></c:import>
 
-		<div id="nav">
-			<ul class="clearfix ullink1">
-				<li><a href="https://www.naver.com/" class="link2">주변가게</a></li>
-				<li><a href="https://www.naver.com/" class="link2">주변예약</a></li>
-				<li><a href="https://www.naver.com/" class="link2">EVENT</a></li>
-
-				<ul class="ullink2">
-					<li><a href="" class="link2">kim1234님</a></li>
-					<li><a href="" class="link2">로그아웃</a></li>
-					<li><a href="" class="link2">마이페이지</a></li>
-					<li><a href="" class="link2">주문내역</a></li>
-				</ul>
-			</ul>
-		</div>
-
-		<div id="nav2">
-			<a href="https://www.naver.com/"><img src="C:\javastudy\assets\img\이미지.PNG" class="h2img"></a>
-		</div>
 		<!-- contents -->
 		<div id="contents" class="clearfix">
 			<!-- aside-->
-			<div class="aside">
+		<div id="aside">
 				<ul>
 					<li id="aside-top">마이페이지</li>
 					<li><a href="https://www.naver.com/" class="link2">회원정보수정</a></li>
 					<li><a href="https://www.naver.com/" class="link2">주소 등록/수정</a></li>
 					<li><a href="https://www.naver.com/" class="link2">주문내역</a></li>
-					<li id="mypoint"><a href="https://www.naver.com/" class="link2">포인트 확인</a></li>
+					<li><a href="${pageContext.request.contextPath}/mypage/point" class="link2">포인트 확인</a></li>
 					<li><a href="https://www.naver.com/" class="link2">리뷰내역</a></li>
-					<li><a href="https://www.naver.com/" class="link2">고객센터</a></li>
+					<li><a href="${pageContext.request.contextPath}/mypage/inquiryList" class="link2">고객센터</a></li>
 				</ul>
 			</div>
 			<!-- aside-->
@@ -107,7 +87,7 @@
 							<td>23.02.27</td>
 							<td>+434원</td>
 						</tr>
-						
+
 						<tr id="last">
 							<td>2021-02-27</td>
 							<td class="pointcontents2">[사용]주문결제시 할인</td>
@@ -135,21 +115,21 @@
 					<li><a href="">▶</a></li>
 				</ul>
 			</div>
+		</div>
+		<div id="footer">
 
-			<div id="footer">
-
-				<div class="clearfix">
-					<ul class="footerh1">
-						<li>이용약관</li>
-						<li>개인정보처리방침</li>
-						<li>회원등급정책</li>
-						<li>회사소개</li>
-						<li>요기요사장님</li>
-						<li>입점문의</li>
-						<li>공지사항</li>
-					</ul>
-				</div>
+			<div class="clearfix">
+				<ul class="footerh1">
+					<li>이용약관</li>
+					<li>개인정보처리방침</li>
+					<li>회원등급정책</li>
+					<li>회사소개</li>
+					<li>요기요사장님</li>
+					<li>입점문의</li>
+					<li>공지사항</li>
+				</ul>
 			</div>
 		</div>
+	</div>
 </body>
 </html>

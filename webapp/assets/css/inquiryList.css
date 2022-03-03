@@ -1,0 +1,148 @@
+@charset "UTF-8";
+
+#mypointcheck {
+	text-align: left;
+	float: left;
+	margin-left: 70px;
+	width: 380px;
+	height: 80px;
+	border: 1px solid #5F0080;
+	vertical-align: middle;
+	margin-top: 50px;
+	float: left;
+}
+
+#timelimitpoint {
+	text-align: left;
+	float: Left;
+	width: 380px;
+	height: 80px;
+	vertical-align: middle;
+	margin-top: 50px;
+	border: 1px solid #5F0080;
+}
+
+.pointall {
+	font-size: 13px;
+	float: left;
+	text-align: left;
+	margin-left: 20px;
+	margin-top: 30px;
+}
+
+.countpoint {
+	font-size: 13px;
+	margin-top: 30px;
+	vertical-align: middle;
+	float: right;
+	text-align: right;
+	color: #5F0080;
+	margin-right: 20px;
+}
+
+#pointlistall {
+	margin: 20px 40px 25px 30px;
+	width: 92%;
+	border: 12px;
+	font-size: 16px;
+	font-weight: 400;
+	font-size: 20px;
+}
+
+/* 표공통 */
+h3 {
+	font-size: 13px;
+	font-weight: bold;
+	text-align: left;
+	margin: 15px 0px 15px 0px;
+}
+
+.pointcontents {
+	margin-left: 10px;
+	float: left;
+}
+
+.pointcontents2 {
+	text-align: left
+}
+
+#pointlist>thead>tr>th {
+	text-align: center;
+	font-size: 13px;
+	padding: 22px 0px 23px 0px;
+}
+
+#pointlist>th {
+	padding: 22px 0px 23px 0px;
+	border-top: 1px solid #e3e3e3;
+	text-align: center;
+	font-size: 12px;
+}
+
+.td-btn {
+	padding: 0px;
+}
+
+.last td {
+	border-bottom: 1px solid #522772;
+}
+
+#pointlist>tbody>tr>td {
+	border-top: 1px solid #e3e3e3;
+	padding: 22px 0px 23px 0px;
+	margin-top: 100px;
+}
+
+#pointlist {
+	padding: 22px 0px 23px 0px;
+	float: left;
+	margin-left: 70px;
+	margin-top: 80px;
+	width: 770px;
+	border-top: 1px solid #5F0080;
+	margin-bottom: 10px;
+}
+
+#pointlist>tbody>#last {
+	border-top: 1px solid #e3e3e3;
+	border-bottom: 1px solid #e3e3e3;
+	padding: 22px 0px 23px 0px;
+	margin-top: 100px;
+}
+
+#paging {
+	margin-left: 450px;
+	margin-bottom: 30px;
+	width: 330px;
+}
+
+#paging ul {
+	margin: 20px 5px 10px 5px;
+}
+
+#paging ul>li {
+	float: left;
+	margin: 10px 8px 0px 8px;
+}
+
+#paging ul>li.active {
+	font-size: 14px;
+	font-weight: bold;
+}
+#formtitle{
+	font-size: 24px;
+	margin-top: 30px;
+	float: left;
+	margin-left: 70px;
+	margin-bottom: -50px;
+}
+#paging {
+	margin-left: 450px;
+	margin-bottom: 30px;
+	width: 330px;
+	margin-top: 30px;
+}
+
+.hiddenRow {
+    padding: 0 !important;
+}
