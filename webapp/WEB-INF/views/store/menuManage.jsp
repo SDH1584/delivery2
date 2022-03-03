@@ -103,7 +103,7 @@
                     <table class="manulist">
                         <tbody>
                         <tr>
-                            <td style="width: 150px;" rowspan="3"><a href="https://www.naver.com/"><img id="profile-img" src="./assets/img/jung.jpg"></a></td>
+                            <td style="width: 150px;" rowspan="3"><a href="https://www.naver.com/"><img id="profile-img" src="${pageContext.request.contextPath}/assets/images/전체.PNG"></a></td>
                             <th>메뉴이름</th>
                             <th>후라이드 치킨</th>
                             <th>가격</th>
