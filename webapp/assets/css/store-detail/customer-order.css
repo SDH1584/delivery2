@@ -1,36 +1,5 @@
 @charset "UTF-8";
 
-/* 가게분류 */
-#header-dropdown{ border-top:1px solid #e2e2e2; padding-left:0px;}
-#header-dropdown li{
-	float:left;
-	font-size:12px;
-	padding: 15px 30px 15px 0px;
-}
-#header-dropdown a:hover{
-	 color: #5F0080; font-weight:bold;
-}
-
-/* 상호명 */
-#store-name{
-	text-align:center;
-	width:1000px; height:188px;
-    padding: 80px 0px 30px 0px;
-    content:"";
-	background-image: url("../images/store_header.jpg");  
-    background-repeat: no-repeat;
-    background-size:cover;
-    
-}
-
-#store-name h1{
-	display: inline-block;
-	font-size:50px;
-	font-weight:bold;
-	color: #333;
-
-}
-
 /* 가게상세메뉴바 */
 
 
