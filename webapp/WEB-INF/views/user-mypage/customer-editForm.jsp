@@ -12,8 +12,8 @@
 <body>
 	<div id="wrap" class="box-gray clearfix">
 
-		<!-- 가게 헤더 -->
-		<c:import url="/WEB-INF/views/includes/store-header.jsp"></c:import>
+		<!-- 사용자 헤더 -->
+		<c:import url="/WEB-INF/views/includes/customer-header.jsp"></c:import>
 
 		<!-- contents -->
 		<div id="contents" class="clearfix">
