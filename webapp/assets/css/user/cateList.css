@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+
+.fileimg{
+    width: 200px;
+    height: 200px;
+    float: left;
+}
+
+.img2{
+    width: 200px;
+    height: 200px;
+    vertical-align: bottom; /* 이미지 공백 없애기*/
+    object-fit: fill;
+}
+

@@ -11,7 +11,7 @@ textarea, button, form {margin: 0; padding: 0;}
 body	{font-size:12px; font-family: "맑은 고딕", 돋움, 굴림; text-align:center; color: #333; background-color: #fff;}
 
 ul, ol	{list-style-type: none; }
-/* a:link {text-decoration: none; color: #000000; } */
+a:link {text-decoration: none; color: #000000; }
 a:visited {text-decoration: none; color: #000000; }
 a:active {text-decoration: none; color: #000000; }
 a:hover {text-decoration: none; color: #000000; }
@@ -26,6 +26,7 @@ a:hover {text-decoration: none; color: #000000; }
     margin: 0px auto;
     
 }
+
 
 #header {
     width: 1000px; 
