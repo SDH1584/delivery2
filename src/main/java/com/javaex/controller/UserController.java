@@ -68,14 +68,33 @@ public class UserController {
 		return "user/loginForm";
 	}
 
-	// 로그인
-	@RequestMapping("/login")
-	public String login(@ModelAttribute UserVo userVo, HttpSession session) {
-		System.out.println("userController/login");
+	// 사용자 로그인
+	@RequestMapping("/c_login")
+	public String c_login(@ModelAttribute UserVo userVo, HttpSession session) {
+		System.out.println("userController/c_login");
 		
-		return "redirect:/";
+		UserVo authUser = userService.customerLogin(userVo);
+		
+		if (authUser != null) {	// 로그인 성공일때
+			System.out.println("사용자 로그인 성공");
+			session.setAttribute("authUser", authUser);
+			return "redirect:/main";
+		} else { // 로그인 실패일때
+			System.out.println("사용자 로그인 실패");
+			return "redirect:/user/loginForm?result=fail";
+		}
+	}
+	
+	// 사용자 로그아웃
+	@RequestMapping("/c_logout")
+	public String c_logout(HttpSession session) {
+		System.out.println("userController/c_logout");
+		
+		// 세션의 값을 삭제한다.
+		session.removeAttribute("authUser");
+		session.invalidate();
+		return "redirect:/main";
 	}
 
-	//주변가게예약
 }
 

@@ -31,13 +31,13 @@
 					<div id="login_form">
 						<div class="login_box">
 							<div id="loginForm">
-								<form action="${pageContext.request.contextPath}/user/login" method="get">
+								<form action="${pageContext.request.contextPath}/user/c_login" method="get">
 
 									<!-- 아이디 -->
-									<input type="text" name="u_id" value="" placeholder="아이디를 입력해주세요">
+									<input type="text" id="u_id" name="id" value="" placeholder="아이디를 입력해주세요">
 
 									<!-- 비밀번호 -->
-									<input type="password" name="u_pass" value="" placeholder="비밀번호를 입력해주세요">
+									<input type="password" id="u_pass" name="password" value="" placeholder="비밀번호를 입력해주세요">
 
 									<div class="chk_area">
 										<label class="chk_box"> <input type="checkbox" id="chk_security"> 보안접속
@@ -55,7 +55,7 @@
 									</c:if>
 
 									<!-- 버튼 -->
-									<button id="btn-submit" class="btn_login" type="submit">로그인</button>
+									<button id="btn_submit" class="btn_login" type="submit">로그인</button>
 									<button class="btn_join" type="button" onclick="location.href='${pageContext.request.contextPath}/user/joinForm'">회원가입</button>
 
 								</form>

@@ -12,11 +12,18 @@ public class UserDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	// 회원정보 저장
+	// 사용자 정보 저장
 	public int insertCustomer(UserVo userVo) {
 		System.out.println("userDao/insertCustomer");
 		
 		return sqlSession.insert("user.insertCustomer", userVo);
+	}
+	
+	// 사용자 정보 가져오기(로그인)
+	public UserVo selectCustomer(UserVo userVo) {
+		System.out.println("userDao/selectCustomer");
+		
+		return sqlSession.selectOne("user.selectCustomer", userVo);
 	}
 	
 }

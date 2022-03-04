@@ -16,6 +16,15 @@
 		]]>
 	</insert>
 	
-	
+	<!-- 사용자 정보 가져오기(로그인) -->
+	<select id="selectCustomer" parameterType="com.javaex.vo.UserVo" resultType="com.javaex.vo.UserVo">
+		<![CDATA[
+			select	no,
+					id
+			from users
+			where id = #{id}
+			and password = #{password}
+		]]>
+	</select>
 	
 </mapper>

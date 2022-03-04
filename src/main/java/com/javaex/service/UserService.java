@@ -19,4 +19,10 @@ public class UserService {
 		return userDao.insertCustomer(userVo);
 	}
 	 
+	// 사용자 로그인
+	public UserVo customerLogin(UserVo userVo) {
+		System.out.println("userService/userLogin");
+		
+		return userDao.selectCustomer(userVo);
+	}
 }

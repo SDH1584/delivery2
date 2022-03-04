@@ -13,12 +13,24 @@
 		<li><a href="https://www.naver.com/" class="link2">주변예약</a></li>
 		<li><a href="https://www.naver.com/" class="link2">EVENT</a></li>
 
-		<ul class="ullink2">
-			<li><a href="" class="link2">kim1234님</a></li>
-			<li><a href="" class="link2">로그아웃</a></li>
-			<li><a href="" class="link2">마이페이지</a></li>
-			<li><a href="" class="link2">주문내역</a></li>
-		</ul>
+		<c:choose>
+			<c:when test="${empty sessionScope.authUser}">
+				<!-- 사용자 로그인 실패, 로그인 전 -->
+				<ul class="ullink2">
+					<li><a href="${pageContext.request.contextPath}/user/loginForm" class="link2">로그인</a></li>
+					<li><a href="${pageContext.request.contextPath}/user/joinForm" class="link2">회원가입</a></li>
+				</ul>
+			</c:when>
+			<c:otherwise>
+				<!-- 사용자 로그인 성공 -->
+				<ul class="ullink2">
+					<li><a href="" class="link2">${sessionScope.authUser.id}님</a></li>
+					<li><a href="${pageContext.request.contextPath}/user/c_logout" class="link2">로그아웃</a></li>
+					<li><a href="${pageContext.request.contextPath}/mypage/editForm" class="link2">마이페이지</a></li>
+					<li><a href="${pageContext.request.contextPath}/mypage/orderList" class="link2">주문내역</a></li>
+				</ul>
+			</c:otherwise>
+		</c:choose>
 	</ul>
 </div>
 
