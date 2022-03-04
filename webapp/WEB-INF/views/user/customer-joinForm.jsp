@@ -68,7 +68,7 @@
 								<tr class="lst">
 									<th>주소 <span class="ico">*</span>
 									</th>
-									<td><input type="text" id="c_addr" name="addr" label="주소" placeholder="배송받을 주소를 검색해주세요">
+									<td><input type="text" id="c_main_address" name="main_address" label="주소" placeholder="배송받을 주소를 검색해주세요">
 										<button type="button" id="" class="btn btn_default">주소 검색</button></td>
 								</tr>
 							</tbody>

@@ -57,6 +57,8 @@ public class UserController {
 	public String s_join(@ModelAttribute UserVo userVo) {
 		System.out.println("userController/s_join");
 
+		userService.storeJoin(userVo);
+		
 		return "redirect:/user/loginForm";
 	}
 
@@ -69,9 +71,9 @@ public class UserController {
 	}
 
 	// 사용자 로그인
-	@RequestMapping("/c_login")
-	public String c_login(@ModelAttribute UserVo userVo, HttpSession session) {
-		System.out.println("userController/c_login");
+	@RequestMapping("/login")
+	public String login(@ModelAttribute UserVo userVo, HttpSession session) {
+		System.out.println("userController/login");
 		
 		UserVo authUser = userService.customerLogin(userVo);
 		

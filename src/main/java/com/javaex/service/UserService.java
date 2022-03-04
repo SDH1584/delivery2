@@ -19,6 +19,13 @@ public class UserService {
 		return userDao.insertCustomer(userVo);
 	}
 	 
+	// 가게 회원가입
+	public int storeJoin(UserVo userVo) {
+		System.out.println("userService/storeJoin");
+		
+		return userDao.insertStore(userVo);
+	}
+	
 	// 사용자 로그인
 	public UserVo customerLogin(UserVo userVo) {
 		System.out.println("userService/userLogin");

@@ -31,7 +31,7 @@
 					<div id="login_form">
 						<div class="login_box">
 							<div id="loginForm">
-								<form action="${pageContext.request.contextPath}/user/c_login" method="get">
+								<form action="${pageContext.request.contextPath}/user/login" method="get">
 
 									<!-- 아이디 -->
 									<input type="text" id="u_id" name="id" value="" placeholder="아이디를 입력해주세요">

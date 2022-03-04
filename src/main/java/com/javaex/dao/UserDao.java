@@ -19,6 +19,13 @@ public class UserDao {
 		return sqlSession.insert("user.insertCustomer", userVo);
 	}
 	
+	// 가게 정보 저장
+	public int insertStore(UserVo userVo) {
+		System.out.println("userDao/insertStore");
+		
+		return sqlSession.insert("user.insertStore", userVo);
+	}
+	
 	// 사용자 정보 가져오기(로그인)
 	public UserVo selectCustomer(UserVo userVo) {
 		System.out.println("userDao/selectCustomer");
