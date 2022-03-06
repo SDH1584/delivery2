@@ -24,10 +24,10 @@
 
 		<div class="store-menu">
 			<ul class="clearfix">
-				<li id="sel-menu"><a href="">메뉴</a></li>
-				<li id="resv-list"><a href="">예약리스트</a></li>
-				<li id="description"><a href="">가게상세정보</a></li>
-				<li id="review"><a href="">리뷰</a></li>
+				<li id="sel-menu"><a href="${pageContext.request.contextPath}/store/main">메뉴</a></li>
+				<li id="resv-list"><a href="${pageContext.request.contextPath}/store/reserv">예약리스트</a></li>
+				<li id="description"><a href="${pageContext.request.contextPath}/store/description">가게상세정보</a></li>
+				<li id="review"><a href="${pageContext.request.contextPath}/store/review">리뷰</a></li>
 			</ul>
 		</div>
 		<!-- //store menu -->
@@ -41,16 +41,16 @@
 				<table id="store-info">
 					<colgroup>
 						<col style="width: 150px">
-						<col style="width: 300px">
+						<col style="width: 200px">
 					</colgroup>
 
 					<tr>
 						<th>상호명</th>
-						<td>ooooo</td>
+						<td>버거킹 신림역점</td>
 					</tr>
 					<tr>
 						<th>주소</th>
-						<td>관악구 봉천동 xxx</td>
+						<td>서울 관악구 신림로 318</td>
 					</tr>
 					<tr>
 						<th>사업자 등록번호</th>
@@ -58,7 +58,7 @@
 					</tr>
 					<tr>
 						<th>전화번호</th>
-						<td>02-0000-0000</td>
+						<td>070-7462-8763</td>
 					</tr>
 				</table>
 			</div>
