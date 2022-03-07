@@ -3,6 +3,7 @@
 
 <configuration>
 	<typeAliases>
+			<typeAlias alias="MainVo" type="com.javaex.vo.MainVo" />
 	</typeAliases>
 	
 	<mappers>
