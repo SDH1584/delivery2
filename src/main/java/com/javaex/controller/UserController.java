@@ -78,15 +78,25 @@ public class UserController {
 		System.out.println("userController/login");
 		
 		UserVo authUser = userService.customerLogin(userVo);
+		int userCode = authUser.getUser_code();
+		System.out.println(userVo.toString());
+		System.out.println(userCode);
 		
-		if (authUser != null) {	// 로그인 성공일때
-			System.out.println("사용자 로그인 성공");
-			session.setAttribute("authUser", authUser);
-			return "redirect:/main";
+		if (authUser != null) {
+			if (userCode == 0) {
+				System.out.println("사용자 로그인 성공");
+				session.setAttribute("authUser", authUser);
+				return "redirect:/main";
+			} else {
+				System.out.println("가게 로그인 성공");
+				session.setAttribute("authUser", authUser);
+				return "redirect:/store/main";
+			}
 		} else { // 로그인 실패일때
-			System.out.println("사용자 로그인 실패");
+			System.out.println("가게 로그인 실패");
 			return "redirect:/user/loginForm?result=fail";
 		}
+		
 	}
 	
 	// 사용자 로그아웃
