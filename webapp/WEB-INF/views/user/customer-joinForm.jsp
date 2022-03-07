@@ -66,13 +66,20 @@
 										<button type="button" id="" class="btn btn_default">중복확인</button></td>
 								</tr>
 								<tr class="lst">
-									<th>주소 <span class="ico">*</span>
-									</th>
-									<td><input type="text" id="c_address_name" name="address_name" label="주소명" placeholder="배송받을 주소명을 입력해주세요">
-										<input type="text" id="c_main_address" name="main_address" label="주소" placeholder="배송받을 주소를 검색해주세요">
-										<button type="button" id="addressSearch" class="btn btn_default">주소 검색</button></td>
-										<input type="text" id="c_sub_address" name="sub_address" label="상세주소" placeholder="상세 주소를 입력해주세요">
+								<tr>
+									<th>주소명 <span class="ico">*</span></th>
+									<td><input type="text" id="c_address_name" name="address_name" label="주소명" placeholder="배송받을 주소명을 입력해주세요"></td>
 								</tr>
+								<tr>
+									<th>주소 <span class="ico">*</span></th>
+									<td><input type="text" id="c_main_address" name="main_address" label="주소" placeholder="배송받을 주소를 검색해주세요">
+										<button type="button" id="addressSearch" class="btn btn_default">주소 검색</button></td>
+								</tr>
+								<tr>
+									<th>상세 주소 <span class="ico">*</span></th>
+									<td><input type="text" id="c_sub_address" name="sub_address" label="상세주소" placeholder="상세 주소를 입력해주세요"></td>
+								</tr>
+
 							</tbody>
 						</table>
 						<div id="btn_area">
@@ -92,21 +99,21 @@
 <script type="text/javascript">
 	$("#btn_submit").on("click", function() {
 		console.log("가입하기 버튼 클릭");
-		
+
 		var id = $("#c_id").val();
 		var pw = $("#c_pass").val();
 		var phone = $("#c_phone").val();
 		var addr = $("#c_addr").val();
-		
-		if(id == "") {
+
+		if (id == "") {
 			alert("아이디를 입력해 주세요.");
 			return false;
 		}
-		if(pw == "") {
+		if (pw == "") {
 			alert("비밀번호를 입력해 주세요.");
 			return false;
 		}
-		if(phone == "") {
+		if (phone == "") {
 			alert("휴대전화 번호를 입력해 주세요.");
 			return false;
 		}
@@ -115,7 +122,7 @@
 			alert("주소를 입력해 주세요.");
 			return false;
 		}
-		*/
+		 */
 		return true;
 	});
 </script>
