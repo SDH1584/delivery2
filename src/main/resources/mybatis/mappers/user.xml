@@ -5,7 +5,7 @@
 	<!-- 사용자 회원가입 -->
 	<insert id="insertCustomer" parameterType="com.javaex.vo.UserVo">
 		<selectKey keyProperty="no" resultType="int" order="BEFORE">
-			select seq_users_no.nextval from dual
+			select seq_users.nextval from dual
 		</selectKey>
 		<![CDATA[
 			insert into users
@@ -24,7 +24,7 @@
 	<insert id="insertStore" parameterType="com.javaex.vo.UserVo">
 		<![CDATA[
 			insert into users
-			values (seq_users_no.nextval,
+			values (seq_users.nextval,
 			#{id},
 			#{password},
 			#{hp},

@@ -6,7 +6,7 @@
 	<insert id="insertAddress" parameterType="com.javaex.vo.AddressVo">
 		<![CDATA[
 			insert into user_adr
-			values ( seq_address_no.nextval,
+			values ( seq_user_adr.nextval,
 			#{no},
 			#{address_name},
 			#{main_address},
