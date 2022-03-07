@@ -1,11 +1,17 @@
 package com.javaex.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.javaex.service.StoreDetailService;
+
 @Controller
 @RequestMapping("/store")
-public class StoreController {
+public class StoreDetailController {
+
+	@Autowired
+	private StoreDetailService storeService;
 
 	@RequestMapping("host")
 	public String host() {
@@ -21,6 +27,9 @@ public class StoreController {
 
 	@RequestMapping("reserv")
 	public String reserv() {
+		System.out.println("reservation");
+
+		storeService.reservList();
 
 		return "store-detail/store-reserv";
 	}
@@ -36,6 +45,5 @@ public class StoreController {
 
 		return "store-detail/store-review";
 	}
-	
 
 }
