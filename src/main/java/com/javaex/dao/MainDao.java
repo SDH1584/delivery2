@@ -17,4 +17,9 @@ SqlSession sqlSession;
 		System.out.println("getList(dao)");
 		return sqlSession.selectList("main.selectMarker");
 	}
+	public List<MainVo>getList2(){
+		System.out.println("getList2 dao");
+		return sqlSession.selectList("main.storeList");
+	}
+	
 }

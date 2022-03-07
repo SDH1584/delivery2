@@ -41,19 +41,19 @@
 					</colgroup>
 
 					<tr>
-						<td rowspan="6"><img id="storeLogo" src="${pageContext.request.contextPath}/assets/images/logo.PNG"></td>
+						<td rowspan="6"><img id="storeLogo"  src="${pageContext.request.contextPath}/assets/images/1.png"></td>
 					</tr>
 					<tr>
-						<th id="name">버거킹 서울대입구역점</th>
+						<th id="name">${mainVo.storeName}</th>
 					</tr>
 					<tr>
-						<td id="delivery-num">2/6명</td>
+						<td id="delivery-num">2/${mainVo.people }명</td>
 					</tr>
 					<tr>
-						<td id="delivery-address" colspan="2">서울 관악구 남부순환로 1796</td>
+						<td id="delivery-address" colspan="2">${mainVo.storeMAdr }+${mainVo.storeSAdr }</td>
 					</tr>
 					<tr>
-						<td id="delivery-hp" colspan="2">02-123-4567</td>
+						<td id="delivery-hp" colspan="2">${mainVo.storePhone }</td>
 					</tr>
 					<tr>
 						<td id="recommend" colspan="2">추천수: 33</td>
@@ -77,21 +77,27 @@
 				<button type="button" class="click">상세정보보기</button>
 			</div>
 			<div id="storelist" class="clearfix">
-				<img id="storelistLogo" src="${pageContext.request.contextPath}/assets/images/1.png" /> ${vo.storeNo} <br>
+				<img id="storelistLogo" data-no="{mainVo.logoImg}" /> {vo.storeName} <br>
 				<button type="button" class="click">상세정보보기</button>
-		<a href="
-			https://maps.googleapis.com/maps/api/geocode/json?address=서울특별시 관악구 관악로 125&key=AIzaSyDl9EqQnWPqoxn5ZOEOAde3auL9VBp4NYU">
-			서울특별시 관악구 관악로 125
-		</a>
 			</div>
+			<div id="storelist" class="clearfix">
+				<img id="storelistLogo" data-no="{mainVo.logoImg}" /> {vo.storeName} <br>
+				<button type="button" class="click">상세정보보기</button>
+			</div>
+			<div id="storelist" class="clearfix">
+				<img id="storelistLogo" data-no="{mainVo.logoImg}" /> {vo.storeName} <br>
+				<button type="button" class="click">상세정보보기</button>
+			</div>
+			<div id="storelist" class="clearfix">
+				<img id="storelistLogo" data-no="{mainVo.logoImg}" /> {vo.storeName} <br>
+				<button type="button" class="click">상세정보보기</button>
+			</div>
+			
 		</div>
 	</div>
 
+<button type="button" id="btnXY" >클릭</button>
 
-
-
-	<button id="btnXY" type="button">위도 경도 테스트</button>
-	
 	<br>
 	<br>
 
@@ -166,7 +172,7 @@
 					/*	window.open('http://https://www.google.com/');*/
 
 					console.log("지도마커클릭")
-			      document.getElementById("storeLogo").src = "../assets/img/logo.png";
+			      document.getElementById("storeLogo").src="${pageContext.request.contextPath}/assets/images/1.png" ;
 
 					$('#store-name').text("지도 주소의 매장")
 					$('#delivery-num').text("n/m+")
@@ -183,7 +189,7 @@
 	}
 
 	//가게 상세정보 버튼 클릭할때
-	$('#click').on("click", function() {
+	$('.click').on("click", function() {
 		console.log("가게클릭")
 		$('#store-name').text("교촌치킨 (선택)")
 		$('#delivery-num').text("2/6+@")
@@ -192,21 +198,21 @@
 		$('#specialities').text('대표메뉴:후라이드치킨 양념치킨+@')
 		$('#recommend').text('추천수:33+1')
 		$('#store-comment').text('사장님 알림: 항상 감사합니다 고객님+@')
-      document.getElementById("storeLogo").src = "../assets/img/logo.png";
+      document.getElementById("storeLogo").src ="${pageContext.request.contextPath}/assets/images/일식돈가스.png";
 		
 	});
 	
 
 	
 	////////////////////////////////////////////////////////////////////////////////////////
-	//위경도 테스트 영역
+	//위경도 추출 영역
 	
 	$("#btnXY").on("click", function(){
 		console.log("위경도");
 		
 		////////////////////////////
 		//추출
-		var url = "https://maps.googleapis.com/maps/api/geocode/json?address= 서울특별시 관악구 관악로 125 &key=AIzaSyDl9EqQnWPqoxn5ZOEOAde3auL9VBp4NYU"
+		var url = "https://maps.googleapis.com/maps/api/geocode/json?address= ${address} &key=AIzaSyDl9EqQnWPqoxn5ZOEOAde3auL9VBp4NYU"
 		
 	
 		//요청 파라미디터 방식
@@ -231,7 +237,6 @@
 
 		
 	});
-	
 	
 	////////////////////////////////////////////////////////////////////////////////////////
 	

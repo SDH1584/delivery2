@@ -10,4 +10,12 @@
 		]]>
 	</select>
 	
+	<!-- 메인화면 가게정보가져오기 -->
+	<select id="storeList" resultType="MainVo">
+			<![CDATA[
+			select store_name,store_phone,store_m_adr,store_s_adr,store_phone
+			from business
+		]]>
+	</select>
+	
 </mapper>

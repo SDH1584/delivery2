@@ -17,4 +17,8 @@ private MainDao maindao;
 		System.out.println("getList(service)");
 		return maindao.getList();
 	}
+	public List<MainVo> getList2(){
+		System.out.println("getList2 ser");
+		return maindao.getList2();
+	}
 }
