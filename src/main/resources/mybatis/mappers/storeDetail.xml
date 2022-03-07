@@ -25,8 +25,8 @@
        			   po.order_no orderNo,
        			   og.store_no storeNo
 			from personal_order po, order_group og
-			where og.order_no = 1
-			and po.no = 1
+			where og.order_no = #{orderNo}
+			and po.no = #{no}
 		]]>
 	</select>
 	
