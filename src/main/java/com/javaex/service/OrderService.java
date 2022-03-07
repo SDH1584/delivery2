@@ -21,11 +21,12 @@ public class OrderService {
 		System.out.println("[OrderService.orderList()]");
 		
 		List<OrderVo> orderList = orderDao.getList(bVo);
+		BusinessVo bizVo = orderDao.getBiz(bVo);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("orderList", orderList);
-		map.put("bVo",bVo);
+		map.put("bizVo", bizVo);
 		return map;
-	
 	}
-
+	
+	
 }

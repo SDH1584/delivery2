@@ -26,9 +26,15 @@
 			<!-- container -->
 
 			<div id="store-name" class="clearfix">
-				<h2>${map.bVo.storeName}</h2>
-				<button type="button">가게 올리기</button>
-				<button type="button">가게 내리기</button>
+				<h2>${map.bizVo.storeName}</h2>
+				<c:choose>
+					<c:when test="${map.bizVo.onOff==0 }">
+						<button type="button" class="storeOnOff">가게 올리기</button>
+					</c:when>
+					<c:otherwise>
+						<button type="button" class="storeOnOff">가게 내리기</button>
+					</c:otherwise>
+				</c:choose>
 			</div>
 
 			<div id="reserve-list">
@@ -49,7 +55,14 @@
 					<tbody>
 						<c:forEach items="${map.orderList}" var="orderVo">
 							<c:if test="${orderVo.orderStatus==0 }">
-								<tr>
+								<c:choose>
+									<c:when test="${orderVo.redText==1 }">
+										<tr class="red">	
+									</c:when>
+								    <c:otherwise>
+								    	<tr>
+								    </c:otherwise>
+								</c:choose>
 									<td>${orderVo.orderNo}</td>
 									<c:choose>
 										<c:when test="${orderVo.people==orderVo.countPeople}">
@@ -66,7 +79,7 @@
 									</td>
 									<td>${orderVo.orderDate}</td>
 									<td>${orderVo.countPeople}명/${orderVo.people}명</td>
-									<td>${orderVo.deliveryMAdr }${orderVo.deliverySAdr }</td>
+									<td>${orderVo.deliveryMAdr }&nbsp;${orderVo.deliverySAdr }</td>
 								</tr>
 							</c:if>
 						</c:forEach>
@@ -93,7 +106,14 @@
 
 						<c:forEach items="${map.orderList}" var="orderVo">
 							<c:if test="${orderVo.orderStatus==1 || orderVo.orderStatus==3 }">
-								<tr>
+								<c:choose>
+									<c:when test="${orderVo.redText==1 }">
+										<tr class="red">	
+									</c:when>
+								    <c:otherwise>
+								    	<tr>
+								    </c:otherwise>
+								</c:choose>
 									<td>${orderVo.orderNo}</td>
 									<c:choose>
 										<c:when test="${orderVo.orderStatus==1}">
@@ -109,7 +129,7 @@
 									</c:choose>
 									<td>${orderVo.orderDate}</td>
 									<td>${orderVo.countPeople}명/${orderVo.people}명</td>
-									<td>${orderVo.deliveryMAdr }${orderVo.deliverySAdr }</td>
+									<td>${orderVo.deliveryMAdr }&nbsp;${orderVo.deliverySAdr }</td>
 								</tr>
 							</c:if>
 						</c:forEach>
@@ -301,6 +321,25 @@
 	$("tr").on("click", function() {
 		console.log("테이블 클릭")
 		$("#detailModal").modal('show');
+	});
+	
+	/* 자동새로고침-1분 */
+	setTimeout("location.reload()",60000);
+	
+	/* 처리해야 할 내역 빨간색 */
+	$(".red").css("color", "red");
+	
+	/* 가게 on/off 설정 */
+	$(".storeOnOff").on("click", function(){
+		console.log("가게올리기/내리기 클릭")
+		
+		$.ajax({
+			
+			/* 요청 */
+			url : "${pageContext.request.contextPath }/store/storeOnOff", //요청 보낼 주소		
+			type : "post", 
+		});
+		
 	});
 </script>
 

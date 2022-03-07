@@ -20,7 +20,7 @@ public class OrderVo {
 	private int pFee;
 	private String storeReq;
 	private String method;
-	private String storeName;
+	private int redText;
 	
 	
 	
@@ -31,7 +31,7 @@ public class OrderVo {
 	public OrderVo(int orderNo, int firstNo, int storeNo, int people, int countPeople, String orderDate,
 			int orderStatus, String deliveryMAdr, String deliverySAdr, double deliveryLat, double deliveryLng,
 			String deliveryReq, int pOrderNo, int no, int finalPay, int pFee, String storeReq, String method,
-			String storeName) {
+			int redText) {
 		super();
 		this.orderNo = orderNo;
 		this.firstNo = firstNo;
@@ -51,7 +51,7 @@ public class OrderVo {
 		this.pFee = pFee;
 		this.storeReq = storeReq;
 		this.method = method;
-		this.storeName = storeName;
+		this.redText = redText;
 	}
 
 	
@@ -168,12 +168,12 @@ public class OrderVo {
 		this.method = method;
 	}
 	
-	public String getStoreName() {
-		return storeName;
+	public int getRedText() {
+		return redText;
 	}
 
-	public void setStoreName(String storeName) {
-		this.storeName = storeName;
+	public void setRedText(int redText) {
+		this.redText = redText;
 	}
 
 	@Override
@@ -183,7 +183,7 @@ public class OrderVo {
 				+ ", deliveryMAdr=" + deliveryMAdr + ", deliverySAdr=" + deliverySAdr + ", deliveryLat=" + deliveryLat
 				+ ", deliveryLng=" + deliveryLng + ", deliveryReq=" + deliveryReq + ", pOrderNo=" + pOrderNo + ", no="
 				+ no + ", finalPay=" + finalPay + ", pFee=" + pFee + ", storeReq=" + storeReq + ", method=" + method
-				+ ", storeName=" + storeName + "]";
+				+ ", redText=" + redText + "]";
 	}
 
 	

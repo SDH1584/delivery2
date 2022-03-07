@@ -12,13 +12,25 @@
 			        o.delivery_m_adr deliveryMAdr,
 			        o.delivery_s_adr deliverySAdr,
 			        o.delivery_req deliveryReq,
-			        p.countPeople
+			        p.countPeople,
+                    case when o.order_date <= sysdate then 1
+                    else 0 end redText
 			from order_group o, (select order_no, count(*) countPeople 
 			                     from personal_order
 			                     group by order_no) p
 			where o.order_no = p.order_no
 			and o.store_no = #{storeNo}
 			order by o.order_date asc, o.order_no asc
+		]]>
+	</select>
+	
+	<!-- 가게정보 -->
+	<select id="selectBiz" parameterType="com.javaex.vo.BusinessVo" resultType="com.javaex.vo.BusinessVo">
+		<![CDATA[
+			select  store_name storeName,
+			        on_off onOff
+			from business
+			where store_no = #{storeNo}
 		]]>
 	</select>
 	

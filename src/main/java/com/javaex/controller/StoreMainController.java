@@ -21,11 +21,19 @@ public class StoreMainController {
 	@RequestMapping("/main")
 	public String main(@ModelAttribute BusinessVo bVo, Model model) {
 		System.out.println("[StoreMainController.main()]");
-		//System.out.println(no);
+		//System.out.println(bVo);
+		
 		Map<String, Object> map = orderService.orderList(bVo);
 		System.out.println(map);
 		model.addAttribute("map", map);
 		return "store/storeMain";
+	}
+	
+	@RequestMapping("/storeOnOff")
+	public String storeOnOff() {
+		System.out.println("[StoreMainController.storeOnOff()]");
+		
+		return  "redirect:/store/main";
 	}
 		
 }
