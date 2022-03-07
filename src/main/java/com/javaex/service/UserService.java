@@ -1,5 +1,7 @@
 package com.javaex.service;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,8 +36,15 @@ public class UserService {
 
 	// 사용자 로그인
 	public UserVo customerLogin(UserVo userVo) {
-		System.out.println("userService/userLogin");
+		System.out.println("userService/customerLogin");
 
 		return userDao.selectCustomer(userVo);
+	}
+	
+	// 가게 로그인
+	public Map<String, Object> storeLogin(UserVo userVo) {
+		System.out.println("userService/storeLogin");
+	
+		return userDao.selectStore(userVo);
 	}
 }

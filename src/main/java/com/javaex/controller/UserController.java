@@ -1,5 +1,7 @@
 package com.javaex.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,7 +91,12 @@ public class UserController {
 				return "redirect:/main";
 			} else {
 				System.out.println("가게 로그인 성공");
-				session.setAttribute("authUser", authUser);
+				Map<String, Object> map = userService.storeLogin(userVo);
+				System.out.println(userVo.toString());
+				System.out.println(map.get("ID"));
+				System.out.println(map.get("NO"));
+				System.out.println(map.get("STORE_NO"));
+				session.setAttribute("map", map);
 				return "redirect:/store/main";
 			}
 		} else { // 로그인 실패일때

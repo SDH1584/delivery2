@@ -1,5 +1,7 @@
 package com.javaex.dao;
 
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -49,4 +51,11 @@ public class UserDao {
 		return sqlSession.selectOne("user.selectCustomer", userVo);
 	}
 
+	// 가게 정보 가져오기(로그인)
+	public Map<String, Object> selectStore(UserVo userVo) {
+		System.out.println("userDao/selectStore");
+		
+		return sqlSession.selectOne("user.selectStore", userVo);
+	}
+	
 }
