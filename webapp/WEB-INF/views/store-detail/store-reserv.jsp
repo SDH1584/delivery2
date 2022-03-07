@@ -11,6 +11,7 @@
 <link href="${pageContext.request.contextPath}/assets/css/store-detail/store-detail-header.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/assets/css/store-detail/store-reserv.css" rel="stylesheet">
 
+<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery-1.12.4.js"></script>
 
 </head>
 
@@ -49,35 +50,18 @@
 					</tr>
 				</thead>
 
+				<c:forEach items="${rList}" var="rList">
 				<tbody>
 					<tr>
-						<td>2월 16일 오후 12시 30분</td>
-						<td>2/5</td>
+						<td>${rList.orderDate}</td>
+						<td>${rList.people}</td>
 						<td>600원</td>
 						<td>12,000 / 25,000</td>
-						<td>관악구 봉천동 000번길 00</td>
-						<td class="status">대기중</td>
-					</tr>
-
-					<tr>
-						<td>2월 16일 오후 12시 10분</td>
-						<td>2/5</td>
-						<td>600원</td>
-						<td>12,000 / 25,000</td>
-						<td>관악구 봉천동 000번길 000</td>
-						<td class="status">대기중</td>
-					</tr>
-
-					<tr id="last">
-						<td>2월 16일 오전 11시 55분</td>
-						<td>2/3</td>
-						<td>1,000원</td>
-						<td>18,000 / 25,000</td>
-						<td>관악구 봉천동 xxx</td>
-						<td class="status">대기중</td>
+						<td>${rList.deliveryMAdr} ${rList.deliverySAdr}</td>
+						<td class="status"><a href="${pageContext.request.contextPath}/store/attend?orderNo=${rList.orderNo}&no=${authUser.no}">대기중</a></td>
 					</tr>
 				</tbody>
-
+				</c:forEach>
 			</table>
 
 

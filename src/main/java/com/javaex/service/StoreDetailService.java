@@ -1,13 +1,30 @@
 package com.javaex.service;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.javaex.dao.StoreDetailDao;
+import com.javaex.vo.OrderVo;
 
 @Service
 public class StoreDetailService {
 
-	
-	public void reservList() {
+	@Autowired
+	private StoreDetailDao storeDetailDao;
+
+	public List<OrderVo> reservList() {
+
+		List<OrderVo> rList = storeDetailDao.reservList();
+
+		return rList;
+	}
+
+	public OrderVo attend(OrderVo orderVo) {
 		
+		OrderVo attendVo = storeDetailDao.attend(orderVo);
 		
+		return attendVo;
 	}
 }
