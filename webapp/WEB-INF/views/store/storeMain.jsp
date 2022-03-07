@@ -8,8 +8,8 @@
 <title>Insert title here</title>
 
 <link href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/assets/css/main.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/assets/css/store-main.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/assets/css/total.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/assets/css/store/store-main.css" rel="stylesheet">
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.js"></script>
@@ -26,9 +26,9 @@
 			<!-- container -->
 
 			<div id="store-name" class="clearfix">
-				<h2>황소곱창 서울대점</h2>
-				<button type="button" class="btn-info btn-lg">가게 올리기</button>
-				<button type="button" class="btn-warning btn-lg">가게 내리기</button>
+				<h2>${map.bVo.storeName}</h2>
+				<button type="button">가게 올리기</button>
+				<button type="button">가게 내리기</button>
 			</div>
 
 			<div id="reserve-list">
@@ -41,75 +41,38 @@
 						<tr>
 							<th>주문번호</th>
 							<th colspan="2">주문 처리</th>
-							<th colspan="2">주문 예약 일시</th>
+							<th>주문 예약 일시</th>
 							<th>참여 인원</th>
 							<th>배달지</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>TSD1234567</td>
-							<td></td>
-							<td class="td-btn">
-								<button type="button" class="btn-danger btn-xs">거부</button>
-							</td>
-							<td>2/16</td>
-							<td>17:00</td>
-							<td>4명/6명</td>
-							<td>서울시 관악구 봉천동1로 3길 16</td>
-						</tr>
+						<c:forEach items="${map.orderList}" var="orderVo">
+							<c:if test="${orderVo.orderStatus==0 }">
+								<tr>
+									<td>${orderVo.orderNo}</td>
+									<c:choose>
+										<c:when test="${orderVo.people==orderVo.countPeople}">
+											<td class="td-btn">
+												<button type="button" class="btn-primary btn-xs">승인</button>
+											</td>
+										</c:when>
+										<c:otherwise>
+											<td></td>
+										</c:otherwise>
+									</c:choose>
+									<td class="td-btn">
+										<button type="button" class="btn-danger btn-xs">거부</button>
+									</td>
+									<td>${orderVo.orderDate}</td>
+									<td>${orderVo.countPeople}명/${orderVo.people}명</td>
+									<td>${orderVo.deliveryMAdr }${orderVo.deliverySAdr }</td>
+								</tr>
+							</c:if>
+						</c:forEach>
 
-						<tr>
-							<td>TSD1234567</td>
-							<td class="td-btn">
-								<button type="button" class="btn-primary btn-xs">승인</button>
-							</td>
-							<td class="td-btn">
-								<button type="button" class="btn-danger btn-xs">거부</button>
-							</td>
-							<td>2/16</td>
-							<td>17:00</td>
-							<td>6명/6명</td>
-							<td>서울시 관악구 봉천동1로 3길 16</td>
-						</tr>
 
-						<tr>
-							<td>TSD1234567</td>
-							<td class="td-btn">
-								<button type="button" class="btn-primary btn-xs">승인</button>
-							</td>
-							<td class="td-btn">
-								<button type="button" class="btn-danger btn-xs">거부</button>
-							</td>
-							<td>2/16</td>
-							<td>17:00</td>
-							<td>1명/1명</td>
-							<td>서울시 관악구 봉천동1로 3길 16</td>
-						</tr>
 
-						<tr>
-							<td>TSD1234567</td>
-							<td></td>
-							<td class="td-btn">
-								<button type="button" class="btn-danger btn-xs">거부</button>
-							</td>
-							<td>2/16</td>
-							<td>17:00</td>
-							<td>4명/6명</td>
-							<td>서울시 관악구 봉천동1로 3길 16</td>
-						</tr>
-
-						<tr class="last">
-							<td>TSD1234567</td>
-							<td></td>
-							<td class="td-btn">
-								<button type="button" class="btn-danger btn-xs">거부</button>
-							</td>
-							<td>2/16</td>
-							<td>17:00</td>
-							<td>4명/6명</td>
-							<td>서울시 관악구 봉천동1로 3길 16</td>
-						</tr>
 
 					</tbody>
 				</table>
@@ -121,96 +84,36 @@
 						<tr>
 							<th>주문번호</th>
 							<th>주문 처리</th>
-							<th colspan="2">주문 예약 일시</th>
+							<th>주문 예약 일시</th>
 							<th>인원</th>
 							<th>배달지</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>TSD1234567</td>
-							<td class="td-btn">
-								<button type="button" class="btn-default btn-xs">배달원 전달 완료</button>
-							</td>
-							<td>2/16</td>
-							<td>17:00</td>
-							<td>6명</td>
-							<td>서울시 관악구 남주순환로 1848</td>
-						</tr>
-						<tr>
-							<td>TSD1234567</td>
-							<td class="td-btn">
-								<button type="button" class="btn-default btn-xs">배달원 전달 완료</button>
-							</td>
-							<td>2/16</td>
-							<td>17:00</td>
-							<td>6명</td>
-							<td>서울시 관악구 남주순환로 1848</td>
-						</tr>
-						<tr>
-							<td>TSD1234567</td>
-							<td class="td-btn">
-								<button type="button" class="btn-default btn-xs">배달원 전달 완료</button>
-							</td>
-							<td>2/16</td>
-							<td>17:00</td>
-							<td>6명</td>
-							<td>서울시 관악구 남주순환로 1848</td>
-						</tr>
-						<tr>
-							<td>TSD1234567</td>
-							<td class="td-btn">
-								<button type="button" class="btn-success btn-xs">배달 완료</button>
-							</td>
-							<td>2/16</td>
-							<td>17:00</td>
-							<td>6명</td>
-							<td>서울시 관악구 남주순환로 1848</td>
-						</tr>
-						<tr>
-							<td>TSD1234567</td>
-							<td class="td-btn">
-								<button type="button" class="btn-success btn-xs">배달 완료</button>
-							</td>
-							<td>2/16</td>
-							<td>17:00</td>
-							<td>6명</td>
-							<td>서울시 관악구 남주순환로 1848</td>
-						</tr>
-						<tr>
-							<td>TSD1234567</td>
-							<td class="td-btn">
-								<button type="button" class="btn-default btn-xs">배달원 전달 완료</button>
-							</td>
-							<td>2/16</td>
-							<td>17:00</td>
-							<td>6명</td>
-							<td>서울시 관악구 남주순환로 1848</td>
-						</tr>
-						<tr>
-							<td>TSD1234567</td>
-							<td></td>
-							<td>2/16</td>
-							<td>19:00</td>
-							<td>6명</td>
-							<td>서울시 관악구 남주순환로 1848</td>
-						</tr>
-						<tr>
-							<td>TSD1234567</td>
-							<td></td>
-							<td>2/17</td>
-							<td>19:00</td>
-							<td>6명</td>
-							<td>서울시 관악구 남주순환로 1848</td>
-						</tr>
-						<tr class="last">
-							<td>TSD1234567</td>
-							<td></td>
-							<td>2/18</td>
-							<td>17:00</td>
-							<td>6명</td>
-							<td>서울시 관악구 남주순환로 1848</td>
-						</tr>
+
+						<c:forEach items="${map.orderList}" var="orderVo">
+							<c:if test="${orderVo.orderStatus==1 || orderVo.orderStatus==3 }">
+								<tr>
+									<td>${orderVo.orderNo}</td>
+									<c:choose>
+										<c:when test="${orderVo.orderStatus==1}">
+											<td class="td-btn">
+												<button type="button" class="btn-default btn-xs">배달원 전달 완료</button>
+											</td>
+										</c:when>
+										<c:otherwise>
+											<td class="td-btn">
+												<button type="button" class="btn-success btn-xs">배달 완료</button>
+											</td>
+										</c:otherwise>
+									</c:choose>
+									<td>${orderVo.orderDate}</td>
+									<td>${orderVo.countPeople}명/${orderVo.people}명</td>
+									<td>${orderVo.deliveryMAdr }${orderVo.deliverySAdr }</td>
+								</tr>
+							</c:if>
+						</c:forEach>
+						
 					</tbody>
 
 				</table>
@@ -222,7 +125,7 @@
 
 		<!-- 개인블로그 푸터-->
 		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
-		
+
 	</div>
 	<!-- //wrap -->
 

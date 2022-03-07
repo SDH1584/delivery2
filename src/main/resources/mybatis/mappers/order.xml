@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="order">
+	
+	<!-- 주문내역리스트 -->
+	<select id="selectOrderList" parameterType="com.javaex.vo.BusinessVo" resultType="com.javaex.vo.OrderVo">
+		<![CDATA[
+			select  o.order_no orderNo,
+			        o.people people,
+			        to_char(o.order_date, 'yy/mm/dd hh24:mi') orderDate,
+			        o.order_status orderStatus,
+			        o.delivery_m_adr deliveryMAdr,
+			        o.delivery_s_adr deliverySAdr,
+			        o.delivery_req deliveryReq,
+			        p.countPeople
+			from order_group o, (select order_no, count(*) countPeople 
+			                     from personal_order
+			                     group by order_no) p
+			where o.order_no = p.order_no
+			and o.store_no = #{storeNo}
+			order by o.order_date asc, o.order_no asc
+		]]>
+	</select>
+	
+</mapper>

@@ -28,7 +28,7 @@
 		
 		<div class="store-menu">
 			<ul class="clearfix">
-				<li id="sel-menu"><a href="">메뉴</a></li>
+				<li class="sel-menu"><a  id="sel-menu"  href="">메뉴</a></li>
 				<li id="resv-list"><a href="">예약리스트</a></li>
 				<li id="description"><a href="">가게상세정보</a></li>
 				<li id="review"><a href="">리뷰</a></li>

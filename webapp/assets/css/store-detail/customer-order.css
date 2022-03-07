@@ -20,7 +20,7 @@
 .store-menu a {
 	color:#666;
 }
-.sel-menu{background-color:#fff !important; border-bottom:1px none #fff !important;}
+.sel-menu{background-color:#fff !important; border-bottom:1px none #fff !important; color:#5f0080 !important;}
 #sel-menu{ color:#5F0080;}
 
 /* 메뉴 */
