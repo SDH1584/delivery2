@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +21,6 @@
 
 		<!-- 가게상세 해더 -->
 		<c:import url="/WEB-INF/views/includes/customer-header.jsp"></c:import>
-
 		<div id=wrap2 class="cleafix">
 
 			<!-- 가게정보 -->
@@ -78,47 +77,21 @@
 				<button type="button" class="click">상세정보보기</button>
 			</div>
 			<div id="storelist" class="clearfix">
-				<img id="storelistLogo" src="${pageContext.request.contextPath}/assets/images/1.png" /> ${pageContext.request.contextPath} <br> n/m명<br>
+				<img id="storelistLogo" src="${pageContext.request.contextPath}/assets/images/1.png" /> ${vo.storeNo} <br>
 				<button type="button" class="click">상세정보보기</button>
+		<a href="
+			https://maps.googleapis.com/maps/api/geocode/json?address=서울특별시 관악구 관악로 125&key=AIzaSyDl9EqQnWPqoxn5ZOEOAde3auL9VBp4NYU">
+			서울특별시 관악구 관악로 125
+		</a>
 			</div>
-			<div id="storelist" class="clearfix">
-				<img id="storelistLogo" src="${pageContext.request.contextPath}/assets/images/1.png" /> 가게 <br> n/m명<br>
-				<button type="button" class="click">상세정보보기</button>
-			</div>
-			<div id="storelist" class="clearfix">
-				<img id="storelistLogo" src="${pageContext.request.contextPath}/assets/images/1.png" /> 가게 <br> n/m명<br>
-				<button type="button" class="click">상세정보보기</button>
-			</div>
-			<div id="storelist" class="clearfix">
-				<img id="storelistLogo" src="${pageContext.request.contextPath}/assets/images/1.png" /> 가게 <br> n/m명<br>
-				<button type="button" class="click">상세정보보기</button>
-			</div>
-			<!-- 
-			<div id="storelistfirst" class="clearfix">
-				<img id="storelistLogo" src="../assets/img/blacklogo.png" /> 교촌치킨 <br> 2/6명<br>
-				<button type="button" class="click">상세정보보기</button>
-			</div>
-			<div id="storelist" class="clearfix">
-				<img id="storelistLogo" src="../assets/img/blacklogo.png" /> 가게 <br> n/m명<br>
-				<button type="button" class="click">상세정보보기</button>
-			</div>
-			<div id="storelist" class="clearfix">
-				<img id="storelistLogo" src="../assets/img/blacklogo.png" /> 가게 <br> n/m명<br>
-				<button type="button" class="click">상세정보보기</button>
-			</div>
-			<div id="storelist" class="clearfix">
-				<img id="storelistLogo" src="../assets/img/blacklogo.png" /> 가게 <br> n/m명<br>
-				<button type="button" class="click">상세정보보기</button>
-			</div>
-			<div id="storelistlast" class="clearfix">
-				<img id="storelistLogo" src="../assets/img/blacklogo.png" /> 가게 <br> n/m명<br>
-				<button type="button" class="click">상세정보보기</button>
-			</div>
-			 -->
 		</div>
 	</div>
 
 
+
+
+	<button id="btnXY" type="button">위도 경도 테스트</button>
+	
 	<br>
 	<br>
 
@@ -209,7 +182,8 @@
 
 	}
 
-	$('#click').click(function() {
+	//가게 상세정보 버튼 클릭할때
+	$('#click').on("click", function() {
 		console.log("가게클릭")
 		$('#store-name').text("교촌치킨 (선택)")
 		$('#delivery-num').text("2/6+@")
@@ -221,49 +195,93 @@
       document.getElementById("storeLogo").src = "../assets/img/logo.png";
 		
 	});
+	
 
-//무한스크롤코드
-var intersectionObserver = new IntersectionObserver(function(entries) {
-  // If intersectionRatio is 0, the target is out of view
-  // and we do not need to do anything.
-  if (entries[0].intersectionRatio <= 0) return;
+	
+	////////////////////////////////////////////////////////////////////////////////////////
+	//위경도 테스트 영역
+	
+	$("#btnXY").on("click", function(){
+		console.log("위경도");
+		
+		////////////////////////////
+		//추출
+		var url = "https://maps.googleapis.com/maps/api/geocode/json?address= 서울특별시 관악구 관악로 125 &key=AIzaSyDl9EqQnWPqoxn5ZOEOAde3auL9VBp4NYU"
+		
+	
+		//요청 파라미디터 방식
+		$.ajax({
+			
+			url : url,		
+			type : "post",
+			//contentType : "application/json",
+			//data : guestbookVo,   //{name: name, password: password, content: content}
+  
+			dataType : "json",
+			success : function(data){
+				/*성공시 처리해야될 코드 작성*/
+				console.log(data.results[0].geometry.location.lat);
+				console.log(data.results[0].geometry.location.lng);
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
+		});
+		/////////////////////////////////////////////		
 
-  loadItems(10);
-  console.log('Loaded new items');
-});
-// start observing
-intersectionObserver.observe(document.querySelector('.scrollerFooter'));
-const io = new IntersectionObserver((entries, observer) => {
-	entries.forEach(entry => {
-	  if (!entry.isIntersecting) return; 
-		//entry가 interscting 중이 아니라면 함수를 실행하지 않습니다.
-	  if (page._scrollchk) return;
-		//현재 page가 불러오는 중임을 나타내는 flag를 통해 불러오는 중이면 함수를 실행하지 않습니다.
-    observer.observe(document.getElementById('storelist'));
-		//observer를 등록합니다.
-    page._page += 1;
-		//불러올 페이지를 추가합니다.
-    page.list.search();
-		//페이지를 불러오는 함수를 호출합니다.
+		
 	});
-});
-io.observe(document.getElementById('storelist'));
+	
+	
+	////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	
+	/////////////////////////////////////////////////////////////////////////////////////
+	//무한스크롤코드
+	var intersectionObserver = new IntersectionObserver(function(entries) {
+	  // If intersectionRatio is 0, the target is out of view
+	  // and we do not need to do anything.
+	  if (entries[0].intersectionRatio <= 0) return;
+	
+	  loadItems(10);
+	  console.log('Loaded new items');
+	});
+	
+	
+	// start observing
+	intersectionObserver.observe(document.querySelector('.scrollerFooter'));
+	const io = new IntersectionObserver((entries, observer) => {
+		entries.forEach(entry => {
+		  if (!entry.isIntersecting) return; 
+			//entry가 interscting 중이 아니라면 함수를 실행하지 않습니다.
+		  if (page._scrollchk) return;
+			//현재 page가 불러오는 중임을 나타내는 flag를 통해 불러오는 중이면 함수를 실행하지 않습니다.
+	    observer.observe(document.getElementById('storelist'));
+			//observer를 등록합니다.
+	    page._page += 1;
+			//불러올 페이지를 추가합니다.
+	    page.list.search();
+			//페이지를 불러오는 함수를 호출합니다.
+		});
+	});
+	io.observe(document.getElementById('storelist'));
 
 
 
 
-/* 버튼 보이는 이벤트 */ function scrollFunction() { 
-	var btn = document.getElementById('btn'); 
-		if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) { 
-			btn.style.display = "storelist";
-			} else {
-				btn.style.display = "none"; 
-				} 
-		} 
-		/* 부드럽게 위로 가기 */ 
-		function GoTop() { 
-			window.scrollTo({top:0, behavior:'smooth'}); }
-
+	/* 버튼 보이는 이벤트 */ function scrollFunction() { 
+		var btn = document.getElementById('btn'); 
+			if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) { 
+				btn.style.display = "storelist";
+				} else {
+					btn.style.display = "none"; 
+					} 
+			} 
+			/* 부드럽게 위로 가기 */ 
+			function GoTop() { 
+				window.scrollTo({top:0, behavior:'smooth'}); }
+	
 
 </script>
 
