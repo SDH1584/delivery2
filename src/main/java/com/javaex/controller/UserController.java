@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.javaex.service.UserService;
+import com.javaex.vo.AddressVo;
 import com.javaex.vo.UserVo;
 
 @Controller
@@ -44,10 +45,10 @@ public class UserController {
 
 	// 사용자 회원가입
 	@RequestMapping(value = "/c_join", method = { RequestMethod.GET, RequestMethod.POST })
-	public String c_join(@ModelAttribute UserVo userVo) {
+	public String c_join(@ModelAttribute UserVo userVo, @ModelAttribute AddressVo addressVo) {
 		System.out.println("userController/c_join");
 
-		userService.customerJoin(userVo);
+		userService.customerJoin(userVo, addressVo);
 		
 		return "redirect:/user/loginForm";
 	}

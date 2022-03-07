@@ -68,8 +68,10 @@
 								<tr class="lst">
 									<th>주소 <span class="ico">*</span>
 									</th>
-									<td><input type="text" id="c_main_address" name="main_address" label="주소" placeholder="배송받을 주소를 검색해주세요">
-										<button type="button" id="" class="btn btn_default">주소 검색</button></td>
+									<td><input type="text" id="c_address_name" name="address_name" label="주소명" placeholder="배송받을 주소명을 입력해주세요">
+										<input type="text" id="c_main_address" name="main_address" label="주소" placeholder="배송받을 주소를 검색해주세요">
+										<button type="button" id="addressSearch" class="btn btn_default">주소 검색</button></td>
+										<input type="text" id="c_sub_address" name="sub_address" label="상세주소" placeholder="상세 주소를 입력해주세요">
 								</tr>
 							</tbody>
 						</table>

@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="user">
-	
+
 	<!-- 사용자 회원가입 -->
 	<insert id="insertCustomer" parameterType="com.javaex.vo.UserVo">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select seq_users_no.nextval from dual
+		</selectKey>
 		<![CDATA[
 			insert into users
-			values (seq_users_no.nextval,
+			values (
+			#{no},
 			#{id},
 			#{password},
 			#{hp},
@@ -15,7 +19,7 @@
 			0 )
 		]]>
 	</insert>
-	
+
 	<!-- 가게 회원가입 -->
 	<insert id="insertStore" parameterType="com.javaex.vo.UserVo">
 		<![CDATA[
@@ -29,7 +33,7 @@
 			1 )
 		]]>
 	</insert>
-	
+
 	<!-- 사용자 정보 가져오기(로그인) -->
 	<select id="selectCustomer" parameterType="com.javaex.vo.UserVo" resultType="com.javaex.vo.UserVo">
 		<![CDATA[
@@ -40,5 +44,5 @@
 			and password = #{password}
 		]]>
 	</select>
-	
+
 </mapper>
