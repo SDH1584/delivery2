@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.javaex.dao.UserDao;
 import com.javaex.vo.AddressVo;
+import com.javaex.vo.BusinessVo;
 import com.javaex.vo.UserVo;
 
 @Service
@@ -23,10 +24,12 @@ public class UserService {
 	}
 
 	// 가게 회원가입
-	public int storeJoin(UserVo userVo) {
+	public int storeJoin(UserVo userVo, BusinessVo businessVo) {
 		System.out.println("userService/storeJoin");
-
-		return userDao.insertStore(userVo);
+		
+		userDao.insertStore(userVo);
+		businessVo.setNo(userVo.getNo());
+		return userDao.insertStoreInfo(businessVo);
 	}
 
 	// 사용자 로그인

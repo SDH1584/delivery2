@@ -39,7 +39,7 @@
 									<td>
 										<div class="s_profile_photo">
 											<img id="profile_photo" src="${pageContext.request.contextPath}/assets/images/profile.png">
-										</div> <input type="file" id="s_profile_img" name="profile_img">
+										</div> <input type="file" id="s_logoImg" name="logoImg">
 									</td>
 								</tr>
 								<tr>
@@ -56,16 +56,16 @@
 								<tr>
 									<th>사업자 등록번호 <span class="ico">*</span>
 									</th>
-									<td><input type="text" id="s_biz_no" name="biz_no" label="사업자 등록번호" placeholder="사업자 등록번호를 입력해주세요"></td>
+									<td><input type="number" id="s_bizNo" name="bizNo" label="사업자 등록번호" placeholder="사업자 등록번호를 입력해주세요"></td>
 								</tr>
 								<tr>
 									<th>상호명 <span class="ico">*</span>
 									</th>
-									<td><input type="text" id="s_store_name" name="store_name" label="상호명" placeholder="상호명을 입력해주세요"></td>
+									<td><input type="text" id="s_storeName" name="storeName" label="상호명" placeholder="상호명을 입력해주세요"></td>
 								</tr>
 								<tr>
 									<th>전화번호</th>
-									<td><input type="text" id="s_store_phone" name="store_phone" label="전화번호" placeholder="숫자만 입력해주세요"></td>
+									<td><input type="text" id="s_storePhone" name="storePhone" label="전화번호" placeholder="숫자만 입력해주세요"></td>
 								</tr>
 								<tr>
 									<th>휴대전화 <span class="ico">*</span>
@@ -78,10 +78,16 @@
 									<td><input type="text" id="s_email" name="email" label="이메일" placeholder="예: marketkurly@kurly.com">
 										<button type="button" id="" class="btn btn_default">중복확인</button></td>
 								</tr>
-								<tr class="lst">
+								<tr>
 									<th>주소 <span class="ico">*</span>
 									</th>
-									<td><input type="text" id="s_store_m_adr" name="store_m_adr" label="주소" placeholder="가게 주소를 검색해주세요">
+									<td><input type="text" id="s_storeMAdr" name="storeMAdr" label="주소" placeholder="가게 주소를 검색해주세요">
+										<button type="button" id="" class="btn btn_default">주소 검색</button></td>
+								</tr>
+								<tr class="lst">
+									<th>상세 주소 <span class="ico">*</span>
+									</th>
+									<td><input type="text" id="s_storeSAdr" name="storeSAdr" label="주소" placeholder="가게 상세 주소를 입력해주세요">
 										<button type="button" id="" class="btn btn_default">주소 검색</button></td>
 								</tr>
 							</tbody>
@@ -104,11 +110,7 @@
 		console.log("가입하기 버튼 클릭");
 		
 		var id = $("#s_id").val();
-		var pw = $("#s_pass").val();
-		var regNum = $("#s_regNum");
-		var name = $("#s_name");
-		var phone = $("#s_phone").val();
-		var addr = $("#s_addr").val();
+		var pw = $("#s_password").val();
 		
 		if(id == "") {
 			alert("아이디를 입력해 주세요.");
@@ -118,24 +120,7 @@
 			alert("비밀번호를 입력해 주세요.");
 			return false;
 		}
-		/*
-		if(regNum == "") {
-			alert("사업자 등록번호를 입력해 주세요.");
-			return false;
-		}
-		if(name == "") {
-			alert("상호명을 입력해 주세요.");
-			return false;
-		}
-		if(phone == "") {
-			alert("휴대전화 번호를 입력해 주세요.");
-			return false;
-		}
-		if(addr == "") {
-			alert("주소를 입력해 주세요.");
-			return false;
-		}
-		*/
+
 		return true;
 	});
 </script>

@@ -101,9 +101,8 @@
 		console.log("가입하기 버튼 클릭");
 
 		var id = $("#c_id").val();
-		var pw = $("#c_pass").val();
+		var pw = $("#c_password").val();
 		var phone = $("#c_phone").val();
-		var addr = $("#c_addr").val();
 
 		if (id == "") {
 			alert("아이디를 입력해 주세요.");
@@ -117,12 +116,7 @@
 			alert("휴대전화 번호를 입력해 주세요.");
 			return false;
 		}
-		/*
-		if(addr == "") {
-			alert("주소를 입력해 주세요.");
-			return false;
-		}
-		 */
+
 		return true;
 	});
 </script>

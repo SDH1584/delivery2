@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.javaex.service.UserService;
 import com.javaex.vo.AddressVo;
+import com.javaex.vo.BusinessVo;
 import com.javaex.vo.UserVo;
 
 @Controller
@@ -55,10 +56,10 @@ public class UserController {
 
 	// 가게 회원가입
 	@RequestMapping(value = "/s_join", method = { RequestMethod.GET, RequestMethod.POST })
-	public String s_join(@ModelAttribute UserVo userVo) {
+	public String s_join(@ModelAttribute UserVo userVo, @ModelAttribute BusinessVo businessVo) {
 		System.out.println("userController/s_join");
 
-		userService.storeJoin(userVo);
+		userService.storeJoin(userVo, businessVo);
 		
 		return "redirect:/user/loginForm";
 	}

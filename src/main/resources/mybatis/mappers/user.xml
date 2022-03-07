@@ -22,15 +22,40 @@
 
 	<!-- 가게 회원가입 -->
 	<insert id="insertStore" parameterType="com.javaex.vo.UserVo">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select seq_users.nextval from dual
+		</selectKey>
 		<![CDATA[
 			insert into users
-			values (seq_users.nextval,
+			values (
+			#{no},
 			#{id},
 			#{password},
 			#{hp},
 			#{email},
-			#{profile_img},
+			null,
 			1 )
+		]]>
+	</insert>
+
+	<!-- 가게 정보 추가(회원가입) -->
+	<insert id="insertStoreInfo" parameterType="com.javaex.vo.BusinessVo">
+		<![CDATA[
+			insert into business
+			values ( seq_business.nextval,
+			#{No},
+			#{bizNo},
+			#{storeName},
+			#{storePhone},
+			#{storeMAdr},
+			#{storeSAdr},
+			null,
+			null,
+			#{logoImg},
+			null,
+			null,
+			null,
+			0 )
 		]]>
 	</insert>
 
