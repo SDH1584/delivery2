@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="storeDetail">
+
+	<select id="reservList" resultType="com.javaex.vo.OrderVo">
+		<![CDATA[
+			select order_no orderNo,
+				   no firstNo,
+				   store_no storeNo,
+				   people,
+				   order_date orderDate,
+				   delivery_m_adr deliveryMAdr,
+				   delivery_s_adr deliverySAdr
+			from order_group
+			order by order_date desc	
+		]]>
+
+	</select>
+
+	<select id="attend" parameterType="com.javaex.vo.OrderVo" resultType="com.javaex.vo.OrderVo">
+		<![CDATA[
+			select po.p_order_no pOrderNo,
+       			   po.order_no orderNo,
+       			   og.store_no storeNo
+			from personal_order po, order_group og
+			where og.order_no = #{orderNo}
+			and po.no = #{no}
+		]]>
+	</select>
+	
+
+</mapper>

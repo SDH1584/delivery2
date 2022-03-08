@@ -24,6 +24,9 @@ MainService mainService;
 		System.out.println(getList);
 		model.addAttribute("getList", getList);
 		
+		List<MainVo> getList2=mainService.getList2();
+		model.addAttribute("getList2",getList2);
+		
 		return "user/main";
 		
 	}

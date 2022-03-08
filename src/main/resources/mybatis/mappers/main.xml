@@ -3,9 +3,17 @@
 <mapper namespace="main">
 	
 	<!-- 지도 디폴트 위치 정보 가져오기 -->
-	<select id="selectMarker"   resultType="MainVo">
+	<select id="selectMarker"  resultType="MainVo">
 		<![CDATA[
-			select store_name,store_phone,store_m_adr,store_s_adr,store_lat,store_lng
+			select storeame,store_phone,store_m_adr,store_s_adr,store_lat,store_lng
+			from business
+		]]>
+	</select>
+	
+	<!-- 메인화면 가게정보가져오기 -->
+	<select id="storeList" resultType="MainVo">
+			<![CDATA[
+			select store_name,store_phone,store_m_adr,store_s_adr,store_phone
 			from business
 		]]>
 	</select>
