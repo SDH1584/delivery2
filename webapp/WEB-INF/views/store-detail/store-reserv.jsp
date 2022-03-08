@@ -55,10 +55,10 @@
 					<tr>
 						<td>${rList.orderDate}</td>
 						<td>${rList.people}</td>
-						<td>600원</td>
-						<td>12,000 / 25,000</td>
+						<td>${rList.pFee}원</td>
+						<td>12,000 / ${rList.minPrice}</td>
 						<td>${rList.deliveryMAdr} ${rList.deliverySAdr}</td>
-						<td class="status"><a href="${pageContext.request.contextPath}/store/attend?orderNo=${rList.orderNo}&no=${authUser.no}">대기중</a></td>
+						<td class="status"><a href="${pageContext.request.contextPath}/store/${storeNo}/attend?orderNo=${rList.orderNo}&no=${authUser.no}">대기중</a></td>
 					</tr>
 				</tbody>
 				</c:forEach>

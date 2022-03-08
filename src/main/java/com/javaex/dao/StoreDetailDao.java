@@ -14,9 +14,9 @@ public class StoreDetailDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public List<OrderVo> reservList() {
+	public List<OrderVo> reservList(int storeNo) {
 		
-		List<OrderVo> rList = sqlSession.selectList("storeDetail.reservList");
+		List<OrderVo> rList = sqlSession.selectList("storeDetail.reservList", storeNo);
 		System.out.println(rList);
 		
 		return rList;

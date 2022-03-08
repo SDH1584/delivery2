@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -30,28 +31,27 @@ public class StoreDetailController {
 		return "store-detail/order-change-attendee";
 	}
 
-	@RequestMapping("reserv")
-	public String reserv(Model model) {
+	@RequestMapping("/{storeNo}/reserv")
+	public String reserv(@PathVariable("storeNo") int storeNo, Model model) {
 		System.out.println("reservation");
 
-		List<OrderVo> rList = storeDetailService.reservList();
+		List<OrderVo> rList = storeDetailService.reservList(storeNo);
 		model.addAttribute("rList", rList);
 		System.out.println("reservList: " + rList);
 
 		return "store-detail/store-reserv";
 	}
 
-	@RequestMapping("attend")
+	@RequestMapping("/{storeNo}/attend")
 	public String attend(@RequestParam(value = "orderNo") int orderNo,
-						 @RequestParam(value = "no", required = false, defaultValue="0") int no, 
-						 Model model) {
+			@RequestParam(value = "no", required = false, defaultValue = "0") int no, Model model) {
 
 		if (no == 0) {
-		
+
 			return "user/loginForm";
-			
+
 		} else {
-			
+
 			OrderVo orderVo = new OrderVo();
 			orderVo.setOrderNo(orderNo);
 			orderVo.setNo(no);
@@ -60,7 +60,7 @@ public class StoreDetailController {
 			model.addAttribute("attendVo", attendVo);
 
 			System.out.println();
-			
+
 			if (attendVo == null) {
 
 				return "store-detail/orderFirst";

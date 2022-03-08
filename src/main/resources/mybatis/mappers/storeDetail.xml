@@ -16,6 +16,7 @@
 			from order_group og, delivery de, business biz
 			where biz.store_no = og.store_no
 			and biz.store_no = og.store_no
+			and og.store_no = #{storeNo}
 			order by order_date desc	
 		]]>
 

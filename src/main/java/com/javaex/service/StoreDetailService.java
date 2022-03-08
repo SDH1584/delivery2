@@ -14,9 +14,9 @@ public class StoreDetailService {
 	@Autowired
 	private StoreDetailDao storeDetailDao;
 
-	public List<OrderVo> reservList() {
+	public List<OrderVo> reservList(int storeNo) {
 
-		List<OrderVo> rList = storeDetailDao.reservList();
+		List<OrderVo> rList = storeDetailDao.reservList(storeNo);
 
 		return rList;
 	}
