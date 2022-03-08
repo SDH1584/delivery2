@@ -4,7 +4,7 @@
 
 <mapper namespace="storeDetail">
 
-	<select id="reservList" resultType="com.javaex.vo.OrderVo">
+	<select id="reservList" parameterType="com.javaex.vo.OrderVo" resultType="com.javaex.vo.OrderVo">
 		<![CDATA[
 			select og.order_no orderNo,
 			       og.people people,
@@ -12,10 +12,16 @@
 			       og.delivery_m_adr deliveryMAdr,
 			       og.delivery_s_adr deliverySAdr,
 			       de.fee/og.people as pFee,
-			       biz.min_price minPrice
-			from order_group og, delivery de, business biz
+			       biz.min_price minPrice,
+			       cp.countpeople
+			from order_group og, delivery de, business biz, (select order_no,
+			                                                        count(p_order_no) as countPeople
+			                                                 from personal_order
+			                                                 group by order_no
+			                                                 ) cp
 			where biz.store_no = og.store_no
 			and biz.store_no = og.store_no
+			and cp.order_no = og.order_no
 			and og.store_no = #{storeNo}
 			order by order_date desc	
 		]]>
