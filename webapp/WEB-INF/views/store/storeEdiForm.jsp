@@ -26,21 +26,21 @@
             </div>
             <!-- aside-->
             <div id="main">
-                <form method="post" action="" enctype="">
+                <form method="${pageContext.request.contextPath}/store/modify" action="" enctype="">
                 <div>
                 <table id="table1">
                         <tbody>
                            <tr>
                                <th>사업자등록번호</th>
-                               <td><span>123123123</span></td>
+                               <td><span>${requestScope.businessVo.bizNo}</span></td>
                                <th>상호명</th>
-                               <td><input type="text" name="" value="교촌"></td>
+                               <td><input type="text" name="" value=""></td>
                            </tr>
                            <tr>
                                <th>가게번호</th>
-                               <td><span>02-1234-1234</span></td>
+                               <td><span></span></td>
                                <th>휴대전화</th>
-                               <td><input type="text" name="" value="010-1234-1234"></td>
+                               <td><input type="text" name="" value=""></td>
                            </tr>
                            <tr>
                                <th>Email</th>
@@ -53,13 +53,13 @@
                            </tr>
                            <tr>
                                <th>상세주소</th>
-                               <td colspan="3"><input type="text" name="" value="서울시 성북구 어쩌고"></td>
+                               <td colspan="3"><input type="text" name="" value=""></td>
                            </tr>
                            <tr>
                             <th>기본배달료</th>
-                            <td><input type="text" name="" value="010-1234-1234"></td>
+                            <td><input type="text" name="" value=""></td>
                             <th class="tdpadding"><span>최소주문금액</span></th>
-                            <td><input type="text" name="" value="010-1234-1234"></td>
+                            <td><input type="text" name="" value=""></td>
                         </tr>
                         <tr>
                             <th>기본배달지역</th>
@@ -82,51 +82,51 @@
                         </tr>
                         <tr>
                             <th>월</th>
-                            <td><input type="text" name="" value="교촌"></td>
-                            <td><span><input type="text" name="" value="교촌"></span></td>
-                            <td><span><input type="checkbox" name="color" value="blue" class="chbtn"></span></td>
+                            <td><input type="text" name="" value=""></td>
+                            <td><span><input type="text" name="" value=""></span></td>
+                            <td><span><input type="checkbox" name="color" value="" class="chbtn"></span></td>
                         </tr>
 
                         <tr>
                             <th>화</th>
-                            <td><input type="text" name="" value="교촌"></td>
-                            <td><span><input type="text" name="" value="교촌"></span></td>
-                            <td><span><input type="checkbox" name="color" value="blue" class="chbtn"></span></td>
+                            <td><input type="text" name="" value=""></td>
+                            <td><span><input type="text" name="" value=""></span></td>
+                            <td><span><input type="checkbox" name="color" value="" class="chbtn"></span></td>
                         </tr>
 
                         <tr>
                             <th>수</th>
-                            <td><input type="text" name="" value="교촌"></td>
-                            <td><span><input type="text" name="" value="교촌"></span></td>
-                            <td><span><input type="checkbox" name="color" value="blue" class="chbtn"></span></td>
+                            <td><input type="text" name="" value=""></td>
+                            <td><span><input type="text" name="" value=""></span></td>
+                            <td><span><input type="checkbox" name="" value="" class="chbtn"></span></td>
                         </tr>
 
                         <tr>
                             <th>목</th>
-                            <td><input type="text" name="" value="교촌"></td>
-                            <td><span><input type="text" name="" value="교촌"></span></td>
-                            <td><span><input type="checkbox" name="color" value="blue" class="chbtn"></span></td>
+                            <td><input type="text" name="" value=""></td>
+                            <td><span><input type="text" name="" value=""></span></td>
+                            <td><span><input type="checkbox" name="" value="" class="chbtn"></span></td>
                         </tr>
 
                         <tr>
                             <th>금</th>
-                            <td><input type="text" name="" value="교촌"></td>
-                            <td><span><input type="text" name="" value="교촌"></span></td>
-                            <td><span><input type="checkbox" name="color" value="blue" class="chbtn"></span></td>
+                            <td><input type="text" name="" value=""></td>
+                            <td><span><input type="text" name="" value=""></span></td>
+                            <td><span><input type="checkbox" name="" value="" class="chbtn"></span></td>
                         </tr>
 
                         <tr>
                             <th>토</th>
-                            <td><input type="text" name="" value="교촌"></td>
-                            <td><span><input type="text" name="" value="교촌"></span></td>
-                            <td><span><input type="checkbox" name="color" value="blue" class="chbtn"></span></td>
+                            <td><input type="text" name="" value=""></td>
+                            <td><span><input type="text" name="" value=""></span></td>
+                            <td><span><input type="checkbox" name="" value="" class="chbtn"></span></td>
                         </tr>
 
                         <tr>
                             <th>일</th>
-                            <td><input type="text" name="" value="교촌"></td>
-                            <td><span><input type="text" name="" value="교촌"></span></td>
-                            <td><span><input type="checkbox" name="color" value="blue" class="chbtn"></span></td>
+                            <td><input type="text" name="" value=""></td>
+                            <td><span><input type="text" name="" value=""></span></td>
+                            <td><span><input type="checkbox" name="r" value="" class="chbtn"></span></td>
                         </tr>
                         
                         </tbody>
@@ -162,6 +162,7 @@
                 </div>
 
                 <div><button class="button1" type="submit">수정버튼</button></div>
+                <input type="text" name="no" value="${requestScope.businessVo.No}">
                 </form>
             </div>
             </div>

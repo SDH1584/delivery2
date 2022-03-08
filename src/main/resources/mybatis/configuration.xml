@@ -4,9 +4,11 @@
 <configuration>
 	<typeAliases>
 			<typeAlias alias="MainVo" type="com.javaex.vo.MainVo" />
+			<typeAlias alias="BusinessVo" type="com.javaex.vo.BusinessVo" />
 	</typeAliases>
 	
 	<mappers>
+		<mapper resource="mybatis/mappers/Business.xml" />
 		<mapper resource="mybatis/mappers/user.xml" />
 		<mapper resource="mybatis/mappers/main.xml" />
 		<mapper resource="mybatis/mappers/order.xml" />
