@@ -6,14 +6,16 @@
 
 	<select id="reservList" resultType="com.javaex.vo.OrderVo">
 		<![CDATA[
-			select order_no orderNo,
-				   no firstNo,
-				   store_no storeNo,
-				   people,
-				   order_date orderDate,
-				   delivery_m_adr deliveryMAdr,
-				   delivery_s_adr deliverySAdr
-			from order_group
+			select og.order_no orderNo,
+			       og.people people,
+			       og.order_date orderDate,
+			       og.delivery_m_adr deliveryMAdr,
+			       og.delivery_s_adr deliverySAdr,
+			       de.fee/og.people as pFee,
+			       biz.min_price minPrice
+			from order_group og, delivery de, business biz
+			where biz.store_no = og.store_no
+			and biz.store_no = og.store_no
 			order by order_date desc	
 		]]>
 

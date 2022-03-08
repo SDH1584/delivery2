@@ -59,7 +59,7 @@ public class StoreDetailController {
 			OrderVo attendVo = storeDetailService.attend(orderVo);
 			model.addAttribute("attendVo", attendVo);
 
-			System.out.println("attendVo: " + attendVo);
+			System.out.println();
 			
 			if (attendVo == null) {
 
