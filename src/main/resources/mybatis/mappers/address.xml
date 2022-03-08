@@ -11,8 +11,8 @@
 			#{address_name},
 			#{main_address},
 			#{sub_address},
-			null,
-			null,
+			#{lat},
+			#{lng},
 			1 )
 		]]>
 	</insert>

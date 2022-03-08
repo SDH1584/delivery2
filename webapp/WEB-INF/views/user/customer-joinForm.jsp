@@ -32,7 +32,7 @@
 					<p class="page_sub">
 						<span class="ico">*</span> 필수입력사항
 					</p>
-					<form action="${pageContext.request.contextPath}/user/c_join" method="get">
+					<form action="${pageContext.request.contextPath}/user/c_join" method="post" enctype="multipart/form-data">
 						<table class="tbl_join">
 							<tbody>
 								<tr class="fst">
@@ -40,48 +40,50 @@
 									<td>
 										<div class="c_profile_photo">
 											<img id="profile_photo" src="${pageContext.request.contextPath}/assets/images/profile.png">
-										</div> <input type="file" id="c_profile_img" name="profile_img">
+										</div> <input type="file" id="c_profile_img" name="file">
 									</td>
 								</tr>
 								<tr>
 									<th>아이디 <span class="ico">*</span>
 									</th>
-									<td><input type="text" id="c_id" name="id" value="" label="아이디" placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합">
+									<td><input type="text" id="c_id" name="id" value="" placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합">
 										<button type="button" id="" class="btn btn_default">중복확인</button></td>
 								</tr>
 								<tr>
 									<th>비밀번호 <span class="ico">*</span>
 									</th>
-									<td><input type="password" id="c_password" name="password" label="비밀번호" placeholder="비밀번호를 입력해주세요"></td>
+									<td><input type="password" id="c_password" name="password" placeholder="비밀번호를 입력해주세요"></td>
 								</tr>
 								<tr>
 									<th>휴대전화 <span class="ico">*</span>
 									</th>
-									<td><input type="text" id="c_hp" name="hp" label="휴대전화" placeholder="숫자만 입력해주세요">
+									<td><input type="text" id="c_hp" name="hp" placeholder="숫자만 입력해주세요">
 										<button type="button" id="" class="btn btn_default">인증번호 받기</button></td>
 								</tr>
 								<tr>
 									<th>이메일</th>
-									<td><input type="text" id="c_email" name="email" label="이메일" placeholder="예: marketkurly@kurly.com">
+									<td><input type="text" id="c_email" name="email" placeholder="예: marketkurly@kurly.com">
 										<button type="button" id="" class="btn btn_default">중복확인</button></td>
 								</tr>
 								<tr class="lst">
 								<tr>
 									<th>주소명 <span class="ico">*</span></th>
-									<td><input type="text" id="c_address_name" name="address_name" label="주소명" placeholder="배송받을 주소명을 입력해주세요"></td>
+									<td><input type="text" id="c_address_name" name="address_name" placeholder="배송받을 주소명을 입력해주세요"></td>
 								</tr>
 								<tr>
 									<th>주소 <span class="ico">*</span></th>
-									<td><input type="text" id="c_main_address" name="main_address" label="주소" placeholder="배송받을 주소를 검색해주세요">
+									<td><input type="text" id="c_main_address" name="main_address" placeholder="배송받을 주소를 검색해주세요">
 										<button type="button" id="addressSearch" class="btn btn_default">주소 검색</button></td>
 								</tr>
 								<tr>
 									<th>상세 주소 <span class="ico">*</span></th>
-									<td><input type="text" id="c_sub_address" name="sub_address" label="상세주소" placeholder="상세 주소를 입력해주세요"></td>
+									<td><input type="text" id="c_sub_address" name="sub_address" placeholder="상세 주소를 입력해주세요"></td>
 								</tr>
 
 							</tbody>
 						</table>
+						<input type="hidden" id="lat" name="lat" value="">
+						<input type="hidden" id="lng" name="lng" value="">	
 						<div id="btn_area">
 							<button type="submit" id="btn_submit" class="btn btn_join">가입하기</button>
 						</div>
@@ -98,6 +100,7 @@
 </body>
 <script type="text/javascript">
 	// 회원가입 예외처리
+	/*
 	$("#btn_submit").on("click", function() {
 		console.log("가입하기 버튼 클릭");
 
@@ -120,6 +123,7 @@
 
 		return true;
 	});
+	*/
 	
 	// 위경도 추출
 	$("#addressSearch").on("click", function() {
@@ -141,6 +145,9 @@
 				/*성공시 처리해야될 코드 작성*/
 				console.log(data.results[0].geometry.location.lat);
 				console.log(data.results[0].geometry.location.lng);
+				
+				$("#lat").val(data.results[0].geometry.location.lat);
+				$("#lng").val(data.results[0].geometry.location.lng);
 			},
 			error : function(XHR, status, error) {
 				console.error(status + " : " + error);

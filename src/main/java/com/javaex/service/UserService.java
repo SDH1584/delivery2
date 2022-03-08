@@ -22,6 +22,7 @@ public class UserService {
 		
 		userDao.insertCustomer(userVo);
 		addressVo.setNo(userVo.getNo());
+		System.out.println(addressVo.toString());
 		return userDao.insertAddress(addressVo);
 	}
 

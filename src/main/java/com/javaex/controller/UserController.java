@@ -6,10 +6,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.javaex.service.FileService;
 import com.javaex.service.UserService;
 import com.javaex.vo.AddressVo;
 import com.javaex.vo.BusinessVo;
@@ -22,6 +26,9 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private FileService fileService;
+	
 	// 공통 회원가입 폼
 	@RequestMapping("/joinForm")
 	public String joinForm() {
@@ -34,7 +41,7 @@ public class UserController {
 	@RequestMapping(value = "/c_joinForm", method = { RequestMethod.GET, RequestMethod.POST })
 	public String c_joinForm() {
 		System.out.println("userController/c_joinForm");
-
+		
 		return "user/customer-joinForm";
 	}
 
@@ -48,11 +55,13 @@ public class UserController {
 
 	// 사용자 회원가입
 	@RequestMapping(value = "/c_join", method = { RequestMethod.GET, RequestMethod.POST })
-	public String c_join(@ModelAttribute UserVo userVo, @ModelAttribute AddressVo addressVo) {
+	public String c_join(@RequestParam("file") MultipartFile file, @ModelAttribute UserVo userVo, @ModelAttribute AddressVo addressVo, Model model) {
 		System.out.println("userController/c_join");
-
-		userService.customerJoin(userVo, addressVo);
 		
+		String saveName = fileService.restore(file);
+		model.addAttribute("saveName", saveName);
+		userVo.setProfile_img(saveName);
+		userService.customerJoin(userVo, addressVo);
 		return "redirect:/user/loginForm";
 	}
 
@@ -60,7 +69,7 @@ public class UserController {
 	@RequestMapping(value = "/s_join", method = { RequestMethod.GET, RequestMethod.POST })
 	public String s_join(@ModelAttribute UserVo userVo, @ModelAttribute BusinessVo businessVo) {
 		System.out.println("userController/s_join");
-
+		
 		userService.storeJoin(userVo, businessVo);
 		
 		return "redirect:/user/loginForm";

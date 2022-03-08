@@ -33,14 +33,14 @@ public class UserDao {
 	// 가게 정보 저장
 	public int insertStore(UserVo userVo) {
 		System.out.println("userDao/insertStore");
-		System.out.println(userVo.toString());
+		
 		return sqlSession.insert("user.insertStore", userVo);
 	}
 	
 	// 가게 상세 정보 저장
 	public int insertStoreInfo(BusinessVo businessVo) {
 		System.out.println("userDao/insertStoreInfo");
-		System.out.println(businessVo.toString());
+		
 		return sqlSession.insert("user.insertStoreInfo", businessVo);
 	}
 
