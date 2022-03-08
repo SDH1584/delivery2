@@ -97,6 +97,7 @@
 
 </body>
 <script type="text/javascript">
+	// 회원가입 예외처리
 	$("#btn_submit").on("click", function() {
 		console.log("가입하기 버튼 클릭");
 
@@ -119,5 +120,34 @@
 
 		return true;
 	});
+	
+	// 위경도 추출
+	$("#addressSearch").on("click", function() {
+		console.log("주소 검색 버튼 클릭");
+		
+		var address = $("#c_main_address").val();
+		console.log(address);
+		
+		//추출
+		var url = "https://maps.googleapis.com/maps/api/geocode/json?address="+address+"&key=AIzaSyDl9EqQnWPqoxn5ZOEOAde3auL9VBp4NYU"
+		
+		//요청 파라미터 방식
+		$.ajax({
+			
+			url : url,		
+			type : "post",
+			dataType : "json",
+			success : function(data){
+				/*성공시 처리해야될 코드 작성*/
+				console.log(data.results[0].geometry.location.lat);
+				console.log(data.results[0].geometry.location.lng);
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
+		});
+		
+	});
+	
 </script>
 </html>
