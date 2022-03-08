@@ -15,7 +15,7 @@
 				<li><a href="https://www.naver.com/" class="link2">가게정보수정</a></li>
 
 				<ul class="ullink2">
-					<li><a href="" class="link2">${sessionScope.authUser.id}님의 가게</a></li>
+					<li><a href="" class="link2">${sessionScope.map.ID}님의 가게</a></li>
 					<li><a href="" class="link2">로그아웃</a></li>
 				</ul>
 			</ul>
