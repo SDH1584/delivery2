@@ -108,13 +108,15 @@
 </body>
 <script type="text/javascript">
 	// 회원가입 예외처리
-	/*
 	$("#btn_submit").on("click", function() {
 		console.log("가입하기 버튼 클릭");
 
 		var id = $("#c_id").val();
 		var pw = $("#c_password").val();
-		var phone = $("#c_phone").val();
+		var hp = $("#c_hp").val();
+		var name = $("#c_address_name").val();
+		var main = $("#c_main_address").val();
+		var sub = $("#c_sub_address").val();
 
 		if (id == "") {
 			alert("아이디를 입력해 주세요.");
@@ -124,14 +126,25 @@
 			alert("비밀번호를 입력해 주세요.");
 			return false;
 		}
-		if (phone == "") {
+		if (hp == "") {
 			alert("휴대전화 번호를 입력해 주세요.");
+			return false;
+		}
+		if (name == "") {
+			alert("주소명을 입력해 주세요.");
+			return false;
+		}
+		if (main == "") {
+			alert("주소를 입력해 주세요.");
+			return false;
+		}
+		if (sub == "") {
+			alert("상세 주소를 입력해 주세요.");
 			return false;
 		}
 
 		return true;
 	});
-	 */
 
 	// 위경도 추출
 	$("#addressSearch")
