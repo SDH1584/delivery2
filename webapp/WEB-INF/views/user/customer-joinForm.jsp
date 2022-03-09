@@ -40,8 +40,17 @@
 									<td>
 										<div class="c_profile_photo">
 											<img id="profile_photo" src="${pageContext.request.contextPath}/assets/images/profile.png">
-										</div> <input type="file" id="c_profile_img" name="file">
+										</div> <input type="file" id="c_profile_img" name="file" onchange="setThumbnail(event);">
 									</td>
+									<script>
+										function setThumbnail(event) {
+											var reader = new FileReader();
+											reader.onload = function(event) {
+												document.getElementById("profile_photo").src = event.target.result;
+											}
+											reader.readAsDataURL(event.target.files[0]);
+										}
+									</script>
 								</tr>
 								<tr>
 									<th>아이디 <span class="ico">*</span>
@@ -82,8 +91,7 @@
 
 							</tbody>
 						</table>
-						<input type="hidden" id="lat" name="lat" value="">
-						<input type="hidden" id="lng" name="lng" value="">	
+						<input type="hidden" id="lat" name="lat" value=""> <input type="hidden" id="lng" name="lng" value="">
 						<div id="btn_area">
 							<button type="submit" id="btn_submit" class="btn btn_join">가입하기</button>
 						</div>
@@ -123,38 +131,49 @@
 
 		return true;
 	});
-	*/
-	
+	 */
+
 	// 위경도 추출
-	$("#addressSearch").on("click", function() {
-		console.log("주소 검색 버튼 클릭");
-		
-		var address = $("#c_main_address").val();
-		console.log(address);
-		
-		//추출
-		var url = "https://maps.googleapis.com/maps/api/geocode/json?address="+address+"&key=AIzaSyDl9EqQnWPqoxn5ZOEOAde3auL9VBp4NYU"
-		
-		//요청 파라미터 방식
-		$.ajax({
-			
-			url : url,		
-			type : "post",
-			dataType : "json",
-			success : function(data){
-				/*성공시 처리해야될 코드 작성*/
-				console.log(data.results[0].geometry.location.lat);
-				console.log(data.results[0].geometry.location.lng);
-				
-				$("#lat").val(data.results[0].geometry.location.lat);
-				$("#lng").val(data.results[0].geometry.location.lng);
-			},
-			error : function(XHR, status, error) {
-				console.error(status + " : " + error);
-			}
-		});
-		
-	});
-	
+	$("#addressSearch")
+			.on(
+					"click",
+					function() {
+						console.log("주소 검색 버튼 클릭");
+
+						var address = $("#c_main_address").val();
+						console.log(address);
+
+						//추출
+						var url = "https://maps.googleapis.com/maps/api/geocode/json?address="
+								+ address
+								+ "&key=AIzaSyDl9EqQnWPqoxn5ZOEOAde3auL9VBp4NYU"
+
+						//요청 파라미터 방식
+						$
+								.ajax({
+
+									url : url,
+									type : "post",
+									dataType : "json",
+									success : function(data) {
+										/*성공시 처리해야될 코드 작성*/
+										console
+												.log(data.results[0].geometry.location.lat);
+										console
+												.log(data.results[0].geometry.location.lng);
+
+										$("#lat")
+												.val(
+														data.results[0].geometry.location.lat);
+										$("#lng")
+												.val(
+														data.results[0].geometry.location.lng);
+									},
+									error : function(XHR, status, error) {
+										console.error(status + " : " + error);
+									}
+								});
+
+					});
 </script>
-</html>
+</ html>
