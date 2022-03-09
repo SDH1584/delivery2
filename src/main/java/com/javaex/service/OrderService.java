@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.javaex.dao.OrderDao;
 import com.javaex.vo.BusinessVo;
+import com.javaex.vo.MenuOptionVo;
 import com.javaex.vo.OrderVo;
 
 @Service
@@ -42,6 +43,29 @@ public class OrderService {
 		System.out.println("[OrderService.orderStatus()]");
 		
 		return orderDao.updateStatus(orderVo);
+	}
+	
+	/* 가게상세-메뉴리스트 가져오기 */
+	public Map<String, Object> menuOptionList(int storeNo) {
+		System.out.println("[OrderService.menuOptionList()]");
+		
+		BusinessVo bizVo=orderDao.getBiz(storeNo);
+		List<MenuOptionVo> menuCateList = orderDao.getMenuCateList(storeNo);
+		List<MenuOptionVo> menuList = orderDao.getMenuList(storeNo);
+		List<MenuOptionVo> optionCateList = orderDao.getOptionCateList(storeNo);
+		List<MenuOptionVo> optionList = orderDao.getOptionList(storeNo);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("bizVo", bizVo);
+		map.put("menuCateList", menuCateList);
+		map.put("menuList", menuList);
+		map.put("optionCateList", optionCateList);
+		map.put("optionList", optionList);
+		
+		System.out.println(map);
+		
+		return map;
+		
 	}
 	
 }

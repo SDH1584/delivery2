@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -25,10 +26,10 @@
 
 		<!-- 가게상세 해더 -->
 		<c:import url="/WEB-INF/views/includes/store-detail-header.jsp"></c:import>
-		
+
 		<div class="store-menu">
 			<ul class="clearfix">
-				<li class="sel-menu"><a  id="sel-menu"  href="">메뉴</a></li>
+				<li class="sel-menu"><a id="sel-menu" href="">메뉴</a></li>
 				<li id="resv-list"><a href="">예약리스트</a></li>
 				<li id="description"><a href="">가게상세정보</a></li>
 				<li id="review"><a href="">리뷰</a></li>
@@ -42,179 +43,37 @@
 			<div id="menu">
 
 				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-					<div class="panel panel-default">
-						<div class="panel-heading clearfix" role="tab" id="headingOne">
-							<h4 class="panel-title">
-								<span class="menu-group"> 세트 메뉴 </span> <a class="menu-collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> ∨ </a>
-							</h4>
+					<c:forEach items="${map.menuCateList}" var="menuCateVo">
+						<div class="panel panel-default">
+							<div class="panel-heading clearfix" role="tab" id="heading${menuCateVo.menuCateNo }">
+								<h4 class="panel-title">
+									<span class="menu-group"> ${menuCateVo.menuCateName} </span> <a class="menu-collapse" data-toggle="collapse" data-parent="#accordion" href="#collapse${menuCateVo.menuCateNo }" aria-expanded="true" aria-controls="collapse${menuCateVo.menuCateNo }"> ∨ </a>
+								</h4>
+							</div>
+							<div id="collapse${menuCateVo.menuCateNo }" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading${menuCateVo.menuCateNo }">
+								<c:forEach items="${map.menuList}" var="menuVo">
+									<c:if test="${menuCateVo.menuCateNo == menuVo.menuCateNo}">
+										<div class="menu-box clearfix" data-no="${menuVo.menuNo}">
+											<div class="menu-letter">
+												<div class="menu-name">${menuVo.menuName}</div>
+												<div class="menu-desc">${menuVo.menuDesc}</div>
+											</div>
+											<div class="menu-img">
+												<img src="${menuVo.menuImg }" width="70px" height="78px">
+											</div>
+											<div class="menu-price"> <fmt:formatNumber value="${menuVo.menuPrice }" pattern="#,###원"/> </div>
+										</div>
+										<!-- menu-box -->
+									</c:if>
+								</c:forEach>
+
+							</div>
+							<!-- collapse -->
 						</div>
-						<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-							<div class="menu-box clearfix">
-								<div class="menu-letter">
-									<div class="menu-name">앵그리트러플와퍼 세트</div>
-									<div class="menu-desc">황홀한 풍미 속 강렬한 매콤함 앵그리 트러플 와퍼...</div>
-								</div>
-								<div class="menu-img">
-									<img src="./menu.jpg" width="70px" height="78px">
-								</div>
-								<div class="menu-price">10,500원</div>
-							</div>
-							<!-- menu-box -->
-
-							<div class="menu-box clearfix">
-								<div class="menu-letter">
-									<div class="menu-name">앵그리트러플와퍼 세트</div>
-									<div class="menu-desc">황홀한 풍미 속 강렬한 매콤함 앵그리 트러플 와퍼 ...</div>
-								</div>
-								<div class="menu-img">
-									<img src="./menu.jpg" width="70px" height="70px">
-								</div>
-								<div class="menu-price">10,500원</div>
-							</div>
-							<!-- menu-box -->
-
-							<div class="menu-box clearfix">
-								<div class="menu-letter">
-									<div class="menu-name">앵그리트러플와퍼 세트</div>
-									<div class="menu-desc">황홀한 풍미 속 강렬한 매콤함 앵그리 트러플 와퍼 ...</div>
-								</div>
-								<div class="menu-img">
-									<img src="./menu.jpg" width="70px" height="70px">
-								</div>
-								<div class="menu-price">10,500원</div>
-							</div>
-							<!-- menu-box -->
-
-							<div class="menu-box clearfix  last">
-								<div class="menu-letter">
-									<div class="menu-name">앵그리트러플와퍼 세트</div>
-									<div class="menu-desc">황홀한 풍미 속 강렬한 매콤함 앵그리 트러플 와퍼 ...</div>
-								</div>
-								<div class="menu-img">
-									<img src="./menu.jpg" width="70px" height="70px">
-								</div>
-								<div class="menu-price">10,500원</div>
-							</div>
-							<!-- menu-box -->
-						</div>
-
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading" role="tab" id="headingTwo">
-							<h4 class="panel-title clearfix">
-								<span class="menu-group"> 단품 메뉴 </span> <a class="menu-collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo"> ∨ </a>
-							</h4>
-						</div>
-						<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-							<div class="menu-box clearfix">
-								<div class="menu-letter">
-									<div class="menu-name">앵그리트러플와퍼 세트</div>
-									<div class="menu-desc">황홀한 풍미 속 강렬한 매콤함 앵그리 트러플 와퍼...</div>
-								</div>
-								<div class="menu-img">
-									<img src="./menu.jpg" width="70px" height="78px">
-								</div>
-								<div class="menu-price">10,500원</div>
-							</div>
-							<!-- menu-box -->
-
-							<div class="menu-box clearfix">
-								<div class="menu-letter">
-									<div class="menu-name">앵그리트러플와퍼 세트</div>
-									<div class="menu-desc">황홀한 풍미 속 강렬한 매콤함 앵그리 트러플 와퍼 ...</div>
-								</div>
-								<div class="menu-img">
-									<img src="./menu.jpg" width="70px" height="70px">
-								</div>
-								<div class="menu-price">10,500원</div>
-							</div>
-							<!-- menu-box -->
-
-							<div class="menu-box clearfix">
-								<div class="menu-letter">
-									<div class="menu-name">앵그리트러플와퍼 세트</div>
-									<div class="menu-desc">황홀한 풍미 속 강렬한 매콤함 앵그리 트러플 와퍼 ...</div>
-								</div>
-								<div class="menu-img">
-									<img src="./menu.jpg" width="70px" height="70px">
-								</div>
-								<div class="menu-price">10,500원</div>
-							</div>
-							<!-- menu-box -->
-
-							<div class="menu-box clearfix last">
-								<div class="menu-letter">
-									<div class="menu-name">앵그리트러플와퍼 세트</div>
-									<div class="menu-desc">황홀한 풍미 속 강렬한 매콤함 앵그리 트러플 와퍼 ...</div>
-								</div>
-								<div class="menu-img">
-									<img src="./menu.jpg" width="70px" height="70px">
-								</div>
-								<div class="menu-price">10,500원</div>
-							</div>
-							<!-- menu-box -->
-						</div>
-					</div>
-
-					<div class="panel panel-default">
-						<div class="panel-heading" role="tab" id="headingThree">
-							<h4 class="panel-title clearfix">
-								<span class="menu-group"> 스페셜 메뉴 </span> <a class="menu-collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree"> ∨ </a>
-							</h4>
-						</div>
-						<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-							<div class="menu-box clearfix">
-								<div class="menu-letter">
-									<div class="menu-name">앵그리트러플와퍼 세트</div>
-									<div class="menu-desc">황홀한 풍미 속 강렬한 매콤함 앵그리 트러플 와퍼...</div>
-								</div>
-								<div class="menu-img">
-									<img src="./menu.jpg" width="70px" height="78px">
-								</div>
-								<div class="menu-price">10,500원</div>
-							</div>
-							<!-- menu-box -->
-
-							<div class="menu-box clearfix">
-								<div class="menu-letter">
-									<div class="menu-name">앵그리트러플와퍼 세트</div>
-									<div class="menu-desc">황홀한 풍미 속 강렬한 매콤함 앵그리 트러플 와퍼 ...</div>
-								</div>
-								<div class="menu-img">
-									<img src="./menu.jpg" width="70px" height="70px">
-								</div>
-								<div class="menu-price">10,500원</div>
-							</div>
-							<!-- menu-box -->
-
-							<div class="menu-box clearfix">
-								<div class="menu-letter">
-									<div class="menu-name">앵그리트러플와퍼 세트</div>
-									<div class="menu-desc">황홀한 풍미 속 강렬한 매콤함 앵그리 트러플 와퍼 ...</div>
-								</div>
-								<div class="menu-img">
-									<img src="./menu.jpg" width="70px" height="70px">
-								</div>
-								<div class="menu-price">10,500원</div>
-							</div>
-							<!-- menu-box -->
-
-							<div class="menu-box clearfix last">
-								<div class="menu-letter">
-									<div class="menu-name">앵그리트러플와퍼 세트</div>
-									<div class="menu-desc">황홀한 풍미 속 강렬한 매콤함 앵그리 트러플 와퍼 ...</div>
-								</div>
-								<div class="menu-img">
-									<img src="./menu.jpg" width="70px" height="70px">
-								</div>
-								<div class="menu-price">10,500원</div>
-							</div>
-							<!-- menu-box -->
-						</div>
-					</div>
+						<!-- panel -->
+					</c:forEach>
 				</div>
-
-
+				<!-- panel group -->
 			</div>
 			<!-- menu -->
 
@@ -395,7 +254,6 @@
 		<!-- /.modal-dialog -->
 	</div>
 	<!-- /.주문 상세modal -->
-
 </body>
 
 <script type="text/javascript">
@@ -450,6 +308,8 @@
 	/* 메뉴 상세 */
 	$(".menu-box").on("click", function() {
 		console.log("메뉴 클릭")
+		var no = $(this).data("no");
+		console.log(no);
 		$("#menuModal").modal('show');
 	});
 </script>

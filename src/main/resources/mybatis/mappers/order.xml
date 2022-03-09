@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="order">
-	
+
 	<!-- 주문내역리스트 -->
 	<select id="selectOrderList" parameterType="int" resultType="com.javaex.vo.OrderVo">
 		<![CDATA[
@@ -23,7 +23,7 @@
 			order by o.order_date asc, o.order_no asc
 		]]>
 	</select>
-	
+
 	<!-- 가게정보 -->
 	<select id="selectBiz" parameterType="int" resultType="com.javaex.vo.BusinessVo">
 		<![CDATA[
@@ -33,25 +33,80 @@
 			where store_no = #{storeNo}
 		]]>
 	</select>
-	
+
 	<!-- 가게 노출여부 수정 -->
 	<update id="updateOnOff" parameterType="com.javaex.vo.BusinessVo">
-	 <![CDATA[
-	 	update business
-		set on_off = (1-on_off)
-		where store_no = #{storeNo}
-	  ]]>
-	
+		<![CDATA[
+	 		update business
+			set on_off = (1-on_off)
+			where store_no = #{storeNo}
+		]]>
 	</update>
-	
+
 	<!-- 주문상태 수정 -->
 	<update id="updateStatus" parameterType="com.javaex.vo.OrderVo">
-	 <![CDATA[
-	 	update order_group
-		set order_status = #{orderStatus}
-		WHERE order_no=#{orderNo}
-	  ]]>
-	
+		<![CDATA[
+	 		update order_group
+			set order_status = #{orderStatus}
+			WHERE order_no=#{orderNo}
+	  	]]>
 	</update>
+
+	<!-- 메뉴카테고리리스트 가져오기 -->
+	<select id="selectMenuCateList" parameterType="int" resultType="com.javaex.vo.MenuOptionVo">
+		<![CDATA[
+			select  menu_cate_no menuCateNo,
+			        store_no storeNo,
+			        menu_cate_name menuCateName
+			from menu_cate
+			where store_no = #{storeNo}
+			order by menu_cate_no asc
+		]]>
+	</select>
+	
+	<!-- 메뉴리스트 가져오기 -->
+	<select id="selectMenuList" parameterType="int" resultType="com.javaex.vo.MenuOptionVo">
+		<![CDATA[
+			select  m.menu_no menuNo,
+			        m.menu_cate_no menuCateNo,
+			        m.menu_name menuImg,
+			        m.menu_name menuName,
+			        m.menu_price menuPrice,
+			        m.menu_desc menuDesc
+			from menu_cate mc, menu m
+			where mc.menu_cate_no = m.menu_cate_no
+			and mc.store_no = #{storeNo}
+			order by menu_no asc
+		]]>
+	</select>
+	
+	<!-- 메뉴옵션 카테고리 리스트 가져오기 -->
+	<select id="selectOptionCateList" parameterType="int" resultType="com.javaex.vo.MenuOptionVo">
+		<![CDATA[
+			select  moc.option_cate_no optionCateNo,
+			        moc.menu_no menuNo,
+			        moc.option_cate_name optionCateName,
+			        moc.chk_rdo chkRdo
+			from menu_cate mc, menu m, menu_option_cate moc
+			where mc.menu_cate_no = m.menu_cate_no
+			and m.menu_no = moc.menu_no
+			and mc.store_no = #{storeNo}
+		]]>
+	</select>
+	
+	<!-- 메뉴카테고리 가져오기 -->
+	<select id="selectOptionList" parameterType="int" resultType="com.javaex.vo.MenuOptionVo">
+		<![CDATA[
+			select  oco.option_cate_no optionCateNo,
+			        mo.option_no optionNo,
+			        mo.option_name optionName,
+			        mo.option_price optionPrice,
+			        mo.store_no storeNo
+			from op_cate_op oco, menu_option mo
+			where oco.option_no = mo.option_no
+			and mo.store_no = #{storeNo}
+		]]>
+	</select>
+	
 	
 </mapper>
