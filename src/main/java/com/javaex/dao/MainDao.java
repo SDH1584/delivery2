@@ -13,13 +13,24 @@ public class MainDao {
 
 @Autowired
 SqlSession sqlSession;
-	public List<MainVo> getList() {
+
+	//메인정보가져오기
+	public List<MainVo> getList(MainVo mainVo) {
 		System.out.println("getList(dao)");
-		return sqlSession.selectList("main.selectMarker");
-	}
-	public List<MainVo>getList2(){
-		System.out.println("getList2 dao");
-		return sqlSession.selectList("main.storeList");
+		
+		return	sqlSession.selectList("main.getMain",mainVo);
 	}
 	
+	
+	//최근 가게 정보 가져오기
+	public MainVo getRecentStore(MainVo mainVo){
+		System.out.println("getStoreTop dao");
+	
+		return sqlSession.selectOne("main.getRecentStore",mainVo);
+	}
+	//가게정보 읽기
+	public List<MainVo> getStore(MainVo mainVo) {
+	System.out.println("getStore dao");
+	return sqlSession.selectOne("main.getStore",mainVo);
+	}
 }

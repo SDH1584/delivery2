@@ -45,9 +45,13 @@ public class MainVo {
 		this.pOrderNo = pOrderNo;
 	}
 
+	public MainVo(int storeNo) {
+		super();
+		this.storeNo = storeNo;
+	}
+
 	public MainVo() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public int getStoreNo() {
@@ -210,6 +214,22 @@ public class MainVo {
 		this.madinAddress = madinAddress;
 		this.subAddress = subAddress;
 		this.addressName = addressName;
+	}
+
+	public MainVo(int storeNo, int no, String storeName, String storePhone, String storeMAdr, String storeSAdr,
+			String logoImg, double storeLat, double storeLng, int recommand, int people) {
+		super();
+		this.storeNo = storeNo;
+		this.no = no;
+		this.storeName = storeName;
+		this.storePhone = storePhone;
+		this.storeMAdr = storeMAdr;
+		this.storeSAdr = storeSAdr;
+		this.logoImg = logoImg;
+		this.storeLat = storeLat;
+		this.storeLng = storeLng;
+		this.recommand = recommand;
+		this.people = people;
 	}
 
 	public MainVo(String storeMAdr, String storeSAdr, double storeLat, double storeLng) {

@@ -1,21 +1,63 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="main">
-	
-	<!-- 지도 디폴트 위치 정보 가져오기 -->
-	<select id="selectMarker"  resultType="MainVo">
+
+
+	<!-- 메인페이지 정보 가져오기 -->
+	<select id="getMain" resultType="mainVo">
 		<![CDATA[
-			select storeame,store_phone,store_m_adr,store_s_adr,store_lat,store_lng
-			from business
+		select  bs.store_no storeNo,
+                    bs.no,
+                    bs.store_name storeName,
+					bs.store_phone storePhone,
+					bs.store_m_adr stroeMAdr,
+					bs.store_s_adr storeSAdr,
+					bs.store_lat storeLat,
+					bs.store_lng stroeLng,
+					og.people
+                    from business bs, order_group og
+					where bs.store_no=og.no
+					
 		]]>
 	</select>
-	
-	<!-- 메인화면 가게정보가져오기 -->
-	<select id="storeList" resultType="MainVo">
+
+	<!-- 가장 최근 가게정보가져오기 -->
+	<select id="getRecentStore" parameterType="int"  resultType="mainVo">
 			<![CDATA[
-			select store_name,store_phone,store_m_adr,store_s_adr,store_phone
+	    select rnt.storeName ,
+            rnt.storeNo ,
+            rnt.storePhone,
+            rnt.storeMAdr,
+            rnt.storeSAdr,
+            rnt.logoImg 
+		from            
+				(select         rownum rn,
+			                    store_name storeName,
+								store_no storeNo,
+								store_phone storePhone,
+								store_m_adr storeMAdr,
+								store_s_adr storeSAdr,
+			              		logo_img logoImg
+				from business
+				where store_no=#{storeNo}
+	            order by storeNo)rnt
+	    where rownum=1;
+		]]>
+	</select>
+	<!-- 가게정보가져오기 -->
+	<select id="getStore" parameterType="int"  resultType="mainVo">
+			<![CDATA[
+			select  store_name storeName,
+					store_no stroeNo,
+					store_phone storePhone,
+					store_m_adr stroeMAdr,
+					store_s_adr storeSAdr,
+					logo_img logoImg
 			from business
+			where store_no=${storeNo}
 		]]>
 	</select>
 	
+
+
 </mapper>

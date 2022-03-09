@@ -76,22 +76,12 @@
 				<img id="storelistLogo" src="${pageContext.request.contextPath}/assets/images/1.png" /> 교촌치킨 <br> 2/6명<br>
 				<button type="button" class="click">상세정보보기</button>
 			</div>
+			<c:forEach items="mainVo" var="vo">
 			<div id="storelist" class="clearfix">
 				<img id="storelistLogo" data-no="{mainVo.logoImg}" /> {vo.storeName} <br>
 				<button type="button" class="click">상세정보보기</button>
 			</div>
-			<div id="storelist" class="clearfix">
-				<img id="storelistLogo" data-no="{mainVo.logoImg}" /> {vo.storeName} <br>
-				<button type="button" class="click">상세정보보기</button>
-			</div>
-			<div id="storelist" class="clearfix">
-				<img id="storelistLogo" data-no="{mainVo.logoImg}" /> {vo.storeName} <br>
-				<button type="button" class="click">상세정보보기</button>
-			</div>
-			<div id="storelist" class="clearfix">
-				<img id="storelistLogo" data-no="{mainVo.logoImg}" /> {vo.storeName} <br>
-				<button type="button" class="click">상세정보보기</button>
-			</div>
+			</c:forEach>
 			
 		</div>
 	</div>

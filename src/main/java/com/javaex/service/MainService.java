@@ -1,6 +1,8 @@
 package com.javaex.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,13 +14,29 @@ import com.javaex.vo.MainVo;
 public class MainService {
 @Autowired
 private MainDao maindao;
-
-	public List<MainVo> getList() {
-		System.out.println("getList(service)");
-		return maindao.getList();
+	
+	public Map<String, Object>getList(MainVo mainVo){
+		System.out.println("[MainService.MainList()]");
+		Map<String,Object> map=new HashMap<String, Object>();
+		//메인정보가져오기
+		List<MainVo>getList=maindao.getList(mainVo);
+		map.put("getList",getList);
+		//가게정보가져오기
+		mainVo.setStoreNo(getList.get(0).getStoreNo());
+		List<MainVo>getStore=maindao.getStore(mainVo);
+		map.put("getStore", getStore);
+		//가장 최근가게 가져오기
+		mainVo=maindao.getRecentStore(mainVo);
+		map.put("mainVo", mainVo);
+		
+		return map;
+}
+	public MainVo getRecentStore(MainVo mainVo) {
+		System.out.println("mainService.getRecentStore");
+		return maindao.getRecentStore(mainVo);
 	}
-	public List<MainVo> getList2(){
-		System.out.println("getList2 ser");
-		return maindao.getList2();
+	public MainVo getStore(MainVo mainVo) {
+		System.out.println("mainservice.getStore");
+		return maindao.getRecentStore(mainVo);
 	}
 }
