@@ -19,17 +19,16 @@ public class UserService {
 	// 사용자 회원가입
 	public int customerJoin(UserVo userVo, AddressVo addressVo) {
 		System.out.println("userService/customerJoin");
-		
+
 		userDao.insertCustomer(userVo);
 		addressVo.setNo(userVo.getNo());
-		System.out.println(addressVo.toString());
 		return userDao.insertAddress(addressVo);
 	}
 
 	// 가게 회원가입
 	public int storeJoin(UserVo userVo, BusinessVo businessVo) {
 		System.out.println("userService/storeJoin");
-		
+
 		userDao.insertStore(userVo);
 		businessVo.setNo(userVo.getNo());
 		return userDao.insertStoreInfo(businessVo);
@@ -41,11 +40,11 @@ public class UserService {
 
 		return userDao.selectCustomer(userVo);
 	}
-	
+
 	// 가게 로그인
 	public Map<String, Object> storeLogin(UserVo userVo) {
 		System.out.println("userService/storeLogin");
-	
+
 		return userDao.selectStore(userVo);
 	}
 }

@@ -67,11 +67,13 @@ public class UserController {
 
 	// 가게 회원가입
 	@RequestMapping(value = "/s_join", method = { RequestMethod.GET, RequestMethod.POST })
-	public String s_join(@ModelAttribute UserVo userVo, @ModelAttribute BusinessVo businessVo) {
+	public String s_join(@RequestParam("file") MultipartFile file, @ModelAttribute UserVo userVo, @ModelAttribute BusinessVo businessVo, Model model) {
 		System.out.println("userController/s_join");
 		
+		String saveName = fileService.restore(file);
+		model.addAttribute("saveName", saveName);
+		businessVo.setLogoImg(saveName);
 		userService.storeJoin(userVo, businessVo);
-		
 		return "redirect:/user/loginForm";
 	}
 
