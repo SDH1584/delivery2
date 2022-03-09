@@ -134,7 +134,7 @@
     text-align: left;
 }
 
-#join_page input[type=text], #join_page input[type=password],
+#join_page input[type=text], #join_page input[type=password], #join_page input[type=number],
 #mypage #edit_page input[type=text], #mypage #edit_page input[type=password] {
     width: 302px;
     height: 44px;
