@@ -10,51 +10,74 @@
                     bs.no,
                     bs.store_name storeName,
 					bs.store_phone storePhone,
-					bs.store_m_adr stroeMAdr,
+					bs.store_m_adr storeMAdr,
 					bs.store_s_adr storeSAdr,
 					bs.store_lat storeLat,
-					bs.store_lng stroeLng,
+					bs.store_lng storeLng,
 					og.people
                     from business bs, order_group og
 					where bs.store_no=og.no
 					
 		]]>
 	</select>
-
-	<!-- 가장 최근 가게정보가져오기 -->
-	<select id="getRecentStore" parameterType="int"  resultType="mainVo">
+	
+	<!-- 가게정보가져오기 -->
+	<select id="getStore"  resultType="mainVo">
 			<![CDATA[
-	    select rnt.storeName ,
-            rnt.storeNo ,
-            rnt.storePhone,
-            rnt.storeMAdr,
-            rnt.storeSAdr,
-            rnt.logoImg 
-		from            
-				(select         rownum rn,
-			                    store_name storeName,
-								store_no storeNo,
-								store_phone storePhone,
-								store_m_adr storeMAdr,
-								store_s_adr storeSAdr,
-			              		logo_img logoImg
-				from business
-				where store_no=#{storeNo}
-	            order by storeNo)rnt
-	    where rownum=1;
+			select  bs.store_no storeNo,
+                    bs.no,
+                    bs.store_name storeName,
+					bs.store_phone storePhone,
+					bs.store_m_adr storeMAdr,
+					bs.store_s_adr storeSAdr,
+					bs.store_lat storeLat,
+					bs.store_lng storeLng,
+					bs.logo_img logoImg,
+					og.people,
+                    bs.notice,
+                    og.order_status orderStatus,
+                    po.p_order_no pOrderNo
+                    from business bs, order_group og, personal_order po
+					where bs.store_no=og.no
+					and og.order_no=po.order_no	
 		]]>
 	</select>
-	<!-- 가게정보가져오기 -->
-	<select id="getStore" parameterType="int"  resultType="mainVo">
+	
+	
+	
+	<!-- 가장 최근 가게정보가져오기 -->
+	<select id="getRecentStore"  resultType="mainVo">
 			<![CDATA[
-			select  store_name storeName,
-					store_no stroeNo,
-					store_phone storePhone,
-					store_m_adr stroeMAdr,
-					store_s_adr storeSAdr,
-					logo_img logoImg
-			from business
-			where store_no=${storeNo}
+	    select rnt.storeName ,
+	           rnt.storeNo ,
+	           rnt.storePhone,
+	           rnt.storeMAdr,
+	           rnt.storeSAdr,
+	           rnt.logoImg,
+	           rnt.people,
+	           rnt.notice,
+	           rnt.orderStatus,
+	           rnt.pOrderNo
+		from            
+				(select         rownum rn,
+			                    bs.store_no storeNo,
+			                    bs.no,
+			                    bs.store_name storeName,
+								bs.store_phone storePhone,
+								bs.store_m_adr storeMAdr,
+								bs.store_s_adr storeSAdr,
+								bs.store_lat storeLat,
+								bs.store_lng storeLng,
+								bs.logo_img logoImg,								
+								og.people,
+			                    bs.notice,
+			                    og.order_status orderStatus,
+			                    po.p_order_no pOrderNo
+				from business bs, order_group og, personal_order po
+				where bs.store_no=og.no
+						and og.order_no=po.order_no	
+            	order by storeNo)rnt
+	    where rownum=1
 		]]>
 	</select>
 	

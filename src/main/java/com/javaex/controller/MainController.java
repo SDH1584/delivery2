@@ -32,6 +32,22 @@ MainService mainService;
 //		model.addAttribute("getList",getList);
 //		model.addAttribute("getStore", getStore);
 //		model.addAttribute("getRecentStore",getRecentStore);
+		List<MainVo> getMain=mainService.getMain(mainVo);
+		System.out.println(getMain);
+		model.addAttribute("getMain",getMain);
+		
+		List<MainVo> getStore=mainService.getStore();
+		System.out.println("getStore :"+getStore);
+		model.addAttribute("getStore",getStore);
+		
+		List<MainVo> getRecentStore=mainService.getRecentStore();
+		System.out.println("getRecentStore :"+getRecentStore);
+		model.addAttribute("getRecentStore",getRecentStore);
+		
+		System.out.println(getMain);
+		System.out.println(getStore);
+		System.out.println(getRecentStore);
+		
 		return "user/main";
 		
 	}

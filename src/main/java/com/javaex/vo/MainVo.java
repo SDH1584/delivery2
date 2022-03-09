@@ -20,10 +20,61 @@ public class MainVo {
 	private String addressName;
 	private int orderNo;
 	private int pOrderNo;
+	private int orderStatus;
+	
+	public int getOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus(int orderStatus) {
+		this.orderStatus = orderStatus;
+	}
+
+	public MainVo(int storeNo, int no, String storeName, String storePhone, String storeMAdr, String storeSAdr,
+			String logoImg, double storeLat, double storeLng, int people, int pOrderNo, int orderStatus) {
+		super();
+		this.storeNo = storeNo;
+		this.no = no;
+		this.storeName = storeName;
+		this.storePhone = storePhone;
+		this.storeMAdr = storeMAdr;
+		this.storeSAdr = storeSAdr;
+		this.logoImg = logoImg;
+		this.storeLat = storeLat;
+		this.storeLng = storeLng;
+		this.people = people;
+		this.pOrderNo = pOrderNo;
+		this.orderStatus = orderStatus;
+	}
 
 	public MainVo(int storeNo, int no, String storeName, String storePhone, String storeMAdr, String storeSAdr,
 			String logoImg, double storeLat, double storeLng, int recommand, double lat, double lng, int people,
-			String madinAddress, String subAddress, String addressName, int orderNo, int pOrderNo) {
+			String madinAddress, String subAddress, String addressName, int orderNo, int pOrderNo, int orderStatus) {
+		super();
+		this.storeNo = storeNo;
+		this.no = no;
+		this.storeName = storeName;
+		this.storePhone = storePhone;
+		this.storeMAdr = storeMAdr;
+		this.storeSAdr = storeSAdr;
+		this.logoImg = logoImg;
+		this.storeLat = storeLat;
+		this.storeLng = storeLng;
+		this.recommand = recommand;
+		Lat = lat;
+		Lng = lng;
+		this.people = people;
+		this.madinAddress = madinAddress;
+		this.subAddress = subAddress;
+		this.addressName = addressName;
+		this.orderNo = orderNo;
+		this.pOrderNo = pOrderNo;
+		this.orderStatus = orderStatus;
+	}
+
+	public MainVo(int storeNo, int no, String storeName, String storePhone, String storeMAdr, String storeSAdr,
+			String logoImg, double storeLat, double storeLng, int recommand, double lat, double lng, int people,
+			String madinAddress, String subAddress, String addressName, int No, int pOrderNo) {
 		super();
 		this.storeNo = storeNo;
 		this.no = no;

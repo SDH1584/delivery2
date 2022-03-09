@@ -31,7 +31,6 @@
 			<div id="map-area" class="clearfix">
 				<div id="map" class="clearfix"></div>
 			</div>
-
 			<div id="store-info-area">
 				<table id="store-info">
 
@@ -44,16 +43,16 @@
 						<td rowspan="6"><img id="storeLogo"  src="${pageContext.request.contextPath}/assets/images/1.png"></td>
 					</tr>
 					<tr>
-						<th id="name">${mainVo.storeName}</th>
+						<th id="name">${getRecentStore.storeName}</th>
 					</tr>
 					<tr>
-						<td id="delivery-num">2/${mainVo.people }명</td>
+						<td id="delivery-num">2/${getRecentStore.people }명</td>
 					</tr>
 					<tr>
-						<td id="delivery-address" colspan="2">${mainVo.storeMAdr }+${mainVo.storeSAdr }</td>
+						<td id="delivery-address" colspan="2">${getRecentStore.storeMAdr }+${getRecentStore.storeSAdr }</td>
 					</tr>
 					<tr>
-						<td id="delivery-hp" colspan="2">${mainVo.storePhone }</td>
+						<td id="delivery-hp" colspan="2">${getRecentStore.storePhone }</td>
 					</tr>
 					<tr>
 						<td id="recommend" colspan="2">추천수: 33</td>
@@ -76,9 +75,9 @@
 				<img id="storelistLogo" src="${pageContext.request.contextPath}/assets/images/1.png" /> 교촌치킨 <br> 2/6명<br>
 				<button type="button" class="click">상세정보보기</button>
 			</div>
-			<c:forEach items="mainVo" var="vo">
+			<c:forEach items="${requestScope.getStore }" var="getStore">
 			<div id="storelist" class="clearfix">
-				<img id="storelistLogo" data-no="{mainVo.logoImg}" /> {vo.storeName} <br>
+				<img id="storelistLogo" data-no=$mainVo.logoImg} /> ${getStore.storeName} <br>
 				<button type="button" class="click">상세정보보기</button>
 			</div>
 			</c:forEach>
