@@ -39,6 +39,15 @@
 				* 현재 진행중인 예약건들입니다<br> * 상태란의 '대기중' 버튼을 누르면 해당 예약건에 참여하실 수 있습니다.
 			</div>
 			<table class="reserve-table">
+				<colgroup>
+					<col style="width:180px">
+					<col style="width:100px">
+					<col style="width:150px">
+					<col style="width:170px">
+					<col style="width:250px">
+					<col style="width:150px">
+				</colgroup>
+				
 				<thead>
 					<tr>
 						<th>예약마감</th>
@@ -58,7 +67,7 @@
 						<td>${rList.pFee}원</td>
 						<td>12,000원 / ${rList.minPrice}원</td>
 						<td>${rList.deliveryMAdr} ${rList.deliverySAdr}</td>
-						<td class="status"><a href="${pageContext.request.contextPath}/store/${storeNo}/attend?orderNo=${rList.orderNo}&no=${authUser.no}">대기중</a></td>
+						<td id="status"><a id="statusLink" href="${pageContext.request.contextPath}/store/${storeNo}/attend?orderNo=${rList.orderNo}&no=${authUser.no}">대기중</a></td>
 					</tr>
 				</tbody>
 				</c:forEach>
