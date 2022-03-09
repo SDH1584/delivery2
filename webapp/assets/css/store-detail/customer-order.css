@@ -38,12 +38,15 @@ h3 {
 .menu-collapse {float:right;font-size:18px; color:#333; font-weight:700;}
 .menu-box{height:118px; padding: 19px 0px 18px 0px; text-align:left; border-bottom:1px solid #e2e2e2;}
 .menu-box.last{border-bottom:1px none #fff;}
-.menu-letter, .menu-img{ float:left; font-weight:bold;}
+.menu-img{ float:left; font-weight:bold;}
+.menu-letter{width:320px !important;
+			 float:left; 
+			 font-weight:bold;	}
 
 .menu-name {font-size:16px; margin-top:15px;}
 .menu-desc{font-size:14px; color:#999; padding-top:7px;}
 .menu-price{font-size:16px; font-weight:bold; float:right; margin:30px 5px 0px 0px;}
-
+.menu-price:after{content:"원";}
 
 /* 주문 */
 #order{float:right; width:470px; border:1px solid #e2e2e2;}

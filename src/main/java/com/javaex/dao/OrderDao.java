@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.javaex.vo.BusinessVo;
+import com.javaex.vo.MenuOptionVo;
 import com.javaex.vo.OrderVo;
 
 @Repository
@@ -46,4 +47,34 @@ public class OrderDao {
 		System.out.println(count+"건 status 수정 성공");
 		return count;
 	}
+	
+	/* 메뉴카테고리리스트 가져오기 */
+	public List<MenuOptionVo> getMenuCateList(int storeNo){
+		System.out.println("[OrderDao.getMenuCateList()]");
+		
+		return sqlSession.selectList("order.selectMenuCateList", storeNo);
+	}
+	
+	/* 메뉴리스트 가져오기 */
+	public List<MenuOptionVo> getMenuList(int storeNo){
+		System.out.println("[OrderDao.getMenuList()]");
+		
+		return sqlSession.selectList("order.selectMenuList", storeNo);
+	}
+	
+	/* 메뉴옵션카테고리리스트 가져오기 */
+	public List<MenuOptionVo> getOptionCateList(int storeNo){
+		System.out.println("[OrderDao.getOptionCateList()]");
+		
+		return sqlSession.selectList("order.selectOptionCateList", storeNo);
+	}
+	
+	/* 메뉴옵션리스트 가져오기 */
+	public List<MenuOptionVo> getOptionList(int storeNo){
+		System.out.println("[OrderDao.getOptionList()]");
+		System.out.println(sqlSession.selectList("order.selectOptionList", storeNo));
+		return sqlSession.selectList("order.selectOptionList", storeNo);
+	}
+	
+	
 }
