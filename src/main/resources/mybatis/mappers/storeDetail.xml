@@ -13,7 +13,7 @@
 			       og.delivery_s_adr deliverySAdr,
 			       de.fee/og.people as pFee,
 			       biz.min_price minPrice,
-			       cp.countpeople as countPeople
+			       cp.countpeople+1 as countPeople
 			from order_group og, delivery de, business biz, (select order_no,
 			                                                        count(p_order_no) as countPeople
 			                                                 from personal_order
@@ -22,6 +22,7 @@
 			where biz.store_no = og.store_no
 			and biz.store_no = og.store_no
 			and cp.order_no = og.order_no
+			and cp.countpeople+1 <> og.people
 			and og.store_no = #{storeNo}
 			order by order_date desc	
 		]]>

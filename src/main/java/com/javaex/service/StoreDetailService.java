@@ -24,14 +24,13 @@ public class StoreDetailService {
 	public Integer attend(OrderVo orderVo) {
 
 		Integer resultNo = storeDetailDao.attend(orderVo);
-		System.out.println("service: " + resultNo);
 
 		if (resultNo == 0) {
 
 			return 0;
 
 		} else {
-			
+
 			return 1;
 		}
 	}
@@ -42,7 +41,7 @@ public class StoreDetailService {
 
 		return hostVo;
 	}
-	
+
 	public OrderVo attendee(OrderVo orderVo) {
 
 		OrderVo attendeeVo = storeDetailDao.host(orderVo);
