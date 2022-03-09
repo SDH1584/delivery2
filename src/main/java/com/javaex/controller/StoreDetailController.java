@@ -43,7 +43,7 @@ public class StoreDetailController {
 	}
 
 	@RequestMapping("/{storeNo}/attend")
-	public String attend(@RequestParam(value = "orderNo") int orderNo,
+	public String attend(@RequestParam(value = "orderNo", required = false, defaultValue = "0") int orderNo,
 			@RequestParam(value = "no", required = false, defaultValue = "0") int no, Model model) {
 
 		if (no == 0) {
@@ -56,21 +56,33 @@ public class StoreDetailController {
 			orderVo.setOrderNo(orderNo);
 			orderVo.setNo(no);
 
-			OrderVo attendVo = storeDetailService.attend(orderVo);
-			model.addAttribute("attendVo", attendVo);
+			Integer resultNo = storeDetailService.attend(orderVo);
 
-			System.out.println();
+			System.out.println("Controller: " + resultNo);
 
-			if (attendVo == null) {
+			if (resultNo == 1) {
 
-				return "store-detail/orderFirst";
+				OrderVo attendeeVo = storeDetailService.attendee(orderVo);
+				model.addAttribute("attendeeVo", attendeeVo);
+
+				return "store-detail/order-change-attendee";
 
 			} else {
 
-				return "store-detail/orderJoin";
+				OrderVo hostVo = storeDetailService.host(orderVo);
+
+				if (hostVo != null) {
+
+					model.addAttribute("hostVo", hostVo);
+					return "store-detail/order-change-host";
+
+				} else {
+
+					return "store-detail/orderJoin";
+
+				}
 			}
 		}
-
 	}
 
 	@RequestMapping("description")

@@ -21,10 +21,32 @@ public class StoreDetailService {
 		return rList;
 	}
 
-	public OrderVo attend(OrderVo orderVo) {
-		
-		OrderVo attendVo = storeDetailDao.attend(orderVo);
-		
-		return attendVo;
+	public Integer attend(OrderVo orderVo) {
+
+		Integer resultNo = storeDetailDao.attend(orderVo);
+		System.out.println("service: " + resultNo);
+
+		if (resultNo == 0) {
+
+			return 0;
+
+		} else {
+			
+			return 1;
+		}
+	}
+
+	public OrderVo host(OrderVo orderVo) {
+
+		OrderVo hostVo = storeDetailDao.host(orderVo);
+
+		return hostVo;
+	}
+	
+	public OrderVo attendee(OrderVo orderVo) {
+
+		OrderVo attendeeVo = storeDetailDao.host(orderVo);
+
+		return attendeeVo;
 	}
 }
