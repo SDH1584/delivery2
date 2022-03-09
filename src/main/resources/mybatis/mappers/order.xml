@@ -3,7 +3,7 @@
 <mapper namespace="order">
 	
 	<!-- 주문내역리스트 -->
-	<select id="selectOrderList" parameterType="com.javaex.vo.BusinessVo" resultType="com.javaex.vo.OrderVo">
+	<select id="selectOrderList" parameterType="int" resultType="com.javaex.vo.OrderVo">
 		<![CDATA[
 			select  o.order_no orderNo,
 			        o.people people,
@@ -25,7 +25,7 @@
 	</select>
 	
 	<!-- 가게정보 -->
-	<select id="selectBiz" parameterType="com.javaex.vo.BusinessVo" resultType="com.javaex.vo.BusinessVo">
+	<select id="selectBiz" parameterType="int" resultType="com.javaex.vo.BusinessVo">
 		<![CDATA[
 			select  store_name storeName,
 			        on_off onOff
@@ -33,5 +33,25 @@
 			where store_no = #{storeNo}
 		]]>
 	</select>
+	
+	<!-- 가게 노출여부 수정 -->
+	<update id="updateOnOff" parameterType="com.javaex.vo.BusinessVo">
+	 <![CDATA[
+	 	update business
+		set on_off = (1-on_off)
+		where store_no = #{storeNo}
+	  ]]>
+	
+	</update>
+	
+	<!-- 주문상태 수정 -->
+	<update id="updateStatus" parameterType="com.javaex.vo.OrderVo">
+	 <![CDATA[
+	 	update order_group
+		set order_status = #{orderStatus}
+		WHERE order_no=#{orderNo}
+	  ]]>
+	
+	</update>
 	
 </mapper>

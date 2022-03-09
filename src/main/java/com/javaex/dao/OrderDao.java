@@ -14,18 +14,36 @@ public class OrderDao {
 	
 	@Autowired
 	SqlSession sqlSession;
-	
-	public List<OrderVo> getList(BusinessVo bVo){
+
+	/* 세션값으로 가게별 주문내역 가져오기 */
+	public List<OrderVo> getList(int loginStoreNo){
 		System.out.println("[OrderDao.getList()]");
-		List<OrderVo> orderList = sqlSession.selectList("order.selectOrderList", bVo);
+		List<OrderVo> orderList = sqlSession.selectList("order.selectOrderList", loginStoreNo);
 		return orderList;
 	}
-	
-	public BusinessVo getBiz(BusinessVo bVo) {
+
+	/* 세션값으로 가게정보 가져오기 */
+	public BusinessVo getBiz(int loginStoreNo) {
 		System.out.println("[OrderDao.getBiz()]");
 		
-		BusinessVo bizVo = sqlSession.selectOne("order.selectBiz", bVo);
+		BusinessVo bizVo = sqlSession.selectOne("order.selectBiz", loginStoreNo);
 		return bizVo;
 	}
 
+	/* 가게 활성화여부 변경 */ 
+	public void updateOnOff(int loginStoreNo) {
+		System.out.println("[OrderDao.updateOnOff()]");
+		
+		int count = sqlSession.update("order.updateOnOff", loginStoreNo);
+		System.out.println(count+"건 onoff 수정 성공");
+	}
+	
+	/* 주문상태 변경 */
+	public int updateStatus(OrderVo orderVo) {
+		System.out.println("[OrderDao.updateStatus()]");
+		
+		int count=sqlSession.update("order.updateStatus",orderVo);
+		System.out.println(count+"건 status 수정 성공");
+		return count;
+	}
 }

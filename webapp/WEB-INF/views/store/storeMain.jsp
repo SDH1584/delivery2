@@ -29,10 +29,10 @@
 				<h2>${map.bizVo.storeName}</h2>
 				<c:choose>
 					<c:when test="${map.bizVo.onOff==0 }">
-						<button type="button" class="storeOnOff">가게 올리기</button>
+						<button type="button" class="storeOnOff"><span class="onOffText">가게 올리기</span></button>
 					</c:when>
 					<c:otherwise>
-						<button type="button" class="storeOnOff">가게 내리기</button>
+						<button type="button" class="storeOnOff"><span class="onOffText">가게 내리기</span></button>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -57,29 +57,29 @@
 							<c:if test="${orderVo.orderStatus==0 }">
 								<c:choose>
 									<c:when test="${orderVo.redText==1 }">
-										<tr class="red">	
+										<tr class="red" data-no="${orderVo.orderNo}">
 									</c:when>
-								    <c:otherwise>
-								    	<tr>
-								    </c:otherwise>
+									<c:otherwise>
+										<tr data-no="${orderVo.orderNo}">
+									</c:otherwise>
 								</c:choose>
-									<td>${orderVo.orderNo}</td>
-									<c:choose>
-										<c:when test="${orderVo.people==orderVo.countPeople}">
-											<td class="td-btn">
-												<button type="button" class="btn-primary btn-xs">승인</button>
-											</td>
-										</c:when>
-										<c:otherwise>
-											<td></td>
-										</c:otherwise>
-									</c:choose>
-									<td class="td-btn">
-										<button type="button" class="btn-danger btn-xs">거부</button>
-									</td>
-									<td>${orderVo.orderDate}</td>
-									<td>${orderVo.countPeople}명/${orderVo.people}명</td>
-									<td>${orderVo.deliveryMAdr }&nbsp;${orderVo.deliverySAdr }</td>
+								<td>${orderVo.orderNo}</td>
+								<c:choose>
+									<c:when test="${orderVo.people==orderVo.countPeople}">
+										<td class="td-btn">
+											<button type="button" class="btn-agree btn-primary btn-sm" data-no="${orderVo.orderNo}">승인</button>
+										</td>
+									</c:when>
+									<c:otherwise>
+										<td></td>
+									</c:otherwise>
+								</c:choose>
+								<td class="td-btn">
+									<button type="button" class="btn-reject btn-danger btn-sm" data-no="${orderVo.orderNo}">거부</button>
+								</td>
+								<td>${orderVo.orderDate}</td>
+								<td>${orderVo.countPeople}명/${orderVo.people}명</td>
+								<td>${orderVo.deliveryMAdr }&nbsp;${orderVo.deliverySAdr }</td>
 								</tr>
 							</c:if>
 						</c:forEach>
@@ -108,32 +108,32 @@
 							<c:if test="${orderVo.orderStatus==1 || orderVo.orderStatus==3 }">
 								<c:choose>
 									<c:when test="${orderVo.redText==1 }">
-										<tr class="red">	
+										<tr class="red" data-no="${orderVo.orderNo}">
 									</c:when>
-								    <c:otherwise>
-								    	<tr>
-								    </c:otherwise>
+									<c:otherwise>
+										<tr data-no="${orderVo.orderNo}">
+									</c:otherwise>
 								</c:choose>
-									<td>${orderVo.orderNo}</td>
-									<c:choose>
-										<c:when test="${orderVo.orderStatus==1}">
-											<td class="td-btn">
-												<button type="button" class="btn-default btn-xs">배달원 전달 완료</button>
-											</td>
-										</c:when>
-										<c:otherwise>
-											<td class="td-btn">
-												<button type="button" class="btn-success btn-xs">배달 완료</button>
-											</td>
-										</c:otherwise>
-									</c:choose>
-									<td>${orderVo.orderDate}</td>
-									<td>${orderVo.countPeople}명/${orderVo.people}명</td>
-									<td>${orderVo.deliveryMAdr }&nbsp;${orderVo.deliverySAdr }</td>
+								<td>${orderVo.orderNo}</td>
+								<c:choose>
+									<c:when test="${orderVo.orderStatus==1}">
+										<td class="td-btn">
+											<button type="button" class="btn-deliver btn-default btn-sm" data-no="${orderVo.orderNo}">배달원 전달 완료</button>
+										</td>
+									</c:when>
+									<c:otherwise>
+										<td class="td-btn">
+											<button type="button" class="btn-complete btn-success btn-sm" data-no="${orderVo.orderNo}">배달 완료</button>
+										</td>
+									</c:otherwise>
+								</c:choose>
+								<td>${orderVo.orderDate}</td>
+								<td>${orderVo.countPeople}명/${orderVo.people}명</td>
+								<td>${orderVo.deliveryMAdr }&nbsp;${orderVo.deliverySAdr }</td>
 								</tr>
 							</c:if>
 						</c:forEach>
-						
+
 					</tbody>
 
 				</table>
@@ -311,6 +311,33 @@
 </body>
 
 <script type="text/javascript">
+
+	/* 주문상태변경 버튼 클릭 */
+	$(".btn-agree").on("click", function(e) {
+		e.stopPropagation();
+		console.log("승인버튼 클릭");
+		var no = $(this).data("no");
+		codeChange(1,no);
+	});
+	$(".btn-reject").on("click", function(e) {
+		e.stopPropagation()
+		console.log("거부버튼 클릭");
+		var no = $(this).data("no");
+		codeChange(2,no);
+	});
+	$(".btn-deliver").on("click", function(e) {
+		e.stopPropagation()
+		console.log("전달완료 클릭");
+		var no = $(this).data("no");
+		codeChange(3,no);
+	});
+	$(".btn-complete").on("click", function(e) {
+		e.stopPropagation()
+		console.log("배달완료버튼 클릭");
+		var no = $(this).data("no");
+		codeChange(4,no);
+	});
+
 	/* 예약 막기 */
 	$("#prevent").on("click", function() {
 		console.log("막기 클릭");
@@ -320,27 +347,76 @@
 	/* 주문 상세내용 */
 	$("tr").on("click", function() {
 		console.log("테이블 클릭")
+		var $this = $(this);
+		var no = $this.data("no");
+		console.log(no);
 		$("#detailModal").modal('show');
 	});
-	
+
 	/* 자동새로고침-1분 */
-	setTimeout("location.reload()",60000);
-	
-	/* 처리해야 할 내역 빨간색 */
+	//setTimeout("location.reload()",60000);
+
+	/* 처리해야 할 리스트만 빨간글씨 */
 	$(".red").css("color", "red");
-	
+
 	/* 가게 on/off 설정 */
-	$(".storeOnOff").on("click", function(){
+	$(".storeOnOff").on("click", function() {
 		console.log("가게올리기/내리기 클릭")
-		
+		var onOffText;		
+
 		$.ajax({
-			
+
 			/* 요청 */
-			url : "${pageContext.request.contextPath }/store/storeOnOff", //요청 보낼 주소		
-			type : "post", 
+			url : "${pageContext.request.contextPath }/admin/storeOnOff", 	
+			type : "post",
+			
+ 			/* 응답 */
+			dataType : "json",
+			success : function(bizVo) {
+				/*성공시 처리해야될 코드 작성*/
+				//console.log(bizVo);
+				var code = bizVo.onOff;
+				console.log(code);
+				if(code=='1'){
+					onOffText = '가게 내리기'
+				} else {
+					onOffText = '가게 올리기'
+				}
+				console.log(onOffText);
+				document.getElementsByClassName('onOffText')[0].innerText = onOffText;
+				
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
 		});
-		
+
 	});
+	
+	/* 주문상태 코드변경 */
+	function codeChange(code, no){
+		console.log(code);
+		console.log(no);
+	
+		$.ajax({
+
+			/* 요청 */
+			url : "${pageContext.request.contextPath }/admin/orderStatus", //요청 보낼 주소		
+			type : "post",
+			data : {orderStatus:code, orderNo:no}, //여기다가 객체 써도 됨. 위에서 객체로 이미 묶어줘서 객체명만 씀.
+
+			/* 응답 */
+			success : function(result) {
+				/*성공시 처리해야될 코드 작성*/
+				window.location.href="${pageContext.request.contextPath }/admin/main"
+
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
+		});
+	};
+
 </script>
 
 </html>

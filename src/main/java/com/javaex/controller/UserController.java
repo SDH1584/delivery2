@@ -108,7 +108,7 @@ public class UserController {
 				System.out.println(map.get("NO"));
 				System.out.println(map.get("STORE_NO"));
 				session.setAttribute("map", map);
-				return "redirect:/store/main";
+				return "redirect:/admin/main";
 			}
 		} else { // 로그인 실패일때
 			System.out.println("가게 로그인 실패");
