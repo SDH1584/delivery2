@@ -43,19 +43,19 @@
 						<td rowspan="6"><img id="storeLogo"  src="${pageContext.request.contextPath}/assets/images/1.png"></td>
 					</tr>
 					<tr>
-						<th id="name">${getRecentStore.storeName}</th>
+						<th id="name">가게명:${getRecentStore[0].storeName }</th>
 					</tr>
 					<tr>
-						<td id="delivery-num">2/${getRecentStore.people }명</td>
+						<td id="delivery-num">${getRecentStore[0].countPeople} /${getRecentStore[0].people }</td>
 					</tr>
 					<tr>
-						<td id="delivery-address" colspan="2">${getRecentStore.storeMAdr }+${getRecentStore.storeSAdr }</td>
+						<td id="delivery-address" colspan="2">주소: ${getRecentStore[0].storeMAdr }  ${getRecentStore[0].storeSAdr}</td>
 					</tr>
 					<tr>
-						<td id="delivery-hp" colspan="2">${getRecentStore.storePhone }</td>
+						<td id="delivery-hp" colspan="2">전화번호:${getRecentStore[0].storePhone}</td>
 					</tr>
 					<tr>
-						<td id="recommend" colspan="2">추천수: 33</td>
+						<td id="recommend" colspan="2">추천수: </td>
 					</tr>
 					<tr>
 						<td colspan="3"><button id="reserve-btn">예약하러 가기</button></td>
@@ -71,23 +71,17 @@
 
 		<div id="container" class="clearfix">
 			
+		<c:forEach items="${getStore}" var="getStore" begin="0" varStatus="status" end="${fn:length(getStore)}">
 			<div id="storelist" class="clearfix">
-				<img id="storelistLogo" src="${pageContext.request.contextPath}/assets/images/1.png" /> 교촌치킨 <br> 2/6명<br>
+				<img id="storelistLogo" src="${pageContext.request.contextPath}/assets/images/${getStore.logoImg}" /> 
+					${getStore.storeName} <br>
+					2/${getStore.people } 명<br>
 				<button type="button" class="click">상세정보보기</button>
 			</div>
-			<c:forEach items="${requestScope.getStore }" var="getStore">
-			<div id="storelist" class="clearfix">
-				<img id="storelistLogo" data-no=$mainVo.logoImg} /> ${getStore.storeName} <br>
-				<button type="button" class="click">상세정보보기</button>
-			</div>
-			</c:forEach>
+		</c:forEach>
 			
 		</div>
 	</div>
-
-<button type="button" id="btnXY" >클릭</button>
-
-	<br>
 	<br>
 
 

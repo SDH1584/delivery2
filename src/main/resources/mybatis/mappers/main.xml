@@ -4,7 +4,7 @@
 
 
 	<!-- 메인페이지 정보 가져오기 -->
-	<select id="getMain" resultType="mainVo">
+	<select id="getMain" parameterType="com.javaex.vo.MainVo" resultType="mainVo">
 		<![CDATA[
 		select  bs.store_no storeNo,
                     bs.no,
@@ -22,7 +22,7 @@
 	</select>
 	
 	<!-- 가게정보가져오기 -->
-	<select id="getStore"  resultType="mainVo">
+	<select id="getStore" parameterType="com.javaex.vo.MainVo" resultType="mainVo">
 			<![CDATA[
 			select  bs.store_no storeNo,
                     bs.no,
@@ -36,7 +36,8 @@
 					og.people,
                     bs.notice,
                     og.order_status orderStatus,
-                    po.p_order_no pOrderNo
+                    
+                    po.count(p_order_no) as countPeople
                     from business bs, order_group og, personal_order po
 					where bs.store_no=og.no
 					and og.order_no=po.order_no	
@@ -46,18 +47,22 @@
 	
 	
 	<!-- 가장 최근 가게정보가져오기 -->
-	<select id="getRecentStore"  resultType="mainVo">
+	<select id="getRecentStore" parameterType="com.javaex.vo.MainVo"  resultType="mainVo">
 			<![CDATA[
 	    select rnt.storeName ,
 	           rnt.storeNo ,
+	           rnt.no,
 	           rnt.storePhone,
 	           rnt.storeMAdr,
 	           rnt.storeSAdr,
 	           rnt.logoImg,
+	           rnt.storeLat,
+	           rnt.storeLng,
 	           rnt.people,
 	           rnt.notice,
 	           rnt.orderStatus,
-	           rnt.pOrderNo
+	           rnt.pOrderNo,
+	           rnt.countPeople
 		from            
 				(select         rownum rn,
 			                    bs.store_no storeNo,
@@ -72,7 +77,8 @@
 								og.people,
 			                    bs.notice,
 			                    og.order_status orderStatus,
-			                    po.p_order_no pOrderNo
+			                    po.p_order_no pOrderNo,
+			                    po.count(p_order_no) as countPeople
 				from business bs, order_group og, personal_order po
 				where bs.store_no=og.no
 						and og.order_no=po.order_no	
