@@ -24,7 +24,7 @@ public class StoreDetailDao {
 	public Integer attend(OrderVo orderVo) {
 
 		OrderVo resultVo = sqlSession.selectOne("storeDetail.attend", orderVo);
-		System.out.println("Dao: " + resultVo);
+		//System.out.println("Dao: " + resultVo);
 
 		if (resultVo == null) {
 
@@ -39,12 +39,12 @@ public class StoreDetailDao {
 	}
 
 	public OrderVo attendVfy(OrderVo orderVo) {
-		System.out.println("Dao.attendVfy: " + orderVo);
+		//System.out.println("Dao.attendVfy: " + orderVo);
 		
-		OrderVo hostVo = sqlSession.selectOne("storeDetail.attendVfy", orderVo);
-		System.out.println("Dao.attendVfy: " + orderVo);
+		OrderVo varifyVo = sqlSession.selectOne("storeDetail.attendVfy", orderVo);
+		//System.out.println("Dao.attendVfy: " + orderVo);
 
-		return hostVo;
+		return varifyVo;
 
 	}
 
