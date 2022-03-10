@@ -16,7 +16,16 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 
-	// 사용자 회원가입
+	// 사용자 회원가입 (프로필 이미지 없을 때)
+	public int customerJoinDefault(UserVo userVo, AddressVo addressVo) {
+		System.out.println("userService/customerJoin");
+
+		userDao.insertCustomerDefault(userVo);
+		addressVo.setNo(userVo.getNo());
+		return userDao.insertAddress(addressVo);
+	}
+
+	// 사용자 회원가입 (프로필 이미지 있을 때)
 	public int customerJoin(UserVo userVo, AddressVo addressVo) {
 		System.out.println("userService/customerJoin");
 

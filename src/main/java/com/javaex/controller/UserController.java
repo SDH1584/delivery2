@@ -59,10 +59,18 @@ public class UserController {
 			@ModelAttribute AddressVo addressVo, Model model) {
 		System.out.println("userController/c_join");
 
-		String saveName = fileService.restore(file);
-		model.addAttribute("saveName", saveName);
-		userVo.setProfile_img(saveName);
-		userService.customerJoin(userVo, addressVo);
+		String orgName = file.getOriginalFilename();
+		if (orgName != "") {
+			// 파일 존재
+			String saveName = fileService.restore(file);
+			model.addAttribute("saveName", saveName);
+			userVo.setProfile_img(saveName);
+			userService.customerJoin(userVo, addressVo);
+		} else {
+			// 파일 없음
+			userService.customerJoinDefault(userVo, addressVo);
+		}
+
 		return "redirect:/user/loginForm";
 	}
 
