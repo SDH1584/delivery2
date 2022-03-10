@@ -13,9 +13,11 @@
 			       og.delivery_s_adr deliverySAdr,
 			       de.fee/og.people as pFee,
 			       biz.min_price minPrice,
-			       cp.countpeople as countPeople
+			       cp.countPeople,
+			       cp.finalPay
 			from order_group og, delivery de, business biz, (select order_no,
-			                                                        count(p_order_no) as countPeople
+			                                                        count(p_order_no) as countPeople,
+			                                                        sum(final_pay) as finalPay
 			                                                 from personal_order
 			                                                 group by order_no
 			                                                 ) cp
