@@ -27,7 +27,7 @@
 					<li id="aside-top">마이페이지</li>
 					<li><a href="https://www.naver.com/" class="link2">회원정보수정</a></li>
 					<li><a href="https://www.naver.com/" class="link2">주소 등록/수정</a></li>
-					<li><a href="https://www.naver.com/" class="link2">주문내역</a></li>
+					<li><a href="${pageContext.request.contextPath }/mypage/orderList" class="link2">주문내역</a></li>
 					<li><a href="https://www.naver.com/" class="link2">포인트 확인</a></li>
 					<li><a href="https://www.naver.com/" class="link2">리뷰내역</a></li>
 					<li><a href="https://www.naver.com/" class="link2">고객센터</a></li>

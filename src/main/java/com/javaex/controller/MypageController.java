@@ -1,21 +1,37 @@
 package com.javaex.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.javaex.service.MypageService;
+import com.javaex.vo.OrderListVo;
+import com.javaex.vo.UserVo;
+
 @Controller
 @RequestMapping("/mypage")
 public class MypageController {
 
-	// 주문 리스트
+	@Autowired
+	private MypageService mypageService;
+	
+	// 주문내역 리스트
 	@RequestMapping(value="/orderList", method= {RequestMethod.GET, RequestMethod.POST})
-	public String orderList() {
+	public String orderList(HttpSession session, Model model) {
 		System.out.println("mypageController/orderList");
 		
+		UserVo authUser = (UserVo) session.getAttribute("authUser");
+		int no = authUser.getNo();
+		System.out.println(no);
+		List<OrderListVo> orderList = mypageService.getOrderList(no);
+		model.addAttribute("orderList", orderList);
+		System.out.println(orderList);
 		return "user-mypage/customer-orderList";
 	}
 	
