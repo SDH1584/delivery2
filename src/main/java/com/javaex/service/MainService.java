@@ -1,8 +1,6 @@
 package com.javaex.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,7 +42,6 @@ public class MainService {
 
 	public List<MainVo> getRecentStore() {
 		System.out.println("mainService.getRecentStore");
-		System.out.println("get!!!!!!recentSt");
 		return maindao.getRecentStore();
 	}
 }

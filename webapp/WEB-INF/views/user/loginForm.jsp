@@ -50,7 +50,7 @@
 									<!-- 로그인 실패/성공 처리 -->
 									<c:if test="${param.result eq 'fail'}">
 										<script type="text/javascript">
-											alert("로그인에 실패하였습니다.");
+											alert("로그인에 실패하였습니다. 다시 입력해 주세요.");
 										</script>
 									</c:if>
 

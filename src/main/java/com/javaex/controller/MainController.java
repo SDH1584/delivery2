@@ -44,9 +44,9 @@ MainService mainService;
 		System.out.println("getRecentStore :"+getRecentStore);
 		model.addAttribute("getRecentStore",getRecentStore);
 		
-		System.out.println(getMain);
-		System.out.println(getStore);
-		System.out.println(getRecentStore);
+		System.out.println("getmain:"+getMain);
+		System.out.println("getstore:"+getStore);
+		System.out.println("getrcentStore:"+getRecentStore);
 		
 		return "user/main";
 		

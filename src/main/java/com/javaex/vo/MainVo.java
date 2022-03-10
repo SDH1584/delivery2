@@ -15,7 +15,7 @@ public class MainVo {
 	private double Lat;
 	private double Lng;
 	private int people;
-	private String madinAddress;
+	private String mainAddress;
 	private String subAddress;
 	private String addressName;
 	private int orderNo;
@@ -49,7 +49,7 @@ public class MainVo {
 
 	public MainVo(int storeNo, int no, String storeName, String storePhone, String storeMAdr, String storeSAdr,
 			String logoImg, double storeLat, double storeLng, int recommand, double lat, double lng, int people,
-			String madinAddress, String subAddress, String addressName, int orderNo, int pOrderNo, int orderStatus) {
+			String mainAddress, String subAddress, String addressName, int orderNo, int pOrderNo, int orderStatus) {
 		super();
 		this.storeNo = storeNo;
 		this.no = no;
@@ -64,7 +64,7 @@ public class MainVo {
 		Lat = lat;
 		Lng = lng;
 		this.people = people;
-		this.madinAddress = madinAddress;
+		this.mainAddress = mainAddress;
 		this.subAddress = subAddress;
 		this.addressName = addressName;
 		this.orderNo = orderNo;
@@ -74,7 +74,7 @@ public class MainVo {
 
 	public MainVo(int storeNo, int no, String storeName, String storePhone, String storeMAdr, String storeSAdr,
 			String logoImg, double storeLat, double storeLng, int recommand, double lat, double lng, int people,
-			String madinAddress, String subAddress, String addressName, int No, int pOrderNo) {
+			String mainAddress, String subAddress, String addressName, int No, int pOrderNo) {
 		super();
 		this.storeNo = storeNo;
 		this.no = no;
@@ -89,10 +89,9 @@ public class MainVo {
 		Lat = lat;
 		Lng = lng;
 		this.people = people;
-		this.madinAddress = madinAddress;
+		this.mainAddress = mainAddress;
 		this.subAddress = subAddress;
 		this.addressName = addressName;
-		this.orderNo = orderNo;
 		this.pOrderNo = pOrderNo;
 	}
 
@@ -209,12 +208,12 @@ public class MainVo {
 		this.people = people;
 	}
 
-	public String getMadinAddress() {
-		return madinAddress;
+	public String getmainAddress() {
+		return mainAddress;
 	}
 
-	public void setMadinAddress(String madinAddress) {
-		this.madinAddress = madinAddress;
+	public void setmainAddress(String mainAddress) {
+		this.mainAddress = mainAddress;
 	}
 
 	public String getSubAddress() {
@@ -254,15 +253,15 @@ public class MainVo {
 		return "MainVo [storeNo=" + storeNo + ", no=" + no + ", storeName=" + storeName + ", storePhone=" + storePhone
 				+ ", storeMAdr=" + storeMAdr + ", storeSAdr=" + storeSAdr + ", logoImg=" + logoImg + ", storeLat="
 				+ storeLat + ", storeLng=" + storeLng + ", recommand=" + recommand + ", Lat=" + Lat + ", Lng=" + Lng
-				+ ", people=" + people + ", madinAddress=" + madinAddress + ", subAddress=" + subAddress
+				+ ", people=" + people + ", mainAddress=" + mainAddress + ", subAddress=" + subAddress
 				+ ", addressName=" + addressName + ", orderNo=" + orderNo + ", pOrderNo=" + pOrderNo + "]";
 	}
 
-	public MainVo(double lat, double lng, String madinAddress, String subAddress, String addressName) {
+	public MainVo(double lat, double lng, String mainAddress, String subAddress, String addressName) {
 		super();
 		Lat = lat;
 		Lng = lng;
-		this.madinAddress = madinAddress;
+		this.mainAddress = mainAddress;
 		this.subAddress = subAddress;
 		this.addressName = addressName;
 	}
