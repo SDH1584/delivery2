@@ -170,7 +170,13 @@
 
 	}
 
-	
+	//가게 상세정보 버튼 클릭할때
+	$('.click').on("click", function() {
+		console.log("가게 상세정보 버튼 클릭");
+		var storeNo = $(this).data("storeno")
+		
+		
+	});
 	
 
 	
