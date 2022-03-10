@@ -63,9 +63,9 @@
 				<tbody>
 					<tr>
 						<td>${rList.orderDate}</td>
-						<td>${rList.countPeople}명 / ${rList.people}명</td>
+						<td>${rList.countPeople}명 / <strong>${rList.people}</strong>명</td>
 						<td>${rList.pFee}원</td>
-						<td>${rList.finalPay}원 / ${rList.minPrice}원</td>
+						<td>${rList.finalPay}원 / <strong>${rList.minPrice}</strong>원</td>
 						<td>${rList.deliveryMAdr} ${rList.deliverySAdr}</td>
 						<td id="status"><a id="statusLink" href="${pageContext.request.contextPath}/store/${storeNo}/attend?orderNo=${rList.orderNo}&no=${authUser.no}">대기중</a></td>
 					</tr>
