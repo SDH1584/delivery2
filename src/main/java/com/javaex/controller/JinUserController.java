@@ -19,7 +19,6 @@ public class JinUserController {
 	@RequestMapping("/storeList")
 	public String storeList() {
 		System.out.println("JinUserController/storeList");
-
 		return "user/storeList";
 	}
 	

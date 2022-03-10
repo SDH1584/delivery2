@@ -2,28 +2,71 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Business">
-	
-	<!-- 회원정보 하나 -->
+
+	<!-- 가게정보 -->
 	<select id="getUser" parameterType="int" resultType="BusinessVo">
 		<![CDATA[
 			SELECT
-					store_no,
+					store_no as storeNo,
 					no,
-					biz_no,
-					store_name,
-					store_phone,
-					store_m_adr,
-					store_s_adr,
-					store_lat,
-					store_lng,
-					logo_img,
-					min_price,
+					biz_no as bizNo,
+					store_name as storeName,
+					store_phone as storePhone,
+					store_m_adr as storeMAdr,
+					store_s_adr as storeSAdr,
+					store_lat as storeLat,
+					store_lng as sotreLng,
+					logo_img as logoImg,
+					min_price as minPrice,
 					notice,
-					origin,
-					on_off
+					origin as origin,
+					on_off as onOff
 			FROM BUSINESS
 			where store_no = #{store_no}
 		]]>
 	</select>
 
+	<!-- 유저정보 -->
+	<select id="getuser" parameterType="int" resultType="UserVo">
+		<![CDATA[
+			SELECT
+    			* FROM USERS
+    		where no = #{no}
+		]]>
+	</select>
+	
+		<!-- 배달정보 -->
+	<select id="getdeli" parameterType="int" resultType="DeliveryVo">
+		<![CDATA[
+			SELECT
+    			* FROM delivery
+    		where store_no = #{store_no}
+		]]>
+	</select>
+	
+	<!-- 유저 업데이트 -->
+	
+	<update id="Userupdate" parameterType="UserVo">
+		<![CDATA[
+			update users
+			set    hp = #{hp},
+       			   email = #{email}
+			where  no = #{no}
+		]]>
+	</update>
+
+	<!-- 가게정보 업데이트 -->
+	<update id="BusinessUpdate" parameterType="BusinessVo">
+		<![CDATA[
+			update BUSINESS
+			set    	
+					store_name = #{storeName},
+					store_phone = #{storePhone},
+					store_m_adr = #{storeMAdr},
+					store_s_adr = #{storeSAdr},
+					min_price = #{minPrice},
+					notice = #{notice}
+			where  store_no = #{storeNo}
+		]]>
+	</update>
 </mapper>
