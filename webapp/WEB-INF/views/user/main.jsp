@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +40,7 @@
 					</colgroup>
 
 					<tr>
-						<td rowspan="6"><img id="storeLogo"  src="${pageContext.request.contextPath}/assets/images/1.png"></td>
+						<td rowspan="6"><img id="storeLogo" src="${pageContext.request.contextPath}/assets/images/1.png"></td>
 					</tr>
 					<tr>
 						<th id="name">가게명:${getRecentStore[0].storeName }</th>
@@ -49,16 +49,16 @@
 						<td id="delivery-num">2 /${getRecentStore[0].people }</td>
 					</tr>
 					<tr>
-						<td id="delivery-address" colspan="2">주소: ${getRecentStore[0].storeMAdr }  ${getRecentStore[0].storeSAdr}</td>
+						<td id="delivery-address" colspan="2">주소: ${getRecentStore[0].storeMAdr } ${getRecentStore[0].storeSAdr}</td>
 					</tr>
 					<tr>
 						<td id="delivery-hp" colspan="2">전화번호:${getRecentStore[0].storePhone}</td>
 					</tr>
 					<tr>
-						<td id="recommend" colspan="2">추천수: </td>
+						<td id="recommend" colspan="2">추천수:</td>
 					</tr>
 					<tr>
-						<td colspan="3"><button id="reserve-btn">예약하러 가기</button></td>
+						<td colspan="3"><button id="reserve-btn" onclick="location.href='${pageContext.request.contextPath}/store/${getRecentStore[0].storeNo}/reserv'">예약하러 가기</button></td>
 					</tr>
 
 				</table>
@@ -70,16 +70,15 @@
 		<!-- container -->
 
 		<div id="container" class="clearfix">
-			
-		<c:forEach items="${getStore}" var="getStore" begin="0" varStatus="status" end="${fn:length(getStore)}">
-			<div id="storelist" class="clearfix">
-				<img id="storelistLogo" src="${pageContext.request.contextPath}/assets/images/${getStore.logoImg}" /> 
-					${getStore.storeName} <br>
-					2/${getStore.people } 명<br>
-				<button type="button" class="click">상세정보보기</button>
-			</div>
-		</c:forEach>
-			
+
+			<c:forEach items="${getStore}" var="getStore" varStatus="status">
+				<div id="storelist" class="clearfix">
+					<img id="storelistLogo" src="${pageContext.request.contextPath}/assets/images/${getStore.logoImg}" /> ${getStore.storeName} <br> 2/${getStore.people } 명<br>
+					<button type="button" class="click" data-storeno="${getStore.storeNo}" >
+					상세정보보기</button>
+				</div>
+			</c:forEach>
+
 		</div>
 	</div>
 	<br>
@@ -118,9 +117,10 @@
 
 		// 마커 정보
 			var locations = [ {
-			place : "서울대입구역",
-			lat : 37.48388,
-			lng : 126.9519
+			place :"서울대입구역",
+			lat : 37.141414,
+			lng : 126.1234124123,
+					
 		} ];
 
 		//인포윈도우
@@ -131,8 +131,7 @@
 			var marker = new google.maps.Marker({
 				map : map,
 				//label: locations[i].place,
-				position : new google.maps.LatLng(locations[i].lat,
-						locations[i].lng),
+				position : new google.maps.LatLng(locations[i].lat,locations[i].lng),
 			});
 
 			google.maps.event.addListener(marker, 'click',
@@ -171,19 +170,7 @@
 
 	}
 
-	//가게 상세정보 버튼 클릭할때
-	$('.click').on("click", function() {
-		console.log("가게클릭")
-		$('#store-name').text("교촌치킨 (선택)")
-		$('#delivery-num').text("2/6+@")
-		$('#delivery-address').text("가게정보: 서울특별시 관악구 중앙동 861-7 +@")
-		$('#delivery-hp').text('연락처:02-123-4567+@')
-		$('#specialities').text('대표메뉴:후라이드치킨 양념치킨+@')
-		$('#recommend').text('추천수:33+1')
-		$('#store-comment').text('사장님 알림: 항상 감사합니다 고객님+@')
-      document.getElementById("storeLogo").src ="${pageContext.request.contextPath}/assets/images/일식돈가스.png";
-		
-	});
+	
 	
 
 	
