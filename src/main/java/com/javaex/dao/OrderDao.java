@@ -62,18 +62,25 @@ public class OrderDao {
 		return sqlSession.selectList("order.selectMenuList", storeNo);
 	}
 	
+	/* 메뉴 가져오기 */
+	public MenuOptionVo getMenu(MenuOptionVo moVo) {
+		System.out.println("[OrderDao.getMenu()]");
+		
+		return sqlSession.selectOne("order.selectMenu", moVo);
+	}
+	
 	/* 메뉴옵션카테고리리스트 가져오기 */
-	public List<MenuOptionVo> getOptionCateList(int storeNo){
+	public List<MenuOptionVo> getOptionCateList(MenuOptionVo moVo){
 		System.out.println("[OrderDao.getOptionCateList()]");
 		
-		return sqlSession.selectList("order.selectOptionCateList", storeNo);
+		return sqlSession.selectList("order.selectOptionCateList", moVo);
 	}
 	
 	/* 메뉴옵션리스트 가져오기 */
-	public List<MenuOptionVo> getOptionList(int storeNo){
+	public List<MenuOptionVo> getOptionList(MenuOptionVo moVo){
 		System.out.println("[OrderDao.getOptionList()]");
-		System.out.println(sqlSession.selectList("order.selectOptionList", storeNo));
-		return sqlSession.selectList("order.selectOptionList", storeNo);
+
+		return sqlSession.selectList("order.selectOptionList", moVo);
 	}
 	
 	

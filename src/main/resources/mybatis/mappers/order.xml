@@ -28,7 +28,8 @@
 	<select id="selectBiz" parameterType="int" resultType="com.javaex.vo.BusinessVo">
 		<![CDATA[
 			select  store_name storeName,
-			        on_off onOff
+			        on_off onOff,
+			        store_no storeNo
 			from business
 			where store_no = #{storeNo}
 		]]>
@@ -80,8 +81,23 @@
 		]]>
 	</select>
 	
+	<!-- 메뉴 가져오기 -->
+	<select id="selectMenu" parameterType="com.javaex.vo.MenuOptionVo" resultType="com.javaex.vo.MenuOptionVo">
+		<![CDATA[
+			select  m.menu_no menuNo,
+			        m.menu_name menuImg,
+			        m.menu_name menuName,
+			        m.menu_price menuPrice,
+			        m.menu_desc menuDesc
+			from menu_cate mc, menu m
+			where mc.menu_cate_no = m.menu_cate_no
+			and mc.store_no = #{storeNo}
+			and m.menu_no = #{menuNo}
+		]]>
+	</select>
+	
 	<!-- 메뉴옵션 카테고리 리스트 가져오기 -->
-	<select id="selectOptionCateList" parameterType="int" resultType="com.javaex.vo.MenuOptionVo">
+	<select id="selectOptionCateList" parameterType="com.javaex.vo.MenuOptionVo" resultType="com.javaex.vo.MenuOptionVo">
 		<![CDATA[
 			select  moc.option_cate_no optionCateNo,
 			        moc.menu_no menuNo,
@@ -91,20 +107,26 @@
 			where mc.menu_cate_no = m.menu_cate_no
 			and m.menu_no = moc.menu_no
 			and mc.store_no = #{storeNo}
+			and m.menu_no = #{menuNo}
+			order by moc.option_cate_no asc
 		]]>
 	</select>
 	
-	<!-- 메뉴카테고리 가져오기 -->
-	<select id="selectOptionList" parameterType="int" resultType="com.javaex.vo.MenuOptionVo">
+	<!-- 옵션리스트 가져오기 -->
+	<select id="selectOptionList" parameterType="com.javaex.vo.MenuOptionVo" resultType="com.javaex.vo.MenuOptionVo">
 		<![CDATA[
 			select  oco.option_cate_no optionCateNo,
 			        mo.option_no optionNo,
 			        mo.option_name optionName,
 			        mo.option_price optionPrice,
-			        mo.store_no storeNo
-			from op_cate_op oco, menu_option mo
+			        mo.store_no storeNo,
+			        moc.menu_no menuNo
+			from op_cate_op oco, menu_option mo, menu_option_cate moc
 			where oco.option_no = mo.option_no
+			and oco.option_cate_no = moc.option_cate_no
 			and mo.store_no = #{storeNo}
+			and moc.menu_no = #{menuNo} 
+			order by mo.option_no asc
 		]]>
 	</select>
 	

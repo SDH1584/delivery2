@@ -59,9 +59,11 @@
 												<div class="menu-desc">${menuVo.menuDesc}</div>
 											</div>
 											<div class="menu-img">
-												<img src="${menuVo.menuImg }" width="70px" height="78px">
+												<img src="${menuVo.menuImg }" width="70px" height="78px" onerror="this.style.display='none'">
 											</div>
-											<div class="menu-price"> <fmt:formatNumber value="${menuVo.menuPrice }" pattern="#,###원"/> </div>
+											<div class="menu-price">
+												<fmt:formatNumber value="${menuVo.menuPrice }" pattern="#,###" />
+											</div>
 										</div>
 										<!-- menu-box -->
 									</c:if>
@@ -85,16 +87,12 @@
 							<td colspan="3"><input type='button' onclick='count("minus")' value='-' class="btn-xs" /> <span id="result">1</span> <input type='button' onclick='count("plus")' value='+' class="btn-xs" /></td>
 						</tr>
 						<tr>
-							<th>최대 주문가능 수량</th>
-							<td colspan="3">10인분</td>
-						</tr>
-						<tr>
 							<th>주문 금액</th>
 							<td colspan="3">26,000 / 25,000</td>
 						</tr>
 						<tr>
 							<th>배달료</th>
-							<td colspan="3">3,000</td>
+							<td colspan="3" id="deliveryFee">3000</td>
 						</tr>
 						<tr>
 							<td colspan="4">*최소 주문 금액을 채울 경우 혼자서도 주문 가능합니다</td>
@@ -114,7 +112,7 @@
 								</tr>
 								<tr>
 									<td class="order-menu">개인 배달료</td>
-									<td class="order-price">+600원</td>
+									<td class="order-price" id="fee">3000</td>
 							</tbody>
 							<tfoot>
 								<tr>
@@ -143,9 +141,18 @@
 							<input type="checkbox" id="group-order" name="group-order" value=""> <label for="group-order">단체 주문</label>
 						</div>
 					</div>
-
-					<button type="submit">예약 만들기</button>
-					<button type="submit">바로 주문하기</button>
+					<c:choose>
+						<c:when test="${empty sessionScope.authUser}">
+							<div id="beforeLogin">
+								<p>주문 진행을 위해 로그인이 필요합니다.</p>
+								<a href="${pageContext.request.contextPath}/user/loginForm">로그인하기</a>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<button type="button" class="btn-ordering">예약 만들기</button>
+							<button type="button" class="btn-ordering">바로 주문하기</button>
+						</c:otherwise>
+					</c:choose>
 				</form>
 
 			</div>
@@ -159,8 +166,8 @@
 	<!-- //wrap -->
 
 	<!-- 메뉴 상세 모달 -->
-	<div id="menuModal" class="modal fade bs-example-modal-sm">
-		<div class="modal-dialog modal-sm">
+	<div id="menuModal" class="modal fade">
+		<div class="modal-dialog">
 			<div class="modal-content clearfix">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -169,81 +176,8 @@
 					<h4 class="modal-title">메뉴 상세</h4>
 				</div>
 
-				<div class="modal-body">
-					<img src="./menu.jpg" width="100px" height="100px">
-					<h5>앵그리트러플 와퍼 세트</h5>
-					<p>황홀한 풍미 속 강렬한 매콤팜 앵그리 트러플리얼 와퍼 ＋ 프렌치프라이R ＋ 콜라R</p>
-					<table>
-						<thead>
-							<tr>
-								<th>가격</th>
-								<td>9,600원</td>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th colspan="2">음료 변경</th>
-							</tr>
-							<tr>
-								<td><input type="radio" name="r-option1" value="콜라" checked="checked"><label>콜라</label></td>
-								<td class="price">+0</td>
-							</tr>
-							<tr>
-								<td><input type="radio" name="r-option1" value="사이다"><label>사이다</label></td>
-								<td class="price">+0</td>
-							</tr>
-							<tr>
-								<td><input type="radio" name="r-option1" value="콜라l"><label>콜라 사이즈업</label></td>
-								<td class="price">+500</td>
-							</tr>
-							<tr>
-								<td><input type="radio" name="r-option1" value="사이다l"><label>사이다 사이즈업</label></td>
-								<td class="price">+500</td>
-							</tr>
-							<tr>
-								<th colspan="2">사이드 변경</th>
-							</tr>
-							<tr>
-								<td><input type="radio" name="r-option2" value="감자튀김" checked="checked"><label>감자튀김</label></td>
-								<td class="price">+0</td>
-							</tr>
-							<tr>
-								<td><input type="radio" name="r-option2" value="감자튀김l"><label>감자튀김 사이즈업</label></td>
-								<td class="price">+500</td>
-							</tr>
-							<tr>
-								<td><input type="radio" name="r-option1" value="치즈감자"><label>치즈감자</label></td>
-								<td class="price">+2000</td>
-							</tr>
-							<tr>
-								<th colspan="2">사이드 추가</th>
-							</tr>
-							<tr>
-								<td><input type="checkbox" name="c-option1" value="치즈스틱"><label>치즈스틱</label></td>
-								<td class="price">+2000</td>
-							</tr>
-							<tr>
-								<td><input type="checkbox" name="c-option1" value="치킨너겟"><label>치킨너겟</label></td>
-								<td class="price">+4000</td>
-							</tr>
-							<tr>
-								<td><input type="checkbox" name="c-option1" value="어니언링"><label>어니언링</label></td>
-								<td class="price">+3500</td>
-							</tr>
-						</tbody>
-						<tfoot>
-							<tr>
-								<th>수량</th>
-								<td><input type='button' onclick='count2("minus")' value='-' class="btn-xs" /> <span id="result2">1</span> <input type='button' onclick='count2("plus")' value='+' class="btn-xs" /></td>
-							</tr>
-							<tr>
-								<th>주문금액</th>
-								<td class="total-price">12000원</td>
-							</tr>
-						</tfoot>
-					</table>
-					<button type="submit">주문표에 추가</button>
-
+				<div class="modal-body" id="optionListArea">
+					
 				</div>
 				<!-- modal-body -->
 
@@ -257,7 +191,11 @@
 </body>
 
 <script type="text/javascript">
-	/* 참여인원 증감 */
+var optionCateList ;
+
+
+
+/* 참여인원 증감 */
 	function count(type) {
 		// 결과를 표시할 element
 		const resultElement = document.getElementById('result');
@@ -279,6 +217,10 @@
 		// 결과 출력
 		console.log(number);
 		resultElement.innerText = number;
+		var feeElement = document.getElementById('deliveryFee');
+		var fee = parseInt(feeElement.innerText);
+		fee = fee / number
+		document.getElementById('fee').innerText = fee;
 	}
 
 	/* 수량 증감 */
@@ -307,11 +249,203 @@
 
 	/* 메뉴 상세 */
 	$(".menu-box").on("click", function() {
+		$("#optionListArea").empty()
 		console.log("메뉴 클릭")
 		var no = $(this).data("no");
 		console.log(no);
+		var menuOptionVo = {storeNo : ${map.bizVo.storeNo}, menuNo:no};
+		$.ajax({
+
+			/* 요청 */
+			url : "${pageContext.request.contextPath }/store/${map.bizVo.storeNo}/optionList", //요청 보낼 주소		
+			type : "post",
+			contentType : "application/json",
+			data : JSON.stringify(menuOptionVo), //자바스크립트 객체를 json 형식으로 변경
+
+			/* 응답 */
+			dataType : "json",
+			success : function(map) {
+				/*성공시 처리해야될 코드 작성*/
+				console.log(map);
+				menuInfo(map);
+				
+				////////////////////////////
+				optionCateList = map.optionCateList
+				
+				
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
+			
+		});
+
 		$("#menuModal").modal('show');
 	});
+	
+	function menuInfo(map){
+		var str= '';
+		str += ' <img src="'+map.menuVo.menuImg+'" width="100px" height="100px" onerror="this.style.display=\'none\'">';
+		str += ' <h5>'+map.menuVo.menuName+'</h5>';
+		str += ' <p>'+map.menuVo.menuDesc+'</p>';
+		//str += ' <form action="${pageContext.request.contextPath}/store/'+map.optionList[0].storeNo+'/orderFirst" method="get">'
+		str += ' <table>';
+		str += ' 	<thead>';
+		str += ' 		<tr>';
+		str += ' 			<th>가격</th>';
+		str += ' 			<td class="price">'+map.menuVo.menuPrice+'</td>';
+		str += ' 		</tr>';
+		str += ' 	</thead>';
+		str += ' 	<tbody>';
+		for (var i = 0; i < map.optionCateList.length; i++){
+
+			str += ' 		<tr>';
+			str += ' 			<th colspan="2">'+map.optionCateList[i].optionCateName+'</th>';
+			str += '		</tr> ';
+			var num = map.optionList.length + 1;
+			
+			for(var j=0; j<map.optionList.length; j++){
+				if(map.optionList[j].optionCateNo == map.optionCateList[i].optionCateNo){
+					if(map.optionCateList[i].chkRdo == 1){
+						str += ' <tr> ';
+						str += ' 	<td><input type="radio" name="'+map.optionCateList[i].optionCateNo+'" value="'+map.optionList[j].optionNo+'" data-name="'+map.optionList[j].optionName+'" data-price="'+map.optionList[j].optionPrice+'"';
+						if(j<=num){
+							num=j;
+							str += ' checked="checked"';
+						}
+						str += '     ><label>'+map.optionList[j].optionName+'</label></td>'
+						str += ' 	<td class="opPrice">'+map.optionList[j].optionPrice+'</td>'
+						str += ' </tr>';
+					} else {
+						str += ' <tr> ';
+						str += ' 	<td><input type="checkbox" name="'+map.optionCateList[i].optionCateNo+'" value="'+map.optionList[j].optionNo+'" data-name="'+map.optionList[j].optionName+'" data-price="'+map.optionList[j].optionPrice+'"><label>'+map.optionList[j].optionName+'</label></td> ';
+						str += ' 	<td class="opPrice">'+map.optionList[j].optionPrice+'</td>'
+						str += ' </tr>';
+					}					
+				}		
+			}
+			
+		}
+		str += ' 	</tbody>';
+		str += ' 	<tfoot>';
+		str += ' 		<tr>';
+		str += ' 			<th>수량</th>';
+		str += ' 			<td class="count">';
+		str += ' 				<input type=\'button\' onclick=\'count2("minus")\' value=\'-\' class="btn-xs" />';
+		str += ' 				<span id="result2">1</span>';
+		str += ' 				<input type=\'button\' onclick=\'count2("plus")\' value=\'-\' class="btn-xs" />';
+		str += ' 		</tr>';
+		str += ' 	</tfoot>';
+		str += ' </table>';
+		str += ' <button id="btnMenuAdd" type="submit" data-no="'+map.menuVo.menuNo+'" data-name="'+map.menuVo.menuName+'" data-price="'+map.menuVo.menuPrice+'" >주문표에 추가</button>';
+		//str += ' </form>'
+		
+		$("#optionListArea").append(str); 
+	}
+
+	
+		
+	////////////////////////////////////////////////////////////////////////
+	var menuInfoArr = [];
+	
+	$(".modal-body").on("click", "#btnMenuAdd", function(){
+		console.log("btnMenuAdd");
+		
+		//console.log(optionCateList);
+		
+		var menuNo = $("#btnMenuAdd").data("no");
+		var menuName = $("#btnMenuAdd").data("name");
+		var menuPrice = $("#btnMenuAdd").data("price")
+		var optInfoArr = [];
+		
+		for (var i = 0; i < optionCateList.length; i++){
+			var optionCateName =optionCateList[i].optionCateNo;
+			
+			var name = "[name='"+optionCateName+"']:checked"
+		
+			var optionNo =$(name).val();
+						
+			var selOptArr = [];
+			$(name).each(function(){
+				var no = $(this).val();
+				var name = $(this).data("name");
+				var price = $(this).data("price");
+				var selOpt = {optionNo:no, optionName:name, optionPrice:price};
+				selOptArr.push(selOpt);
+			});
+			//console.log(optionCateName);
+			//console.log("opt" + optionNo);
+			//console.log("arr" + selOptNoArr);
+			
+			var optInfo = {
+					optCateNo : optionCateName,
+					selOptArr : selOptArr
+			}
+			if(selOptArr.length > 0){optInfoArr.push(optInfo)};
+			
+		}
+		//console.log(optInfoArr);
+		var count = document.getElementById('result2').innerText;
+		var menuInfo = {menuNo : menuNo, menuName:menuName, menuPrice:menuPrice, optInfoArr:optInfoArr, orderCount:count };
+		//console.log(menuInfo);
+		menuInfoArr.push(menuInfo);
+		console.log("menuInfoArr");
+		console.log(menuInfoArr);
+		
+		$("#menuModal").modal('hide');
+		
+	});
+	
+	
+	$(".btn-ordering").on("click", function(){
+		console.log("btn-ordering");
+		var storeNo = 1;
+		var fee = 500;
+		var address = '서울시 관악구 남부순환로 1820 302호';
+		var storeReq = '반찬 빼주세요';
+		var deliveryReq = '1층에 두고 전화주세요';
+		var people = 3;
+		var orderDate = '2022/03/10 17:00'
+		var orderStatus = 0;
+		var orderInfo = {storeNo : storeNo,
+						 fee : fee,
+						 address : address,
+						 storeReq : storeReq,
+						 deliveryReq : deliveryReq,
+						 people : people,
+						 orderDate : orderDate,
+						 orderStatus : orderStatus,
+						 menuInfoArr : menuInfoArr}
+		console.log(orderInfo);
+		
+		$.ajax({
+
+			/* 요청 */
+			url : "${pageContext.request.contextPath }/store/${map.bizVo.storeNo}/orderInfo", //요청 보낼 주소		
+			type : "post",
+			contentType : "application/json",
+			data : JSON.stringify(orderInfo) //자바스크립트 객체를 json 형식으로 변경
+
+			/* 응답 */
+			//dataType : "json",
+			//success : function(map) {
+				/*성공시 처리해야될 코드 작성*/
+			//	console.log(map);
+			//	menuInfo(map);
+				
+				////////////////////////////
+			//	optionCateList = map.optionCateList
+				
+				
+			//},
+			//error : function(XHR, status, error) {
+		//		console.error(status + " : " + error);
+		//	}
+			
+		});
+	});
+	
+	
 </script>
 
 </html>

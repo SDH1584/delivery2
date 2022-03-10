@@ -39,7 +39,7 @@ h3 {
 .menu-box{height:118px; padding: 19px 0px 18px 0px; text-align:left; border-bottom:1px solid #e2e2e2;}
 .menu-box.last{border-bottom:1px none #fff;}
 .menu-img{ float:left; font-weight:bold;}
-.menu-letter{width:320px !important;
+.menu-letter{width:300px !important;
 			 float:left; 
 			 font-weight:bold;	}
 
@@ -68,6 +68,11 @@ h3 {
 #adress-change{width:100%; height:34px; border:1px solid #5f0080; color: #5f0080; border-radius:3px; font-size: 12px; background-color:#fff; margin-bottom:20px;}
 input[type="text"]{width:100%; text-align:right; height:34px; }
 
+#beforeLogin {margin-bottom:20px;}
+#beforeLogin p{font-size : 16px; margin-bottom:15px;}
+#beforeLogin a{font-size : 20px; margin-bottom:15px;}
+#beforeLogin a:hover{color: #06F;}
+
 button[type="submit"]{
 	margin: 20px 0px 20px 0px; 
 	width:45%; height:56px; 
@@ -77,20 +82,30 @@ button[type="submit"]{
 	color:#fff; 
 	font-size:16px; 
 	font-weight:bold;}
-	
+.btn-ordering{
+	margin: 20px 0px 20px 0px; 
+	width:45%; height:56px; 
+	background-color:#5f0081; 
+	border-color:#5f0080;
+	border-radius:5px; 
+	color:#fff; 
+	font-size:16px; 
+	font-weight:bold;
+}	
 /* 주문 상세 모달 */
 
 .modal-body{
-	width:300px;
-	font-size: 16px;}
+	width:600px;
+	font-size: 16px;
+	padding: 30px;}
 .modal-body h5{
 	font-weight:bold;
-	font-size:16px;
+	font-size:20px;
 	margin-top:7px;
 }	
 .modal-body p{
 	font-weight:bold;
-	font-size:14px;
+	font-size:16px;
 	color: #999;
 	margin:7px 0px 7px 0px;
 }	
@@ -99,17 +114,11 @@ button[type="submit"]{
 	width:100%
 }
 
-.modal-body td{
-	text-align:left;
-	font-weight: 400;
-}
-
-
-.modal-body .price{
-	text-align:right;
+.modal-body .price, .modal-body .opPrice, .modal-body .count{
 	font-weight: 400;
 	font-size:18px !important;
 	margin-top: 7px;
+	text-align: right !important;
 }
 
 .modal-body td{
@@ -121,14 +130,15 @@ button[type="submit"]{
 
 .modal-body th[colspan="2"]{
 	font-weight:bold !important;
-	font-size:16px;
-	padding-top:10px;
+	font-size:18px;
+	padding-top:20px;
 }
 
 .modal-body th{
 	text-align: left;
 	font-weight: 400 !important;
-	font-size: 16px;
+	font-size: 18px;
+	padding-top:15px;
 }
 
 
