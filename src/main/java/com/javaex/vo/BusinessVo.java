@@ -19,13 +19,13 @@ public class BusinessVo {
 	
 	
 	public BusinessVo() {
-		super();
+
 	}
 	
 	public BusinessVo(int storeNo, int no, int bizNo, String storeName, String storePhone, String storeMAdr,
 			String storeSAdr, double storeLat, double sotreLng, String logoImg, int minPrice, String notice,
 			String origin, int onOff) {
-		super();
+
 		this.storeNo = storeNo;
 		No = no;
 		this.bizNo = bizNo;

@@ -26,7 +26,7 @@
             </div>
             <!-- aside-->
             <div id="main">
-                <form method="${pageContext.request.contextPath}/store/modify" action="" enctype="">
+                <form method="get" action="${pageContext.request.contextPath}/store/modify" enctype="">
                 <div>
                 <table id="table1">
                         <tbody>
@@ -34,41 +34,46 @@
                                <th>사업자등록번호</th>
                                <td><span>${requestScope.businessVo.bizNo}</span></td>
                                <th>상호명</th>
-                               <td><input type="text" name="" value=""></td>
+                               <td><input type="text" name="storeName" value="${requestScope.businessVo.storeName}"></td>
                            </tr>
                            <tr>
                                <th>가게번호</th>
-                               <td><span></span></td>
+                               <td><span><input type="text" name="storePhone" value="${requestScope.businessVo.storePhone}" style="width:100px;"></span></td>
                                <th>휴대전화</th>
-                               <td><input type="text" name="" value=""></td>
+                               <td><input type="text" name="hp" value="${requestScope.UserVo.hp}"></td>
                            </tr>
                            <tr>
                                <th>Email</th>
-                               <td colspan="3"><input type="text" name="" value=""></td>
+                               <td colspan="3"><input type="text" name="email" value="${requestScope.UserVo.email}"></td>
                            </tr>
                            <tr>
                                <th>주소</th>
-                               <td colspan="2"><input type="text" name="" value=""></td>
+                               <td colspan="2"><input type="text" name="storeMAdr" value="${requestScope.businessVo.storeMAdr}"></td>
                                <td class="tdpadding"><span class="spancolor"><a href="https://www.naver.com/"><span class="fontcolor">주소검색</span></a></span></td>
                            </tr>
                            <tr>
                                <th>상세주소</th>
-                               <td colspan="3"><input type="text" name="" value=""></td>
+                               <td colspan="3"><input type="text" name="storeSAdr" value="${requestScope.businessVo.storeSAdr}"></td>
                            </tr>
                            <tr>
                             <th>기본배달료</th>
-                            <td><input type="text" name="" value=""></td>
+                            <td><input type="text" name="fee" value="${requestScope.DeliveryVo.fee}"></td>
                             <th class="tdpadding"><span>최소주문금액</span></th>
-                            <td><input type="text" name="" value=""></td>
+                            <td><input type="text" name="minPrice" value="${requestScope.businessVo.minPrice}"></td>
                         </tr>
                         <tr>
                             <th>기본배달지역</th>
-                            <td colspan="2"><input type="text" name="" value="봉천동"></td>
-                            <td class="tdpadding"><span class="spancolor"><a href="https://www.naver.com/"><span class="fontcolor">주소검색</span></a></span></td>
+                            <td colspan="2"><input type="text" name="delivery_area,area_code" value="${requestScope.DeliveryVo.delivery_area}"></td>
+                            <td class="tdpadding"><span class="spancolor"><span class="fontcolor" id="btnOptAdd">배달지추가</span></span></td>
                         </tr>
+                        
+                        <tr id="memDiv">
+                            
+                        </tr>
+                        
                         <tr>
                             <th>배달가능지역</th>
-                            <td colspan="2"><input type="text" name="" value="봉천동"></td>
+                            <td colspan="2"><input type="text" name="delivery_area" value="${requestScope.DeliveryVo.delivery_area}"></td>
                             <td class="tdpadding"><span class="spancolor"><a href="https://www.naver.com/"><span class="fontcolor">주소검색</span></a></span></td>
                         </tr>
                         <tr>
@@ -81,52 +86,52 @@
                             <th style="text-align: center;">휴일체크</th>
                         </tr>
                         <tr>
-                            <th>월</th>
+                            <th>월<input type="hidden" name="day" value="월"></th>
                             <td><input type="text" name="" value=""></td>
                             <td><span><input type="text" name="" value=""></span></td>
-                            <td><span><input type="checkbox" name="color" value="" class="chbtn"></span></td>
+                            <td><span><input type="checkbox" name="day_off" value="1" class="chbtn"></span></td>
                         </tr>
 
                         <tr>
-                            <th>화</th>
-                            <td><input type="text" name="" value=""></td>
+                            <th>화<input type="hidden" name="day" value="화"></th>
+                            <td><input type="text" name="" value="1"></td>
                             <td><span><input type="text" name="" value=""></span></td>
-                            <td><span><input type="checkbox" name="color" value="" class="chbtn"></span></td>
+                            <td><span><input type="checkbox" name="day_off" value="1" class="chbtn"></span></td>
                         </tr>
 
                         <tr>
-                            <th>수</th>
+                            <th>수<input type="hidden" name="day" value="수"></th>
                             <td><input type="text" name="" value=""></td>
                             <td><span><input type="text" name="" value=""></span></td>
-                            <td><span><input type="checkbox" name="" value="" class="chbtn"></span></td>
+                            <td><span><input type="checkbox" name="day_off" value="1" class="chbtn"></span></td>
                         </tr>
 
                         <tr>
-                            <th>목</th>
+                            <th>목<input type="hidden" name="day" value="목"></th>
                             <td><input type="text" name="" value=""></td>
                             <td><span><input type="text" name="" value=""></span></td>
-                            <td><span><input type="checkbox" name="" value="" class="chbtn"></span></td>
+                            <td><span><input type="checkbox" name="day_off" value="1" class="chbtn"></span></td>
                         </tr>
 
                         <tr>
-                            <th>금</th>
+                            <th>금<input type="hidden" name="day" value="금"></th>
                             <td><input type="text" name="" value=""></td>
                             <td><span><input type="text" name="" value=""></span></td>
-                            <td><span><input type="checkbox" name="" value="" class="chbtn"></span></td>
+                            <td><span><input type="checkbox" name="day_off" value="1" class="chbtn"></span></td>
                         </tr>
 
                         <tr>
-                            <th>토</th>
+                            <th>토<input type="hidden" name="day" value="토"></th>
                             <td><input type="text" name="" value=""></td>
                             <td><span><input type="text" name="" value=""></span></td>
-                            <td><span><input type="checkbox" name="" value="" class="chbtn"></span></td>
+                            <td><span><input type="checkbox" name="day_off" value="1" class="chbtn"></span></td>
                         </tr>
 
                         <tr>
-                            <th>일</th>
+                            <th>일<input type="hidden" name="day" value="일"></th>
                             <td><input type="text" name="" value=""></td>
                             <td><span><input type="text" name="" value=""></span></td>
-                            <td><span><input type="checkbox" name="r" value="" class="chbtn"></span></td>
+                            <td><span><input type="checkbox" name="day_off" value="1" class="chbtn"></span></td>
                         </tr>
                         
                         </tbody>
@@ -138,7 +143,7 @@
               
 
                 <div class="logoimgline">
-
+					<img src="${pageContext.request.contextPath}/upload/${businessVo.logoImg}" class="img2" name="">
                 </div>
 
                 <div class="upload-btn_wrap">
@@ -156,13 +161,14 @@
                 <div class="textarea">
                     
                     <div>
-                        <textarea class="autosize" placeholder=""></textarea>
+                        <textarea class="autosize" placeholder="" name="notice">${requestScope.businessVo.notice}</textarea>
                     </div>
 
                 </div>
 
                 <div><button class="button1" type="submit">수정버튼</button></div>
-                <input type="text" name="no" value="${requestScope.businessVo.No}">
+                <input type="text" name="storeNo" value="${requestScope.businessVo.storeNo}">
+                <input type="text" name="storeNo" value="${requestScope.UserVo.no}">
                 </form>
             </div>
             </div>
@@ -171,6 +177,7 @@
 		<!-- 푸터 -->
 		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
     </body>
+    
     
     
 <script>
@@ -192,4 +199,27 @@ $("textarea.autosize").on('keydown keyup', function () {
      reader.readAsDataURL(event.target.files[0]); 
     } 
 </script>
+
+<script>
+
+    //배달지 추가 클릭할때
+$("#btnOptAdd").on("click", function(){
+    console.log("배달지 추가");
+
+    insertTr();
+});
+
+function insertTr() {
+
+var insertTr = "";
+
+
+insertTr += '<td> <input type="test" name="" value="" > </td>';
+
+
+$("#memDiv").append(insertTr);
+}
+
+</script>
+
 </html>
