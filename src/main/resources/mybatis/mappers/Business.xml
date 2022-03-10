@@ -35,14 +35,7 @@
 		]]>
 	</select>
 	
-		<!-- 배달정보 -->
-	<select id="getdeli" parameterType="int" resultType="DeliveryVo">
-		<![CDATA[
-			SELECT
-    			* FROM delivery
-    		where store_no = #{store_no}
-		]]>
-	</select>
+
 	
 	<!-- 유저 업데이트 -->
 	
@@ -59,12 +52,14 @@
 	<update id="BusinessUpdate" parameterType="BusinessVo">
 		<![CDATA[
 			update BUSINESS
-			set    	
+			set   	
 					store_name = #{storeName},
 					store_phone = #{storePhone},
 					store_m_adr = #{storeMAdr},
 					store_s_adr = #{storeSAdr},
 					min_price = #{minPrice},
+					origin = #{origin},
+					logo_img = #{logoImg},
 					notice = #{notice}
 			where  store_no = #{storeNo}
 		]]>
