@@ -8,7 +8,7 @@
 		<![CDATA[
 			select og.order_no orderNo,
 			       og.people people,
-			       og.order_date orderDate,
+			       to_char(og.order_date, 'mm/dd hh24:mi') orderDate,
 			       og.delivery_m_adr deliveryMAdr,
 			       og.delivery_s_adr deliverySAdr,
 			       biz.min_price minPrice,
