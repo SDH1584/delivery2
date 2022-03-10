@@ -55,15 +55,28 @@
 								</thead>
 								<tbody>
 									<c:forEach items="${orderList }" var="orderListVo">
-										<tr>
-											<td>${orderListVo.order_date }</td>
-											<td>${orderListVo.store_name }</td>
-											<td>${orderListVo.menu_name }${orderListVo.count }</td>
-											<td>${orderListVo.final_pay }</td>
-											<td>${orderListVo.order_status }
-												<button class="btn btn_edit">수정</button>
-											</td>
-										</tr>
+										<c:if test="${orderListVo.order_status != 2}">
+											<c:if test="${orderListVo.order_status != 4 }">
+												<tr>
+													<td>${orderListVo.order_date }</td>
+													<td>${orderListVo.store_name }</td>
+													<td>${orderListVo.menu_name }x${orderListVo.count }</td>
+													<td>${orderListVo.final_pay }</td>
+													<td><c:choose>
+															<c:when test="${orderListVo.order_status == 0 }">
+																예약중
+															</c:when>
+															<c:when test="${orderListVo.order_status == 1 }">
+																주문접수
+															</c:when>
+															<c:otherwise>
+																배달중
+															</c:otherwise>
+														</c:choose>
+														<button class="btn btn_edit">수정</button></td>
+												</tr>
+											</c:if>
+										</c:if>
 									</c:forEach>
 								</tbody>
 							</table>
@@ -87,10 +100,21 @@
 									</thead>
 									<tbody>
 										<c:forEach items="${orderList }" var="orderListVo">
+											<c:if test="${orderListVo.order_status == 2 }">
+												<tr>
+													<td>${orderListVo.order_date }</td>
+													<td>${orderListVo.store_name }</td>
+													<td>${orderListVo.menu_name }x${orderListVo.count }</td>
+													<td>${orderListVo.final_pay }</td>
+													<td>주문취소</td>
+												</tr>
+											</c:if>
+											<c:if test="${orderListVo.order_status == 4 }">
+											</c:if>
 											<tr>
 												<td>${orderListVo.order_date }</td>
 												<td>${orderListVo.store_name }</td>
-												<td>${orderListVo.menu_name }${orderListVo.count }</td>
+												<td>${orderListVo.menu_name }x${orderListVo.count }</td>
 												<td>${orderListVo.final_pay }</td>
 												<td>배달완료
 													<button class="btn btn_review">리뷰작성</button>
