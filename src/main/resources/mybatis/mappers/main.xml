@@ -37,7 +37,7 @@
                     bs.notice,
                     og.order_status orderStatus,
                     
-                    po.count(p_order_no) as countPeople
+                    po.p_order_no as countPeople
                     from business bs, order_group og, personal_order po
 					where bs.store_no=og.no
 					and og.order_no=po.order_no	
@@ -61,8 +61,8 @@
 	           rnt.people,
 	           rnt.notice,
 	           rnt.orderStatus,
-	           rnt.pOrderNo,
-	           rnt.countPeople
+	           rnt.pOrderNo
+	          
 		from            
 				(select         rownum rn,
 			                    bs.store_no storeNo,
@@ -77,8 +77,7 @@
 								og.people,
 			                    bs.notice,
 			                    og.order_status orderStatus,
-			                    po.p_order_no pOrderNo,
-			                    po.count(p_order_no) as countPeople
+			                    po.p_order_no pOrderNo
 				from business bs, order_group og, personal_order po
 				where bs.store_no=og.no
 						and og.order_no=po.order_no	

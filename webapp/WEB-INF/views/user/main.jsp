@@ -46,7 +46,7 @@
 						<th id="name">가게명:${getRecentStore[0].storeName }</th>
 					</tr>
 					<tr>
-						<td id="delivery-num">${getRecentStore[0].countPeople} /${getRecentStore[0].people }</td>
+						<td id="delivery-num">2 /${getRecentStore[0].people }</td>
 					</tr>
 					<tr>
 						<td id="delivery-address" colspan="2">주소: ${getRecentStore[0].storeMAdr }  ${getRecentStore[0].storeSAdr}</td>
