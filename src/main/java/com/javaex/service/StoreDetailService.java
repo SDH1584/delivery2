@@ -35,17 +35,12 @@ public class StoreDetailService {
 		}
 	}
 
-	public OrderVo host(OrderVo orderVo) {
+	public OrderVo attendVfy(OrderVo orderVo) {
 
-		OrderVo hostVo = storeDetailDao.host(orderVo);
+		OrderVo hostVo = storeDetailDao.attendVfy(orderVo);
 
 		return hostVo;
 	}
 
-	public OrderVo attendee(OrderVo orderVo) {
 
-		OrderVo attendeeVo = storeDetailDao.host(orderVo);
-
-		return attendeeVo;
-	}
 }

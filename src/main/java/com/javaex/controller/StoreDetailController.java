@@ -55,30 +55,32 @@ public class StoreDetailController {
 			OrderVo orderVo = new OrderVo();
 			orderVo.setOrderNo(orderNo);
 			orderVo.setNo(no);
+			System.out.println("orerNo: " + orderNo + ", no: " + no);
 
 			Integer resultNo = storeDetailService.attend(orderVo);
 
-			System.out.println("Controller: " + resultNo);
+			System.out.println("Controller.resultNo: " + resultNo);
 
-			if (resultNo == 1) {
+			if (resultNo == 0) {
 
-				OrderVo attendeeVo = storeDetailService.attendee(orderVo);
-				model.addAttribute("attendeeVo", attendeeVo);
-
-				return "store-detail/order-change-attendee";
+				return "store-detail/orderJoin";
 
 			} else {
 
-				OrderVo hostVo = storeDetailService.host(orderVo);
+				OrderVo varifyVo = storeDetailService.attendVfy(orderVo);
+				model.addAttribute("varifyVo", varifyVo);
+				
+				int vfyNo = varifyVo.getAttendVfy();
+				System.out.println("vfyNo: " + vfyNo);
+				
+				if (vfyNo == 0) {
 
-				if (hostVo != null) {
-
-					model.addAttribute("hostVo", hostVo);
 					return "store-detail/order-change-host";
 
 				} else {
 
-					return "store-detail/orderJoin";
+					return "store-detail/order-change-attendee";
+					
 
 				}
 			}

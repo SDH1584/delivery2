@@ -38,22 +38,15 @@ public class StoreDetailDao {
 
 	}
 
-	public OrderVo host(OrderVo orderVo) {
-
-		OrderVo hostVo = sqlSession.selectOne("storeDetail.host", orderVo);
-		System.out.println("Dao: " + orderVo);
+	public OrderVo attendVfy(OrderVo orderVo) {
+		System.out.println("Dao.attendVfy: " + orderVo);
+		
+		OrderVo hostVo = sqlSession.selectOne("storeDetail.attendVfy", orderVo);
+		System.out.println("Dao.attendVfy: " + orderVo);
 
 		return hostVo;
 
 	}
 
-	public OrderVo attendee(OrderVo orderVo) {
-
-		OrderVo attendeeVo = sqlSession.selectOne("storeDetail.attendee", orderVo);
-		System.out.println("Dao: " + attendeeVo);
-
-		return attendeeVo;
-
-	}
 
 }

@@ -13,7 +13,7 @@
 			       og.delivery_s_adr deliverySAdr,
 			       de.fee/og.people as pFee,
 			       biz.min_price minPrice,
-			       cp.countpeople+1 as countPeople
+			       cp.countpeople as countPeople
 			from order_group og, delivery de, business biz, (select order_no,
 			                                                        count(p_order_no) as countPeople
 			                                                 from personal_order
@@ -22,7 +22,7 @@
 			where biz.store_no = og.store_no
 			and biz.store_no = og.store_no
 			and cp.order_no = og.order_no
-			and cp.countpeople+1 <> og.people
+			and cp.countpeople <> og.people
 			and og.store_no = #{storeNo}
 			order by order_date desc	
 		]]>
@@ -38,27 +38,19 @@
 		]]>
 	</select>
 
-	<select id="host" parameterType="com.javaex.vo.OrderVo" resultType="com.javaex.vo.OrderVo">
-		<![CDATA[
-			select order_no orderNo,
-			       store_no storeNo,
-			       no
-			from order_group
-			where order_no = #{orderNo}
-			and no = #{no}
-		]]>
-	</select>
-
-	<select id="attendee" parameterType="com.javaex.vo.OrderVo" resultType="com.javaex.vo.OrderVo">
+	<select id="attendVfy" parameterType="com.javaex.vo.OrderVo" resultType="com.javaex.vo.OrderVo">
 		<![CDATA[
 			select po.p_order_no pOrderNo,
-			 	   og.store_no storeNo,
-			 	   po.no
+			       po.order_no,
+			       po.attendVfy attendVfy,
+			       po.no,
+			       og.store_no
 			from personal_order po, order_group og
 			where po.order_no = og.order_no
 			and po.order_no = #{orderNo}
 			and po.no = #{no}
 		]]>
 	</select>
+
 
 </mapper>
