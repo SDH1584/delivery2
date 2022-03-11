@@ -70,15 +70,14 @@
 		<!-- container -->
 
 		<div id="container" class="clearfix">
-<c:if test ="${ orderStatus == 0 and countPeople<people}" >  
-			<c:forEach items="${getStore}" var="getStore" varStatus="status">
-				<div id="storelist" class="clearfix">
-					<img id="storelistLogo" src="${pageContext.request.contextPath}/assets/images/${getStore.logoImg}" /> ${getStore.storeName} <br> 2/${getStore.people } 명<br>
-					<button type="button" class="click" data-storeno="${getStore.storeNo}" >
-					상세정보보기</button>
-				</div>
-			</c:forEach>
-</c:if>
+			<c:if test=${ orderStatus == 0 }>
+				<c:forEach items="${getStore}" var="getStore" varStatus="status">
+					<div id="storelist" class="clearfix">
+						<img id="storelistLogo" src="${pageContext.request.contextPath}/assets/images/${getStore.logoImg}" /> ${getStore.storeName} <br> 2/${getStore.people } 명<br>
+						<button type="button" class="click" data-storeno="${getStore.storeNo}">상세정보보기</button>
+					</div>
+				</c:forEach>
+			</c:if>
 		</div>
 	</div>
 	<br>
@@ -180,45 +179,7 @@
 	
 
 	
-	////////////////////////////////////////////////////////////////////////////////////////
-	//위경도 추출 영역
-	
-	$("#btnXY").on("click", function(){
-		console.log("위경도");
-		
-		////////////////////////////
-		//추출
-		var url = "https://maps.googleapis.com/maps/api/geocode/json?address= ${address} &key=AIzaSyDl9EqQnWPqoxn5ZOEOAde3auL9VBp4NYU"
-		
-	
-		//요청 파라미디터 방식
-		$.ajax({
-			
-			url : url,		
-			type : "post",
-			//contentType : "application/json",
-			//data : guestbookVo,   //{name: name, password: password, content: content}
-  
-			dataType : "json",
-			success : function(data){
-				/*성공시 처리해야될 코드 작성*/
-				console.log(data.results[0].geometry.location.lat);
-				console.log(data.results[0].geometry.location.lng);
-			},
-			error : function(XHR, status, error) {
-				console.error(status + " : " + error);
-			}
-		});
-		/////////////////////////////////////////////		
-
-		
-	});
-	
-	////////////////////////////////////////////////////////////////////////////////////////
-	
-	
-	
-	/////////////////////////////////////////////////////////////////////////////////////
+	<!--
 	//무한스크롤코드
 	var intersectionObserver = new IntersectionObserver(function(entries) {
 	  // If intersectionRatio is 0, the target is out of view
@@ -262,7 +223,7 @@
 			/* 부드럽게 위로 가기 */ 
 			function GoTop() { 
 				window.scrollTo({top:0, behavior:'smooth'}); }
-	
+	-->
 
 </script>
 
