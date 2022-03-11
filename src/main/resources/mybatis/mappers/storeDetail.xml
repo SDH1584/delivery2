@@ -15,13 +15,13 @@
 			       cp.countPeople,
 			       cp.finalPay,
 			       cp.pFee
-			from order_group og, delivery de, business biz, (select order_no,
-			                                                        p_fee as pFee,
-			                                                        count(p_order_no) as countPeople,
-			                                                        sum(final_pay) as finalPay
-			                                                 from personal_order
-			                                                 group by order_no, p_fee
-			                                                 ) cp
+			from order_group og, business biz, (select order_no,
+                                                       p_fee as pFee,
+                                                       count(p_order_no) as countPeople,
+                                                       sum(final_pay) as finalPay
+                                                 from personal_order
+                                                 group by order_no, p_fee
+                                                 ) cp
 			where biz.store_no = og.store_no
 			and cp.order_no = og.order_no
 			and cp.countpeople <> og.people
