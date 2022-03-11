@@ -37,9 +37,9 @@ public class StoreDetailService {
 
 	public OrderVo attendVfy(OrderVo orderVo) {
 
-		OrderVo hostVo = storeDetailDao.attendVfy(orderVo);
+		OrderVo varifyVo = storeDetailDao.attendVfy(orderVo);
 
-		return hostVo;
+		return varifyVo;
 	}
 
 

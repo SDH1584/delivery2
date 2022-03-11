@@ -19,25 +19,14 @@ public class StoreDetailController {
 	@Autowired
 	private StoreDetailService storeDetailService;
 
-	@RequestMapping("/{storeNo}/host")
-	public String host() {
-
-		return "store-detail/order-change-host";
-	}
-
-	@RequestMapping("/{storeNo}/attendee")
-	public String attendee() {
-
-		return "store-detail/order-change-attendee";
-	}
-
 	@RequestMapping("/{storeNo}/reserv")
-	public String reserv(@PathVariable("storeNo") int storeNo, Model model) {
-		System.out.println("reservation");
+	public String reserv(@PathVariable("storeNo") int storeNo, 
+						 Model model) {
+		// System.out.println("reservation");
 
 		List<OrderVo> rList = storeDetailService.reservList(storeNo);
 		model.addAttribute("rList", rList);
-		System.out.println("reservList: " + rList);
+		// System.out.println("reservList: " + rList);
 
 		return "store-detail/store-reserv";
 	}
@@ -56,11 +45,11 @@ public class StoreDetailController {
 			OrderVo orderVo = new OrderVo();
 			orderVo.setOrderNo(orderNo);
 			orderVo.setNo(no);
-			//System.out.println("orerNo: " + orderNo + ", no: " + no);
+			// System.out.println("orerNo: " + orderNo + ", no: " + no);
 
 			Integer resultNo = storeDetailService.attend(orderVo);
 
-			//System.out.println("Controller.resultNo: " + resultNo);
+			// System.out.println("Controller.resultNo: " + resultNo);
 
 			if (resultNo == 0) {
 
@@ -72,7 +61,7 @@ public class StoreDetailController {
 				model.addAttribute("varifyVo", varifyVo);
 
 				int vfyNo = varifyVo.getAttendVfy();
-				//System.out.println("vfyNo: " + vfyNo);
+				// System.out.println("vfyNo: " + vfyNo);
 
 				if (vfyNo == 0) {
 
@@ -87,6 +76,30 @@ public class StoreDetailController {
 		}
 	}
 
+	@RequestMapping("/{storeNo}/host")
+	public String host() {
+
+		return "store-detail/order-change-host";
+	}
+
+	@RequestMapping("/{storeNo}/attendee")
+	public String attendee() {
+
+		return "store-detail/order-change-attendee";
+	}
+
+	@RequestMapping("orderJoin")
+	public String orderJoin() {
+
+		return "store-detail/orderJoin";
+	}
+	
+	@RequestMapping("orderFirst")
+	public String firstOrder() {
+
+		return "store-detail/orderFirst";
+	}
+	
 	@RequestMapping("description")
 	public String description() {
 
@@ -99,16 +112,5 @@ public class StoreDetailController {
 		return "store-detail/store-review";
 	}
 
-	@RequestMapping("orderFirst")
-	public String firstOrder() {
-
-		return "store-detail/orderFirst";
-	}
-
-	@RequestMapping("orderJoin")
-	public String orderJoin() {
-
-		return "store-detail/orderJoin";
-	}
 
 }

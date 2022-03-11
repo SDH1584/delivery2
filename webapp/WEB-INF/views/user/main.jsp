@@ -70,7 +70,7 @@
 		<!-- container -->
 
 		<div id="container" class="clearfix">
-
+<c:if test ="${ orderStatus == 0 and countPeople<people}" >  
 			<c:forEach items="${getStore}" var="getStore" varStatus="status">
 				<div id="storelist" class="clearfix">
 					<img id="storelistLogo" src="${pageContext.request.contextPath}/assets/images/${getStore.logoImg}" /> ${getStore.storeName} <br> 2/${getStore.people } 명<br>
@@ -78,7 +78,7 @@
 					상세정보보기</button>
 				</div>
 			</c:forEach>
-
+</c:if>
 		</div>
 	</div>
 	<br>

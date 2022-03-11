@@ -28,12 +28,6 @@ public class BusinessDao {
 		return sqlSession.selectOne("Business.getuser", no);
 	}
 	
-	// 배달료 정보 가져오기
-	public DeliveryVo getdeli(int storeNo) {
-		System.out.println("[BusinessDao.getdeli]");
-		return sqlSession.selectOne("Business.getdeli", storeNo);
-	}
-	
 	// 유저 업데이트
 	public int UserUpdate(UserVo userVo) {
 		System.out.println("[BusinessDao.Userupdate()]");
@@ -51,4 +45,5 @@ public class BusinessDao {
 		System.out.println("["+count+"건이 수정되었습니다(BusinessDao)");
 		return count;
 }
+	
 }

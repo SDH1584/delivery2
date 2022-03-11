@@ -9,10 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.service.BusinessService;
+import com.javaex.service.JinFileService;
 import com.javaex.vo.BusinessVo;
-import com.javaex.vo.DeliveryVo;
 import com.javaex.vo.UserVo;
 
 
@@ -23,6 +25,9 @@ public class JinStoreController {
 	@Autowired
 	private BusinessService businessService;
 	
+	@Autowired
+	private JinFileService jinfileService;
+	
 	//가게정보수정
 	@RequestMapping("/storeEdiForm")
 	public String storeEdiForm(HttpSession session, Model model,Model usermodel,Model delimodel,Model optime) {
@@ -32,8 +37,6 @@ public class JinStoreController {
 		Map<String,Object> sessionMap =(Map<String,Object>)session.getAttribute("map");
 		
 	    int storeNo = Integer.parseInt(String.valueOf(sessionMap.get("STORE_NO")));
-	    
-	    System.out.println(storeNo);
 	    
 		BusinessVo businessVo = businessService.storeEdiForm(storeNo);
 		
@@ -47,13 +50,7 @@ public class JinStoreController {
 		UserVo uservo = businessService.getuser(userNo);
 		System.out.println(uservo);
 		usermodel.addAttribute("UserVo", uservo);
-		
-		//배달료
-		DeliveryVo deliveryVo = businessService.getdeli(storeNo);
-		System.out.println("deliveryVo = " + deliveryVo);
-		delimodel.addAttribute("DeliveryVo", deliveryVo);
-		
-		
+
 		return "store/storeEdiForm";
 		
 	}
@@ -73,7 +70,11 @@ public class JinStoreController {
 	}
 	
 	@RequestMapping("/modify")
-	public String modify(@ModelAttribute UserVo userVo,HttpSession session,@ModelAttribute BusinessVo businessVo) {
+	public String modify(
+			@ModelAttribute UserVo userVo,
+			HttpSession session,
+			@ModelAttribute BusinessVo businessVo,
+			@RequestParam("file") MultipartFile file) {
 		System.out.println("JinStoreController/modify");
 		
 		//유저 업데이트
@@ -85,9 +86,13 @@ public class JinStoreController {
 		//가게 storeNo 가져오기
 		businessVo.setStoreNo(storeNo);
 		System.out.println("BusinessController = " + businessVo);
+		
 		//유저정보 수정
 		businessService.modify(userVo);
+		
 		//가게정보수정
+		String saveName = jinfileService.restore(file);
+		businessVo.setLogoImg(saveName);
 		businessService.Businessmodify(businessVo);
 		
 		return "redirect:storeEdiForm";

@@ -8,25 +8,25 @@
 		<![CDATA[
 			select og.order_no orderNo,
 			       og.people people,
-			       og.order_date orderDate,
+			       to_char(og.order_date, 'mm/dd hh24:mi') orderDate,
 			       og.delivery_m_adr deliveryMAdr,
 			       og.delivery_s_adr deliverySAdr,
-			       de.fee/og.people as pFee,
 			       biz.min_price minPrice,
 			       cp.countPeople,
-			       cp.finalPay
-			from order_group og, delivery de, business biz, (select order_no,
-			                                                        count(p_order_no) as countPeople,
-			                                                        sum(final_pay) as finalPay
-			                                                 from personal_order
-			                                                 group by order_no
-			                                                 ) cp
+			       cp.finalPay,
+			       cp.pFee
+			from order_group og, business biz, (select order_no,
+                                                       p_fee as pFee,
+                                                       count(p_order_no) as countPeople,
+                                                       sum(final_pay) as finalPay
+                                                 from personal_order
+                                                 group by order_no, p_fee
+                                                 ) cp
 			where biz.store_no = og.store_no
-			and biz.store_no = og.store_no
 			and cp.order_no = og.order_no
 			and cp.countpeople <> og.people
 			and og.store_no = #{storeNo}
-			order by order_date desc	
+			order by order_date desc
 		]]>
 
 	</select>

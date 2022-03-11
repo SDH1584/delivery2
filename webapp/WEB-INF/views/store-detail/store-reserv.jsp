@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 
@@ -40,11 +41,11 @@
 			</div>
 			<table class="reserve-table">
 				<colgroup>
-					<col style="width:180px">
+					<col style="width:150px">
 					<col style="width:100px">
 					<col style="width:150px">
 					<col style="width:170px">
-					<col style="width:250px">
+					<col style="width:280px">
 					<col style="width:150px">
 				</colgroup>
 				
@@ -63,9 +64,9 @@
 				<tbody>
 					<tr>
 						<td>${rList.orderDate}</td>
-						<td>${rList.countPeople}명 / ${rList.people}명</td>
-						<td>${rList.pFee}원</td>
-						<td>${rList.finalPay}원 / ${rList.minPrice}원</td>
+						<td>${rList.countPeople}명 / <strong>${rList.people}</strong>명</td>
+						<td><fmt:formatNumber value="${rList.pFee}" pattern="#,###" />원</td>
+						<td><fmt:formatNumber value="${rList.finalPay}" pattern="#,###" />원 / <strong><fmt:formatNumber value="${rList.minPrice}" pattern="#,###" /></strong>원</td>
 						<td>${rList.deliveryMAdr} ${rList.deliverySAdr}</td>
 						<td id="status"><a id="statusLink" href="${pageContext.request.contextPath}/store/${storeNo}/attend?orderNo=${rList.orderNo}&no=${authUser.no}">대기중</a></td>
 					</tr>

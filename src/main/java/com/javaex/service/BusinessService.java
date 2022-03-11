@@ -27,13 +27,7 @@ public class BusinessService {
 		System.out.println(no);
 		return businessDao.getuser(no);
 	}
-	
-	public DeliveryVo getdeli(int storeNo){
-		
-		System.out.println("BusinessService/storeEdiForm/Userno");
-		System.out.println(storeNo);
-		return businessDao.getdeli(storeNo);
-	}
+
 	
 	//유저 정보수정
 	public void modify(UserVo userVo) {
