@@ -59,7 +59,7 @@
 	           rnt.storeMAdr,
 	           rnt.storeSAdr,
 	           rnt.logoImg,
-	           rnt.orderStatus
+	           rnt.orderStatus,
 	           rnt.storeLat,
 	           rnt.storeLng,
 	           rnt.people,
