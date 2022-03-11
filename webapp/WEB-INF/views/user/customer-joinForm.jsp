@@ -92,6 +92,7 @@
 								</tr>
 								<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 								<script>
+									// 카카오 API 사용하여 주소 받아오기
 									function findAddr() {
 										new daum.Postcode(
 												{
@@ -99,6 +100,47 @@
 														console.log(data);
 														document
 																.getElementById("c_main_address").value = data.address;
+														
+														
+														// 구글맵 API 사용하여 위경도 받아오기
+														var address = data.address;
+																
+														console.log(address);
+
+														//추출
+														var url = "https://maps.googleapis.com/maps/api/geocode/json?address="
+																+ address
+																+ "&key=AIzaSyDl9EqQnWPqoxn5ZOEOAde3auL9VBp4NYU"
+
+														//요청 파라미터 방식
+														$
+																.ajax({
+
+																	url : url,
+																	type : "post",
+																	dataType : "json",
+																	success : function(data) {
+																		//성공시 처리해야될 코드 작성
+																		console
+																				.log(data.results[0].geometry.location.lat);
+																		console
+																				.log(data.results[0].geometry.location.lng);
+
+																		$("#lat")
+																				.val(
+																						data.results[0].geometry.location.lat);
+																		$("#lng")
+																				.val(
+																						data.results[0].geometry.location.lng);
+																	},
+																	error : function(XHR,
+																			status, error) {
+																		console
+																				.error(status
+																						+ " : "
+																						+ error);
+																	}
+																});
 													}
 
 												}).open();
@@ -162,49 +204,5 @@
 		return true;
 	});
 
-	// 위경도 추출
-	/*
-	$("#addressSearch")
-			.on(
-					"click",
-					function() {
-						console.log("주소 검색 버튼 클릭");
-
-						var address = $("#c_main_address").val();
-						console.log(address);
-
-						//추출
-						var url = "https://maps.googleapis.com/maps/api/geocode/json?address="
-								+ address
-								+ "&key=AIzaSyDl9EqQnWPqoxn5ZOEOAde3auL9VBp4NYU"
-
-						//요청 파라미터 방식
-						$
-								.ajax({
-
-									url : url,
-									type : "post",
-									dataType : "json",
-									success : function(data) {
-										//성공시 처리해야될 코드 작성
-										console
-												.log(data.results[0].geometry.location.lat);
-										console
-												.log(data.results[0].geometry.location.lng);
-
-										$("#lat")
-												.val(
-														data.results[0].geometry.location.lat);
-										$("#lng")
-												.val(
-														data.results[0].geometry.location.lng);
-									},
-									error : function(XHR, status, error) {
-										console.error(status + " : " + error);
-									}
-								});
-
-					});
-	 */
 </script>
 </ html>
