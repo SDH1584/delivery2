@@ -58,10 +58,14 @@ h3 {
 	font-size:16px; font-weight:400;
 }
 
-#order-menu-table .order-menu {text-align: left; font-size:16px;}
-#order-menu-table .order-price {text-align: right; font-size:18px; font-weight:520;}
-#order-menu-table tfoot .order-menu{padding:10px 0px 0px 0px; border-top:1px solid #e2e2e2;}
-#order-menu-table tfoot .order-price{padding:10px 0px 0px 0px; font-size: 22px; border-top:1px solid #e2e2e2;}
+#order-menu-table th {text-align: left; font-size:16px; font-weight:400; padding-top:15px; width:70%;}
+#order-menu-table td {text-align: right; font-size:18px; font-weight:520;}
+.selMenu{text-align:left; font-size:16px;}
+.selOpt {font-size:14px; text-align:left; color:#888;}
+.selCnt{float:left; padding-left:20px;}
+
+#order-menu-table tfoot {border-top: 1px dashed #d2d2d2; }
+#fee, #total-price {padding-top: 15px; font-size:22px !important; font-weight:500 !important;}
 #order-delivery, #group-option{font-size:16px; font-weight:bold;margin:14px 23px 15px 19px; text-align:left;}
 
 .order-deli{padding:5px 0px 4px 0px;}

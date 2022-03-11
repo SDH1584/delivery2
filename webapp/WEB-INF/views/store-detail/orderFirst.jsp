@@ -80,80 +80,77 @@
 			<!-- menu -->
 
 			<div id="order">
-				<form action="">
-					<table id="order-detail">
-						<tr>
-							<th>참여인원</th>
-							<td colspan="3"><input type='button' onclick='count("minus")' value='-' class="btn-xs" /> <span id="result">1</span> <input type='button' onclick='count("plus")' value='+' class="btn-xs" /></td>
-						</tr>
-						<tr>
-							<th>주문 금액</th>
-							<td colspan="3">26,000 / 25,000</td>
-						</tr>
-						<tr>
-							<th>배달료</th>
-							<td colspan="3" id="deliveryFee">3000</td>
-						</tr>
-						<tr>
-							<td colspan="4">*최소 주문 금액을 채울 경우 혼자서도 주문 가능합니다</td>
-						</tr>
-					</table>
-					<div id="order-menu-box">
-						<table id="order-menu-table">
-							<tbody>
-								<tr>
-									<td class="order-menu">기네스 몬스터 와퍼 세트<br>(+사이다 + 치즈감자)
-									</td>
-									<td class="order-price">11,000원</td>
-								</tr>
-								<tr>
-									<td class="order-menu">기네스 몬스터 와퍼</td>
-									<td class="order-price">9,000원</td>
-								</tr>
-								<tr>
-									<td class="order-menu">개인 배달료</td>
-									<td class="order-price" id="fee">3000</td>
-							</tbody>
-							<tfoot>
-								<tr>
-									<td class="order-menu">결제예정금액</td>
-									<td class="order-price">20,600원</td>
-								</tr>
-							</tfoot>
-						</table>
-					</div>
+				<table id="order-detail">
+					<tr>
+						<th>참여인원</th>
+						<td colspan="3">
+							<input type='button' onclick='count("minus")' value='-' class="btn-xs" /> 
+							<span id="result">1</span> 
+							<input type='button' onclick='count("plus")' value='+' class="btn-xs" />
+						</td>
+					</tr>
+					<tr>
+						<th>주문 금액</th>
+						<td colspan="3">26,000 / 25,000</td>
+					</tr>
+					<tr>
+						<th>배달료</th>
+						<td colspan="3" id="deliveryFee">3000</td>
+					</tr>
+					<tr>
+						<td colspan="4">*최소 주문 금액을 채울 경우 혼자서도 주문 가능합니다</td>
+					</tr>
+				</table>
+				<div id="order-menu-box">
+					<table id="order-menu-table">
+						<tbody id="selMenuArea">
 
-					<div id="order-delivery">
-						<div class="order-deli">배달 주소</div>
-						<div class="order-deli">서울시 관악구 남부순환로 1820 302호</div>
-						<div class="order-deli">
-							<button type="button" id="adress-change">배달 주소 변경</button>
-						</div>
-						<div class="order-deli">가게 사장님께</div>
-						<div class="order-deli">
-							<input type="text" name="store-require" value="">
-						</div>
-						<div class="order-deli">라이더님께</div>
-						<div class="order-deli">
-							<input type="text" name="store-require" value="">
-						</div>
-						<div class="order-deli">
-							<input type="checkbox" id="group-order" name="group-order" value=""> <label for="group-order">단체 주문</label>
-						</div>
+						</tbody>
+						<tfoot>
+							<tr>
+								<th>개인 배달료</th>
+								<td id="fee">3000</td>
+							</tr>
+							<tr>
+								<th>결제예정금액</th>
+								<td id="total-price">0원</td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+
+				<div id="order-delivery">
+					<div class="order-deli">배달 주소</div>
+					<div class="order-deli" id="deliveryAdr">서울시 관악구 남부순환로 1820 302호</div>
+					<div class="order-deli">
+						<button type="button" id="adress-change">배달 주소 변경</button>
 					</div>
-					<c:choose>
-						<c:when test="${empty sessionScope.authUser}">
-							<div id="beforeLogin">
-								<p>주문 진행을 위해 로그인이 필요합니다.</p>
-								<a href="${pageContext.request.contextPath}/user/loginForm">로그인하기</a>
-							</div>
-						</c:when>
-						<c:otherwise>
-							<button type="button" class="btn-ordering">예약 만들기</button>
-							<button type="button" class="btn-ordering">바로 주문하기</button>
-						</c:otherwise>
-					</c:choose>
-				</form>
+					<div class="order-deli">가게 사장님께</div>
+					<div class="order-deli">
+						<input type="text" name="store-require" value="">
+					</div>
+					<div class="order-deli">라이더님께</div>
+					<div class="order-deli">
+						<input type="text" name="deliver-require" value="">
+					</div>
+					<div class="order-deli">
+						<input type="checkbox" id="group-order" name="group-order" value=""> <label for="group-order">단체 주문</label>
+					</div>
+				</div>
+				<c:choose>
+					<c:when test="${empty sessionScope.authUser}">
+						<div id="beforeLogin">
+							<p>주문 진행을 위해 로그인이 필요합니다.</p>
+							<a href="${pageContext.request.contextPath}/user/loginForm">로그인하기</a>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div id="order-btn">
+							<button type="button" class="btn-ordering">바로주문하기</button>
+						</div>
+					</c:otherwise>
+				</c:choose>
+
 
 			</div>
 		</div>
@@ -176,9 +173,7 @@
 					<h4 class="modal-title">메뉴 상세</h4>
 				</div>
 
-				<div class="modal-body" id="optionListArea">
-					
-				</div>
+				<div class="modal-body" id="optionListArea"></div>
 				<!-- modal-body -->
 
 				<div class="modal-footer"></div>
@@ -192,8 +187,10 @@
 
 <script type="text/javascript">
 var optionCateList ;
-
-
+var fee=parseInt(document.getElementById('deliveryFee').innerText);
+var totalPrice=0;
+var finalPrice=0;
+var menuInfoArr = [];
 
 /* 참여인원 증감 */
 	function count(type) {
@@ -202,10 +199,14 @@ var optionCateList ;
 
 		// 현재 화면에 표시된 값
 		let number = resultElement.innerText;
-
+		
 		// 더하기/빼기
 		if (type === 'plus') {
-			number = parseInt(number) + 1;
+			if(number==='6'){
+				number = parseInt(number);	
+			} else {
+				number = parseInt(number) + 1;	
+			}
 		} else if (type === 'minus') {
 			if (number === '1') {
 				number = parseInt(number);
@@ -213,14 +214,25 @@ var optionCateList ;
 				number = parseInt(number) - 1;
 			}
 		}
-
 		// 결과 출력
-		console.log(number);
+		//console.log(number);
 		resultElement.innerText = number;
+		
+		//주문 버튼 그리기 
+		if (number === 1){
+			$("#order-btn").html('<button type="button" class="btn-ordering">바로주문하기</button>');
+		} else {
+			$("#order-btn").html('<button type="button" class="btn-ordering">예약만들기</button>');
+		}
+		
+		
+		// 개인 배달료 계산
 		var feeElement = document.getElementById('deliveryFee');
 		var fee = parseInt(feeElement.innerText);
-		fee = fee / number
-		document.getElementById('fee').innerText = fee;
+		fee = Math.ceil((fee / number)/10)*10;
+		document.getElementById('fee').innerText = fee;//출력
+		finalPrice = totalPrice + fee;//변경된 배달료로 적용
+		document.getElementById('total-price').innerText = finalPrice;//결제예정금액 출력
 	}
 
 	/* 수량 증감 */
@@ -233,7 +245,11 @@ var optionCateList ;
 
 		// 더하기/빼기
 		if (type === 'plus') {
-			number = parseInt(number) + 1;
+			if(number==='6'){
+				number = parseInt(number);	
+			} else {
+				number = parseInt(number) + 1;	
+			}
 		} else if (type === 'minus') {
 			if (number === '1') {
 				number = parseInt(number);
@@ -247,7 +263,7 @@ var optionCateList ;
 		resultElement.innerText = number;
 	}
 
-	/* 메뉴 상세 */
+	/* 메뉴 상세 모달 ajax 데이터 받아오기*/
 	$(".menu-box").on("click", function() {
 		$("#optionListArea").empty()
 		console.log("메뉴 클릭")
@@ -269,10 +285,8 @@ var optionCateList ;
 				console.log(map);
 				menuInfo(map);
 				
-				////////////////////////////
 				optionCateList = map.optionCateList
-				
-				
+								
 			},
 			error : function(XHR, status, error) {
 				console.error(status + " : " + error);
@@ -283,12 +297,12 @@ var optionCateList ;
 		$("#menuModal").modal('show');
 	});
 	
+	/* 메뉴상세모달 그리기 */
 	function menuInfo(map){
 		var str= '';
 		str += ' <img src="'+map.menuVo.menuImg+'" width="100px" height="100px" onerror="this.style.display=\'none\'">';
 		str += ' <h5>'+map.menuVo.menuName+'</h5>';
 		str += ' <p>'+map.menuVo.menuDesc+'</p>';
-		//str += ' <form action="${pageContext.request.contextPath}/store/'+map.optionList[0].storeNo+'/orderFirst" method="get">'
 		str += ' <table>';
 		str += ' 	<thead>';
 		str += ' 		<tr>';
@@ -338,73 +352,105 @@ var optionCateList ;
 		str += ' 	</tfoot>';
 		str += ' </table>';
 		str += ' <button id="btnMenuAdd" type="submit" data-no="'+map.menuVo.menuNo+'" data-name="'+map.menuVo.menuName+'" data-price="'+map.menuVo.menuPrice+'" >주문표에 추가</button>';
-		//str += ' </form>'
 		
 		$("#optionListArea").append(str); 
 	}
 
 	
 		
-	////////////////////////////////////////////////////////////////////////
-	var menuInfoArr = [];
-	
+	/* 선택한 메뉴와 옵션 데이터 객체로 묶기 */
 	$(".modal-body").on("click", "#btnMenuAdd", function(){
+		finalPrice = 0;
 		console.log("btnMenuAdd");
 		
 		//console.log(optionCateList);
 		
+		//메뉴 정보 담기
 		var menuNo = $("#btnMenuAdd").data("no");
 		var menuName = $("#btnMenuAdd").data("name");
 		var menuPrice = $("#btnMenuAdd").data("price")
+		
+		var price = parseInt(menuPrice); // 메뉴+옵션 가격
+		var str = ''; // 선택한 메뉴 옵션 화면에 보이기
+		str += ' <tr>';
+		str += ' 	<td>';
+		str += ' 		<div class="selMenu">'+menuName+'</div>';
+		str += ' 		<div class="selOpt">'
+		//check된 옵션 정보 담기
 		var optInfoArr = [];
-		
 		for (var i = 0; i < optionCateList.length; i++){
-			var optionCateName =optionCateList[i].optionCateNo;
-			
-			var name = "[name='"+optionCateName+"']:checked"
-		
-			var optionNo =$(name).val();
-						
 			var selOptArr = [];
+			var optionCateNo =optionCateList[i].optionCateNo;
+			
+			var name = "[name='"+optionCateNo+"']:checked"
 			$(name).each(function(){
 				var no = $(this).val();
 				var name = $(this).data("name");
-				var price = $(this).data("price");
-				var selOpt = {optionNo:no, optionName:name, optionPrice:price};
+				var optPrice = $(this).data("price");
+				var selOpt = {optionNo:no, optionName:name, optionPrice:optPrice};
+				
 				selOptArr.push(selOpt);
+				
+				str += ' +'+name+'&nbsp';
+				price = price+ parseInt(optPrice);		
 			});
+			
 			//console.log(optionCateName);
 			//console.log("opt" + optionNo);
 			//console.log("arr" + selOptNoArr);
 			
+			
+			
 			var optInfo = {
-					optCateNo : optionCateName,
+					optCateNo : optionCateNo,
 					selOptArr : selOptArr
 			}
-			if(selOptArr.length > 0){optInfoArr.push(optInfo)};
+			
+			if(selOptArr.length > 0){optInfoArr.push(optInfo)}; //선택 옵션이 있을때만 옵션 arr에 담기
 			
 		}
 		//console.log(optInfoArr);
-		var count = document.getElementById('result2').innerText;
+		var count = document.getElementById('result2').innerText; //주문수량
 		var menuInfo = {menuNo : menuNo, menuName:menuName, menuPrice:menuPrice, optInfoArr:optInfoArr, orderCount:count };
 		//console.log(menuInfo);
 		menuInfoArr.push(menuInfo);
-		console.log("menuInfoArr");
-		console.log(menuInfoArr);
+		//console.log("menuInfoArr");
+		//console.log(menuInfoArr);
 		
-		$("#menuModal").modal('hide');
+		price = price*parseInt(count);
+		totalPrice = totalPrice +price
+		finalPrice = totalPrice+fee;
+		console.log(price);
+		console.log(totalPrice);
+		console.log(finalPrice);
+		console.log(fee);
+		str += ' 		</div>';
+		str += ' 	</td>';
+		str += ' 	<td>';
+		str += ' 		<div class="selCnt">x'+count+'</div>';
+		str += ' 		<div class="selPrice">'+String(price)+'</div>';
+		str += ' 	</td>';
+		str += ' </tr>';
+		
+		$("#selMenuArea").append(str);//메뉴 옵션 보이기
+		document.getElementById('total-price').innerText = finalPrice;//결제예정금액 출력
+		$("#menuModal").modal('hide');//모달 닫기
+	
 		
 	});
 	
+
 	
-	$(".btn-ordering").on("click", function(){
+	
+	/* 메뉴옵션 객체와 주문 기본정보 묶기 */
+	$("#order-btn").on("click", ".btn-ordering", function(){
 		console.log("btn-ordering");
-		var storeNo = 1;
-		var fee = 500;
-		var address = '서울시 관악구 남부순환로 1820 302호';
-		var storeReq = '반찬 빼주세요';
-		var deliveryReq = '1층에 두고 전화주세요';
-		var people = 3;
+		var storeNo = ${map.bizVo.storeNo};
+		var fee = document.getElementById('fee').innerText;
+		var address = document.getElementById('deliveryAdr').innerText;
+		var storeReq = $('[name="store-require"]').val();
+		var deliveryReq = $('[name="deliver-require"]').val();
+		var people = document.getElementById('result').innerText;
 		var orderDate = '2022/03/10 17:00'
 		var orderStatus = 0;
 		var orderInfo = {storeNo : storeNo,
