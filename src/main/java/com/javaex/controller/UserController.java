@@ -80,10 +80,18 @@ public class UserController {
 			@ModelAttribute BusinessVo businessVo, Model model) {
 		System.out.println("userController/s_join");
 
-		String saveName = fileService.restore(file);
-		model.addAttribute("saveName", saveName);
-		businessVo.setLogoImg(saveName);
-		userService.storeJoin(userVo, businessVo);
+		String orgName = file.getOriginalFilename();
+		if (orgName != "") {
+			// 파일 존재
+			String saveName = fileService.restore(file);
+			model.addAttribute("saveName", saveName);
+			businessVo.setLogoImg(saveName);
+			userService.storeJoin(userVo, businessVo);
+		} else {
+			// 파일 없음
+			userService.storeJoinDefault(userVo, businessVo);
+		}
+
 		return "redirect:/user/loginForm";
 	}
 

@@ -75,7 +75,8 @@
 									<td><input type="text" id="s_storeName" name="storeName" placeholder="상호명을 입력해주세요"></td>
 								</tr>
 								<tr>
-									<th>전화번호</th>
+									<th>전화번호 <span class="ico">*</span>
+ 									</th>
 									<td><input type="text" id="s_storePhone" name="storePhone" placeholder="숫자만 입력해주세요"></td>
 								</tr>
 								<tr>
@@ -92,14 +93,75 @@
 								<tr>
 									<th>주소 <span class="ico">*</span>
 									</th>
-									<td><input type="text" id="s_storeMAdr" name="storeMAdr" placeholder="가게 주소를 검색해주세요">
-										<button type="button" id="addressSearch" class="btn btn_default">주소 검색</button></td>
+									<td><input type="text" id="s_storeMAdr" name="storeMAdr" placeholder="가게 주소를 검색해주세요" readonly>
+										<button type="button" id="addressSearch" class="btn btn_default" onclick="findAddr()">주소 검색</button></td>
 								</tr>
 								<tr class="lst">
 									<th>상세 주소 <span class="ico">*</span>
 									</th>
 									<td><input type="text" id="s_storeSAdr" name="storeSAdr" placeholder="가게 상세 주소를 입력해주세요">
 								</tr>
+								<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+								<script>
+									// 카카오 API 사용하여 주소 받아오기
+									function findAddr() {
+										new daum.Postcode(
+												{
+													oncomplete : function(data) {
+														console.log(data);
+														document
+																.getElementById("s_storeMAdr").value = data.address;
+
+														// 구글맵 API 사용하여 위경도 받아오기
+														var address = data.address;
+
+														console.log(address);
+
+														//추출
+														var url = "https://maps.googleapis.com/maps/api/geocode/json?address="
+																+ address
+																+ "&key=AIzaSyDl9EqQnWPqoxn5ZOEOAde3auL9VBp4NYU"
+
+														//요청 파라미터 방식
+														$
+																.ajax({
+
+																	url : url,
+																	type : "post",
+																	dataType : "json",
+																	success : function(
+																			data) {
+																		//성공시 처리해야될 코드 작성
+																		console
+																				.log(data.results[0].geometry.location.lat);
+																		console
+																				.log(data.results[0].geometry.location.lng);
+
+																		$(
+																				"#lat")
+																				.val(
+																						data.results[0].geometry.location.lat);
+																		$(
+																				"#lng")
+																				.val(
+																						data.results[0].geometry.location.lng);
+																	},
+																	error : function(
+																			XHR,
+																			status,
+																			error) {
+																		console
+																				.error(status
+																						+ " : "
+																						+ error);
+																	}
+																});
+													}
+
+												}).open();
+
+									}
+								</script>
 							</tbody>
 						</table>
 						<input type="hidden" id="lat" name="storeLat" value=""> <input type="hidden" id="lng" name="sotreLng" value="">
@@ -124,10 +186,11 @@
 		var pw = $("#s_password").val();
 		var no = $("#s_bizNo").val();
 		var name = $("#s_storeName").val();
+		var phone = $("#s_storePhone").val();
 		var hp = $("#s_hp").val();
 		var main = $("#s_storeMAdr").val();
 		var sub = $("#s_storeSAdr").val();
-		
+
 		if (id == "") {
 			alert("아이디를 입력해 주세요.");
 			return false;
@@ -144,6 +207,10 @@
 			alert("상호명을 입력해 주세요.");
 			return false;
 		}
+		if (phone == "") {
+			alert("가게 전화 번호를 입력해 주세요.")
+			return false;
+		}
 		if (hp == "") {
 			alert("휴대전화 번호를 입력해 주세요.");
 			return false;
@@ -156,52 +223,9 @@
 			alert("상세 주소를 입력해 주세요.");
 			return false;
 		}
-		
 
 		return true;
 	});
-
-	// 위경도 추출
-	$("#addressSearch")
-			.on(
-					"click",
-					function() {
-						console.log("주소 검색 버튼 클릭");
-
-						var address = $("#s_storeMAdr").val();
-						console.log(address);
-
-						//추출
-						var url = "https://maps.googleapis.com/maps/api/geocode/json?address="
-								+ address
-								+ "&key=AIzaSyDl9EqQnWPqoxn5ZOEOAde3auL9VBp4NYU"
-
-						//요청 파라미터 방식
-						$
-								.ajax({
-
-									url : url,
-									type : "post",
-									dataType : "json",
-									success : function(data) {
-										/*성공시 처리해야될 코드 작성*/
-										console
-												.log(data.results[0].geometry.location.lat);
-										console
-												.log(data.results[0].geometry.location.lng);
-
-										$("#lat")
-												.val(
-														data.results[0].geometry.location.lat);
-										$("#lng")
-												.val(
-														data.results[0].geometry.location.lng);
-									},
-									error : function(XHR, status, error) {
-										console.error(status + " : " + error);
-									}
-								});
-
-					});
+	
 </script>
 </html>

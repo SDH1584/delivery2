@@ -34,7 +34,16 @@ public class UserService {
 		return userDao.insertAddress(addressVo);
 	}
 
-	// 가게 회원가입
+	// 가게 회원가입 (로고 이미지 없을 때)
+	public int storeJoinDefault(UserVo userVo, BusinessVo businessVo) {
+		System.out.println("userService/storeJoinDefault");
+		
+		userDao.insertStore(userVo);
+		businessVo.setNo(userVo.getNo());
+		return userDao.insertStoreInfoDefault(businessVo);
+	}
+	
+	// 가게 회원가입 (로고 이미지 있을 때)
 	public int storeJoin(UserVo userVo, BusinessVo businessVo) {
 		System.out.println("userService/storeJoin");
 

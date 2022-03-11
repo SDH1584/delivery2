@@ -44,7 +44,14 @@ public class UserDao {
 		return sqlSession.insert("user.insertStore", userVo);
 	}
 
-	// 가게 상세 정보 저장
+	// 가게 상세 정보 추가(로고 이미지 있을 때)
+	public int insertStoreInfoDefault(BusinessVo businessVo) {
+		System.out.println("userDao/insertStoreInfoDefault");
+
+		return sqlSession.insert("user.insertStoreInfoDefault", businessVo);
+	}
+
+	// 가게 상세 정보 추가(로고 이미지 있을 때)
 	public int insertStoreInfo(BusinessVo businessVo) {
 		System.out.println("userDao/insertStoreInfo");
 
