@@ -46,9 +46,11 @@
 										function setThumbnail(event) {
 											var reader = new FileReader();
 											reader.onload = function(event) {
-												document.getElementById("profile_photo").src = event.target.result;
+												document
+														.getElementById("profile_photo").src = event.target.result;
 											}
-											reader.readAsDataURL(event.target.files[0]);
+											reader
+													.readAsDataURL(event.target.files[0]);
 										}
 									</script>
 								</tr>
@@ -81,14 +83,28 @@
 								</tr>
 								<tr>
 									<th>주소 <span class="ico">*</span></th>
-									<td><input type="text" id="c_main_address" name="main_address" placeholder="배송받을 주소를 검색해주세요">
-										<button type="button" id="addressSearch" class="btn btn_default">주소 검색</button></td>
+									<td><input type="text" id="c_main_address" name="main_address" placeholder="배송받을 주소를 검색해주세요" readonly>
+										<button type="button" id="addressSearch" class="btn btn_default" onclick="findAddr()">주소 검색</button></td>
 								</tr>
 								<tr>
 									<th>상세 주소 <span class="ico">*</span></th>
 									<td><input type="text" id="c_sub_address" name="sub_address" placeholder="상세 주소를 입력해주세요"></td>
 								</tr>
+								<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+								<script>
+									function findAddr() {
+										new daum.Postcode(
+												{
+													oncomplete : function(data) {
+														console.log(data);
+														document
+																.getElementById("c_main_address").value = data.address;
+													}
 
+												}).open();
+
+									}
+								</script>
 							</tbody>
 						</table>
 						<input type="hidden" id="lat" name="lat" value=""> <input type="hidden" id="lng" name="lng" value="">
@@ -147,6 +163,7 @@
 	});
 
 	// 위경도 추출
+	/*
 	$("#addressSearch")
 			.on(
 					"click",
@@ -169,7 +186,7 @@
 									type : "post",
 									dataType : "json",
 									success : function(data) {
-										/*성공시 처리해야될 코드 작성*/
+										//성공시 처리해야될 코드 작성
 										console
 												.log(data.results[0].geometry.location.lat);
 										console
@@ -188,5 +205,6 @@
 								});
 
 					});
+	 */
 </script>
 </ html>
