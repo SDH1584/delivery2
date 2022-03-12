@@ -34,7 +34,6 @@
 					bs.store_lat storeLat,
 					bs.store_lng storeLng,
 					bs.logo_img logoImg,
-					og.order_status orderStatus,
 					og.people,
                     bs.notice,
                     og.order_status orderStatus,
@@ -44,7 +43,8 @@
 								                       group by order_no)po
 					where bs.store_no=og.no
 					and og.order_no=po.order_no	
-		]]>
+					and po.countpeople <> og.people
+				]]>
 	</select>
 	
 	
@@ -52,22 +52,20 @@
 	<!-- 가장 최근 가게정보가져오기 -->
 	<select id="getRecentStore" parameterType="com.javaex.vo.MainVo"  resultType="mainVo">
 			<![CDATA[
-	    select rnt.storeName ,
+	   select rnt.storeName ,
 	           rnt.storeNo ,
 	           rnt.no,
 	           rnt.storePhone,
 	           rnt.storeMAdr,
 	           rnt.storeSAdr,
 	           rnt.logoImg,
-	           rnt.orderStatus,
 	           rnt.storeLat,
 	           rnt.storeLng,
 	           rnt.people,
 	           rnt.notice,
-	           rnt.orderStatus,
-	           rnt.countPeople
-	          
-		from            
+	           rnt.countPeople,
+               orderStatus
+	          		from            
 				(select         rownum rn,
 			                    bs.store_no storeNo,
 			                    bs.no,
@@ -81,7 +79,6 @@
 								og.order_status orderStatus,
 								og.people,
 			                    bs.notice,
-			                    og.order_status orderStatus,
 			                    po.countPeople
 				from business bs, order_group og, (select order_no, count(*) countPeople 
 								                    from personal_order

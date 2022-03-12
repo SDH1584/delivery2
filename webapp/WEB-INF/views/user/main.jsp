@@ -40,13 +40,13 @@
 					</colgroup>
 
 					<tr>
-						<td rowspan="6"><img id="storeLogo" src="${pageContext.request.contextPath}/assets/images/1.png"></td>
+						<td rowspan="6"><img id="storeLogo" src="${pageContext.request.contextPath}/assets/images/${getRecentStore[0].logoImg }png"></td>
 					</tr>
 					<tr>
-						<th id="name">가게명:${getRecentStore[0].storeName }</th>
+						<th id="name">${getRecentStore[0].storeName }</th>
 					</tr>
 					<tr>
-						<td id="delivery-num">2 /${getRecentStore[0].people }</td>
+						<td id="delivery-num"> ${getRecentStore[0].countPeople } /${getRecentStore[0].people }</td>
 					</tr>
 					<tr>
 						<td id="delivery-address" colspan="2">주소: ${getRecentStore[0].storeMAdr } ${getRecentStore[0].storeSAdr}</td>
@@ -55,7 +55,7 @@
 						<td id="delivery-hp" colspan="2">전화번호:${getRecentStore[0].storePhone}</td>
 					</tr>
 					<tr>
-						<td id="recommend" colspan="2">추천수:</td>
+						<td id="recommend" colspan="2"></td>
 					</tr>
 					<tr>
 						<td colspan="3"><button id="reserve-btn" onclick="location.href='${pageContext.request.contextPath}/store/${getRecentStore[0].storeNo}/reserv'">예약하러 가기</button></td>
@@ -70,14 +70,18 @@
 		<!-- container -->
 
 		<div id="container" class="clearfix">
-			<c:if test=${ orderStatus == 0 }>
 				<c:forEach items="${getStore}" var="getStore" varStatus="status">
+			
 					<div id="storelist" class="clearfix">
-						<img id="storelistLogo" src="${pageContext.request.contextPath}/assets/images/${getStore.logoImg}" /> ${getStore.storeName} <br> 2/${getStore.people } 명<br>
-						<button type="button" class="click" data-storeno="${getStore.storeNo}">상세정보보기</button>
+						<img id="storelistLogo" src="${pageContext.request.contextPath}/assets/images/${getStore.logoImg}" /> ${getStore.storeName} <br> ${getStore.countPeople }/${getStore.people } 명<br>
+						<button type="button" class="click" data-storeno="${getStore.storeNo}" 
+															data-storeName="${getStore.storeName }"
+															data-storePhone="${getStore.storePhone }"
+															data-logoImg="${getStore.logoImg }"
+															data-storeMAdr="${getStore.storeMAdr }"
+															data-storeSAdr="${getStore.storeSAdr }">상세정보보기</button>
 					</div>
 				</c:forEach>
-			</c:if>
 		</div>
 	</div>
 	<br>
@@ -103,6 +107,7 @@
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDl9EqQnWPqoxn5ZOEOAde3auL9VBp4NYU&callback=initMap&region=kr"></script>
 <script>
+
 	function initMap() {
 
 		// 지도 스타일
@@ -173,11 +178,29 @@
 	$('.click').on("click", function() {
 		console.log("가게 상세정보 버튼 클릭");
 		var storeNo = $(this).data("storeno")
+		var storeName=$(this).data("storename")
+		var storePhone=$(this).data("storephone")
+		var logoImg=$(this).data("logoimg")
+		var storeMAdr=$(this).data("storemadr")
+		var storeSAdr=$(this).data("storesadr")
+		var getStore={
+			storeNo:storeNo,
+			storeName:storeName,
+			storePhone:storePhone,
+			storeMAdr:storeMAdr,
+			storeSAdr:storeSAdr
+		}
+		console.log(getStore)
 		
+		
+		$('#name').text(storeName)
+		$('#delivery-num').text(storeNo)
+		$("#delivery-address").text(storeMAdr +" "+ storeSAdr)
+		document.getElementById("storeLogo").src="${pageContext.request.contextPath}/assets/images/1.png" ;
+		$('#delivery-hp').text(storePhone)
+		$('#reserve-btn').attr("href", "${pageContext.request.contextPath}/store/reserv")
 		
 	});
-	
-
 	
 	<!--
 	//무한스크롤코드
