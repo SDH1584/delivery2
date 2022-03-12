@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.service.FileService;
@@ -38,7 +40,7 @@ public class UserController {
 	}
 
 	// 사용자 회원가입 폼
-	@RequestMapping(value = "/c_joinForm", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/c-joinForm", method = { RequestMethod.GET, RequestMethod.POST })
 	public String c_joinForm() {
 		System.out.println("userController/c_joinForm");
 
@@ -46,7 +48,7 @@ public class UserController {
 	}
 
 	// 가게 회원가입 폼
-	@RequestMapping(value = "/s_joinForm", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/s-joinForm", method = { RequestMethod.GET, RequestMethod.POST })
 	public String s_joinForm() {
 		System.out.println("userController/s_joinForm");
 
@@ -54,7 +56,7 @@ public class UserController {
 	}
 
 	// 사용자 회원가입
-	@RequestMapping(value = "/c_join", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/c-join", method = { RequestMethod.GET, RequestMethod.POST })
 	public String c_join(@RequestParam("file") MultipartFile file, @ModelAttribute UserVo userVo,
 			@ModelAttribute AddressVo addressVo, Model model) {
 		System.out.println("userController/c_join");
@@ -75,7 +77,7 @@ public class UserController {
 	}
 
 	// 가게 회원가입
-	@RequestMapping(value = "/s_join", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/s-join", method = { RequestMethod.GET, RequestMethod.POST })
 	public String s_join(@RequestParam("file") MultipartFile file, @ModelAttribute UserVo userVo,
 			@ModelAttribute BusinessVo businessVo, Model model) {
 		System.out.println("userController/s_join");
@@ -95,6 +97,31 @@ public class UserController {
 		return "redirect:/user/loginForm";
 	}
 
+	// 아이디 중복 확인 폼
+	@RequestMapping("/id-checkForm")
+	public String idCheckForm() {
+		System.out.println("userController/idCheckForm");
+		
+		return "user/idCheckForm";
+	}
+	
+	// 아이디 중복 확인
+	@ResponseBody
+	@RequestMapping("/id-check")
+	public int idCheck(@ModelAttribute UserVo userVo) {
+		System.out.println("userController/id-check");
+		System.out.println(userVo);
+		UserVo idVo = userService.idCheck(userVo);
+		System.out.println(idVo);
+		if(idVo != null) {
+			// 아이디 중복
+			return 0;
+		} else {
+			// 중복 아님
+			return 1;
+		}
+	}
+	
 	// 로그인 폼
 	@RequestMapping("/loginForm")
 	public String loginForm() {
@@ -138,7 +165,7 @@ public class UserController {
 	}
 
 	// 사용자 로그아웃
-	@RequestMapping("/c_logout")
+	@RequestMapping("/logout")
 	public String c_logout(HttpSession session) {
 		System.out.println("userController/c_logout");
 

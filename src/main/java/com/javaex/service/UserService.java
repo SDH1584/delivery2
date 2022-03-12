@@ -52,6 +52,13 @@ public class UserService {
 		return userDao.insertStoreInfo(businessVo);
 	}
 
+	// 아이디 중복 확인
+	public UserVo idCheck(UserVo userVo) {
+		System.out.println("userService/idCheck");
+		System.out.println(userVo);
+		return userDao.selectId(userVo);
+	}
+	
 	// 사용자 로그인
 	public UserVo customerLogin(UserVo userVo) {
 		System.out.println("userService/customerLogin");

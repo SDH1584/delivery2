@@ -58,6 +58,13 @@ public class UserDao {
 		return sqlSession.insert("user.insertStoreInfo", businessVo);
 	}
 
+	// 아이디 가져오기(중복 확인)
+	public UserVo selectId(UserVo userVo) {
+		System.out.println("userDao/selectId");
+		System.out.println(userVo);
+		return sqlSession.selectOne("user.selectId", userVo);
+	}
+	
 	// 사용자 정보 가져오기(로그인)
 	public UserVo selectCustomer(UserVo userVo) {
 		System.out.println("userDao/selectCustomer");

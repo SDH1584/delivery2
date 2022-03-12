@@ -188,8 +188,19 @@
 	margin-bottom: 5px;
 }
 
-#join_page #c_photo, #join_page #s_photo {
-	
+/* 아이디 중복확인 페이지 */
+#wrap {
+	width: 490px;
+	text-align: center;
+	margin: 0 auto;
+}
+
+#idChk_page #chk {
+	text-align: center;
+}
+
+#idChk_page #useBtn{
+	visibility: hidden;
 }
 
 /* 로그인 페이지 */
