@@ -31,7 +31,7 @@
 								<span class="join_guide_txt">나에게 딱 맞는 배달정보를 찾는 분</span>
 							</div>
 							<div class="btn_area">
-								<button type="button" class="btn_login" onclick="location.href='${pageContext.request.contextPath}/user/c_joinForm'">가입하기</button>
+								<button type="button" class="btn_login" onclick="location.href='${pageContext.request.contextPath}/user/c-joinForm'">가입하기</button>
 							</div>
 						</li>
 						<li class="c_join s_join">
@@ -41,7 +41,7 @@
 								<span class="join_guide_txt">가게를 등록해서 손님을 모으고 싶은 분</span>
 							</div>
 							<div class="btn_area">
-								<button type="button" class="btn_join" onclick="location.href='${pageContext.request.contextPath}/user/s_joinForm'">가입하기</button>
+								<button type="button" class="btn_join" onclick="location.href='${pageContext.request.contextPath}/user/s-joinForm'">가입하기</button>
 							</div>
 						</li>
 					</ul>
