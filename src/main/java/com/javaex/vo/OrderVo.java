@@ -23,6 +23,7 @@ public class OrderVo {
 	private int redText;
 	private int minPrice;
 	private int attendVfy;
+	private int finalPaySum;
 
 	public OrderVo() {
 		super();
@@ -31,7 +32,7 @@ public class OrderVo {
 	public OrderVo(int orderNo, int firstNo, int storeNo, int people, int countPeople, String orderDate,
 			int orderStatus, String deliveryMAdr, String deliverySAdr, double deliveryLat, double deliveryLng,
 			String deliveryReq, int pOrderNo, int no, int finalPay, int pFee, String storeReq, String method,
-			int redText, int minPrice, int attendVfy) {
+			int redText, int minPrice, int attendVfy, int finalPaySum) {
 		super();
 		this.orderNo = orderNo;
 		this.firstNo = firstNo;
@@ -54,6 +55,7 @@ public class OrderVo {
 		this.redText = redText;
 		this.minPrice = minPrice;
 		this.attendVfy = attendVfy;
+		this.finalPaySum = finalPaySum;
 	}
 
 	public int getOrderNo() {
@@ -224,6 +226,14 @@ public class OrderVo {
 		this.attendVfy = attendVfy;
 	}
 
+	public int getFinalPaySum() {
+		return finalPaySum;
+	}
+
+	public void setFinalPaySum(int finalPaySum) {
+		this.finalPaySum = finalPaySum;
+	}
+
 	@Override
 	public String toString() {
 		return "OrderVo [orderNo=" + orderNo + ", firstNo=" + firstNo + ", storeNo=" + storeNo + ", people=" + people
@@ -231,7 +241,8 @@ public class OrderVo {
 				+ ", deliveryMAdr=" + deliveryMAdr + ", deliverySAdr=" + deliverySAdr + ", deliveryLat=" + deliveryLat
 				+ ", deliveryLng=" + deliveryLng + ", deliveryReq=" + deliveryReq + ", pOrderNo=" + pOrderNo + ", no="
 				+ no + ", finalPay=" + finalPay + ", pFee=" + pFee + ", storeReq=" + storeReq + ", method=" + method
-				+ ", redText=" + redText + ", minPrice=" + minPrice + ", attendVfy=" + attendVfy + "]";
+				+ ", redText=" + redText + ", minPrice=" + minPrice + ", attendVfy=" + attendVfy + ", finalPaySum="
+				+ finalPaySum + "]";
 	}
 
 }
