@@ -19,9 +19,9 @@
 			<!-- aside-->
 			<div id="aside">
 				<ul>
-					<li><a href="https://www.naver.com/" class="link2">메뉴추가</a></li>
+					<li><a href="${pageContext.request.contextPath}/store/menuManage" class="link2">메뉴추가</a></li>
 					<li><a href="https://www.naver.com/" class="link2">댓글 게시판</a></li>
-					<li><a href="https://www.naver.com/" class="link2">첨부 게시판</a></li>
+					<li><a href="https://www.naver.com/" class="link2">리뷰 게시판</a></li>
 				</ul>
 			</div>
 			<!-- aside-->
@@ -85,50 +85,50 @@
 								</tr>
 								<tr>
 									<th>월<input type="hidden" name="day" value="월"></th>
-									<td><input type="text" name="" value=""></td>
-									<td><span><input type="text" name="" value=""></span></td>
+									<td><input type="text" name="store_no" value=""></td>
+									<td><span><input type="text" name="close_time" value=""></span></td>
 									<td><span><input type="checkbox" name="day_off" value="1" class="chbtn"></span></td>
 								</tr>
 
 								<tr>
 									<th>화<input type="hidden" name="day" value="화"></th>
-									<td><input type="text" name="" value="1"></td>
-									<td><span><input type="text" name="" value=""></span></td>
+									<td><input type="text" name="store_no" value="1"></td>
+									<td><span><input type="text" name="close_time" value=""></span></td>
 									<td><span><input type="checkbox" name="day_off" value="1" class="chbtn"></span></td>
 								</tr>
 
 								<tr>
 									<th>수<input type="hidden" name="day" value="수"></th>
-									<td><input type="text" name="" value=""></td>
-									<td><span><input type="text" name="" value=""></span></td>
+									<td><input type="text" name="store_no" value=""></td>
+									<td><span><input type="text" name="close_time" value=""></span></td>
 									<td><span><input type="checkbox" name="day_off" value="1" class="chbtn"></span></td>
 								</tr>
 
 								<tr>
 									<th>목<input type="hidden" name="day" value="목"></th>
-									<td><input type="text" name="" value=""></td>
-									<td><span><input type="text" name="" value=""></span></td>
+									<td><input type="text" name="store_no" value=""></td>
+									<td><span><input type="text" name="close_time" value=""></span></td>
 									<td><span><input type="checkbox" name="day_off" value="1" class="chbtn"></span></td>
 								</tr>
 
 								<tr>
 									<th>금<input type="hidden" name="day" value="금"></th>
-									<td><input type="text" name="" value=""></td>
-									<td><span><input type="text" name="" value=""></span></td>
+									<td><input type="text" name="store_no" value=""></td>
+									<td><span><input type="text" name="close_time" value=""></span></td>
 									<td><span><input type="checkbox" name="day_off" value="1" class="chbtn"></span></td>
 								</tr>
 
 								<tr>
 									<th>토<input type="hidden" name="day" value="토"></th>
-									<td><input type="text" name="" value=""></td>
-									<td><span><input type="text" name="" value=""></span></td>
+									<td><input type="text" name="store_no" value=""></td>
+									<td><span><input type="text" name="close_time" value=""></span></td>
 									<td><span><input type="checkbox" name="day_off" value="1" class="chbtn"></span></td>
 								</tr>
 
 								<tr>
 									<th>일<input type="hidden" name="day" value="일"></th>
-									<td><input type="text" name="" value=""></td>
-									<td><span><input type="text" name="" value=""></span></td>
+									<td><input type="text" name="store_no" value=""></td>
+									<td><span><input type="text" name="close_time" value=""></span></td>
 									<td><span><input type="checkbox" name="day_off" value="1" class="chbtn"></span></td>
 								</tr>
 
@@ -226,19 +226,16 @@ insertTr += '</tr>';
 
 $("#memDiv").append(insertTr);
 }
-
 </script>
 
 <script>
-		function setThumbnail(event) {
-			var reader = new FileReader();
-			reader.onload = function(event) {
-			document
-			.getElementById("logoImg").src = event.target.result;
-			}
-			reader
-			.readAsDataURL(event.target.files[0]);
-			}
+function setThumbnail(event) {
+	var reader = new FileReader();
+	reader.onload = function(event) {
+		document.getElementById("logoImg").src = event.target.result;
+	}
+	reader.readAsDataURL(event.target.files[0]);
+}
 </script>
 
 </html>
