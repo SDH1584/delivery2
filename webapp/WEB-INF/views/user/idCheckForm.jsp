@@ -13,7 +13,7 @@
 
 </head>
 <body onload="pValue()">
-	<div id="wrap">
+	<div id="idWrap">
 		<div id="idChk_page">
 		<h3>아이디 중복체크</h3>
 		<div id="chk">
