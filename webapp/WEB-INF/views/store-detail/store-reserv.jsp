@@ -25,9 +25,9 @@
 
 		<div class="store-menu">
 			<ul class="clearfix">
-				<li id="sel-menu"><a href="${pageContext.request.contextPath}/store/main">메뉴</a></li>
+				<li id="sel-menu"><a href="${pageContext.request.contextPath}/store/${storeNo}/main">메뉴</a></li>
 				<li id="resv-list"><a href="${pageContext.request.contextPath}/store/reserv">예약리스트</a></li>
-				<li id="description"><a href="${pageContext.request.contextPath}/store/description">가게상세정보</a></li>
+				<li id="description"><a href="${pageContext.request.contextPath}/store/${storeNo}/description">가게상세정보</a></li>
 				<li id="review"><a href="${pageContext.request.contextPath}/store/review">리뷰</a></li>
 			</ul>
 		</div>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -43,207 +44,64 @@
 			<div id="menu">
 
 				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-					<div class="panel panel-default">
-						<div class="panel-heading clearfix" role="tab" id="headingOne">
-							<h4 class="panel-title">
-								<span class="menu-group"> 세트 메뉴 </span> <a class="menu-collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> ∨ </a>
-							</h4>
+					<c:forEach items="${orderInfoMap.menuCateList}" var="menuCateVo">
+						<div class="panel panel-default">
+							<div class="panel-heading clearfix" role="tab" id="heading${menuCateVo.menuCateNo }">
+								<h4 class="panel-title">
+									<span class="menu-group"> ${menuCateVo.menuCateName} </span> <a class="menu-collapse" data-toggle="collapse" data-parent="#accordion" href="#collapse${menuCateVo.menuCateNo }" aria-expanded="true" aria-controls="collapse${menuCateVo.menuCateNo }"> ∨ </a>
+								</h4>
+							</div>
+							<div id="collapse${menuCateVo.menuCateNo }" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading${menuCateVo.menuCateNo }">
+								<c:forEach items="${orderInfoMap.menuList}" var="menuVo">
+									<c:if test="${menuCateVo.menuCateNo == menuVo.menuCateNo}">
+										<div class="menu-box clearfix" data-no="${menuVo.menuNo}">
+											<div class="menu-letter">
+												<div class="menu-name">${menuVo.menuName}</div>
+												<div class="menu-desc">${menuVo.menuDesc}</div>
+											</div>
+											<div class="menu-img">
+												<img src="${menuVo.menuImg }" width="70px" height="78px" onerror="this.style.display='none'">
+											</div>
+											<div class="menu-price">
+												<fmt:formatNumber value="${menuVo.menuPrice }" pattern="#,###" />
+											</div>
+										</div>
+										<!-- menu-box -->
+									</c:if>
+								</c:forEach>
+
+							</div>
+							<!-- collapse -->
 						</div>
-						<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-							<div class="menu-box clearfix">
-								<div class="menu-letter">
-									<div class="menu-name">앵그리트러플와퍼 세트</div>
-									<div class="menu-desc">황홀한 풍미 속 강렬한 매콤함 앵그리 트러플 와퍼...</div>
-								</div>
-								<div class="menu-img">
-									<img src="./menu.jpg" width="70px" height="78px">
-								</div>
-								<div class="menu-price">10,500원</div>
-							</div>
-							<!-- menu-box -->
-
-							<div class="menu-box clearfix">
-								<div class="menu-letter">
-									<div class="menu-name">앵그리트러플와퍼 세트</div>
-									<div class="menu-desc">황홀한 풍미 속 강렬한 매콤함 앵그리 트러플 와퍼 ...</div>
-								</div>
-								<div class="menu-img">
-									<img src="./menu.jpg" width="70px" height="70px">
-								</div>
-								<div class="menu-price">10,500원</div>
-							</div>
-							<!-- menu-box -->
-
-							<div class="menu-box clearfix">
-								<div class="menu-letter">
-									<div class="menu-name">앵그리트러플와퍼 세트</div>
-									<div class="menu-desc">황홀한 풍미 속 강렬한 매콤함 앵그리 트러플 와퍼 ...</div>
-								</div>
-								<div class="menu-img">
-									<img src="./menu.jpg" width="70px" height="70px">
-								</div>
-								<div class="menu-price">10,500원</div>
-							</div>
-							<!-- menu-box -->
-
-							<div class="menu-box clearfix  last">
-								<div class="menu-letter">
-									<div class="menu-name">앵그리트러플와퍼 세트</div>
-									<div class="menu-desc">황홀한 풍미 속 강렬한 매콤함 앵그리 트러플 와퍼 ...</div>
-								</div>
-								<div class="menu-img">
-									<img src="./menu.jpg" width="70px" height="70px">
-								</div>
-								<div class="menu-price">10,500원</div>
-							</div>
-							<!-- menu-box -->
-						</div>
-
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading" role="tab" id="headingTwo">
-							<h4 class="panel-title clearfix">
-								<span class="menu-group"> 단품 메뉴 </span> <a class="menu-collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo"> ∨ </a>
-							</h4>
-						</div>
-						<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-							<div class="menu-box clearfix">
-								<div class="menu-letter">
-									<div class="menu-name">앵그리트러플와퍼 세트</div>
-									<div class="menu-desc">황홀한 풍미 속 강렬한 매콤함 앵그리 트러플 와퍼...</div>
-								</div>
-								<div class="menu-img">
-									<img src="./menu.jpg" width="70px" height="78px">
-								</div>
-								<div class="menu-price">10,500원</div>
-							</div>
-							<!-- menu-box -->
-
-							<div class="menu-box clearfix">
-								<div class="menu-letter">
-									<div class="menu-name">앵그리트러플와퍼 세트</div>
-									<div class="menu-desc">황홀한 풍미 속 강렬한 매콤함 앵그리 트러플 와퍼 ...</div>
-								</div>
-								<div class="menu-img">
-									<img src="./menu.jpg" width="70px" height="70px">
-								</div>
-								<div class="menu-price">10,500원</div>
-							</div>
-							<!-- menu-box -->
-
-							<div class="menu-box clearfix">
-								<div class="menu-letter">
-									<div class="menu-name">앵그리트러플와퍼 세트</div>
-									<div class="menu-desc">황홀한 풍미 속 강렬한 매콤함 앵그리 트러플 와퍼 ...</div>
-								</div>
-								<div class="menu-img">
-									<img src="./menu.jpg" width="70px" height="70px">
-								</div>
-								<div class="menu-price">10,500원</div>
-							</div>
-							<!-- menu-box -->
-
-							<div class="menu-box clearfix last">
-								<div class="menu-letter">
-									<div class="menu-name">앵그리트러플와퍼 세트</div>
-									<div class="menu-desc">황홀한 풍미 속 강렬한 매콤함 앵그리 트러플 와퍼 ...</div>
-								</div>
-								<div class="menu-img">
-									<img src="./menu.jpg" width="70px" height="70px">
-								</div>
-								<div class="menu-price">10,500원</div>
-							</div>
-							<!-- menu-box -->
-						</div>
-					</div>
-
-					<div class="panel panel-default">
-						<div class="panel-heading" role="tab" id="headingThree">
-							<h4 class="panel-title clearfix">
-								<span class="menu-group"> 스페셜 메뉴 </span> <a class="menu-collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree"> ∨ </a>
-							</h4>
-						</div>
-						<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-							<div class="menu-box clearfix">
-								<div class="menu-letter">
-									<div class="menu-name">앵그리트러플와퍼 세트</div>
-									<div class="menu-desc">황홀한 풍미 속 강렬한 매콤함 앵그리 트러플 와퍼...</div>
-								</div>
-								<div class="menu-img">
-									<img src="./menu.jpg" width="70px" height="78px">
-								</div>
-								<div class="menu-price">10,500원</div>
-							</div>
-							<!-- menu-box -->
-
-							<div class="menu-box clearfix">
-								<div class="menu-letter">
-									<div class="menu-name">앵그리트러플와퍼 세트</div>
-									<div class="menu-desc">황홀한 풍미 속 강렬한 매콤함 앵그리 트러플 와퍼 ...</div>
-								</div>
-								<div class="menu-img">
-									<img src="./menu.jpg" width="70px" height="70px">
-								</div>
-								<div class="menu-price">10,500원</div>
-							</div>
-							<!-- menu-box -->
-
-							<div class="menu-box clearfix">
-								<div class="menu-letter">
-									<div class="menu-name">앵그리트러플와퍼 세트</div>
-									<div class="menu-desc">황홀한 풍미 속 강렬한 매콤함 앵그리 트러플 와퍼 ...</div>
-								</div>
-								<div class="menu-img">
-									<img src="./menu.jpg" width="70px" height="70px">
-								</div>
-								<div class="menu-price">10,500원</div>
-							</div>
-							<!-- menu-box -->
-
-							<div class="menu-box clearfix last">
-								<div class="menu-letter">
-									<div class="menu-name">앵그리트러플와퍼 세트</div>
-									<div class="menu-desc">황홀한 풍미 속 강렬한 매콤함 앵그리 트러플 와퍼 ...</div>
-								</div>
-								<div class="menu-img">
-									<img src="./menu.jpg" width="70px" height="70px">
-								</div>
-								<div class="menu-price">10,500원</div>
-							</div>
-							<!-- menu-box -->
-						</div>
-					</div>
+						<!-- panel -->
+					</c:forEach>
 				</div>
-
-
+				<!-- panel group -->
 			</div>
 
 
 
 			<div id="order">
-				<form action="">
+				<form action="">				
 					<table id="order-detail">
 						<tr>
 							<th>예약 마감(주문 시간)</th>
-							<td colspan="3">2월 19일 19:30</td>
-						</tr>
-						<tr>
-							<th>최대 주문가능 수량</th>
-							<td colspan="3">2/10인분</td>
+							<td colspan="3">${orderInfoMap.pOrderVo.orderDate}</td>
 						</tr>
 						<tr>
 							<th>현재 참여 인원</th>
-							<td colspan="3">2/5</td>
+							<td colspan="3">${orderInfoMap.pOrderVo.countPeople}/${orderInfoMap.pOrderVo.people}</td>
 						</tr>
 						<tr>
 							<th>주문 금액</th>
-							<td colspan="3">23,000 / 25,000</td>
+							<td colspan="3"><fmt:formatNumber value="${orderInfoMap.pOrderVo.finalPaySum}" pattern="#,###" />원 / <fmt:formatNumber value="${orderInfoMap.bizInfoVo.minPrice}" pattern="#,###" />원</td>
 						</tr>
 						<tr>
 							<th>배달료</th>
-							<td colspan="3">3,000</td>
+							<td colspan="3"><fmt:formatNumber value="${orderInfoMap.pOrderVo.pFee}" pattern="#,###" />원</td>
 						</tr>
 					</table>
+					
 					<div id="order-menu-box">
 						<table id="order-menu-table">
 							<tbody>
@@ -251,28 +109,26 @@
 									<td class="delete">
 										<button class="del-btn">x</button>
 									</td>
-									<td class="order-menu">기네스 몬스터 와퍼 세트<br>(+사이다 + 치즈감자)
+									<td class="order-menu">${orderInfoMap.pMenuVo.menuName}<br>						
+										(
+										<c:forEach items="${orderInfoMap.pOptionList}" var="pOptionList">
+											+${pOptionList.optionName}
+										</c:forEach>
+										)
 									</td>
-									<td class="order-price">11,000원</td>
-								</tr>
-								<tr>
-									<td class="delete">
-										<button class="del-btn">x</button>
-									</td>
-									<td class="order-menu">기네스 몬스터 와퍼</td>
-									<td class="order-price">9,000원</td>
+									<td class="order-price"><fmt:formatNumber value="${orderInfoMap.pOrderVo.finalPay}" pattern="#,###" />원</td>
 								</tr>
 								<tr>
 									<td></td>
 									<td class="order-menu">개인 배달료</td>
-									<td class="order-price">+600원</td>
+									<td class="order-price">+<fmt:formatNumber value="${orderInfoMap.pOrderVo.pFee}" pattern="#,###" />원</td>
 								</tr>
 							</tbody>
 							<tfoot>
 								<tr>
 									<td></td>
 									<td class="order-menu">결제예정금액</td>
-									<td class="order-price">20,600원</td>
+									<td class="order-price"><fmt:formatNumber value="${orderInfoMap.pOrderVo.finalPay + orderInfoMap.pOrderVo.pFee}" pattern="#,###" />원</td>
 								</tr>
 							</tfoot>
 						</table>
@@ -280,25 +136,24 @@
 
 					<div id="order-delivery">
 						<div class="order-deli">배달 주소</div>
-						<div class="order-deli">서울시 관악구 남부순환로 1820 302호</div>
+						<div class="order-deli">${orderInfoMap.pOrderVo.deliveryMAdr} ${orderInfoMap.pOrderVo.deliverySAdr}</div>
 						<div class="order-deli">
 							<button type="button" id="adress-change">배달 주소 변경</button>
 						</div>
 						<div class="order-deli">가게 사장님께</div>
 						<div class="order-deli">
-							<input type="text" name="store-require" value="">
+							<input type="text" name="store-require" value="${orderInfoMap.pOrderVo.storeReq}">
 						</div>
 						<div class="order-deli">라이더님께</div>
 						<div class="order-deli">
-							<input type="text" name="store-require" value="">
+							<input type="text" name="store-require" value="${orderInfoMap.pOrderVo.deliveryReq}">
 						</div>
 					</div>
 
 					<button type="submit">예약 수정</button>
 				</form>
-
 			</div>
-
+			
 		</div>
 		<!-- //container -->
 
@@ -320,84 +175,7 @@
 					<h4 class="modal-title">메뉴 상세</h4>
 				</div>
 
-				<div class="modal-body">
-					<img src="./menu.jpg" width="100px" height="100px">
-					<h5>와퍼 세트</h5>
-					<p>
-						리얼 와퍼 ＋ 프렌치프라이R ＋ 콜라R <br> 버거킹 대표 메뉴
-					</p>
-					<table>
-						<thead>
-							<tr>
-								<th>가격</th>
-								<td>9,600원</td>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th colspan="2">음료 변경</th>
-							</tr>
-							<tr>
-								<td><input type="radio" name="r-option1" value="콜라" checked="checked"><label>콜라</label></td>
-								<td>+0</td>
-							</tr>
-							<tr>
-								<td><input type="radio" name="r-option1" value="사이다"><label>사이다</label></td>
-								<td>+0</td>
-							</tr>
-							<tr>
-								<td><input type="radio" name="r-option1" value="콜라l"><label>콜라 사이즈업</label></td>
-								<td>+500</td>
-							</tr>
-							<tr>
-								<td><input type="radio" name="r-option1" value="사이다l"><label>사이다 사이즈업</label></td>
-								<td>+500</td>
-							</tr>
-							<tr>
-								<th colspan="2">사이드 변경</th>
-							</tr>
-							<tr>
-								<td><input type="radio" name="r-option2" value="감자튀김" checked="checked"><label>감자튀김</label></td>
-								<td>+0</td>
-							</tr>
-							<tr>
-								<td><input type="radio" name="r-option2" value="감자튀김l"><label>감자튀김 사이즈업</label></td>
-								<td>+500</td>
-							</tr>
-							<tr>
-								<td><input type="radio" name="r-option1" value="치즈감자"><label>치즈감자</label></td>
-								<td>+2000</td>
-							</tr>
-							<tr>
-								<th colspan="2">사이드 추가</th>
-							</tr>
-							<tr>
-								<td><input type="checkbox" name="c-option1" value="치즈스틱"><label>치즈스틱</label></td>
-								<td>+2000</td>
-							</tr>
-							<tr>
-								<td><input type="checkbox" name="c-option1" value="치킨너겟"><label>치킨너겟</label></td>
-								<td>+4000</td>
-							</tr>
-							<tr>
-								<td><input type="checkbox" name="c-option1" value="어니언링"><label>어니언링</label></td>
-								<td>+3500</td>
-							</tr>
-						</tbody>
-						<tfoot>
-							<tr>
-								<th>수량</th>
-								<td><input type='button' onclick='count2("minus")' value='-' class="btn-xs" /> <span id="result2">1</span> <input type='button' onclick='count2("plus")' value='+' class="btn-xs" /></td>
-							</tr>
-							<tr>
-								<th>주문금액</th>
-								<td>12000원</td>
-							</tr>
-						</tfoot>
-					</table>
-					<button type="button" class="btn-default btn-lg">주문표에 추가</button>
-
-				</div>
+				<div class="modal-body" id="optionListArea"></div>
 				<!-- modal-body -->
 
 				<div class="modal-footer"></div>
@@ -411,59 +189,238 @@
 </body>
 
 <script type="text/javascript">
-	/* 참여인원 증감 */
-	function count(type) {
-		// 결과를 표시할 element
-		const resultElement = document.getElementById('result');
+	
+/* 메뉴 상세 모달 ajax 데이터 받아오기*/
+$(".menu-box").on("click", function() {
+	$("#optionListArea").empty()
+	console.log("메뉴 클릭")
+	var no = $(this).data("no");
+	console.log(no);
+	var menuOptionVo = {storeNo : ${map.bizVo.storeNo}, menuNo:no};
+	$.ajax({
 
-		// 현재 화면에 표시된 값
-		let number = resultElement.innerText;
+		/* 요청 */
+		url : "${pageContext.request.contextPath }/store/${map.bizVo.storeNo}/optionList", //요청 보낼 주소		
+		type : "post",
+		contentType : "application/json",
+		data : JSON.stringify(menuOptionVo), //자바스크립트 객체를 json 형식으로 변경
 
-		// 더하기/빼기
-		if (type === 'plus') {
-			number = parseInt(number) + 1;
-		} else if (type === 'minus') {
-			if (number === '1') {
-				number = parseInt(number);
-			} else {
-				number = parseInt(number) - 1;
-			}
+		/* 응답 */
+		dataType : "json",
+		success : function(map) {
+			/*성공시 처리해야될 코드 작성*/
+			console.log(map);
+			menuInfo(map);
+			
+			optionCateList = map.optionCateList
+							
+		},
+		error : function(XHR, status, error) {
+			console.error(status + " : " + error);
 		}
-
-		// 결과 출력
-		console.log(number);
-		resultElement.innerText = number;
-	}
-
-	/* 수량 증감 */
-	function count2(type) {
-		// 결과를 표시할 element
-		const resultElement = document.getElementById('result2');
-
-		// 현재 화면에 표시된 값
-		let number = resultElement.innerText;
-
-		// 더하기/빼기
-		if (type === 'plus') {
-			number = parseInt(number) + 1;
-		} else if (type === 'minus') {
-			if (number === '1') {
-				number = parseInt(number);
-			} else {
-				number = parseInt(number) - 1;
-			}
-		}
-
-		// 결과 출력
-		console.log(number);
-		resultElement.innerText = number;
-	}
-
-	/* 메뉴 상세 */
-	$(".menu-box").on("click", function() {
-		console.log("메뉴 클릭")
-		$("#menuModal").modal('show');
+		
 	});
+
+	$("#menuModal").modal('show');
+});
+
+
+
+/* 메뉴상세모달 그리기 */
+function menuInfo(map){
+	var str= '';
+	str += ' <img src="'+map.menuVo.menuImg+'" width="100px" height="100px" onerror="this.style.display=\'none\'">';
+	str += ' <h5>'+map.menuVo.menuName+'</h5>';
+	str += ' <p>'+map.menuVo.menuDesc+'</p>';
+	str += ' <table>';
+	str += ' 	<thead>';
+	str += ' 		<tr>';
+	str += ' 			<th>가격</th>';
+	str += ' 			<td class="price">'+map.menuVo.menuPrice+'</td>';
+	str += ' 		</tr>';
+	str += ' 	</thead>';
+	str += ' 	<tbody>';
+	for (var i = 0; i < map.optionCateList.length; i++){
+
+		str += ' 		<tr>';
+		str += ' 			<th colspan="2">'+map.optionCateList[i].optionCateName+'</th>';
+		str += '		</tr> ';
+		var num = map.optionList.length + 1;
+		
+		for(var j=0; j<map.optionList.length; j++){
+			if(map.optionList[j].optionCateNo == map.optionCateList[i].optionCateNo){
+				if(map.optionCateList[i].chkRdo == 1){
+					str += ' <tr> ';
+					str += ' 	<td><input type="radio" name="'+map.optionCateList[i].optionCateNo+'" value="'+map.optionList[j].optionNo+'" data-name="'+map.optionList[j].optionName+'" data-price="'+map.optionList[j].optionPrice+'"';
+					if(j<=num){
+						num=j;
+						str += ' checked="checked"';
+					}
+					str += '     ><label>'+map.optionList[j].optionName+'</label></td>'
+					str += ' 	<td class="opPrice">'+map.optionList[j].optionPrice+'</td>'
+					str += ' </tr>';
+				} else {
+					str += ' <tr> ';
+					str += ' 	<td><input type="checkbox" name="'+map.optionCateList[i].optionCateNo+'" value="'+map.optionList[j].optionNo+'" data-name="'+map.optionList[j].optionName+'" data-price="'+map.optionList[j].optionPrice+'"><label>'+map.optionList[j].optionName+'</label></td> ';
+					str += ' 	<td class="opPrice">'+map.optionList[j].optionPrice+'</td>'
+					str += ' </tr>';
+				}					
+			}		
+		}
+		
+	}
+	str += ' 	</tbody>';
+	str += ' 	<tfoot>';
+	str += ' 		<tr>';
+	str += ' 			<th>수량</th>';
+	str += ' 			<td class="count">';
+	str += ' 				<input type=\'button\' onclick=\'count2("minus")\' value=\'-\' class="btn-xs" />';
+	str += ' 				<span id="result2">1</span>';
+	str += ' 				<input type=\'button\' onclick=\'count2("plus")\' value=\'-\' class="btn-xs" />';
+	str += ' 		</tr>';
+	str += ' 	</tfoot>';
+	str += ' </table>';
+	str += ' <button id="btnMenuAdd" type="submit" data-no="'+map.menuVo.menuNo+'" data-name="'+map.menuVo.menuName+'" data-price="'+map.menuVo.menuPrice+'" >주문표에 추가</button>';
+	
+	$("#optionListArea").append(str); 
+}
+
+
+
+/* 선택한 메뉴와 옵션 데이터 객체로 묶기 */
+$(".modal-body").on("click", "#btnMenuAdd", function(){
+	finalPrice = 0;
+	console.log("btnMenuAdd");
+	
+	//console.log(optionCateList);
+	
+	//메뉴 정보 담기
+	var menuNo = $("#btnMenuAdd").data("no");
+	var menuName = $("#btnMenuAdd").data("name");
+	var menuPrice = $("#btnMenuAdd").data("price")
+	
+	var price = parseInt(menuPrice); // 메뉴+옵션 가격
+	var str = ''; // 선택한 메뉴 옵션 화면에 보이기
+	str += ' <tr>';
+	str += ' 	<td>';
+	str += ' 		<div class="selMenu">'+menuName+'</div>';
+	str += ' 		<div class="selOpt">'
+	//check된 옵션 정보 담기
+	var optInfoArr = [];
+	for (var i = 0; i < optionCateList.length; i++){
+		var selOptArr = [];
+		var optionCateNo =optionCateList[i].optionCateNo;
+		
+		var name = "[name='"+optionCateNo+"']:checked"
+		$(name).each(function(){
+			var no = $(this).val();
+			var name = $(this).data("name");
+			var optPrice = $(this).data("price");
+			var selOpt = {optionNo:no, optionName:name, optionPrice:optPrice};
+			
+			selOptArr.push(selOpt);
+			
+			str += ' +'+name+'&nbsp';
+			price = price+ parseInt(optPrice);		
+		});
+		
+		//console.log(optionCateName);
+		//console.log("opt" + optionNo);
+		//console.log("arr" + selOptNoArr);
+		
+		
+		
+		var optInfo = {
+				optCateNo : optionCateNo,
+				selOptArr : selOptArr
+		}
+		
+		if(selOptArr.length > 0){optInfoArr.push(optInfo)}; //선택 옵션이 있을때만 옵션 arr에 담기
+		
+	}
+	//console.log(optInfoArr);
+	var count = document.getElementById('result2').innerText; //주문수량
+	var menuInfo = {menuNo : menuNo, menuName:menuName, menuPrice:menuPrice, optInfoArr:optInfoArr, orderCount:count };
+	//console.log(menuInfo);
+	menuInfoArr.push(menuInfo);
+	//console.log("menuInfoArr");
+	//console.log(menuInfoArr);
+	
+	price = price*parseInt(count);
+	totalPrice = totalPrice +price
+	finalPrice = totalPrice+fee;
+	console.log(price);
+	console.log(totalPrice);
+	console.log(finalPrice);
+	console.log(fee);
+	str += ' 		</div>';
+	str += ' 	</td>';
+	str += ' 	<td>';
+	str += ' 		<div class="selCnt">x'+count+'</div>';
+	str += ' 		<div class="selPrice">'+String(price)+'</div>';
+	str += ' 	</td>';
+	str += ' </tr>';
+	
+	$("#selMenuArea").append(str);//메뉴 옵션 보이기
+	document.getElementById('total-price').innerText = finalPrice;//결제예정금액 출력
+	$("#menuModal").modal('hide');//모달 닫기
+
+	
+});
+
+
+
+
+/* 메뉴옵션 객체와 주문 기본정보 묶기 */
+$("#order-btn").on("click", ".btn-ordering", function(){
+	console.log("btn-ordering");
+	var storeNo = ${map.bizVo.storeNo};
+	var fee = document.getElementById('fee').innerText;
+	var address = document.getElementById('deliveryAdr').innerText;
+	var storeReq = $('[name="store-require"]').val();
+	var deliveryReq = $('[name="deliver-require"]').val();
+	var people = document.getElementById('result').innerText;
+	var orderDate = '2022/03/10 17:00'
+	var orderStatus = 0;
+	var orderInfo = {storeNo : storeNo,
+					 fee : fee,
+					 address : address,
+					 storeReq : storeReq,
+					 deliveryReq : deliveryReq,
+					 people : people,
+					 orderDate : orderDate,
+					 orderStatus : orderStatus,
+					 menuInfoArr : menuInfoArr}
+	console.log(orderInfo);
+	
+	$.ajax({
+
+		/* 요청 */
+		url : "${pageContext.request.contextPath }/store/${map.bizVo.storeNo}/orderInfo", //요청 보낼 주소		
+		type : "post",
+		contentType : "application/json",
+		data : JSON.stringify(orderInfo) //자바스크립트 객체를 json 형식으로 변경
+
+		/* 응답 */
+		//dataType : "json",
+		//success : function(map) {
+			/*성공시 처리해야될 코드 작성*/
+		//	console.log(map);
+		//	menuInfo(map);
+			
+			////////////////////////////
+		//	optionCateList = map.optionCateList
+			
+			
+		//},
+		//error : function(XHR, status, error) {
+	//		console.error(status + " : " + error);
+	//	}
+		
+	});
+});
+
+
 </script>
 
 

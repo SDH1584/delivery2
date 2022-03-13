@@ -34,11 +34,11 @@
     		where no = #{no}
 		]]>
 	</select>
-	
 
-	
+
+
 	<!-- 유저 업데이트 -->
-	
+
 	<update id="Userupdate" parameterType="UserVo">
 		<![CDATA[
 			update users
@@ -64,4 +64,51 @@
 			where  store_no = #{storeNo}
 		]]>
 	</update>
+
+	<!-- 메뉴 카테고리 추가 -->
+	<insert id="menucateadd" parameterType="MenucateVo">
+		<![CDATA[
+				
+				insert into menu_cate 
+				values(seq_menu_cate.nextval, #{store_no}, #{menu_cate_name} )
+		]]>
+	</insert>
+
+	<!-- 메뉴 카테고리 리스트 -->
+	<select id="menucatelist" parameterType="MenucateVo" resultType="MenucateVo">
+		<![CDATA[
+			 	select 
+						menu_cate_no,
+						store_no,
+						menu_cate_name
+			 	from	menu_cate
+			 	where store_no = #{store_no}
+		]]>
+	</select>
+
+	<!-- 메뉴 등록 -->
+	<insert id="menuadd" parameterType="MenuVo">
+		<![CDATA[
+				
+				insert into menu 
+				values(seq_menu.nextval, #{menu_cate_no}, #{menu_img}, #{menu_name} , #{menu_price} , #{menu_desc})
+		]]>
+	</insert>
+
+	<!-- 메뉴 리스트 파라미터 -->
+	<select id="menulistpar" parameterType="MenuVo"
+		resultType="MenuVo">
+		<![CDATA[
+			 	select 
+			 			menu_no,
+						menu_cate_no,
+						menu_img,
+						menu_name,
+						menu_price,
+						menu_desc
+			 	from	menu
+			 	where menu_cate_no= #{menu_cate_no}
+		]]>
+	</select>
+	
 </mapper>

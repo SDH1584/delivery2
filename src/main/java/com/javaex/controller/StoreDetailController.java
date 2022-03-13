@@ -1,6 +1,7 @@
 package com.javaex.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,15 +14,15 @@ import com.javaex.service.StoreDetailService;
 import com.javaex.vo.OrderVo;
 
 @Controller
-@RequestMapping("/store")
+@RequestMapping("/store/{storeNo}/")
 public class StoreDetailController {
 
 	@Autowired
 	private StoreDetailService storeDetailService;
 
-	@RequestMapping("/{storeNo}/reserv")
-	public String reserv(@PathVariable("storeNo") int storeNo, 
-						 Model model) {
+	// 예약리스트
+	@RequestMapping("reserv")
+	public String reserv(@PathVariable("storeNo") int storeNo, Model model) {
 		// System.out.println("reservation");
 
 		List<OrderVo> rList = storeDetailService.reservList(storeNo);
@@ -31,10 +32,12 @@ public class StoreDetailController {
 		return "store-detail/store-reserv";
 	}
 
-	@RequestMapping("/{storeNo}/attend")
+	// 예약리스트에서 대기중 클릭
+	@RequestMapping("attend")
 	public String attend(@RequestParam(value = "orderNo", required = false, defaultValue = "0") int orderNo,
-						 @RequestParam(value = "no", required = false, defaultValue = "0") int no, 
-						 Model model) {
+			@RequestParam(value = "no", required = false, defaultValue = "0") int no,
+			@PathVariable("storeNo") int storeNo, 
+			Model model) {
 
 		if (no == 0) {
 
@@ -45,29 +48,35 @@ public class StoreDetailController {
 			OrderVo orderVo = new OrderVo();
 			orderVo.setOrderNo(orderNo);
 			orderVo.setNo(no);
-			// System.out.println("orerNo: " + orderNo + ", no: " + no);
+			orderVo.setStoreNo(storeNo);
 
-			Integer resultNo = storeDetailService.attend(orderVo);
+			int pOrderNo = storeDetailService.attend(orderVo);
+			System.out.println("Controller.resultNo: " + pOrderNo);
 
-			// System.out.println("Controller.resultNo: " + resultNo);
-
-			if (resultNo == 0) {
+			if (pOrderNo == 0) {
 
 				return "store-detail/orderJoin";
 
 			} else {
 
-				OrderVo varifyVo = storeDetailService.attendVfy(orderVo);
-				model.addAttribute("varifyVo", varifyVo);
+				int attendVfy = storeDetailService.attendVfy(orderVo);
+				System.out.println("controller.attendVfy: " + attendVfy);
 
-				int vfyNo = varifyVo.getAttendVfy();
-				// System.out.println("vfyNo: " + vfyNo);
+				if (attendVfy == 0) {
 
-				if (vfyNo == 0) {
-
+					Map<String, Object> orderInfoMap = storeDetailService.menuList(orderVo);
+					model.addAttribute("orderInfoMap",orderInfoMap);
+					
+					//System.out.println("controller.host: " + orderInfoMap);
+					
 					return "store-detail/order-change-host";
 
 				} else {
+
+					Map<String, Object> orderInfoMap = storeDetailService.menuList(orderVo);
+					model.addAttribute("orderInfoMap",orderInfoMap);
+					
+					//System.out.println("controller.attendee: " + orderInfoMap);
 
 					return "store-detail/order-change-attendee";
 
@@ -76,30 +85,13 @@ public class StoreDetailController {
 		}
 	}
 
-	@RequestMapping("/{storeNo}/host")
-	public String host() {
-
-		return "store-detail/order-change-host";
-	}
-
-	@RequestMapping("/{storeNo}/attendee")
-	public String attendee() {
-
-		return "store-detail/order-change-attendee";
-	}
 
 	@RequestMapping("orderJoin")
 	public String orderJoin() {
 
 		return "store-detail/orderJoin";
 	}
-	
-	@RequestMapping("orderFirst")
-	public String firstOrder() {
 
-		return "store-detail/orderFirst";
-	}
-	
 	@RequestMapping("description")
 	public String description() {
 
@@ -111,6 +103,5 @@ public class StoreDetailController {
 
 		return "store-detail/store-review";
 	}
-
 
 }
