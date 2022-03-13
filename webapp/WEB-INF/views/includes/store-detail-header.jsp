@@ -15,7 +15,7 @@
 <div id="nav">
 	<ul class="clearfix ullink1">
 		<li><a href="https://www.naver.com/" class="link2">주변가게</a></li>
-		<li><a href="https://www.naver.com/" class="link2">주변예약</a></li>
+		<li><a href="${pageContext.request.contextPath}/main" class="link2">주변예약</a></li>
 		<li><a href="https://www.naver.com/" class="link2">EVENT</a></li>
 
 		<c:choose>

@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javaex.service.MainService;
 import com.javaex.vo.MainVo;
@@ -17,8 +19,6 @@ import com.javaex.vo.MainVo;
 public class MainController {
 @Autowired
 MainService mainService;
-	
-	
 	@RequestMapping("/main")
 	public String main(@ModelAttribute MainVo mainVo ,Model model) {
 		System.out.println("main(controller)");
@@ -57,6 +57,6 @@ MainService mainService;
 		System.out.println("getStore:"+getStore);
 		
 		return "user/main";
-		
-	}
+		}
+	
 }

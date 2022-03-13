@@ -23,7 +23,7 @@ SqlSession sqlSession;
 	//가게정보 읽기
 	public List<MainVo> getStore(int storeNo) {
 		System.out.println("getStore dao");
-		return sqlSession.selectOne("main.getStore");
+		return sqlSession.selectList("main.getStore");
 	}
 	//가게리스트
 	public List<MainVo> storeList() {

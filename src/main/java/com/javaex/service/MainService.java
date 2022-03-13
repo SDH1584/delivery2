@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.javaex.dao.MainDao;
 import com.javaex.vo.MainVo;
@@ -14,8 +15,7 @@ import com.javaex.vo.MainVo;
 public class MainService {
 	@Autowired
 	private MainDao maindao;
-
-	public Map<String, Object> getMain(MainVo mainVo) {
+	public Map<String, Object> getMain(@RequestBody MainVo mainVo) {
 		System.out.println("[MainService.MainList()]");
 		Map<String, Object> map = new HashMap<String, Object>();
 		// 메인정보가져오기
