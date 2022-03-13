@@ -21,20 +21,20 @@
 
 		<!-- contents -->
 		<div id="contents" class="clearfix">
+		
 			<!-- aside-->
 			<div id="aside">
 				<ul>
 					<li id="aside-top">마이페이지</li>
-					<li><a href="https://www.naver.com/" class="link2">회원정보수정</a></li>
-					<li><a href="https://www.naver.com/" class="link2">주소 등록/수정</a></li>
-					<li><a href="https://www.naver.com/" class="link2">주문내역</a></li>
-					<li><a href="https://www.naver.com/" class="link2">포인트 확인</a></li>
-					<li><a href="https://www.naver.com/" class="link2">리뷰내역</a></li>
-					<li><a href="https://www.naver.com/" class="link2">고객센터</a></li>
+					<li><a href="${pageContext.request.contextPath}/mypage/editForm" class="link2">회원정보수정</a></li>
+					<li><a href="${pageContext.request.contextPath}/mypage/address" class="link2">주소 등록/수정</a></li>
+					<li><a href="${pageContext.request.contextPath}/mypage/orderList">주문내역</a></li>
+					<li><a href="${pageContext.request.contextPath}/mypage/point" class="link2">포인트 확인</a></li>
+					<li><a href="${pageContext.request.contextPath}/mypage/review" class="link2">리뷰내역</a></li>
+					<li><a href="${pageContext.request.contextPath}/mypage/inquiryList" class="link2">고객센터</a></li>
 				</ul>
 			</div>
 			<!-- aside-->
-
 
 			<div id="main">
 				<div id="mypage">
