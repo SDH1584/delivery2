@@ -6,7 +6,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.javaex.vo.BusinessVo;
 import com.javaex.vo.OrderVo;
+import com.javaex.vo.POrderVo;
 
 @Repository
 public class StoreDetailDao {
@@ -23,30 +25,53 @@ public class StoreDetailDao {
 
 	public Integer attend(OrderVo orderVo) {
 
-		OrderVo resultVo = sqlSession.selectOne("storeDetail.attend", orderVo);
-		//System.out.println("Dao: " + resultVo);
+		Integer pOrderNo = sqlSession.selectOne("storeDetail.attend", orderVo);
+		// System.out.println("Dao: " + pOrderNo);
 
-		if (resultVo == null) {
-
-			return 0;
-
-		} else {
-
-			return 1;
-
-		}
+		return pOrderNo;
 
 	}
 
-	public OrderVo attendVfy(OrderVo orderVo) {
-		//System.out.println("Dao.attendVfy: " + orderVo);
+	public int attendVfy(OrderVo orderVo) {
+
+		int attendVfy = sqlSession.selectOne("storeDetail.attendVfy", orderVo);
+		System.out.println("Dao.attendVfy: " + attendVfy);
+
+		return attendVfy;
+	}
+
+	public OrderVo personalOrder(OrderVo orderVo) {
+
+		OrderVo pOrderVo = sqlSession.selectOne("storeDetail.personalOrder", orderVo);
+		System.out.println("Dao.personalOrder: " + pOrderVo);
+
+		return pOrderVo;
+	}
+
+	public POrderVo pOrderMenu(OrderVo orderVo) {
+		System.out.println("Dao.pOrderMenu: " + orderVo);
+
+		POrderVo pMenuVo = sqlSession.selectOne("storeDetail.pOrderMenu", orderVo);
+		System.out.println("Dao.pOrderMenu: " + pMenuVo);
+
+		return pMenuVo;
+	}
+
+	public List<POrderVo> pOrderOption(OrderVo orderVo) {
+		System.out.println("Dao.pOrderOption: " + orderVo);
 		
-		OrderVo varifyVo = sqlSession.selectOne("storeDetail.attendVfy", orderVo);
-		//System.out.println("Dao.attendVfy: " + orderVo);
+		List<POrderVo> pOptionList = sqlSession.selectList("storeDetail.pOrderOption", orderVo);
+		System.out.println("Dao.pOrderOption: " + pOptionList);
 
-		return varifyVo;
-
+		return pOptionList;
 	}
 
+	public BusinessVo bizInfo(int storeNo) {
+
+		BusinessVo bizInfoVo = sqlSession.selectOne("storeDetail.bizInfo", storeNo);
+		System.out.println("Dao.bizInfo: " + bizInfoVo);
+
+		return bizInfoVo;
+	}
 
 }

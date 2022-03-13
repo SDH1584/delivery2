@@ -31,28 +31,98 @@
 
 	</select>
 
-	<select id="attend" parameterType="com.javaex.vo.OrderVo" resultType="com.javaex.vo.OrderVo">
+	<select id="attend" parameterType="com.javaex.vo.OrderVo" resultType="int">
 		<![CDATA[
-			select p_order_no pOrderNo
-			from personal_order
-			where order_no = #{orderNo}
-			and no = #{no}
+			select po.p_order_no pOrderNo
+			from personal_order po, order_group og
+			where po.order_no = og.order_no 
+			and po.order_no = #{orderNo}
+			and po.no = #{no}
+			and og.store_no = #{storeNo}
 		]]>
 	</select>
 
-	<select id="attendVfy" parameterType="com.javaex.vo.OrderVo" resultType="com.javaex.vo.OrderVo">
+	<select id="attendVfy" parameterType="com.javaex.vo.OrderVo" resultType="int">
+		<![CDATA[
+			select po.attendvfy attendVfy
+			from personal_order po, business b
+			where po.order_no = #{orderNo}
+			and po.no = #{no}
+			and b.store_no = #{storeNo}
+		]]>
+	</select>
+
+
+	<select id="personalOrder" parameterType="com.javaex.vo.OrderVo" resultType="com.javaex.vo.OrderVo">
 		<![CDATA[
 			select po.p_order_no pOrderNo,
-			       po.order_no,
-			       po.attendVfy attendVfy,
-			       po.no,
-			       og.store_no
-			from personal_order po, order_group og
-			where po.order_no = og.order_no
+			       po.order_no orderNo,
+			       po.no no,
+			       final_pay finalPay,
+			       p_fee pFee,
+			       attendvfy attendVfy,
+			       store_req storeReq,
+			       og.people people,
+			       to_char(og.order_date, 'mm/dd hh24:mi') orderDate,
+			       og.delivery_m_adr deliveryMAdr,
+			       og.delivery_s_adr deliverySAdr,
+			       og.delivery_req deliveryReq,
+			       po.store_req storeReq,
+			       cp.countPeople countPeople,
+			       cp.finalPaySum finalPaySum
+			from personal_order po, order_group og, (select order_no,
+			                                                 count(p_order_no) as countPeople,
+			                                                 sum(final_pay) as finalPaySum
+			                                                 from personal_order
+			                                                 group by order_no
+			                                                 )cp
+			where po.order_no = og.order_no 
+			and og.order_no = cp.order_no
 			and po.order_no = #{orderNo}
 			and po.no = #{no}
 		]]>
 	</select>
+	
+		<select id="pOrderMenu" parameterType="int" resultType="com.javaex.vo.POrderVo">
+			<![CDATA[
+				select menu_name menuName,
+				       menu_price menuPrice,
+				       menu_img menuImg
+				from personal_order po, order_menu om, menu m
+				where po.p_order_no = om.p_order_no
+				and om.menu_no = m.menu_no
+				and po.order_no = #{orderNo}
+				and po.no = #{no}
+			]]>
+		</select>
+
+		<select id="pOrderOption" parameterType="int" resultType="com.javaex.vo.POrderVo">
+			<![CDATA[
+				select option_name optionName,
+				       option_price optionPrice
+				from personal_order po, order_menu om, order_menu_option omo, menu_option mo
+				where po.p_order_no = om.p_order_no
+				and om.order_menu_no = omo.order_menu_no
+				and omo.option_no = mo.option_no
+				and po.order_no = #{orderNo}
+				and po.no = #{no}
+			]]>
+		</select>
+		
+
+	<select id="bizInfo" parameterType="int" resultType="com.javaex.vo.BusinessVo">
+		<![CDATA[
+			select d.fee fee,
+			       b.store_no store_No,
+			       b.store_name storeName,
+			       b.min_price minPrice,
+			       b.on_off onOff
+			from business b, delivery d
+			where b.store_no = d.store_no
+			and b.store_no = #{storeNo}
+		]]>
+	</select>
+
 
 
 </mapper>
