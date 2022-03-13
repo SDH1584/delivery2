@@ -71,8 +71,8 @@ h3 {
 .order-deli{padding:5px 0px 4px 0px;}
 #adress-change{width:100%; height:34px; border:1px solid #5f0080; color: #5f0080; border-radius:3px; font-size: 12px; background-color:#fff; margin-bottom:20px;}
 input[type="text"]{width:100%; text-align:right; height:34px; }
-
-#beforeLogin {margin-bottom:20px;}
+#datetimepicker{margin-bottom:15px; text-align:left;}
+#beforeLogin {margin:20px 0px 20px 0px;}
 #beforeLogin p{font-size : 16px; margin-bottom:15px;}
 #beforeLogin a{font-size : 20px; margin-bottom:15px;}
 #beforeLogin a:hover{color: #06F;}
@@ -96,6 +96,8 @@ button[type="submit"]{
 	font-size:16px; 
 	font-weight:bold;
 }	
+
+button[disabled="disabled"]{color :#666 !important; background-color:#e2e2e2 !important; border-color:#e2e2e2 !important;}
 /* 주문 상세 모달 */
 
 .modal-body{

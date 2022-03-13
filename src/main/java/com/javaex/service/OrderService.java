@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.javaex.dao.OrderDao;
 import com.javaex.vo.BusinessVo;
 import com.javaex.vo.MenuOptionVo;
+import com.javaex.vo.OrderInfoVo;
 import com.javaex.vo.OrderVo;
 
 @Service
@@ -46,12 +47,36 @@ public class OrderService {
 	}
 	
 	/* 가게상세-메뉴리스트 가져오기 */
+	public Map<String, Object> menuList(int storeNo, int no) {
+		System.out.println("[OrderService.menuList()]");
+		
+		BusinessVo bVo = new BusinessVo();
+		bVo.setNo(no);
+		bVo.setStoreNo(storeNo);
+		
+		OrderVo orderVo= orderDao.getDeliFee(bVo); //배달주소, 배달료 정보
+		System.out.println(orderVo);
+		BusinessVo bizVo=orderDao.getBiz(storeNo);//가게 기본정보
+		List<MenuOptionVo> menuCateList = orderDao.getMenuCateList(storeNo);//메뉴카테고리리스트
+		List<MenuOptionVo> menuList = orderDao.getMenuList(storeNo);//메뉴리스트
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("bizVo", bizVo);
+		map.put("orderVo", orderVo);
+		map.put("menuCateList", menuCateList);
+		map.put("menuList", menuList);
+		
+		System.out.println(map);
+		
+		return map;		
+	}
+	
 	public Map<String, Object> menuList(int storeNo) {
 		System.out.println("[OrderService.menuList()]");
 		
-		BusinessVo bizVo=orderDao.getBiz(storeNo);
-		List<MenuOptionVo> menuCateList = orderDao.getMenuCateList(storeNo);
-		List<MenuOptionVo> menuList = orderDao.getMenuList(storeNo);
+		BusinessVo bizVo=orderDao.getBiz(storeNo);//가게 기본정보
+		List<MenuOptionVo> menuCateList = orderDao.getMenuCateList(storeNo);//메뉴카테고리리스트
+		List<MenuOptionVo> menuList = orderDao.getMenuList(storeNo);//메뉴리스트
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("bizVo", bizVo);
@@ -79,6 +104,14 @@ public class OrderService {
 		
 		return map;
 		
+	}
+	
+	/* 주문정보 저장하기 */
+	public void saveOrderInfo(OrderInfoVo oVo) {
+		System.out.println("[OrderService.saveOrderInfo()]");
+	
+		orderDao.addOrderGroup(oVo); //주문그룹테이블에 정보 삽입
+		//orderDao.addPersonalOrder(oVo); //개인주문정보테이블에 정보 삽입
 	}
 	
 }

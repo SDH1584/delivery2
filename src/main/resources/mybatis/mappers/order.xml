@@ -29,7 +29,8 @@
 		<![CDATA[
 			select  store_name storeName,
 			        on_off onOff,
-			        store_no storeNo
+			        store_no storeNo,
+			        min_price minPrice
 			from business
 			where store_no = #{storeNo}
 		]]>
@@ -52,6 +53,20 @@
 			WHERE order_no=#{orderNo}
 	  	]]>
 	</update>
+	
+	<!-- 배달주소, 배달료 가져오기 -->
+	<select id="selectDeliFee" parameterType="com.javaex.vo.BusinessVo" resultType="com.javaex.vo.OrderVo">
+		<![CDATA[
+			select  d.fee pFee, 
+			        u.main_address deliveryMAdr, 
+			        u.sub_address deliverySAdr
+			from delivery d , user_adr u
+			where d.store_no = #{storeNo}
+			and u.no = #{No}
+			and u.default_address =1
+			and u.main_address like '%'||d.delivery_area||'%'
+		]]>
+	</select>
 
 	<!-- 메뉴카테고리리스트 가져오기 -->
 	<select id="selectMenuCateList" parameterType="int" resultType="com.javaex.vo.MenuOptionVo">
@@ -130,5 +145,34 @@
 		]]>
 	</select>
 	
+	<!-- 주문정보 - 주문그룹 삽입 -->
+	<insert id="insertOrderGroup" parameterType="com.javaex.vo.OrderInfoVo">
+		<selectKey keyProperty="orderNo" resultType="int" order="BEFORE">	
+			select seq_order_group.nextval from dual
+		</selectKey>
+		<![CDATA[	
+			insert into order_group(order_no, 
+			                        store_no, 
+			                        people, 
+			                        order_date, 
+			                        order_status, 
+			                        delivery_m_adr,  
+			                        delivery_req)
+			values (#{orderNo},
+			        #{storeNo},
+			        #{people},
+			        TO_DATE(#{orderDate},'yyyy-mm-dd hh24:mi'),
+			        0,
+			        #{address},
+			        #{deliveryReq})
+    	]]>
+	</insert>
+	
+	<!-- 주문정보 - 개인 주문정보 삽입 -->
+	<insert id= "insertPersonalOrder" parameterType = "com.javaex.vo.OrderInfoVo">
+		<![CDATA[
+		
+		]]>
+	</insert>
 	
 </mapper>

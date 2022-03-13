@@ -3,6 +3,9 @@ package com.javaex.vo;
 import java.util.List;
 
 public class OrderInfoVo {
+	private int orderNo;
+	private int pOrderNo;
+	private int no;
 	private int storeNo;
 	private int fee;
 	private String address;
@@ -19,9 +22,12 @@ public class OrderInfoVo {
 		super();
 	}
 	
-	public OrderInfoVo(int storeNo, int fee, String address, String storeReq, String deliveryReq, int people,
-			String orderDate, int orderStatus, List<MenuInfoVo> menuInfoArr) {
+	public OrderInfoVo(int orderNo, int pOrderNo, int no, int storeNo, int fee, String address, String storeReq,
+			String deliveryReq, int people, String orderDate, int orderStatus, List<MenuInfoVo> menuInfoArr) {
 		super();
+		this.orderNo = orderNo;
+		this.pOrderNo = pOrderNo;
+		this.no = no;
 		this.storeNo = storeNo;
 		this.fee = fee;
 		this.address = address;
@@ -32,9 +38,36 @@ public class OrderInfoVo {
 		this.orderStatus = orderStatus;
 		this.menuInfoArr = menuInfoArr;
 	}
-	
-	
-	
+
+
+
+
+
+
+	public int getOrderNo() {
+		return orderNo;
+	}
+
+	public void setOrderNo(int orderNo) {
+		this.orderNo = orderNo;
+	}
+
+	public int getpOrderNo() {
+		return pOrderNo;
+	}
+
+	public void setpOrderNo(int pOrderNo) {
+		this.pOrderNo = pOrderNo;
+	}
+
+	public int getNo() {
+		return no;
+	}
+
+	public void setNo(int no) {
+		this.no = no;
+	}
+
 	public int getStoreNo() {
 		return storeNo;
 	}
@@ -89,14 +122,20 @@ public class OrderInfoVo {
 	public void setMenuInfoArr(List<MenuInfoVo> menuInfoArr) {
 		this.menuInfoArr = menuInfoArr;
 	}
-	
+
 	
 	
 	@Override
 	public String toString() {
-		return "OrderInfoVo [storeNo=" + storeNo + ", fee=" + fee + ", address=" + address + ", storeReq=" + storeReq
-				+ ", deliveryReq=" + deliveryReq + ", people=" + people + ", orderDate=" + orderDate + ", orderStatus="
-				+ orderStatus + ", menuInfoArr=" + menuInfoArr + "]";
+		return "OrderInfoVo [orderNo=" + orderNo + ", pOrderNo=" + pOrderNo + ", no=" + no + ", storeNo=" + storeNo
+				+ ", fee=" + fee + ", address=" + address + ", storeReq=" + storeReq + ", deliveryReq=" + deliveryReq
+				+ ", people=" + people + ", orderDate=" + orderDate + ", orderStatus=" + orderStatus + ", menuInfoArr="
+				+ menuInfoArr + "]";
 	}
+
+	
+	
+	
+	
 	
 }

@@ -3,6 +3,7 @@ package com.javaex.vo;
 import java.util.List;
 
 public class MenuInfoVo {
+	private int orderMenuNo;
 	private int menuNo;
 	private String menuName;
 	private int menuPrice;
@@ -15,8 +16,10 @@ public class MenuInfoVo {
 		super();
 	}
 	
-	public MenuInfoVo(int menuNo, String menuName, int menuPrice, int orderCount, List<OptInfoVo> optInfoArr) {
+	public MenuInfoVo(int orderMenuNo, int menuNo, String menuName, int menuPrice, int orderCount,
+			List<OptInfoVo> optInfoArr) {
 		super();
+		this.orderMenuNo = orderMenuNo;
 		this.menuNo = menuNo;
 		this.menuName = menuName;
 		this.menuPrice = menuPrice;
@@ -24,9 +27,19 @@ public class MenuInfoVo {
 		this.optInfoArr = optInfoArr;
 	}
 
-	
-	
-	
+
+
+
+
+
+	public int getOrderMenuNo() {
+		return orderMenuNo;
+	}
+
+	public void setOrderMenuNo(int orderMenuNo) {
+		this.orderMenuNo = orderMenuNo;
+	}
+
 	public int getMenuNo() {
 		return menuNo;
 	}
@@ -72,9 +85,14 @@ public class MenuInfoVo {
 	
 	@Override
 	public String toString() {
-		return "MenuInfoVo [menuNo=" + menuNo + ", menuName=" + menuName + ", menuPrice=" + menuPrice + ", orderCount="
-				+ orderCount + ", optInfoArr=" + optInfoArr + "]";
+		return "MenuInfoVo [orderMenuNo=" + orderMenuNo + ", menuNo=" + menuNo + ", menuName=" + menuName
+				+ ", menuPrice=" + menuPrice + ", orderCount=" + orderCount + ", optInfoArr=" + optInfoArr + "]";
 	}
+
+	
+	
+	
+
 	
 	
 	

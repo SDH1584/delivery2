@@ -10,12 +10,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Insert title here</title>
+
+<link href="${pageContext.request.contextPath}/assets/datetimepicker/jquery.datetimepicker.css" rel="stylesheet" >
 <link href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/assets/css/store-detail/store-detail-header.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/assets/css/store-detail/customer-order.css" rel="stylesheet">
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/datetimepicker/build/jquery.datetimepicker.full.min.js"></script>
 </head>
 
 
@@ -80,63 +83,6 @@
 			<!-- menu -->
 
 			<div id="order">
-				<table id="order-detail">
-					<tr>
-						<th>참여인원</th>
-						<td colspan="3">
-							<input type='button' onclick='count("minus")' value='-' class="btn-xs" /> 
-							<span id="result">1</span> 
-							<input type='button' onclick='count("plus")' value='+' class="btn-xs" />
-						</td>
-					</tr>
-					<tr>
-						<th>주문 금액</th>
-						<td colspan="3">26,000 / 25,000</td>
-					</tr>
-					<tr>
-						<th>배달료</th>
-						<td colspan="3" id="deliveryFee">3000</td>
-					</tr>
-					<tr>
-						<td colspan="4">*최소 주문 금액을 채울 경우 혼자서도 주문 가능합니다</td>
-					</tr>
-				</table>
-				<div id="order-menu-box">
-					<table id="order-menu-table">
-						<tbody id="selMenuArea">
-
-						</tbody>
-						<tfoot>
-							<tr>
-								<th>개인 배달료</th>
-								<td id="fee">3000</td>
-							</tr>
-							<tr>
-								<th>결제예정금액</th>
-								<td id="total-price">0원</td>
-							</tr>
-						</tfoot>
-					</table>
-				</div>
-
-				<div id="order-delivery">
-					<div class="order-deli">배달 주소</div>
-					<div class="order-deli" id="deliveryAdr">서울시 관악구 남부순환로 1820 302호</div>
-					<div class="order-deli">
-						<button type="button" id="adress-change">배달 주소 변경</button>
-					</div>
-					<div class="order-deli">가게 사장님께</div>
-					<div class="order-deli">
-						<input type="text" name="store-require" value="">
-					</div>
-					<div class="order-deli">라이더님께</div>
-					<div class="order-deli">
-						<input type="text" name="deliver-require" value="">
-					</div>
-					<div class="order-deli">
-						<input type="checkbox" id="group-order" name="group-order" value=""> <label for="group-order">단체 주문</label>
-					</div>
-				</div>
 				<c:choose>
 					<c:when test="${empty sessionScope.authUser}">
 						<div id="beforeLogin">
@@ -145,8 +91,65 @@
 						</div>
 					</c:when>
 					<c:otherwise>
+						<table id="order-detail">
+							<tr>
+								<th>참여인원</th>
+								<td colspan="3"><input type='button' onclick='count("minus")' value='-' class="btn-xs" /> <span id="result">1</span> <input type='button' onclick='count("plus")' value='+' class="btn-xs" /></td>
+							</tr>
+							<tr>
+								<th>주문 금액</th>
+								<td colspan="3"><span id ="total-price2">0</span> / <span id="min-price">${map.bizVo.minPrice }</span></td>
+							</tr>
+							<tr>
+								<th>배달료</th>
+								<td colspan="3" id="deliveryFee">${map.orderVo.pFee }</td>
+							</tr>
+							<tr>
+								<td colspan="4">*최소 주문 금액을 채울 경우 혼자서도 주문 가능합니다</td>
+							</tr>
+						</table>
+						<div id="order-menu-box">
+							<table id="order-menu-table">
+								<tbody id="selMenuArea">
+
+								</tbody>
+								<tfoot>
+									<tr>
+										<th>개인 배달료</th>
+										<td id="fee">${map.orderVo.pFee }</td>
+									</tr>
+									<tr>
+										<th>결제예정금액</th>
+										<td id="total-price">0</td>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+
+						<div id="order-delivery">
+							<div class="order-deli">주문일시</div>
+							<div class="order-deli"><input type="text" id="datetimepicker"></div>
+							<div class="order-deli">배달 주소</div>
+							<div class="order-deli" id="deliveryAdr">${map.orderVo.deliveryMAdr }&nbsp${ map.orderVo.deliverySAdr}</div>
+							<div class="order-deli">
+								<button type="button" id="adress-change">배달 주소 변경</button>
+							</div>
+							<div class="order-deli">가게 사장님께</div>
+							<div class="order-deli">
+								<input type="text" name="store-require" value="">
+							</div>
+							<div class="order-deli">라이더님께</div>
+							<div class="order-deli">
+								<input type="text" name="deliver-require" value="">
+							</div>
+							<div class="order-deli">
+								<input type="checkbox" id="group-order" name="group-order" value=""> <label for="group-order">단체 주문</label>
+							</div>
+						</div>
+
+
 						<div id="order-btn">
-							<button type="button" class="btn-ordering">바로주문하기</button>
+							<button type="button" class="btn-ordering" disabled="disabled">바로주문하기</button>
 						</div>
 					</c:otherwise>
 				</c:choose>
@@ -186,13 +189,19 @@
 </body>
 
 <script type="text/javascript">
-var optionCateList ;
-var fee=parseInt(document.getElementById('deliveryFee').innerText);
-var totalPrice=0;
-var finalPrice=0;
-var menuInfoArr = [];
+	var optionCateList ;
+	var fee=parseInt(document.getElementById('fee').innerText);
+	var totalPrice=0;
+	var finalPrice=0;
+	var menuInfoArr = [];
 
-/* 참여인원 증감 */
+	/* 주문일시선택 */
+	$('#datetimepicker').datetimepicker({
+		minDate: '-1970/01/01',
+		maxDate: '+1970/01/31'
+	});
+
+	/* 참여인원 증감 */
 	function count(type) {
 		// 결과를 표시할 element
 		const resultElement = document.getElementById('result');
@@ -220,7 +229,18 @@ var menuInfoArr = [];
 		
 		//주문 버튼 그리기 
 		if (number === 1){
-			$("#order-btn").html('<button type="button" class="btn-ordering">바로주문하기</button>');
+			var orderPrice = parseInt(document.getElementById('total-price2').innerText);
+			var minPrice = parseInt(document.getElementById('min-price').innerText);
+			console.log(orderPrice);
+			console.log(minPrice);
+			var result = orderPrice >= minPrice;
+			console.log(result);
+			if( result){
+				$("#order-btn").html('<button type="button" class="btn-ordering">바로주문하기</button>');	
+			} else {
+				$("#order-btn").html('<button type="button" class="btn-ordering" disabled="disabled">바로주문하기</button>');
+			}
+			
 		} else {
 			$("#order-btn").html('<button type="button" class="btn-ordering">예약만들기</button>');
 		}
@@ -228,7 +248,7 @@ var menuInfoArr = [];
 		
 		// 개인 배달료 계산
 		var feeElement = document.getElementById('deliveryFee');
-		var fee = parseInt(feeElement.innerText);
+		fee = parseInt(feeElement.innerText);
 		fee = Math.ceil((fee / number)/10)*10;
 		document.getElementById('fee').innerText = fee;//출력
 		finalPrice = totalPrice + fee;//변경된 배달료로 적용
@@ -347,7 +367,7 @@ var menuInfoArr = [];
 		str += ' 			<td class="count">';
 		str += ' 				<input type=\'button\' onclick=\'count2("minus")\' value=\'-\' class="btn-xs" />';
 		str += ' 				<span id="result2">1</span>';
-		str += ' 				<input type=\'button\' onclick=\'count2("plus")\' value=\'-\' class="btn-xs" />';
+		str += ' 				<input type=\'button\' onclick=\'count2("plus")\' value=\'+\' class="btn-xs" />';
 		str += ' 		</tr>';
 		str += ' 	</tfoot>';
 		str += ' </table>';
@@ -360,7 +380,6 @@ var menuInfoArr = [];
 		
 	/* 선택한 메뉴와 옵션 데이터 객체로 묶기 */
 	$(".modal-body").on("click", "#btnMenuAdd", function(){
-		finalPrice = 0;
 		console.log("btnMenuAdd");
 		
 		//console.log(optionCateList);
@@ -419,11 +438,11 @@ var menuInfoArr = [];
 		
 		price = price*parseInt(count);
 		totalPrice = totalPrice +price
-		finalPrice = totalPrice+fee;
+		finalPrice = totalPrice+parseInt(document.getElementById('fee').innerText);
 		console.log(price);
 		console.log(totalPrice);
 		console.log(finalPrice);
-		console.log(fee);
+		console.log(document.getElementById('fee').innerText);
 		str += ' 		</div>';
 		str += ' 	</td>';
 		str += ' 	<td>';
@@ -434,7 +453,27 @@ var menuInfoArr = [];
 		
 		$("#selMenuArea").append(str);//메뉴 옵션 보이기
 		document.getElementById('total-price').innerText = finalPrice;//결제예정금액 출력
+		document.getElementById('total-price2').innerText = totalPrice;
 		$("#menuModal").modal('hide');//모달 닫기
+		
+		//버튼 바꾸기
+		var number = parseInt(document.getElementById('result').innerText)
+		if (number === 1){
+			var orderPrice = totalPrice;
+			var minPrice = parseInt(document.getElementById('min-price').innerText);
+			console.log(orderPrice);
+			console.log(minPrice);
+			var result = orderPrice >= minPrice;
+			console.log(result);
+			if( result){
+				$("#order-btn").html('<button type="button" class="btn-ordering">바로주문하기</button>');	
+			} else {
+				$("#order-btn").html('<button type="button" class="btn-ordering" disabled="disabled">바로주문하기</button>');
+			}
+			
+		} else {
+			$("#order-btn").html('<button type="button" class="btn-ordering">예약만들기</button>');
+		}
 	
 		
 	});
@@ -445,15 +484,18 @@ var menuInfoArr = [];
 	/* 메뉴옵션 객체와 주문 기본정보 묶기 */
 	$("#order-btn").on("click", ".btn-ordering", function(){
 		console.log("btn-ordering");
+		var no = ${sessionScope.authUser.no};
 		var storeNo = ${map.bizVo.storeNo};
 		var fee = document.getElementById('fee').innerText;
 		var address = document.getElementById('deliveryAdr').innerText;
 		var storeReq = $('[name="store-require"]').val();
 		var deliveryReq = $('[name="deliver-require"]').val();
 		var people = document.getElementById('result').innerText;
-		var orderDate = '2022/03/10 17:00'
+		var orderDate = $("#datetimepicker").val();
 		var orderStatus = 0;
-		var orderInfo = {storeNo : storeNo,
+		var attendVfy = 0;
+		var orderInfo = {no : no,
+						 storeNo : storeNo,
 						 fee : fee,
 						 address : address,
 						 storeReq : storeReq,
@@ -461,6 +503,7 @@ var menuInfoArr = [];
 						 people : people,
 						 orderDate : orderDate,
 						 orderStatus : orderStatus,
+						 attendVfy : attendVfy,
 						 menuInfoArr : menuInfoArr}
 		console.log(orderInfo);
 		

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.javaex.vo.BusinessVo;
 import com.javaex.vo.MenuOptionVo;
+import com.javaex.vo.OrderInfoVo;
 import com.javaex.vo.OrderVo;
 
 @Repository
@@ -48,6 +49,13 @@ public class OrderDao {
 		return count;
 	}
 	
+	/* 고객 주소, 주소에 따른 배달료 가져오기 */
+	public OrderVo getDeliFee(BusinessVo bVo) {
+		System.out.println("[OrderDao.getUser()]");
+		
+		return sqlSession.selectOne("order.selectDeliFee", bVo);
+	}	
+	
 	/* 메뉴카테고리리스트 가져오기 */
 	public List<MenuOptionVo> getMenuCateList(int storeNo){
 		System.out.println("[OrderDao.getMenuCateList()]");
@@ -82,6 +90,23 @@ public class OrderDao {
 
 		return sqlSession.selectList("order.selectOptionList", moVo);
 	}
+	
+	/* 주문그룹 테이블에 정보 삽입 */
+	public void addOrderGroup(OrderInfoVo oVo) {
+		System.out.println("[OrderDao.addOrderGroup()]");
+		
+		int count = sqlSession.insert("order.insertOrderGroup", oVo);
+		System.out.println(count+"건 삽입 성공(order-group)");
+	}
+	
+	/* 개인주문정보 테이블에 정보 삽입 */
+	public void addPersonalOrder(OrderInfoVo oVo) {
+		System.out.println("[OrderDao.addPersonalOrder()]");
+		
+		int count = sqlSession.insert("order.insertPersonalOrder",oVo);
+		System.out.println(count+"건 삽입 성공(personal-order)");
+	}
+	
 	
 	
 }
