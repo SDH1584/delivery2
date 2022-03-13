@@ -18,12 +18,11 @@
 					og.people
                     from business bs, order_group og
 					where bs.store_no=og.no
-					
 		]]>
 	</select>
 	
 	<!-- 가게정보가져오기 -->
-	<select id="getStore" parameterType="com.javaex.vo.MainVo" resultType="mainVo">
+	<select id="storeList" parameterType="com.javaex.vo.MainVo" resultType="mainVo">
 			<![CDATA[
 			select  bs.store_no storeNo,
                     bs.no,
@@ -44,6 +43,36 @@
 					where bs.store_no=og.no
 					and og.order_no=po.order_no	
 					and po.countpeople <> og.people
+					
+				]]>
+	</select>
+	
+	
+	
+	<!-- 가게정보가져오기 -->
+	<select id="getStore" parameterType="int" resultType="mainVo">
+			<![CDATA[
+			select  bs.store_no storeNo,
+                    bs.no,
+                    bs.store_name storeName,
+					bs.store_phone storePhone,
+					bs.store_m_adr storeMAdr,
+					bs.store_s_adr storeSAdr,
+					bs.store_lat storeLat,
+					bs.store_lng storeLng,
+					bs.logo_img logoImg,
+					og.people,
+                    bs.notice,
+                    og.order_status orderStatus,
+                    po.countPeople
+                    from business bs, order_group og, (select order_no, count(*) countPeople 
+								                       from personal_order
+								                       group by order_no)po
+					where bs.store_no=og.no
+					and og.order_no=po.order_no	
+					and po.countpeople <> og.people
+			   		and bs.store_no=#{storeNo}
+					
 				]]>
 	</select>
 	

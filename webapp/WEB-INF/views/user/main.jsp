@@ -58,7 +58,10 @@
 						<td id="recommend" colspan="2"></td>
 					</tr>
 					<tr>
-						<td colspan="3"><button id="reserve-btn" onclick="location.href='${pageContext.request.contextPath}/store/${getRecentStore[0].storeNo}/reserv'">예약하러 가기</button></td>
+						<td colspan="3"><a href="${pageContext.request.contextPath}/store/${getRecentStore[0].storeNo}/reserv">
+						<button id="reserve-btn">예약하러 가기</button>
+						</a>
+						</td>
 					</tr>
 
 				</table>
@@ -70,16 +73,18 @@
 		<!-- container -->
 
 		<div id="container" class="clearfix">
-				<c:forEach items="${getStore}" var="getStore" varStatus="status">
+				<c:forEach items="${storeList}" var="storeList" varStatus="status">
 			
 					<div id="storelist" class="clearfix">
-						<img id="storelistLogo" src="${pageContext.request.contextPath}/assets/images/${getStore.logoImg}" /> ${getStore.storeName} <br> ${getStore.countPeople }/${getStore.people } 명<br>
-						<button type="button" class="click" data-storeno="${getStore.storeNo}" 
-															data-storeName="${getStore.storeName }"
-															data-storePhone="${getStore.storePhone }"
-															data-logoImg="${getStore.logoImg }"
-															data-storeMAdr="${getStore.storeMAdr }"
-															data-storeSAdr="${getStore.storeSAdr }">상세정보보기</button>
+						<img id="storelistLogo" src="${pageContext.request.contextPath}/assets/images/${storeList.logoImg}" /> ${storeList.storeName} <br> ${storeList.countPeople }/${storeList.people } 명<br>
+						<button type="button" class="click" data-storeno="${storeList.storeNo}" 
+															data-storeName="${storeList.storeName }"
+															data-storePhone="${storeList.storePhone }"
+															data-countPeople="${storeList.countPeople }"
+															data-people="${storeList.people }"
+															data-logoImg="${storeList.logoImg }"
+															data-storeMAdr="${storeList.storeMAdr }"
+															data-storeSAdr="${storeList.storeSAdr }">상세정보보기</button>
 					</div>
 				</c:forEach>
 		</div>
@@ -127,6 +132,22 @@
 					
 		} ];
 
+			//DB에 있는 장소 마커 표시
+		      $.ajax({
+		        type: 'GET',
+		        url: 'url',
+		        data: {},
+		        success: function (response) {
+		          if (response['result'] == 'success') {
+		            let places = response['places_list']
+		            for (let i = 0; i < places.length; i++) {
+		              var place = { lat: places[i]['latitude'], lng: places[i]['longitude'] }
+		              var marker = new google.maps.Marker({ position: place, map: map, title: places[i]['name'] });
+		            }
+		          }
+		        }
+		      });		
+		
 		//인포윈도우
 		var infowindow = new google.maps.InfoWindow();
 
@@ -180,73 +201,35 @@
 		var storeNo = $(this).data("storeno")
 		var storeName=$(this).data("storename")
 		var storePhone=$(this).data("storephone")
+		var people=$(this).data("people")
+		var countPeople=$(this).data("countpeople")
 		var logoImg=$(this).data("logoimg")
 		var storeMAdr=$(this).data("storemadr")
 		var storeSAdr=$(this).data("storesadr")
-		var getStore={
+		var storeList={
 			storeNo:storeNo,
 			storeName:storeName,
 			storePhone:storePhone,
+			logoImg:logoImg,
+			people:people,
+			countPeople:countPeople,
 			storeMAdr:storeMAdr,
 			storeSAdr:storeSAdr
 		}
-		console.log(getStore)
+		console.log(storeList)
 		
 		
 		$('#name').text(storeName)
-		$('#delivery-num').text(storeNo)
+		$('#delivery-num').text(countPeople+" / "+people)
 		$("#delivery-address").text(storeMAdr +" "+ storeSAdr)
 		document.getElementById("storeLogo").src="${pageContext.request.contextPath}/assets/images/1.png" ;
 		$('#delivery-hp').text(storePhone)
-		$('#reserve-btn').attr("href", "${pageContext.request.contextPath}/store/reserv")
+		$('#reserve-btn').attr("href", "${pageContext.request.contextPath}/${storeNo}/reserv")
+		
 		
 	});
 	
-	<!--
-	//무한스크롤코드
-	var intersectionObserver = new IntersectionObserver(function(entries) {
-	  // If intersectionRatio is 0, the target is out of view
-	  // and we do not need to do anything.
-	  if (entries[0].intersectionRatio <= 0) return;
-	
-	  loadItems(10);
-	  console.log('Loaded new items');
-	});
-	
-	
-	// start observing
-	intersectionObserver.observe(document.querySelector('.scrollerFooter'));
-	const io = new IntersectionObserver((entries, observer) => {
-		entries.forEach(entry => {
-		  if (!entry.isIntersecting) return; 
-			//entry가 interscting 중이 아니라면 함수를 실행하지 않습니다.
-		  if (page._scrollchk) return;
-			//현재 page가 불러오는 중임을 나타내는 flag를 통해 불러오는 중이면 함수를 실행하지 않습니다.
-	    observer.observe(document.getElementById('storelist'));
-			//observer를 등록합니다.
-	    page._page += 1;
-			//불러올 페이지를 추가합니다.
-	    page.list.search();
-			//페이지를 불러오는 함수를 호출합니다.
-		});
-	});
-	io.observe(document.getElementById('storelist'));
 
-
-
-
-	/* 버튼 보이는 이벤트 */ function scrollFunction() { 
-		var btn = document.getElementById('btn'); 
-			if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) { 
-				btn.style.display = "storelist";
-				} else {
-					btn.style.display = "none"; 
-					} 
-			} 
-			/* 부드럽게 위로 가기 */ 
-			function GoTop() { 
-				window.scrollTo({top:0, behavior:'smooth'}); }
-	-->
 
 </script>
 
