@@ -54,7 +54,8 @@ public class StoreDetailController {
 			System.out.println("Controller.resultNo: " + pOrderNo);
 
 			if (pOrderNo == 0) {
-
+				
+				model.addAttribute("orderVo",orderVo);
 				return "store-detail/orderJoin";
 
 			} else {
