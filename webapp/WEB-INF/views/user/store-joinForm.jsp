@@ -31,7 +31,7 @@
 					<p class="page_sub">
 						<span class="ico">*</span> 필수입력사항
 					</p>
-					<form action="${pageContext.request.contextPath}/user/s-join" method="post" enctype="multipart/form-data">
+					<form action="${pageContext.request.contextPath}/user/s-join" method="post" enctype="multipart/form-data" name="userInfo">
 						<table class="tbl_join">
 							<tbody>
 								<tr class="fst">
@@ -55,9 +55,24 @@
 								<tr>
 									<th>아이디 <span class="ico">*</span>
 									</th>
-									<td><input type="text" id="s_id" name="id" value="" placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합">
-										<button type="button" id="" class="btn btn_default">중복확인</button></td>
+									<td><input type="text" id="s_id" name="id" value="" placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합 " onkeydown="inputIdChk()">
+										<button type="button" id="" class="btn btn_default" onclick="openIdChk()">중복확인</button> <input type="hidden" id="idDuplication" name="idDuplication" value="idUncheck"></td>
 								</tr>
+								<script>
+									// 아이디 중복체크 화면 열기
+									function openIdChk(){
+										window.name = "parentForm";
+										window.open("${pageContext.request.contextPath }/user/id-checkForm",
+												"chkForm", "width=500, height=300, resizable=no, scrollbars=no");
+									}
+									
+									// 아이디 입력란에 키보드로 값을 입력시 호출되는 함수
+									// 중복체크 실행 여부 초기화
+									function inputIdChk() {
+										console.log("중복체크 초기화")
+										document.userInfo.idDuplication.value = "idUncheck";
+									}
+								</script>
 								<tr>
 									<th>비밀번호 <span class="ico">*</span>
 									</th>
@@ -188,6 +203,7 @@
 		var hp = $("#s_hp").val();
 		var main = $("#s_storeMAdr").val();
 		var sub = $("#s_storeSAdr").val();
+		var idDuplication = $("#idDuplication").val();
 
 		if (id == "") {
 			alert("아이디를 입력해 주세요.");
@@ -221,7 +237,10 @@
 			alert("상세 주소를 입력해 주세요.");
 			return false;
 		}
-
+		if (idDuplication != "idCheck") {
+			alert("아이디 중복확인을 해주세요.")
+			return false;
+		}
 		return true;
 	});
 	

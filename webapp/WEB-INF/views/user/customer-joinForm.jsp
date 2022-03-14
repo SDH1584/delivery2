@@ -189,8 +189,6 @@
 		var sub = $("#c_sub_address").val();
 		var idDuplication = $("#idDuplication").val();
 		
-		console.log(idDuplication);
-		
 		if (id == "") {
 			alert("아이디를 입력해 주세요.");
 			return false;
