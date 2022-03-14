@@ -1,22 +1,48 @@
 package com.javaex.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.javaex.dao.MainDao;
 import com.javaex.vo.MainVo;
 
 @Service
 public class MainService {
+	
 	@Autowired
 	private MainDao maindao;
-	public Map<String, Object> getMain(@RequestBody MainVo mainVo) {
-		System.out.println("[MainService.MainList()]");
+	
+	
+	public List<MainVo> getStoreList() {
+		System.out.println("MainService.getStoreList()");
+
+		List<MainVo> storeList =  maindao.selectStoreList();
+		return storeList;
+	}
+
+	
+	
+	public MainVo getStore(int storeNo) {
+		System.out.println("MainService.getStore()");
+		MainVo storeVo = maindao.getStore(storeNo);
+		return storeVo;
+	}
+	
+	
+	
+	
+	
+	public void getMain() {
+		System.out.println("MainService.getMain()");
+		
+
+		//List<MainVo> storeList = maindao.storeList();
+		
+		
+		
+		/*
 		Map<String, Object> map = new HashMap<String, Object>();
 		// 메인정보가져오기
 		List<MainVo> getMain = maindao.getMain(mainVo);
@@ -32,21 +58,15 @@ public class MainService {
 		return map;
 //	public List<MainVo> getMain(MainVo mainVo) {
 //		System.out.println("getMain service");
-//		return maindao.getMain(mainVo);
+//		
+ * 
+ * return maindao.getMain(mainVo);
+ */
 //
 	}
 
-	public List<MainVo> storeList() {
-		System.out.println("mainservice.storeList");
+	
 
-		return maindao.storeList();
-	}
-
-	public List<MainVo> getStore(int storeNo) {
-		System.out.println("mainservice.getStore");
-
-		return maindao.getStore(storeNo);
-	}
 
 	public List<MainVo> getRecentStore() {
 		System.out.println("mainService.getRecentStore");

@@ -75,7 +75,8 @@
 }
 
 #reserve-btn{
-	width: 480px;
+	display: inline-block;
+	width: 440px;
 	background-color: #fff;
 	border:#5F0080 1px solid;
 	border-radius: 10px;
@@ -83,6 +84,8 @@
 	color:#5F0080;
 	font-size: 15px;
 	font-weight: bold;
+	margin: 0px 0px 0px 10px;
+	text-align: center;
 }
 
 #delivery-address {
@@ -177,4 +180,5 @@ button {
 	color: #5F0080;
 	font-size: 15px;
 	font-weight: bold;
+	cursor: pointer;
 }

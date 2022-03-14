@@ -40,26 +40,26 @@
 					</colgroup>
 
 					<tr>
-						<td rowspan="6"><img id="storeLogo" src="${pageContext.request.contextPath}/assets/images/${getRecentStore[0].logoImg }png"></td>
+						<td rowspan="6"><img id="storeLogo" src="${pageContext.request.contextPath}/assets/images/${storeList[0].logoImg}"></td>
 					</tr>
 					<tr>
-						<th id="name">${getRecentStore[0].storeName }</th>
+						<th id="name">${storeList[0].storeName }</th>
 					</tr>
 					<tr>
-						<td id="delivery-num"> ${getRecentStore[0].countPeople } /${getRecentStore[0].people }</td>
+						<td id="delivery-num"> ${storeList[0].countPeople }/${storeList[0].people }</td>
 					</tr>
 					<tr>
-						<td id="delivery-address" colspan="2">주소: ${getRecentStore[0].storeMAdr } ${getRecentStore[0].storeSAdr}</td>
+						<td id="delivery-address" colspan="2">주소: ${storeList[0].storeMAdr } ${storeList[0].storeSAdr}</td>
 					</tr>
 					<tr>
-						<td id="delivery-hp" colspan="2">전화번호:${getRecentStore[0].storePhone}</td>
+						<td id="delivery-hp" colspan="2">전화번호: ${storeList[0].storePhone}</td>
 					</tr>
 					<tr>
 						<td id="recommend" colspan="2"></td>
 					</tr>
 					<tr>
-						<td colspan="3" onclick="location='${pageContext.request.contextPath}/store/${getRecentStore[0].storeNo}/reserv'">
-						<button id="reserve-btn">예약하러 가기</button>
+						<td colspan="3">
+						<a href="${pageContext.request.contextPath}/store/${storeList[0].storeNo}/reserv" id="reserve-btn">예약하러 가기</a>
 						</td>
 					</tr>
 
@@ -74,15 +74,10 @@
 				<c:forEach items="${storeList}" var="storeList" varStatus="status">
 			
 					<div id="storelist" class="clearfix">
-						<img id="storelistLogo" src="${pageContext.request.contextPath}/assets/images/${storeList.logoImg}" /> ${storeList.storeName} <br> ${storeList.countPeople }/${storeList.people } 명<br>
-						<button type="button" class="click" data-storeno="${storeList.storeNo}" 
-															data-storeName="${storeList.storeName }"
-															data-storePhone="${storeList.storePhone }"
-															data-countPeople="${storeList.countPeople }"
-															data-people="${storeList.people }"
-															data-logoImg="${storeList.logoImg }"
-															data-storeMAdr="${storeList.storeMAdr }"
-															data-storeSAdr="${storeList.storeSAdr }">상세정보보기</button>
+						<img id="storelistLogo" src="${pageContext.request.contextPath}/assets/images/${storeList.logoImg}">
+						${storeList.storeName} <br> 
+						${storeList.countPeople }/${storeList.people } 명<br>
+						<button type="button" class="click" data-storeno="${storeList.storeNo}">상세정보보기</button>
 					</div>
 				</c:forEach>
 		</div>
@@ -115,37 +110,35 @@
 	//가게 상세정보 버튼 클릭할때
 	$('.click').on("click", function() {
 		console.log("가게 상세정보 버튼 클릭");
-		var storeNo = $(this).data("storeno")
-		var storeName=$(this).data("storename")
-		var storePhone=$(this).data("storephone")
-		var people=$(this).data("people")
-		var countPeople=$(this).data("countpeople")
-		var logoImg=$(this).data("logoimg")
-		var storeMAdr=$(this).data("storemadr")
-		var storeSAdr=$(this).data("storesadr")
-		var getStore={
-			storeNo:storeNo,
-			storeName:storeName,
-			storePhone:storePhone,
-			logoImg:logoImg,
-			people:people,
-			countPeople:countPeople,
-			storeMAdr:storeMAdr,
-			storeSAdr:storeSAdr
-		}
-		console.log("ajax 직전?")
+		
+		
+		//가게번호 알기
+		var storeno = $(this).data("storeno");
+		console.log(storeno);
+		
+		
 		$.ajax({
 			
-			url : "${pageContext.request.contextPath }/user/main",		
+			url : "${pageContext.request.contextPath }/getStore",		
 			type : "post",
-			contentType : "application/json",
-			data : JSON.stringify(getStore), //자바스크립트 객체를 json형식으로 변경
+			/* contentType : "application/json", */
+			data : {storeNo: storeno}, 
   
 			dataType : "json",
-			success : function(getStore){
+			success : function(storeVo){
 				/*성공시 처리해야될 코드 작성*/
 				
-				console.log(getStore);
+				console.log(storeVo);
+				//로고
+				$("#storeLogo").attr("src", storeVo.logoImg);
+				$("#name").text(storeVo.storeName);
+				$("#delivery-num").text(storeVo.countPeople + "/" + storeVo.people);
+				$("#delivery-address").text("주소: " + storeVo.storeMAdr +" "+ storeVo.storeSAdr);
+				$("#delivery-hp").text("전화번호: " + storeVo.storePhone);
+				
+				$("#reserve-btn").attr("href", "${pageContext.request.contextPath}/store/"+ storeVo.storeNo +"/reserv");
+				
+				//지도
 				
 				
 			},
@@ -153,100 +146,10 @@
 				console.error(status + " : " + error);
 			}
 		});
-
 		
 	});
 	
 
 
 </script>
-<!-- 
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDl9EqQnWPqoxn5ZOEOAde3auL9VBp4NYU&callback=initMap&region=kr"></script>
-
-   function initMap() {
-
-      // 지도 스타일
-      const map = new google.maps.Map(document.getElementById("map"), {
-         zoom : 13,
-         center : {
-            lat : 37.48140579914052,
-            lng : 126.95269053971082
-         },
-      });
-
-      // 마커 정보
-         var locations = [ {
-         place :"서울대입구역",
-         lat : 37.141414,
-         lng : 126.1234124123,
-               
-      } ];
-
-         //DB에 있는 장소 마커 표시
-            $.ajax({
-              type: 'GET',
-              url: 'url',
-              data: {},
-              success: function (response) {
-                if (response['result'] == 'success') {
-                  let places = response['places_list']
-                  for (let i = 0; i < places.length; i++) {
-                    var place = { lat: places[i]['latitude'], lng: places[i]['longitude'] }
-                    var marker = new google.maps.Marker({ position: place, map: map, title: places[i]['name'] });
-                  }
-                }
-              }
-            });      
-      
-      //인포윈도우
-      var infowindow = new google.maps.InfoWindow();
-
-      //마커 생성
-      for (var i = 0; i < locations.length; i++) {
-         var marker = new google.maps.Marker({
-            map : map,
-            //label: locations[i].place,
-            position : new google.maps.LatLng(locations[i].lat,locations[i].lng),
-         });
-
-         google.maps.event.addListener(marker, 'click',
-               (function(marker, i) {
-                  return function() {
-                     //html로 표시될 인포 윈도우의 내용
-                     infowindow.setContent(locations[i].place);
-                     //인포윈도우가 표시될 위치
-                     infowindow.open(map, marker);
-
-                  }
-               })(marker, i));
-
-         if (marker) {
-            marker.addListener("click", function() {
-               //중심 위치를 클릭된 마커의 위치로 변경
-               map.setCenter(this.getPosition());
-               //마커 클릭 시의 줌 변화
-               map.setZoom(14);
-               /*   window.open('http://https://www.google.com/');*/
-
-               console.log("지도마커클릭")
-               document.getElementById("storeLogo").src="${pageContext.request.contextPath}/assets/images/1.png" ;
-
-               $('#store-name').text("지도 주소의 매장")
-               $('#delivery-num').text("n/m+")
-               $("#delivery-address").text("지도 내 주소")
-               $('#delivery-hp').text('연락처:@')
-               $('#specialities').text('대표메뉴:')
-               $('#recommend').text('추천수:n')
-               $('#store-comment').text('사장님 알림: @')
-            });
-         }
-
-      }
-
-   }
-
-<c:if test=" ${ storeList.orderStatus} eq 0 and ${storeList.countPeople} lt ${storeList.people}">
-</c:if>
-
- -->
 </html>
