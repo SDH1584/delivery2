@@ -45,6 +45,7 @@ td{
 .last td{
 	border-bottom: 1px solid #522772;
 }
+.address{width:35%;}
 
 table button{height:34px;}
 /* 주문예약 영역 */

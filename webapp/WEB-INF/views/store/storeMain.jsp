@@ -79,7 +79,7 @@
 								</td>
 								<td>${orderVo.orderDate}</td>
 								<td>${orderVo.countPeople}명/${orderVo.people}명</td>
-								<td>${orderVo.deliveryMAdr }&nbsp;${orderVo.deliverySAdr }</td>
+								<td class="address">${orderVo.deliveryMAdr }&nbsp;${orderVo.deliverySAdr }</td>
 								</tr>
 							</c:if>
 						</c:forEach>
@@ -129,7 +129,7 @@
 								</c:choose>
 								<td>${orderVo.orderDate}</td>
 								<td>${orderVo.countPeople}명/${orderVo.people}명</td>
-								<td>${orderVo.deliveryMAdr }&nbsp;${orderVo.deliverySAdr }</td>
+								<td class="address">${orderVo.deliveryMAdr }&nbsp;${orderVo.deliverySAdr }</td>
 								</tr>
 							</c:if>
 						</c:forEach>

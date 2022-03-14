@@ -10,7 +10,7 @@
 
 		<div id="nav">
 			<ul class="clearfix ullink1">
-				<li><a href="https://www.naver.com/" class="link2">주문현황</a></li>
+				<li><a href="${pageContext.request.contextPath}/admin/main">주문현황</a></li>
 				<li><a href="https://www.naver.com/" class="link2">지난주문</a></li>
 				<li><a href="${pageContext.request.contextPath}/admin/editForm" class="link2">가게정보수정</a></li>
 
