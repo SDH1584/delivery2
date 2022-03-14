@@ -32,10 +32,10 @@
 
 		<div class="store-menu">
 			<ul class="clearfix">
-				<li class="sel-menu"><a id="sel-menu" href="">메뉴</a></li>
-				<li id="resv-list"><a href="">예약리스트</a></li>
-				<li id="description"><a href="">가게상세정보</a></li>
-				<li id="review"><a href="">리뷰</a></li>
+				<li class="sel-menu"><a id="sel-menu" href="${pageContext.request.contextPath}/store/${map.bizVo.storeNo}/orderFirst">메뉴</a></li>
+				<li id="resv-list"><a href="${pageContext.request.contextPath}/store/${map.bizVo.storeNo}/reserve">예약리스트</a></li>
+				<li id="description"><a href="${pageContext.request.contextPath}/store/${map.bizVo.storeNo}/description">가게상세정보</a></li>
+				<li id="review"><a href="${pageContext.request.contextPath}/store/${map.bizVo.storeNo}/review">리뷰</a></li>
 			</ul>
 		</div>
 		<!-- //store menu -->
@@ -233,9 +233,8 @@
 			var minPrice = parseInt(document.getElementById('min-price').innerText);
 			console.log(orderPrice);
 			console.log(minPrice);
-			var result = orderPrice >= minPrice;
-			console.log(result);
-			if( result){
+			
+			if( orderPrice >= minPrice){
 				$("#order-btn").html('<button type="button" class="btn-ordering">바로주문하기</button>');	
 			} else {
 				$("#order-btn").html('<button type="button" class="btn-ordering" disabled="disabled">바로주문하기</button>');
@@ -487,6 +486,7 @@
 		var no = ${sessionScope.authUser.no};
 		var storeNo = ${map.bizVo.storeNo};
 		var fee = document.getElementById('fee').innerText;
+		var finalPay = totalPrice;
 		var address = document.getElementById('deliveryAdr').innerText;
 		var storeReq = $('[name="store-require"]').val();
 		var deliveryReq = $('[name="deliver-require"]').val();
@@ -497,6 +497,7 @@
 		var orderInfo = {no : no,
 						 storeNo : storeNo,
 						 fee : fee,
+						 finalPay : finalPay,
 						 address : address,
 						 storeReq : storeReq,
 						 deliveryReq : deliveryReq,
@@ -513,23 +514,17 @@
 			url : "${pageContext.request.contextPath }/store/${map.bizVo.storeNo}/orderInfo", //요청 보낼 주소		
 			type : "post",
 			contentType : "application/json",
-			data : JSON.stringify(orderInfo) //자바스크립트 객체를 json 형식으로 변경
+			data : JSON.stringify(orderInfo), //자바스크립트 객체를 json 형식으로 변경
 
 			/* 응답 */
-			//dataType : "json",
-			//success : function(map) {
-				/*성공시 처리해야될 코드 작성*/
-			//	console.log(map);
-			//	menuInfo(map);
+			dataType : "json",
+			success : function() {
+				window.location.href="${pageContext.request.contextPath }/mypage/orderList"
 				
-				////////////////////////////
-			//	optionCateList = map.optionCateList
-				
-				
-			//},
-			//error : function(XHR, status, error) {
-		//		console.error(status + " : " + error);
-		//	}
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
 			
 		});
 	});

@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.javaex.vo.BusinessVo;
+import com.javaex.vo.MenuInfoVo;
 import com.javaex.vo.MenuOptionVo;
 import com.javaex.vo.OrderInfoVo;
 import com.javaex.vo.OrderVo;
+import com.javaex.vo.SelOptVo;
 
 @Repository
 public class OrderDao {
@@ -105,6 +107,29 @@ public class OrderDao {
 		
 		int count = sqlSession.insert("order.insertPersonalOrder",oVo);
 		System.out.println(count+"건 삽입 성공(personal-order)");
+	}
+	
+	/* 주문메뉴 테이블에 정보 삽입 */
+	public void addOrderMenu(MenuInfoVo orderMenu) {
+		System.out.println("[OrderDao.addOrderMenu()]");
+		
+		int count = sqlSession.insert("order.insertOrderMenu",orderMenu);
+		System.out.println(count+"건 삽입 성공(order-menu)");
+	}
+	
+	/* 주문옵션 테이블에 정보 삽입 */
+	public void addOrderOpt(SelOptVo selOpt) {
+		System.out.println("[OrderDao.addOrderOpt()]");
+		
+		int count = sqlSession.insert("order.insertOrderOption", selOpt);
+		System.out.println(count+"건 삽입 성공(order-option)");
+	}
+	
+	/* 참여예약 주문 정보 가져오기 */
+	public OrderVo getOrderInfo(int orderNo) {
+		System.out.println("[OrderDao.getOrderInfo()]");
+		
+		return sqlSession.selectOne("order.selectOrderInfo", orderNo); 
 	}
 	
 	

@@ -4,6 +4,7 @@ import java.util.List;
 
 public class MenuInfoVo {
 	private int orderMenuNo;
+	private int pOrderNo;
 	private int menuNo;
 	private String menuName;
 	private int menuPrice;
@@ -16,10 +17,11 @@ public class MenuInfoVo {
 		super();
 	}
 	
-	public MenuInfoVo(int orderMenuNo, int menuNo, String menuName, int menuPrice, int orderCount,
+	public MenuInfoVo(int orderMenuNo, int pOrderNo, int menuNo, String menuName, int menuPrice, int orderCount,
 			List<OptInfoVo> optInfoArr) {
 		super();
 		this.orderMenuNo = orderMenuNo;
+		this.pOrderNo = pOrderNo;
 		this.menuNo = menuNo;
 		this.menuName = menuName;
 		this.menuPrice = menuPrice;
@@ -28,16 +30,20 @@ public class MenuInfoVo {
 	}
 
 
-
-
-
-
 	public int getOrderMenuNo() {
 		return orderMenuNo;
 	}
 
 	public void setOrderMenuNo(int orderMenuNo) {
 		this.orderMenuNo = orderMenuNo;
+	}
+	
+	public int getpOrderNo() {
+		return pOrderNo;
+	}
+
+	public void setpOrderNo(int pOrderNo) {
+		this.pOrderNo = pOrderNo;
 	}
 
 	public int getMenuNo() {
@@ -85,10 +91,15 @@ public class MenuInfoVo {
 	
 	@Override
 	public String toString() {
-		return "MenuInfoVo [orderMenuNo=" + orderMenuNo + ", menuNo=" + menuNo + ", menuName=" + menuName
-				+ ", menuPrice=" + menuPrice + ", orderCount=" + orderCount + ", optInfoArr=" + optInfoArr + "]";
+		return "MenuInfoVo [orderMenuNo=" + orderMenuNo + ", pOrderNo=" + pOrderNo + ", menuNo=" + menuNo
+				+ ", menuName=" + menuName + ", menuPrice=" + menuPrice + ", orderCount=" + orderCount + ", optInfoArr="
+				+ optInfoArr + "]";
 	}
 
+	
+	
+	
+	
 	
 	
 	

@@ -8,6 +8,7 @@ public class OrderInfoVo {
 	private int no;
 	private int storeNo;
 	private int fee;
+	private int finalPay;
 	private String address;
 	private String storeReq;
 	private String deliveryReq;
@@ -22,14 +23,16 @@ public class OrderInfoVo {
 		super();
 	}
 	
-	public OrderInfoVo(int orderNo, int pOrderNo, int no, int storeNo, int fee, String address, String storeReq,
-			String deliveryReq, int people, String orderDate, int orderStatus, List<MenuInfoVo> menuInfoArr) {
+	public OrderInfoVo(int orderNo, int pOrderNo, int no, int storeNo, int fee, int finalPay, String address,
+			String storeReq, String deliveryReq, int people, String orderDate, int orderStatus,
+			List<MenuInfoVo> menuInfoArr) {
 		super();
 		this.orderNo = orderNo;
 		this.pOrderNo = pOrderNo;
 		this.no = no;
 		this.storeNo = storeNo;
 		this.fee = fee;
+		this.finalPay = finalPay;
 		this.address = address;
 		this.storeReq = storeReq;
 		this.deliveryReq = deliveryReq;
@@ -38,6 +41,8 @@ public class OrderInfoVo {
 		this.orderStatus = orderStatus;
 		this.menuInfoArr = menuInfoArr;
 	}
+
+
 
 
 
@@ -80,6 +85,15 @@ public class OrderInfoVo {
 	public void setFee(int fee) {
 		this.fee = fee;
 	}
+	
+	public int getFinalPay() {
+		return finalPay;
+	}
+
+	public void setFinalPay(int finalPay) {
+		this.finalPay = finalPay;
+	}
+
 	public String getAddress() {
 		return address;
 	}
@@ -123,16 +137,16 @@ public class OrderInfoVo {
 		this.menuInfoArr = menuInfoArr;
 	}
 
-	
-	
 	@Override
 	public String toString() {
 		return "OrderInfoVo [orderNo=" + orderNo + ", pOrderNo=" + pOrderNo + ", no=" + no + ", storeNo=" + storeNo
-				+ ", fee=" + fee + ", address=" + address + ", storeReq=" + storeReq + ", deliveryReq=" + deliveryReq
-				+ ", people=" + people + ", orderDate=" + orderDate + ", orderStatus=" + orderStatus + ", menuInfoArr="
-				+ menuInfoArr + "]";
+				+ ", fee=" + fee + ", finalPay=" + finalPay + ", address=" + address + ", storeReq=" + storeReq
+				+ ", deliveryReq=" + deliveryReq + ", people=" + people + ", orderDate=" + orderDate + ", orderStatus="
+				+ orderStatus + ", menuInfoArr=" + menuInfoArr + "]";
 	}
 
+	
+	
 	
 	
 	

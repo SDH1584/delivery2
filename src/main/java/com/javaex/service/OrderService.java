@@ -9,9 +9,12 @@ import org.springframework.stereotype.Service;
 
 import com.javaex.dao.OrderDao;
 import com.javaex.vo.BusinessVo;
+import com.javaex.vo.MenuInfoVo;
 import com.javaex.vo.MenuOptionVo;
+import com.javaex.vo.OptInfoVo;
 import com.javaex.vo.OrderInfoVo;
 import com.javaex.vo.OrderVo;
+import com.javaex.vo.SelOptVo;
 
 @Service
 public class OrderService {
@@ -48,7 +51,7 @@ public class OrderService {
 	
 	/* 가게상세-메뉴리스트 가져오기 */
 	public Map<String, Object> menuList(int storeNo, int no) {
-		System.out.println("[OrderService.menuList()]");
+		System.out.println("[OrderService.menuList(2)]");
 		
 		BusinessVo bVo = new BusinessVo();
 		bVo.setNo(no);
@@ -71,8 +74,10 @@ public class OrderService {
 		return map;		
 	}
 	
+	
+	/* 가게상세-메뉴리스트 가져오기-로그인 전 */
 	public Map<String, Object> menuList(int storeNo) {
-		System.out.println("[OrderService.menuList()]");
+		System.out.println("[OrderService.menuList(1)]");
 		
 		BusinessVo bizVo=orderDao.getBiz(storeNo);//가게 기본정보
 		List<MenuOptionVo> menuCateList = orderDao.getMenuCateList(storeNo);//메뉴카테고리리스트
@@ -83,6 +88,25 @@ public class OrderService {
 		map.put("menuCateList", menuCateList);
 		map.put("menuList", menuList);
 		
+		System.out.println(map);
+		
+		return map;		
+	}
+	
+	/* 가게상세-메뉴리스트 가져오기-예약참여 */
+	public Map<String, Object> menuList(int storeNo, int orderNo, int no) {
+		System.out.println("[OrderService.menuList(3)]");
+		
+		BusinessVo bizVo=orderDao.getBiz(storeNo);//가게 기본정보
+		List<MenuOptionVo> menuCateList = orderDao.getMenuCateList(storeNo);//메뉴카테고리리스트
+		List<MenuOptionVo> menuList = orderDao.getMenuList(storeNo);//메뉴리스트
+		OrderVo orderVo = orderDao.getOrderInfo(orderNo);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("bizVo", bizVo);
+		map.put("menuCateList", menuCateList);
+		map.put("menuList", menuList);
+		map.put("orderVo", orderVo);
 		System.out.println(map);
 		
 		return map;		
@@ -111,7 +135,60 @@ public class OrderService {
 		System.out.println("[OrderService.saveOrderInfo()]");
 	
 		orderDao.addOrderGroup(oVo); //주문그룹테이블에 정보 삽입
-		//orderDao.addPersonalOrder(oVo); //개인주문정보테이블에 정보 삽입
+		orderDao.addPersonalOrder(oVo); //개인주문정보테이블에 정보 삽입
+		
+		List<MenuInfoVo> orderMenuList = oVo.getMenuInfoArr();
+		for(int i=0; i<orderMenuList.size(); i++) {
+			MenuInfoVo orderMenu = orderMenuList.get(i);
+			orderMenu.setpOrderNo(oVo.getpOrderNo());
+			orderDao.addOrderMenu(orderMenu); // 주문메뉴테이블에 정보 삽입
+			System.out.println("menuList");
+			
+			List<OptInfoVo> optCateList = orderMenu.getOptInfoArr();
+			for(int j=0; j<optCateList.size(); j++) {
+				OptInfoVo optCate = optCateList.get(j);
+				System.out.println("cateList");
+				
+				List<SelOptVo> selOptList = optCate.getSelOptArr();
+				for(int k=0; k<selOptList.size(); k++) {
+					SelOptVo selOpt = selOptList.get(k);
+					selOpt.setOrderMenuNo(orderMenu.getOrderMenuNo());
+					selOpt.setOptionCnt(orderMenu.getOrderCount());
+					orderDao.addOrderOpt(selOpt); // 주문옵션테이블에 정보 삽입
+					System.out.println("optionList");
+				}
+			}	
+		}
+	}
+	
+	/* 주문정보 저장하기 */
+	public void saveOrderInfo2(OrderInfoVo oVo) {
+		System.out.println("[OrderService.saveOrderInfo()]");
+	
+		orderDao.addPersonalOrder(oVo); //개인주문정보테이블에 정보 삽입
+		
+		List<MenuInfoVo> orderMenuList = oVo.getMenuInfoArr();
+		for(int i=0; i<orderMenuList.size(); i++) {
+			MenuInfoVo orderMenu = orderMenuList.get(i);
+			orderMenu.setpOrderNo(oVo.getpOrderNo());
+			orderDao.addOrderMenu(orderMenu); // 주문메뉴테이블에 정보 삽입
+			System.out.println("menuList");
+			
+			List<OptInfoVo> optCateList = orderMenu.getOptInfoArr();
+			for(int j=0; j<optCateList.size(); j++) {
+				OptInfoVo optCate = optCateList.get(j);
+				System.out.println("cateList");
+				
+				List<SelOptVo> selOptList = optCate.getSelOptArr();
+				for(int k=0; k<selOptList.size(); k++) {
+					SelOptVo selOpt = selOptList.get(k);
+					selOpt.setOrderMenuNo(orderMenu.getOrderMenuNo());
+					selOpt.setOptionCnt(orderMenu.getOrderCount());
+					orderDao.addOrderOpt(selOpt); // 주문옵션테이블에 정보 삽입
+					System.out.println("optionList");
+				}
+			}	
+		}
 	}
 	
 }

@@ -170,9 +170,70 @@
 	
 	<!-- 주문정보 - 개인 주문정보 삽입 -->
 	<insert id= "insertPersonalOrder" parameterType = "com.javaex.vo.OrderInfoVo">
-		<![CDATA[
+			<selectKey keyProperty="pOrderNo" resultType="int" order="BEFORE">	
+				select SEQ_PERSONAL_ORDER.nextval from dual
+			</selectKey>
 		
+		<![CDATA[
+			insert into personal_order
+			values (#{pOrderNo},
+			        #{orderNo},
+			        #{no},
+			        #{finalPay},
+			        #{fee},
+			        #{storeReq},
+			        '',
+			        0)
 		]]>
 	</insert>
+	
+	<!-- 주문정보 - 주문메뉴 삽입 -->
+	<insert id= "insertOrderMenu" parameterType = "com.javaex.vo.MenuInfoVo">
+			<selectKey keyProperty="orderMenuNo" resultType="int" order="BEFORE">	
+				select SEQ_ORDER_MENU.nextval from dual
+			</selectKey>
+		
+		<![CDATA[
+			insert into order_menu
+			values (#{orderMenuNo},
+			        #{pOrderNo},
+			        #{menuNo},
+			        #{orderCount},
+			        #{menuPrice})
+		]]>
+	</insert>
+	
+	<!-- 주문정보 - 주문메뉴옵션 삽입 -->
+	<insert id= "insertOrderOption" parameterType = "com.javaex.vo.SelOptVo">		
+		<![CDATA[
+			insert into order_menu_option
+			values (SEQ_ORDER_MENU_OPTION.nextval,
+			        #{orderMenuNo},
+			        #{optionNo},
+			        #{optionPrice},
+			        #{optionCnt})
+		]]>
+	</insert>
+	
+	<!-- 예약 참여 주문 정보 가져오기 -->
+	<select id= "selectOrderInfo" parameterType = "int" resultType="com.javaex.vo.OrderVo">
+		<![CDATA[
+			select  og.order_no orderNo,
+			        og.people people,
+			        po.countpeople countPeople,
+			        po.finalpaysum finalPaySum,
+			        po.p_fee pFee,
+			        to_char(og.order_date,'yyyy-mm-dd hh24:mi') orderDate,
+			        og.delivery_m_adr deliveryMAdr
+			from order_group og, (select count(*) countPeople, 
+			                             sum(final_pay) finalPaySum, 
+			                             order_no,
+			                             p_Fee
+			                      from personal_order
+			                      group by order_no, p_Fee)po
+			where og.order_no = #{orderNo}
+			and og.order_no = po.order_no
+		]]>
+	</select>
 	
 </mapper>
