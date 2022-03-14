@@ -24,7 +24,7 @@
              from business bs, order_group og, (select order_no, count(*) countPeople 
 								                from personal_order
 								                group by order_no)po
-			 where bs.store_no=og.no
+			 where bs.store_no=og.store_no
 			 and og.order_no=po.order_no	
 			 and po.countpeople <> og.people
 			 and og.order_status=0
