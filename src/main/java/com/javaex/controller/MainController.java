@@ -26,7 +26,7 @@ public class MainController {
 		
 		//모델이 담아 jsp에 포워딩 한다
 		model.addAttribute("storeList", storeList);
-		
+		System.out.println(storeList);
 		return "user/main";
 	}
 	
