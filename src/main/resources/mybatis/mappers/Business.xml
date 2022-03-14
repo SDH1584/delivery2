@@ -114,20 +114,19 @@
 
 	<!-- 가게 카테고리 등록 -->
 	<insert id="storecateadd" parameterType="StorecateVo">
-		
+		<selectKey keyProperty="store_cate_no" resultType="int"
+			order="BEFORE">
+			select seq_store_cate.nextval from dual
+		</selectKey>
 		<![CDATA[
 				
 				insert into store_cate 
-				values(seq_store_cate.nextval, #{store_cate_name})
+				values(#{store_cate_no}, #{store_cate_name})
 		]]>
 	</insert>
 
 	<!-- 가게 다대다 키 등록 -->
 	<insert id="storecate" parameterType="BizstorecateVo">
-	
-		<selectKey keyProperty="store_cate_no" resultType="BizstorecateVo" order="BEFORE">
-			select seq_store_cate.nextval from store_cate
-		</selectKey>
 		
 		<![CDATA[
 				

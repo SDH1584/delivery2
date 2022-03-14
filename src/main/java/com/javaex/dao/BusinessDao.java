@@ -92,7 +92,7 @@ public class BusinessDao {
 	// 가게 카테고리 다대다 추가
 	public int storecate(BizstorecateVo BizstorecateVo) {
 
-		System.out.println("[BusinessDao.storecateadd()]");
+		System.out.println("[BusinessDao.storecate()]");
 		int count = sqlSession.insert("Business.storecate", BizstorecateVo);
 		System.out.println("[" + count + "건이 가게 카테고리 다대다가 추가 되었습니다(BusinessDao)");
 		return count;
