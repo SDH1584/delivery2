@@ -30,7 +30,7 @@
 				<!-- 사용자 로그인 성공 -->
 				<ul class="ullink2">
 					<li><a href="" class="link2">${sessionScope.authUser.id}님</a></li>
-					<li><a href="${pageContext.request.contextPath}/user/c_logout" class="link2">로그아웃</a></li>
+					<li><a href="${pageContext.request.contextPath}/user/logout" class="link2">로그아웃</a></li>
 					<li><a href="${pageContext.request.contextPath}/mypage/editForm" class="link2">마이페이지</a></li>
 					<li><a href="${pageContext.request.contextPath}/mypage/orderList" class="link2">주문내역</a></li>
 				</ul>
