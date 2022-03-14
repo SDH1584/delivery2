@@ -27,7 +27,7 @@
 					<li><a href="" class="link2">${sessionScope.authUser.id}님</a></li>
 					<li><a href="${pageContext.request.contextPath}/user/logout" class="link2">로그아웃</a></li>
 					<li><a href="${pageContext.request.contextPath}/mypage/editForm" class="link2">마이페이지</a></li>
-					<li><a href="${pageContext.request.contextPath}/mypage/orderList" class="link2">주문내역</a></li>
+					<li><a href="${pageContext.request.contextPath}/mypage/orderList-now" class="link2">주문현황</a></li>
 				</ul>
 			</c:otherwise>
 		</c:choose>

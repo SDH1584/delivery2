@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+/* 마이페이지 주문 내역 */
+#mypage .orderList {
+	margin: 20px 0 40px 0;
+}
+
+#mypage .orderList .btn {
+	display: inline-block;
+	margin-left: 5px;
+	vertical-align: top;
+	border-radius: 3px;
+	font-weight: 700;
+	font-size: 13px;
+	line-height: 23px;
+	text-align: center;
+	outline: none;
+	border: 1px solid #5f0080;
+	background-color: #fff;
+	color: #5f0080;
+	padding: 0;
+}
+
+#mypage .orderList .btn_edit {
+	width: 40px;
+}
+
+#mypage .orderList .btn_review {
+	width: 60px;
+}
+
+#mypage tr:hover {
+	cursor: pointer;
+}
