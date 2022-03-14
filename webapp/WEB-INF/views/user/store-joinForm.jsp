@@ -45,8 +45,7 @@
 										function setThumbnail(event) {
 											var reader = new FileReader();
 											reader.onload = function(event) {
-												document
-														.getElementById("profile_photo").src = event.target.result;
+												$("#profile_photo").attr("src", event.target.result);
 											}
 											reader
 													.readAsDataURL(event.target.files[0]);
@@ -109,8 +108,7 @@
 												{
 													oncomplete : function(data) {
 														console.log(data);
-														document
-																.getElementById("s_storeMAdr").value = data.address;
+														$("#s_storeMAdr").val(data.jibunAddress);
 
 														// 구글맵 API 사용하여 위경도 받아오기
 														var address = data.address;
