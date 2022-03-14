@@ -84,6 +84,7 @@ public class BusinessService {
 		
 		businessDao.storecateadd(storecateVo);
 		//다대다 넘김
+		BizstorecateVo.setStore_cate_no(storecateVo.getStore_cate_no());
 		businessDao.storecate(BizstorecateVo);
 	}
 
