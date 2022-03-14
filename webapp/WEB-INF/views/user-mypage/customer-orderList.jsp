@@ -48,7 +48,6 @@
 									<tr>
 										<th>주문 날짜</th>
 										<th>주문 가게</th>
-										<th>주문 메뉴x수량</th>
 										<th>주문 금액</th>
 										<th>주문 상태</th>
 									</tr>
@@ -60,7 +59,6 @@
 												<tr>
 													<td>${orderListVo.order_date }</td>
 													<td>${orderListVo.store_name }</td>
-													<td>${orderListVo.menu_name }x${orderListVo.count }</td>
 													<td>${orderListVo.final_pay }</td>
 													<td><c:choose>
 															<c:when test="${orderListVo.order_status == 0 }">
