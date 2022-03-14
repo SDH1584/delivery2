@@ -19,14 +19,14 @@
 			<!-- aside-->
 			<div id="aside">
 				<ul>
-					<li><a href="${pageContext.request.contextPath}/store/menuManage" class="link2">메뉴추가</a></li>
+					<li><a href="${pageContext.request.contextPath}/admin/menuManage" class="link2">메뉴추가</a></li>
 					<li><a href="https://www.naver.com/" class="link2">댓글 게시판</a></li>
 					<li><a href="https://www.naver.com/" class="link2">리뷰 게시판</a></li>
 				</ul>
 			</div>
 			<!-- aside-->
 			<div id="main">
-				<form method="post" action="${pageContext.request.contextPath}/store/modify" enctype="multipart/form-data">
+				<form method="post" action="${pageContext.request.contextPath}/admin/modify" enctype="multipart/form-data">
 					<div>
 						<table id="table1">
 							<tbody>
@@ -84,54 +84,15 @@
 									<th style="text-align: center;">휴일체크</th>
 								</tr>
 								<tr>
-									<th>월<input type="hidden" name="day" value="월"></th>
+									<th >월<input type="hidden" name="day" value="월"></th>
 									<td><input type="text" name="store_no" value=""></td>
 									<td><span><input type="text" name="close_time" value=""></span></td>
 									<td><span><input type="checkbox" name="day_off" value="1" class="chbtn"></span></td>
 								</tr>
-
-								<tr>
-									<th>화<input type="hidden" name="day" value="화"></th>
-									<td><input type="text" name="store_no" value="1"></td>
-									<td><span><input type="text" name="close_time" value=""></span></td>
-									<td><span><input type="checkbox" name="day_off" value="1" class="chbtn"></span></td>
+                                <tr>
+									<th colspan="2">가게 카테고리</th>
+									<td colspan="2"><button type="button" class="catebtnadd">카테고리 추가</button></td>
 								</tr>
-
-								<tr>
-									<th>수<input type="hidden" name="day" value="수"></th>
-									<td><input type="text" name="store_no" value=""></td>
-									<td><span><input type="text" name="close_time" value=""></span></td>
-									<td><span><input type="checkbox" name="day_off" value="1" class="chbtn"></span></td>
-								</tr>
-
-								<tr>
-									<th>목<input type="hidden" name="day" value="목"></th>
-									<td><input type="text" name="store_no" value=""></td>
-									<td><span><input type="text" name="close_time" value=""></span></td>
-									<td><span><input type="checkbox" name="day_off" value="1" class="chbtn"></span></td>
-								</tr>
-
-								<tr>
-									<th>금<input type="hidden" name="day" value="금"></th>
-									<td><input type="text" name="store_no" value=""></td>
-									<td><span><input type="text" name="close_time" value=""></span></td>
-									<td><span><input type="checkbox" name="day_off" value="1" class="chbtn"></span></td>
-								</tr>
-
-								<tr>
-									<th>토<input type="hidden" name="day" value="토"></th>
-									<td><input type="text" name="store_no" value=""></td>
-									<td><span><input type="text" name="close_time" value=""></span></td>
-									<td><span><input type="checkbox" name="day_off" value="1" class="chbtn"></span></td>
-								</tr>
-
-								<tr>
-									<th>일<input type="hidden" name="day" value="일"></th>
-									<td><input type="text" name="store_no" value=""></td>
-									<td><span><input type="text" name="close_time" value=""></span></td>
-									<td><span><input type="checkbox" name="day_off" value="1" class="chbtn"></span></td>
-								</tr>
-
 							</tbody>
 						</table>
 					</div>
@@ -188,6 +149,29 @@
 			</div>
 		</div>
 
+        <div class="modal">
+
+            <div class="modal_body">
+            <form action="${pageContext.request.contextPath}/admin/storecate">
+                <select name="store_cate_name" class="sort">
+                    <option value="one">1인분주문</option>
+                    <option value="Chinese">중국집</option>
+                    <option value="Korean">한식</option>
+                    <option value="chicken">치킨</option>
+                    <option value="jpane">일식/돈가스</option>
+                    <option value="convenience">편의점/마트</option>
+                    <option value="fran">프랜차이즈</option>
+                    <option value="pizza">피자/양식</option>
+                    <option value="night">야식</option>
+                    <option value="jokbal">족발/보쌈</option>
+                    <option value="cafe">카페/디저트</option>
+                    <option value="Koreansnak">카페/분식</option>
+                </select>
+                <button type="submit" class="catebtnadd2">카테고리 등록</button>
+            </form>
+            </div>
+        </div>
+
 	</div>
 	<!-- 푸터 -->
 	<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
@@ -236,6 +220,31 @@ function setThumbnail(event) {
 	}
 	reader.readAsDataURL(event.target.files[0]);
 }
+</script>
+
+<script>
+    //카테고리 등록 버튼 클릭시
+        const body = document.querySelector('body');
+        const modal = document.querySelector('.modal');
+        const btnOpenPopup = document.querySelector('.catebtnadd');
+  
+        btnOpenPopup.addEventListener('click', () => {
+          modal.classList.toggle('show');
+  
+          if (modal.classList.contains('show')) {
+            body.style.overflow = 'hidden';
+          }
+        });
+  
+        modal.addEventListener('click', (event) => {
+          if (event.target === modal) {
+            modal.classList.toggle('show');
+  
+            if (!modal.classList.contains('show')) {
+              body.style.overflow = 'auto';
+            }
+          }
+        });
 </script>
 
 </html>

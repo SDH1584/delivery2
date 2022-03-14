@@ -75,7 +75,8 @@
 	</insert>
 
 	<!-- 메뉴 카테고리 리스트 -->
-	<select id="menucatelist" parameterType="MenucateVo" resultType="MenucateVo">
+	<select id="menucatelist" parameterType="MenucateVo"
+		resultType="MenucateVo">
 		<![CDATA[
 			 	select 
 						menu_cate_no,
@@ -110,5 +111,28 @@
 			 	where menu_cate_no= #{menu_cate_no}
 		]]>
 	</select>
+
+	<!-- 가게 카테고리 등록 -->
+	<insert id="storecateadd" parameterType="StorecateVo">
+		
+		<![CDATA[
+				
+				insert into store_cate 
+				values(seq_store_cate.nextval, #{store_cate_name})
+		]]>
+	</insert>
+
+	<!-- 가게 다대다 키 등록 -->
+	<insert id="storecate" parameterType="BizstorecateVo">
 	
+		<selectKey keyProperty="store_cate_no" resultType="BizstorecateVo" order="BEFORE">
+			select seq_store_cate.nextval from store_cate
+		</selectKey>
+		
+		<![CDATA[
+				
+				insert into biz_store_cate 
+				values(seq_biz_store_cate.nextval, #{store_cate_no},#{store_no})
+		]]>
+	</insert>
 </mapper>

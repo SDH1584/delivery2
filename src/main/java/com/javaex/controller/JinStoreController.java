@@ -15,13 +15,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.service.BusinessService;
 import com.javaex.service.JinFileService;
+import com.javaex.vo.BizstorecateVo;
 import com.javaex.vo.BusinessVo;
 import com.javaex.vo.MenuVo;
 import com.javaex.vo.MenucateVo;
+import com.javaex.vo.StorecateVo;
 import com.javaex.vo.UserVo;
 
 @Controller
-@RequestMapping("/store")
+@RequestMapping("/admin")
 public class JinStoreController {
 	@Autowired
 	private BusinessService businessService;
@@ -30,7 +32,7 @@ public class JinStoreController {
 	private JinFileService jinfileService;
 
 	// 가게정보수정 페이지
-	@RequestMapping("/storeEdiForm")
+	@RequestMapping("/editForm")
 	public String storeEdiForm(HttpSession session, Model model) {
 		System.out.println("JinStoreController/storeEdiForm");
 
@@ -77,7 +79,7 @@ public class JinStoreController {
 		businessService.Businessmodify(businessVo);
 
 		// 영업시간 수정
-		return "redirect:storeEdiForm";
+		return "redirect:editForm";
 
 	}
 	
@@ -147,7 +149,7 @@ public class JinStoreController {
 		return "redirect:menuManage";
 	}
 	
-	
+	//메뉴등록
 	@RequestMapping("/menuadd")
 	public String menuadd(@ModelAttribute MenuVo menuVo,
 			@RequestParam("file") MultipartFile file) {
@@ -161,4 +163,22 @@ public class JinStoreController {
 		return "redirect:menuManage";
 	}
 	
+	
+	//가게 카테고리 추가
+	@RequestMapping("/storecate")
+	public String storecate(@ModelAttribute StorecateVo storecateVo,
+			@ModelAttribute BizstorecateVo BizstorecateVo,
+			HttpSession session) {
+		
+		System.out.println("controll storecate");
+		// 가게번호
+		Map<String, Object> sessionMap = (Map<String, Object>) session.getAttribute("map");
+		int storeNo = Integer.parseInt(String.valueOf(sessionMap.get("STORE_NO")));
+		
+		//가게 카테고리추가
+		BizstorecateVo.setStore_no(storeNo);
+		businessService.storecateadd(storecateVo,BizstorecateVo);
+
+		return "redirect:editForm";
+	}
 }

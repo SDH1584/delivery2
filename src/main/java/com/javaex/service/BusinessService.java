@@ -2,15 +2,15 @@ package com.javaex.service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.javaex.dao.BusinessDao;
+import com.javaex.vo.BizstorecateVo;
 import com.javaex.vo.BusinessVo;
 import com.javaex.vo.MenuVo;
 import com.javaex.vo.MenucateVo;
+import com.javaex.vo.StorecateVo;
 import com.javaex.vo.UserVo;
 
 @Service
@@ -70,13 +70,21 @@ public class BusinessService {
 		businessDao.menuadd(menuVo);
 	}
 	
-	
-	
 
 	//메뉴 리스트
 	public List<MenuVo> menulistpar(MenuVo menuVo) {
 		System.out.println("menulist service");
 		return businessDao.menulistpar(menuVo);
+	}
+	
+	//가게 카테고리 추가
+	public void storecateadd(StorecateVo storecateVo,BizstorecateVo BizstorecateVo) {
+		System.out.println("service storecate = "+ storecateVo);
+		System.out.println(BizstorecateVo);
+		
+		businessDao.storecateadd(storecateVo);
+		//다대다 넘김
+		businessDao.storecate(BizstorecateVo);
 	}
 
 }

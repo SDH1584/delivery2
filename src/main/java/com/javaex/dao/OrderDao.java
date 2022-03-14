@@ -120,7 +120,6 @@ public class OrderDao {
 	/* 주문옵션 테이블에 정보 삽입 */
 	public void addOrderOpt(SelOptVo selOpt) {
 		System.out.println("[OrderDao.addOrderOpt()]");
-		
 		int count = sqlSession.insert("order.insertOrderOption", selOpt);
 		System.out.println(count+"건 삽입 성공(order-option)");
 	}

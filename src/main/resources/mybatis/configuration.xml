@@ -9,7 +9,9 @@
 			<typeAlias alias="DeliveryVo" type="com.javaex.vo.DeliveryVo" />
 			<typeAlias alias="OpentimeVo" type="com.javaex.vo.OpentimeVo" />
 			<typeAlias alias="MenucateVo" type="com.javaex.vo.MenucateVo" />
+			<typeAlias alias="StorecateVo" type="com.javaex.vo.StorecateVo" />
 			<typeAlias alias="MenuVo" type="com.javaex.vo.MenuVo" />
+			<typeAlias alias="BizstorecateVo" type="com.javaex.vo.BizstorecateVo" />
 	</typeAliases>
 	
 	<mappers>

@@ -1,18 +1,18 @@
 package com.javaex.vo;
 
-public class Store_cateVo {
+public class StorecateVo {
 	
 	private int store_cate_no;
 	private String store_cate_name;
 	
 	
-	public Store_cateVo(int store_cate_no, String store_cate_name) {
+	public StorecateVo(int store_cate_no, String store_cate_name) {
 		this.store_cate_no = store_cate_no;
 		this.store_cate_name = store_cate_name;
 	}
 
 
-	public Store_cateVo() {
+	public StorecateVo() {
 
 	}
 
