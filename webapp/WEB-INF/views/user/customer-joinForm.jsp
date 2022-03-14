@@ -147,7 +147,7 @@
 		
 		if (!id) {
 			console.log("아이디 입력값 없음")
-			alert("아이디를 입력하지 않았습니다.");
+			$("#msg").html("아이디를 입력하지 않았습니다.");
 			return false;
 		} else {
 
@@ -167,10 +167,10 @@
 					console.log("success")
 
 					if (result == 0) {
-						alert("사용할 수 없는 아이디입니다.");
+						console.log("사용불가")
 						$("#cancleBtn").css("visibility", "visible");
 						$("#useBtn").css("visibility", "hidden");
-						$("#msg").html("중복확인 버튼을 눌러주세요.");
+						$("#msg").html("이미 존재하는 아이디입니다.");
 					} else {
 						console.log("사용가능")
 						$("#cancleBtn").css("visibility", "hidden");
