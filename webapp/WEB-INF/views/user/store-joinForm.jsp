@@ -31,7 +31,7 @@
 					<p class="page_sub">
 						<span class="ico">*</span> 필수입력사항
 					</p>
-					<form action="${pageContext.request.contextPath}/user/s_join" method="post" enctype="multipart/form-data">
+					<form action="${pageContext.request.contextPath}/user/s-join" method="post" enctype="multipart/form-data">
 						<table class="tbl_join">
 							<tbody>
 								<tr class="fst">
