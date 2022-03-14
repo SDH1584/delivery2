@@ -21,10 +21,10 @@ public class MypageController {
 	@Autowired
 	private MypageService mypageService;
 	
-	// 주문내역 리스트
-	@RequestMapping(value="/orderList", method= {RequestMethod.GET, RequestMethod.POST})
-	public String orderList(HttpSession session, Model model) {
-		System.out.println("mypageController/orderList");
+	// 주문 현황 리스트
+	@RequestMapping(value="/orderList-now", method= {RequestMethod.GET, RequestMethod.POST})
+	public String orderListNow(HttpSession session, Model model) {
+		System.out.println("mypageController/orderListNow");
 		
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
 		int no = authUser.getNo();
@@ -32,7 +32,21 @@ public class MypageController {
 		List<OrderListVo> orderList = mypageService.getOrderList(no);
 		model.addAttribute("orderList", orderList);
 		System.out.println(orderList);
-		return "user-mypage/customer-orderList";
+		return "user-mypage/customer-orderListNow";
+	}
+	
+	// 주문 내역 리스트
+	@RequestMapping(value="/orderList-old", method= {RequestMethod.GET, RequestMethod.POST})
+	public String orderListOld(HttpSession session, Model model) {
+		System.out.println("mypageController/orderListOld");
+		
+		UserVo authUser = (UserVo) session.getAttribute("authUser");
+		int no = authUser.getNo();
+		System.out.println(no);
+		List<OrderListVo> orderList = mypageService.getOrderList(no);
+		model.addAttribute("orderList", orderList);
+		System.out.println(orderList);
+		return "user-mypage/customer-orderListOld";
 	}
 	
 	// 회원정보 수정
