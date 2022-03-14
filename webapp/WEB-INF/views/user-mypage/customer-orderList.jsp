@@ -21,7 +21,7 @@
 
 		<!-- contents -->
 		<div id="contents" class="clearfix">
-		
+
 			<!-- aside-->
 			<div id="aside">
 				<ul>
@@ -110,16 +110,16 @@
 												</tr>
 											</c:if>
 											<c:if test="${orderListVo.order_status == 4 }">
+												<tr>
+													<td>${orderListVo.order_date }</td>
+													<td>${orderListVo.store_name }</td>
+													<td>${orderListVo.menu_name }x${orderListVo.count }</td>
+													<td>${orderListVo.final_pay }</td>
+													<td>배달완료
+														<button class="btn btn_review">리뷰작성</button>
+													</td>
+												</tr>
 											</c:if>
-											<tr>
-												<td>${orderListVo.order_date }</td>
-												<td>${orderListVo.store_name }</td>
-												<td>${orderListVo.menu_name }x${orderListVo.count }</td>
-												<td>${orderListVo.final_pay }</td>
-												<td>배달완료
-													<button class="btn btn_review">리뷰작성</button>
-												</td>
-											</tr>
 										</c:forEach>
 									</tbody>
 								</table>
