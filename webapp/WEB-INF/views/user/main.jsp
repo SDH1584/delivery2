@@ -103,8 +103,88 @@
 	<!-- //wrap -->
 </body>
 
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDl9EqQnWPqoxn5ZOEOAde3auL9VBp4NYU&callback=initMap&region=kr"></script>
 <script>
 
+function initMap() {
+
+    // 지도 스타일
+    const map = new google.maps.Map(document.getElementById("map"), {
+       zoom : 13,
+       center : {
+          lat : 37.48140579914052,
+          lng : 126.95269053971082
+       },
+    });
+
+    // 마커 정보
+       var locations = [ {
+       place :"서울대입구역",
+       lat : 37.141414,
+       lng : 126.1234124123,
+             
+    } ];
+
+       //DB에 있는 장소 마커 표시
+          $.ajax({
+            type: 'GET',
+            url: 'url',
+            data: {},
+            success: function (response) {
+              if (response['result'] == 'success') {
+                let places = response['places_list']
+                for (let i = 0; i < places.length; i++) {
+                  var place = { lat: places[i]['latitude'], lng: places[i]['longitude'] }
+                  var marker = new google.maps.Marker({ position: place, map: map, title: places[i]['name'] });
+                }
+              }
+            }
+          });      
+    
+    //인포윈도우
+    var infowindow = new google.maps.InfoWindow();
+
+    //마커 생성
+    for (var i = 0; i < locations.length; i++) {
+       var marker = new google.maps.Marker({
+          map : map,
+          //label: locations[i].place,
+          position : new google.maps.LatLng(locations[i].lat,locations[i].lng),
+       });
+
+       google.maps.event.addListener(marker, 'click',
+             (function(marker, i) {
+                return function() {
+                   //html로 표시될 인포 윈도우의 내용
+                   infowindow.setContent(locations[i].place);
+                   //인포윈도우가 표시될 위치
+                   infowindow.open(map, marker);
+
+                }
+             })(marker, i));
+
+       if (marker) {
+          marker.addListener("click", function() {
+             //중심 위치를 클릭된 마커의 위치로 변경
+             map.setCenter(this.getPosition());
+             //마커 클릭 시의 줌 변화
+             map.setZoom(14);
+             /*   window.open('http://https://www.google.com/');*/
+
+            console.log("지도마커클릭")
+            $("#storeLogo").attr("src", storeVo.logoImg);
+			$("#name").text(storeVo.storeName);
+			$("#delivery-num").text(storeVo.countPeople + "/" + storeVo.people);
+			$("#delivery-address").text("주소: " + storeVo.storeMAdr +" "+ storeVo.storeSAdr);
+			$("#delivery-hp").text("전화번호: " + storeVo.storePhone);
+			$("#reserve-btn").attr("href", "${pageContext.request.contextPath}/store/"+ storeVo.storeNo +"/reserv");
+				
+          });
+       }
+
+    }
+
+ }
 	
 	
 	//가게 상세정보 버튼 클릭할때
@@ -135,7 +215,6 @@
 				$("#delivery-num").text(storeVo.countPeople + "/" + storeVo.people);
 				$("#delivery-address").text("주소: " + storeVo.storeMAdr +" "+ storeVo.storeSAdr);
 				$("#delivery-hp").text("전화번호: " + storeVo.storePhone);
-				
 				$("#reserve-btn").attr("href", "${pageContext.request.contextPath}/store/"+ storeVo.storeNo +"/reserv");
 				
 				//지도
