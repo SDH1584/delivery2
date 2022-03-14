@@ -27,6 +27,7 @@
 			 where bs.store_no=og.no
 			 and og.order_no=po.order_no	
 			 and po.countpeople <> og.people
+			 and og.order_status=0
 			 order by og.order_no desc
 		]]>
 	</select>
