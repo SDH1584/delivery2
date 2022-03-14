@@ -166,7 +166,7 @@ public class UserController {
 
 	// 사용자 로그아웃
 	@RequestMapping("/logout")
-	public String c_logout(HttpSession session) {
+	public String logout(HttpSession session) {
 		System.out.println("userController/c_logout");
 
 		// 세션의 값을 삭제한다.

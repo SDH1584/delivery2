@@ -16,7 +16,7 @@
 
 				<ul class="ullink2">
 					<li><a href="" class="link2">${sessionScope.map.ID}님의 가게</a></li>
-					<li><a href="" class="link2">로그아웃</a></li>
+					<li><a href="${pageContext.request.contextPath}/user/logout" class="link2">로그아웃</a></li>
 				</ul>
 			</ul>
 		</div>
