@@ -19,7 +19,7 @@
 			<!-- aside-->
 			<div id="aside">
 				<ul>
-					<li><a href="${pageContext.request.contextPath}/store/menuManage" class="link2">메뉴추가</a></li>
+					<li><a href="${pageContext.request.contextPath}/admin/menuManage" class="link2">메뉴추가</a></li>
 					<li><a href="https://www.naver.com/" class="link2">댓글 게시판</a></li>
 					<li><a href="https://www.naver.com/" class="link2">리뷰 게시판</a></li>
 				</ul>
@@ -28,7 +28,7 @@
 			<div id="main">
 				<div class="modal">
 					<div class="modal_body">
-						<form method="get" action="${pageContext.request.contextPath}/store/menucataadd">
+						<form method="get" action="${pageContext.request.contextPath}/admin/menucataadd">
 							<input type="text" name="menu_cate_name" value="" class="textcate">
 							<button type="submit" class="catebtnadd2">카테고리 등록</button>
 						</form>
@@ -42,7 +42,7 @@
 						</li>
 						<li class="category">카테고리</li>
 						<c:forEach items="${requestScope.menucatelist}" var="menucatelist">
-							<li class="category"><a href="${pageContext.request.contextPath}/store/menuManage2?menu_cate_no=${menucatelist.menu_cate_no}">${menucatelist.menu_cate_name}</a></li>
+							<li class="category"><a href="${pageContext.request.contextPath}/admin/menuManage2?menu_cate_no=${menucatelist.menu_cate_no}">${menucatelist.menu_cate_name}</a></li>
 						</c:forEach>
 					</ul>
 				</div>
@@ -53,7 +53,7 @@
 				<div class="modal2">
 
 					<div class="modal_body2">
-						<form method="post" action="${pageContext.request.contextPath}/store/menuadd" enctype="multipart/form-data">
+						<form method="post" action="${pageContext.request.contextPath}/admin/menuadd" enctype="multipart/form-data">
 							<table class="file">
 								<tbody>
 									<tr>
@@ -105,7 +105,7 @@
 				<table class="manulist">
 					<tbody>
 						<tr>
-							<td style="width: 150px;" rowspan="3"><a href="${pageContext.request.contextPath}/store/menuOption?menu_no=${menulist.menu_no}"><img id="profile-img" src="${pageContext.request.contextPath}/upload/${menulist.menu_img}"></a></td>
+							<td style="width: 150px;" rowspan="3"><a href="${pageContext.request.contextPath}/admin/menuOption?menu_no=${menulist.menu_no}"><img id="profile-img" src="${pageContext.request.contextPath}/upload/${menulist.menu_img}"></a></td>
 							<th>메뉴이름</th>
 							<th>${menulist.menu_name}</th>
 							<th>가격</th>
