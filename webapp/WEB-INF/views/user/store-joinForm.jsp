@@ -5,13 +5,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>사업자 회원가입</title>
 
 <link href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/assets/css/total.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/assets/css/user/user.css" rel="stylesheet" type="text/css">
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.js"></script>
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 </head>
 <body>
@@ -39,40 +42,16 @@
 									<td>
 										<div class="s_profile_photo">
 											<img id="profile_photo" src="${pageContext.request.contextPath}/assets/images/profile.png">
-										</div> <input type="file" id="s_logoImg" name="file" onchange="setThumbnail(event);">
+										</div> <input type="file" id="s_logoImg" name="file">
 									</td>
-									<script>
-										function setThumbnail(event) {
-											var reader = new FileReader();
-											reader.onload = function(event) {
-												$("#profile_photo").attr("src", event.target.result);
-											}
-											reader
-													.readAsDataURL(event.target.files[0]);
-										}
-									</script>
 								</tr>
 								<tr>
 									<th>아이디 <span class="ico">*</span>
 									</th>
-									<td><input type="text" id="s_id" name="id" value="" placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합 " onkeydown="inputIdChk()">
-										<button type="button" id="" class="btn btn_default" onclick="openIdChk()">중복확인</button> <input type="hidden" id="idDuplication" name="idDuplication" value="idUncheck"></td>
+									<td><input type="text" id="s_id" name="id" value="" placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합 ">
+										<button type="button" id="modalOpenIdChk" class="btn btn_default">중복확인</button> 
+										<input type="text" id="idDuplication" name="idDuplication" value="idUncheck"></td>
 								</tr>
-								<script>
-									// 아이디 중복체크 화면 열기
-									function openIdChk(){
-										window.name = "parentForm";
-										window.open("${pageContext.request.contextPath }/user/id-checkForm",
-												"chkForm", "width=500, height=300, resizable=no, scrollbars=no");
-									}
-									
-									// 아이디 입력란에 키보드로 값을 입력시 호출되는 함수
-									// 중복체크 실행 여부 초기화
-									function inputIdChk() {
-										console.log("중복체크 초기화")
-										document.userInfo.idDuplication.value = "idUncheck";
-									}
-								</script>
 								<tr>
 									<th>비밀번호 <span class="ico">*</span>
 									</th>
@@ -90,19 +69,19 @@
 								</tr>
 								<tr>
 									<th>전화번호 <span class="ico">*</span>
- 									</th>
+									</th>
 									<td><input type="text" id="s_storePhone" name="storePhone" placeholder="숫자만 입력해주세요"></td>
 								</tr>
 								<tr>
 									<th>휴대전화 <span class="ico">*</span>
 									</th>
 									<td><input type="text" id="s_hp" name="hp" placeholder="숫자만 입력해주세요">
-										<button type="button" id="" class="btn btn_default">인증번호 받기</button></td>
+										<button type="button" id="btn_hpChk" class="btn btn_default">인증번호 받기</button></td>
 								</tr>
 								<tr>
 									<th>이메일</th>
 									<td><input type="text" id="s_email" name="email" placeholder="예: marketkurly@kurly.com">
-										<button type="button" id="" class="btn btn_default">중복확인</button></td>
+										<button type="button" id="btn_emailChk" class="btn btn_default">중복확인</button></td>
 								</tr>
 								<tr>
 									<th>주소 <span class="ico">*</span>
@@ -115,69 +94,9 @@
 									</th>
 									<td><input type="text" id="s_storeSAdr" name="storeSAdr" placeholder="가게 상세 주소를 입력해주세요">
 								</tr>
-								<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-								<script>
-									// 카카오 API 사용하여 주소 받아오기
-									function findAddr() {
-										new daum.Postcode(
-												{
-													oncomplete : function(data) {
-														console.log(data);
-														$("#s_storeMAdr").val(data.jibunAddress);
-
-														// 구글맵 API 사용하여 위경도 받아오기
-														var address = data.address;
-
-														console.log(address);
-
-														//추출
-														var url = "https://maps.googleapis.com/maps/api/geocode/json?address="
-																+ address
-																+ "&key=AIzaSyDl9EqQnWPqoxn5ZOEOAde3auL9VBp4NYU"
-
-														//요청 파라미터 방식
-														$
-																.ajax({
-
-																	url : url,
-																	type : "post",
-																	dataType : "json",
-																	success : function(
-																			data) {
-																		//성공시 처리해야될 코드 작성
-																		console
-																				.log(data.results[0].geometry.location.lat);
-																		console
-																				.log(data.results[0].geometry.location.lng);
-
-																		$(
-																				"#lat")
-																				.val(
-																						data.results[0].geometry.location.lat);
-																		$(
-																				"#lng")
-																				.val(
-																						data.results[0].geometry.location.lng);
-																	},
-																	error : function(
-																			XHR,
-																			status,
-																			error) {
-																		console
-																				.error(status
-																						+ " : "
-																						+ error);
-																	}
-																});
-													}
-
-												}).open();
-
-									}
-								</script>
 							</tbody>
 						</table>
-						<input type="hidden" id="lat" name="storeLat" value=""> <input type="hidden" id="lng" name="sotreLng" value="">
+						<input type="text" id="lat" name="storeLat" value=""> <input type="text" id="lng" name="sotreLng" value="">
 						<div id="btn_area">
 							<button type="submit" id="btn_submit" class="btn btn_join">가입하기</button>
 						</div>
@@ -192,6 +111,37 @@
 	</div>
 </body>
 <script type="text/javascript">
+	//첨부파일을 선택했을 때
+	$("#s_logoImg").on("change", function() {
+		console.log("첨부파일 선택")
+		var reader = new FileReader();
+		reader.onload = function(event) {
+			$("#profile_photo").attr("src", event.target.result);
+		}
+		reader.readAsDataURL(event.target.files[0]);
+	});									
+
+	//아이디를 입력할때  중복체크 여부 마킹
+	$("#s_id").on("keydown", function(){
+		console.log("키보드 입력");
+		$("#idDuplication").val("idUncheck");
+	});
+
+	//중복확인 버튼 클릭했을때 --> 모달창
+	$("#modalOpenIdChk").on("click", function(){
+		console.log("중복확인 모달창");
+
+		openIdChk();
+	});
+
+	//중복확인 모달창 오픈
+	function openIdChk(){
+		window.name = "parentForm";
+		window.open("${pageContext.request.contextPath }/user/id-checkForm",
+				"chkForm", "width=500, height=300, resizable=no, scrollbars=no");
+	}
+
+	// 회원가입 예외처리	저장버튼 눌렀을때
 	$("#btn_submit").on("click", function() {
 		console.log("가입하기 버튼 클릭");
 
@@ -243,6 +193,59 @@
 		}
 		return true;
 	});
-	
+
+	// 카카오 API 사용하여 주소 받아오기
+	function findAddr() {
+		new daum.Postcode(
+				{
+					oncomplete : function(data) {
+						console.log(data);
+						$("#s_storeMAdr").val(data.jibunAddress);
+						
+						
+						// 구글맵 API 사용하여 위경도 받아오기
+						var address = data.address;
+								
+						console.log(address);
+
+						//추출
+						var url = "https://maps.googleapis.com/maps/api/geocode/json?address="
+								+ address
+								+ "&key=AIzaSyDl9EqQnWPqoxn5ZOEOAde3auL9VBp4NYU"
+
+						//요청 파라미터 방식
+						$
+								.ajax({
+
+									url : url,
+									type : "post",
+									dataType : "json",
+									success : function(data) {
+										//성공시 처리해야될 코드 작성
+										console
+												.log(data.results[0].geometry.location.lat);
+										console
+												.log(data.results[0].geometry.location.lng);
+
+										$("#lat")
+												.val(
+														data.results[0].geometry.location.lat);
+										$("#lng")
+												.val(
+														data.results[0].geometry.location.lng);
+									},
+									error : function(XHR,
+											status, error) {
+										console
+												.error(status
+														+ " : "
+														+ error);
+									}
+								});
+					}
+
+				}).open();
+
+	}
 </script>
 </html>
