@@ -34,7 +34,7 @@
 					<p class="page_sub">
 						<span class="ico">*</span> 필수입력사항
 					</p>
-					<form action="${pageContext.request.contextPath}/user/s-join" method="post" enctype="multipart/form-data" name="userInfo">
+					<form action="${pageContext.request.contextPath}/user/s-join" method="post" enctype="multipart/form-data">
 						<table class="tbl_join">
 							<tbody>
 								<tr class="fst">
@@ -50,7 +50,7 @@
 									</th>
 									<td><input type="text" id="s_id" name="id" value="" placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합 ">
 										<button type="button" id="modalOpenIdChk" class="btn btn_default">중복확인</button> 
-										<input type="text" id="idDuplication" name="idDuplication" value="idUncheck"></td>
+										<input type="hidden" id="idDuplication" name="idDuplication" value="idUncheck"></td>
 								</tr>
 								<tr>
 									<th>비밀번호 <span class="ico">*</span>
@@ -96,7 +96,7 @@
 								</tr>
 							</tbody>
 						</table>
-						<input type="text" id="lat" name="storeLat" value=""> <input type="text" id="lng" name="sotreLng" value="">
+						<input type="hidden" id="lat" name="storeLat" value=""> <input type="hidden" id="lng" name="sotreLng" value="">
 						<div id="btn_area">
 							<button type="submit" id="btn_submit" class="btn btn_join">가입하기</button>
 						</div>
@@ -109,8 +109,111 @@
 		<!-- 푸터 -->
 		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 	</div>
+
+	<!-- 아이디 중복확인 모달창 -->
+	<div id="idChkModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">아이디 중복확인</h4>
+				</div>
+				<div class="modal-body">
+					<input id="modalId" type="text" name="id" value="">
+					<button type="button" id="modalBtnIdChk">중복확인</button>
+				</div>
+				<div id="msg"></div>
+				<div class="modal-footer">
+					<button type="button" id="cancleBtn">닫기</button>
+					<button type="button" id="useBtn">사용</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 <script type="text/javascript">
+	//중복확인 모달창 오픈
+	$("#modalOpenIdChk").on("click", function() {
+		console.log("중복확인 모달창");
+
+		$("#modalId").val($("#s_id").val());
+
+		// 초기화
+		$("#cancleBtn").css("visibility", "visible");
+		$("#useBtn").css("visibility", "hidden");
+		$("#msg").html("중복확인 버튼을 눌러주세요.");
+
+		$("#idChkModal").modal('show');
+	});
+
+	// 모달창의 중복확인 버튼 클릭했을때
+	$("#modalBtnIdChk").on("click", function() {
+		console.log("중복 확인 버튼 클릭")
+
+		var id = $("#modalId").val();
+
+		if (!id) {
+			console.log("아이디 입력값 없음")
+			$("#msg").html("아이디를 입력하지 않았습니다.");
+			return false;
+		} else {
+
+			var userVo = {
+				id : id
+			};
+
+			console.log(userVo);
+
+			$.ajax({
+				url : "${pageContext.request.contextPath }/user/id-check",
+				type : "post",
+				data : userVo,
+
+				dataType : "json",
+				success : function(result) {
+					console.log("success")
+
+					if (result == 0) {
+						console.log("사용불가")
+						$("#cancleBtn").css("visibility", "visible");
+						$("#useBtn").css("visibility", "hidden");
+						$("#msg").html("이미 존재하는 아이디입니다.");
+					} else {
+						console.log("사용가능")
+						$("#cancleBtn").css("visibility", "hidden");
+						$("#useBtn").css("visibility", "visible");
+						$("#msg").html("사용 가능한 아이디입니다.");
+					}
+
+				},
+				error : function(XHR, status, error) {
+					console.error(status + ":" + error);
+				}
+			});
+
+		}
+
+	});
+
+	// 사용하기 클릭시 아이디 값 전달
+	$("#useBtn").on("click", function() {
+		console.log("사용하기 버튼 클릭");
+
+		$("#idDuplication").val("idCheck");
+		$("#s_id").val($("#modalId").val());
+
+		$("#idChkModal").modal('hide');
+	});
+
+	// 닫기 버튼 클릭했을 때
+	$("#cancleBtn").on("click", function() {
+		console.log("닫기 버튼 클릭");
+
+		$("#idChkModal").modal('hide');
+	});
+
 	//첨부파일을 선택했을 때
 	$("#s_logoImg").on("change", function() {
 		console.log("첨부파일 선택")
@@ -119,27 +222,13 @@
 			$("#profile_photo").attr("src", event.target.result);
 		}
 		reader.readAsDataURL(event.target.files[0]);
-	});									
+	});
 
 	//아이디를 입력할때  중복체크 여부 마킹
-	$("#s_id").on("keydown", function(){
+	$("#s_id").on("keydown", function() {
 		console.log("키보드 입력");
 		$("#idDuplication").val("idUncheck");
 	});
-
-	//중복확인 버튼 클릭했을때 --> 모달창
-	$("#modalOpenIdChk").on("click", function(){
-		console.log("중복확인 모달창");
-
-		openIdChk();
-	});
-
-	//중복확인 모달창 오픈
-	function openIdChk(){
-		window.name = "parentForm";
-		window.open("${pageContext.request.contextPath }/user/id-checkForm",
-				"chkForm", "width=500, height=300, resizable=no, scrollbars=no");
-	}
 
 	// 회원가입 예외처리	저장버튼 눌렀을때
 	$("#btn_submit").on("click", function() {
@@ -201,11 +290,10 @@
 					oncomplete : function(data) {
 						console.log(data);
 						$("#s_storeMAdr").val(data.jibunAddress);
-						
-						
+
 						// 구글맵 API 사용하여 위경도 받아오기
 						var address = data.address;
-								
+
 						console.log(address);
 
 						//추출
@@ -234,12 +322,8 @@
 												.val(
 														data.results[0].geometry.location.lng);
 									},
-									error : function(XHR,
-											status, error) {
-										console
-												.error(status
-														+ " : "
-														+ error);
+									error : function(XHR, status, error) {
+										console.error(status + " : " + error);
 									}
 								});
 					}

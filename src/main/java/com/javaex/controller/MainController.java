@@ -33,11 +33,11 @@ public class MainController {
 	
 	@ResponseBody
 	@RequestMapping("/getStore")
-	public MainVo getStore(@RequestParam("storeNo") int storeno) {
+	public MainVo getStore(@RequestParam("orderNo") int orderno) {
 		System.out.println("MainController.getStore()");
-		System.out.println(storeno);
+		System.out.println(orderno);
 		
-		MainVo storeVo= mainService.getStore(storeno);
+		MainVo storeVo= mainService.getStore(orderno);
 		System.out.println(storeVo);
 		
 		return storeVo;

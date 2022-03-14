@@ -77,7 +77,7 @@
 						<img id="storelistLogo" src="${pageContext.request.contextPath}/assets/images/${storeList.logoImg}">
 						${storeList.storeName} <br> 
 						${storeList.countPeople }/${storeList.people } 명<br>
-						<button type="button" class="click" data-storeno="${storeList.storeNo}">상세정보보기</button>
+						<button type="button" class="click" data-orderNo="${storeList.orderNo}">상세정보보기</button>
 					</div>
 				</c:forEach>
 		</div>
@@ -193,8 +193,8 @@ function initMap() {
 		
 		
 		//가게번호 알기
-		var storeno = $(this).data("storeno");
-		console.log(storeno);
+		var orderno = $(this).data("orderno");
+		console.log(orderno);
 		
 		
 		$.ajax({
@@ -202,7 +202,7 @@ function initMap() {
 			url : "${pageContext.request.contextPath }/getStore",		
 			type : "post",
 			/* contentType : "application/json", */
-			data : {storeNo: storeno}, 
+			data : {orderNo: orderno}, 
   
 			dataType : "json",
 			success : function(storeVo){

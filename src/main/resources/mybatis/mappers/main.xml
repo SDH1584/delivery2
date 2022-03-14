@@ -20,7 +20,7 @@
                     bs.notice,
                     og.order_status orderStatus,
                     po.countPeople,
-                    og.order_no
+                    og.order_no orderNo
              from business bs, order_group og, (select order_no, count(*) countPeople 
 								                from personal_order
 								                group by order_no)po
@@ -36,7 +36,7 @@
 	<!-- 가게정보가져오기 -->
 	<select id="getStore" parameterType="int" resultType="mainVo">
 		<![CDATA[
-			select  bs.store_no storeNo,
+		select  bs.store_no storeNo,
                     bs.no,
                     bs.store_name storeName,
 					bs.store_phone storePhone,
@@ -48,14 +48,15 @@
 					og.people,
                     bs.notice,
                     og.order_status orderStatus,
-                    po.countPeople
+                    po.countPeople,
+                    og.order_no orderNo
             from business bs, order_group og, (select order_no, count(*) countPeople 
 								               from personal_order
 								               group by order_no)po
-			where bs.store_no=og.no
+			where bs.store_no=og.store_no
 			and og.order_no=po.order_no	
 			and po.countpeople <> og.people
-			and bs.store_no=#{storeNo}
+			and og.order_no=#{orderNo}
 					
 		]]>
 	</select>

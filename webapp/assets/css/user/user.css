@@ -189,18 +189,48 @@
 }
 
 /* 아이디 중복확인 페이지 */
-#idWrap {
-	width: 490px;
-	text-align: center;
-	margin: 0 auto;
-}
-
-#idChk_page #chk {
+#idChkModal {
 	text-align: center;
 }
 
-#idChk_page #useBtn{
-	visibility: hidden;
+#idChkModal .modal-body input {
+	width: 50%;
+	height: 42px;
+	border: 1px solid #e2e2e2;
+	font-size: 14px;
+	padding: 0px 10px 0px 10px;
+	margin: 10px 0px 10px 0px;
+}
+
+#idChkModal .modal-body button {
+	padding: 10px;
+	margin-left: 15px;
+	border: 1px solid #5F0080;
+	border-radius: 5px;
+	background-color: #5F0080;
+	color: #fff;
+	width: 20%;
+	height: 44px;
+	font-size: 14px;
+}
+
+#idChkModal #msg {
+	height: 50px;
+	padding: 10px;
+	font-size: 14px;
+	font-weight: 400;
+}
+
+#idChkModal .modal-footer button {
+	padding: 10px;
+	margin-left: 15px;
+	border: 1px solid #5F0080;
+	border-radius: 5px;
+	background-color: #5F0080;
+	color: #fff;
+	width: 45%;
+	height: 44px;
+	font-size: 14px;
 }
 
 /* 로그인 페이지 */

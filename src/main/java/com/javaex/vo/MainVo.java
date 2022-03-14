@@ -18,6 +18,38 @@ public class MainVo {
 	private String mainAddress;
 	private String subAddress;
 	private int countPeople;
+	private int orderNo;
+	
+	public MainVo(int storeNo, int no, String storeName, String storePhone, String storeMAdr, String storeSAdr,
+			String logoImg, double storeLat, double storeLng, int recommand, double lat, double lng, int people,
+			String mainAddress, String subAddress, int countPeople, int orderNo) {
+		super();
+		this.storeNo = storeNo;
+		this.no = no;
+		this.storeName = storeName;
+		this.storePhone = storePhone;
+		this.storeMAdr = storeMAdr;
+		this.storeSAdr = storeSAdr;
+		this.logoImg = logoImg;
+		this.storeLat = storeLat;
+		this.storeLng = storeLng;
+		this.recommand = recommand;
+		this.lat = lat;
+		this.lng = lng;
+		this.people = people;
+		this.mainAddress = mainAddress;
+		this.subAddress = subAddress;
+		this.countPeople = countPeople;
+		this.orderNo = orderNo;
+	}
+
+	public int getOrderNo() {
+		return orderNo;
+	}
+
+	public void setOrderNo(int orderNo) {
+		this.orderNo = orderNo;
+	}
 
 	// 생성자
 	public MainVo() {
@@ -173,14 +205,13 @@ public class MainVo {
 		this.countPeople = countPeople;
 	}
 
-	//메소드 일반
 	@Override
 	public String toString() {
 		return "MainVo [storeNo=" + storeNo + ", no=" + no + ", storeName=" + storeName + ", storePhone=" + storePhone
 				+ ", storeMAdr=" + storeMAdr + ", storeSAdr=" + storeSAdr + ", logoImg=" + logoImg + ", storeLat="
 				+ storeLat + ", storeLng=" + storeLng + ", recommand=" + recommand + ", lat=" + lat + ", lng=" + lng
 				+ ", people=" + people + ", mainAddress=" + mainAddress + ", subAddress=" + subAddress
-				+ ", countPeople=" + countPeople + "]";
+				+ ", countPeople=" + countPeople + ", orderNo=" + orderNo + "]";
 	}
 
 }
