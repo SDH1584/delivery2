@@ -61,13 +61,13 @@
 									<c:forEach items="${orderList }" var="orderListVo">
 										<c:if test="${orderListVo.order_status != 2}">
 											<c:if test="${orderListVo.order_status != 4 }">
-												<tr class="modalOrderList">
+												<tr class="modalOrderDetail">
 													<td>${orderListVo.order_date }</td>
 													<td>${orderListVo.store_name }</td>
 													<td>${orderListVo.final_pay }</td>
 													<td><c:choose>
 															<c:when test="${orderListVo.order_status == 0 }">
-																예약중
+																예약중(${orderListVo.people }/6)
 															</c:when>
 															<c:when test="${orderListVo.order_status == 1 }">
 																주문접수
@@ -77,12 +77,14 @@
 															</c:otherwise>
 														</c:choose>
 														<button class="btn btn_edit">수정</button></td>
+													<input type="text" id="pOrderNo" value="${orderListVo.p_order_no }">
 												</tr>
 											</c:if>
 										</c:if>
 									</c:forEach>
 								</tbody>
 							</table>
+							<input type="text" id="no" value="${authUser.no }">
 						</div>
 						<!-- //orderList-box -->
 					</div>
@@ -93,9 +95,132 @@
 			<!-- //main -->
 		</div>
 		<!-- //contents -->
-		
+
 		<!-- 푸터 -->
 		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 	</div>
 	<!-- //wrap -->
+
+	<!-- 주문 상세 정보 모달창 -->
+	<div id="orderModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">주문 상세 정보</h4>
+				</div>
+				<div class="modal-body">
+					<div id="menuListArea"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="closeBtn">닫기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //orderModal -->
 </body>
+<script type="text/javascript">
+	// 주문상세 모달창 오픈
+	$(".modalOrderDetail")
+			.on(
+					"click",
+					function() {
+						console.log("주문상세 모달창");
+
+						var no = $("#no").val();
+						var p_order_no = $("#pOrderNo").val();
+
+						var orderListVo = {
+							no : no,
+							p_order_no : p_order_no
+						}
+
+						$
+								.ajax({
+									url : "${pageContext.request.contextPath }/mypage/orderList-detail",
+									type : "post",
+									data : orderListVo,
+									dataType : "json",
+									success : function(detailList) {
+										console.log(detailList);
+										menuInfo(detailList);
+										$(detailList).each(function() {
+											console.log(this.menu_name);
+											console.log(this.count);
+
+										});
+									},
+									error : function(XHR, status, error) {
+										console.error(status + ":" + error);
+									}
+								});
+
+						$("#orderModal").modal('show');
+					});
+
+	// 주문상세 모달창 그리기
+	function menuInfo(detailList) {
+		var str = '';
+		str += '<table>';
+		str += '	<tbody>';
+		str += '		<tr>';
+		str += '			<th>주문 가게</th>';
+		str += '		</tr>';
+		str += '		<tr>';
+		str += '			<td>' + detailList[0].store_name + '</td>';
+		str += '		</tr>';
+		str += '		<tr>';
+		str += '			<th>주문 번호</th>';
+		str += '		</tr>';
+		str += '		<tr>';
+		str += '			<td>' + detailList[0].p_order_no + '</td>';
+		str += '		</tr>';
+		str += '		<tr>';
+		str += '			<th>주문 일시</th>';
+		str += '		</tr>';
+		str += '		<tr>';
+		str += '			<td>' + detailList[0].order_date + '</td>';
+		str += '		</tr>';
+		str += '		<tr>';
+		str += '			<th>주문메뉴 x 수량</th>';
+		str += '		</tr>';
+		for (var i = 0; i < detailList.length; i++) {
+			str += '<tr>';
+			str += '	<td>' + detailList[i].menu_name;
+			str += 'x' + detailList[i].count + '</td>';
+			str += '</tr>'
+		}
+		str += '		<tr>';
+		str += '			<th>결제 금액</th>';
+		str += '		</tr>';
+		str += '		<tr>';
+		str += '			<td>' + detailList[0].final_pay + '</td>';
+		str += '		</tr>';
+		str += '		<tr>';
+		str += '			<th>배달료</th>';
+		str += '		</tr>';
+		str += '		<tr>';
+		str += '			<td>' + detailList[0].p_fee + '</td>';
+		str += '		</tr>';
+		str += '		<tr>';
+		str += '			<th>결제방식</th>';
+		str += '		</tr>';
+		str += '		<tr>';
+		str += '			<td>' + detailList[0].method + '</td>';
+		str += '		</tr>';
+		str += '	</tbody>';
+		str += '</table>';
+
+		$("#menuListArea").append(str);
+	}
+
+	// 닫기 버튼 클릭했을 때
+	$("#closeBtn").on("click", function() {
+		console.log("닫기 버튼 클릭");
+
+		$("#orderModal").modal('hide');
+	});
+</script>

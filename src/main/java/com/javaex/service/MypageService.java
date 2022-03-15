@@ -17,8 +17,13 @@ public class MypageService {
 	// 주문내역 리스트
 	public List<OrderListVo> getOrderList(int no) {
 		System.out.println("mypageService/getOrderList");
-		System.out.println(no);
 		return mypageDao.selectOrderList(no);
+	}
+	
+	// 주문 상세 페이지
+	public List<OrderListVo> getOrderDetail(OrderListVo orderListVo) {
+		System.out.println("mypageService/getOrderDetail");
+		return mypageDao.selectOrderDetail(orderListVo);
 	}
 	
 }
