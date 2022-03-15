@@ -51,7 +51,7 @@
 									</th>
 									<td><input type="text" id="c_id" name="id" value="" placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합 ">
 										<button type="button" id="modalOpenIdChk" class="btn btn_default">중복확인</button> 
-										<input type="hidden" id="idDuplication" name="idDuplication" value="idUncheck"></td>
+										<input type="text" id="idDuplication" name="idDuplication" value="idUncheck"></td>
 								</tr>
 								<tr>
 									<th>비밀번호 <span class="ico">*</span>
@@ -188,22 +188,21 @@
 	});
 
 	// 사용하기 클릭시 아이디 값 전달
-	$("#useBtn").on("click", function(){
-		console.log("사용하기 버튼 클릭");
-		
-		$("#idDuplication").val("idCheck");
-		$("#c_id").val($("#modalId").val());
-		
-		$("#idChkModal").modal('hide');
+	$(".changeBtn").on("click", function(){
+		if ($(".changeBtn").attr('id') == "useBtn") {
+			console.log("사용하기 버튼 클릭");
+			
+			$("#idDuplication").val("idCheck");
+			$("#c_id").val($("#modalId").val());
+			
+			$("#idChkModal").modal('hide');
+		} else {
+			console.log("닫기 버튼 클릭");
+			
+			$("#idChkModal").modal('hide');
+		}
 	});
-	
-	// 닫기 버튼 클릭했을 때
-	$("#cancleBtn").on("click", function() {
-		console.log("닫기 버튼 클릭");
-		
-		$("#idChkModal").modal('hide');
-	});
-	
+
 	//첨부파일을 선택했을 때
 	$("#c_profile_img").on("change", function() {
 		console.log("첨부파일 선택")
