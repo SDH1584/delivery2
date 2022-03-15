@@ -233,6 +233,10 @@
 	font-size: 14px;
 }
 
+#idChkModal #idChkBtn {
+	text-align: center;
+}
+
 /* 로그인 페이지 */
 /* 로그인 타이틀 페이지 */
 #login_page {

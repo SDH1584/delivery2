@@ -117,8 +117,9 @@
 				</div>
 				<div id="msg"></div>
 				<div class="modal-footer">
-					<button type="button" id="cancleBtn">닫기</button>
-					<button type="button" id="useBtn">사용</button>
+					<div id="idChkBtn">
+						<button type="button" id="cancleBtn" class="changeBtn">닫기</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -132,8 +133,8 @@
 		$("#modalId").val($("#c_id").val());
 		
 		// 초기화
-		$("#cancleBtn").css("visibility", "visible");
-		$("#useBtn").css("visibility", "hidden");
+		$(".changeBtn").attr('id', 'cancleBtn');
+		$(".changeBtn").html("닫기");
 		$("#msg").html("중복확인 버튼을 눌러주세요.");
 		
 		$("#idChkModal").modal('show');
@@ -168,13 +169,11 @@
 
 					if (result == 0) {
 						console.log("사용불가")
-						$("#cancleBtn").css("visibility", "visible");
-						$("#useBtn").css("visibility", "hidden");
 						$("#msg").html("이미 존재하는 아이디입니다.");
 					} else {
 						console.log("사용가능")
-						$("#cancleBtn").css("visibility", "hidden");
-						$("#useBtn").css("visibility", "visible");
+						$(".changeBtn").attr('id', 'useBtn');
+						$(".changeBtn").html("사용");
 						$("#msg").html("사용 가능한 아이디입니다.");
 					}
 
