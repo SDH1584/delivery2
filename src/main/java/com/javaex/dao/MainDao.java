@@ -27,7 +27,11 @@ public class MainDao {
 		return sqlSession.selectOne("main.getStore", storeNo);
 	}
 
+	public List<MainVo> selectstoreList2() {
+		System.out.println("MainDao.selectStoreList2()");
+		return sqlSession.selectList("main.storeList");
 		
+	}	
 		
 	
 	

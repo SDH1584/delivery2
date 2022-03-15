@@ -42,5 +42,13 @@ public class MainController {
 		
 		return storeVo;
 	}
+	@ResponseBody
+	@RequestMapping("/storeList2")
+	public List<MainVo> storeList(Model model) {
+		List<MainVo> storeList2= mainService.getStoreList2();
+		System.out.println(storeList2);
+		return storeList2;
+	}
+	
 	
 }

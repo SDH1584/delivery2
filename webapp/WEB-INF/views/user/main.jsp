@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+	<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -20,7 +20,7 @@
 	<!-- wrap -->
 	<div id="wrap" class="clearfix">
 
-		<!-- 가게상세 해더 -->
+		<!-- 가게상세 해더 -->A	
 		<c:import url="/WEB-INF/views/includes/customer-header.jsp"></c:import>
 		<div id=wrap2 class="cleafix">
 
@@ -144,27 +144,60 @@
 		});
 		
 	});
-	
-	  function initMap() {
+	 
 
-          const map = new google.maps.Map(document.getElementById("map"), {
-              zoom: 14,
-              center: {     lat : 37.48140579914052,
-    	          lng : 126.95269053971082},
-          });
-          for (var i = 0; i < locations.length; i++) {
-              var marker = new google.maps.Marker({
-                  map: map,
-                  label: locations[i].place,
-                  position: new google.maps.LatLng(locations[i].lat, locations[i].lng),
-              });
-          }
-      }
-      const locations = [
-          { place:"${storeList[0].storeName}", lat: ${storeList[0].storeLat}, lng: ${storeList[0].storeLng}},
-          { place:"${storeList[1].storeName}", lat: ${storeList[1].storeLat}, lng: ${storeList[1].storeLng}}
-          
-          ];
+
+
+function initMap() {
+	// 지도 스타일
+	const map = new google.maps.Map(document.getElementById("map"), {
+		zoom : 10,
+		center : {
+			lat : 37.48140579914052,
+			lng : 126.95269053971082
+		},
+	});
+	$.ajax({
+		
+		url : "${pageContext.request.contextPath }/storeList2",		
+		type : "get",
+		data : {storeList2: storeList2}, 
+		  
+		/* contentType : "application/json", */
+
+		dataType : "json",
+		success : function(storeList2){
+			/*성공시 처리해야될 코드 작성*/
+			console.log('storeList2');
+			console.log(storeList2);
+		}
+	});	
+    var marker = new google.maps.Marker({
+        map : map,
+        //label: storeList2[i].place,
+        position : new google.maps.LatLng(storeList2[i].lat,storeList2[i].lng),
+     });
+    
+     google.maps.event.addListener(marker, 'click',
+             (function(marker, i) {
+                return function() {
+                   //html로 표시될 인포 윈도우의 내용
+                   infowindow.setContent(storeList2[i].place);
+                   //인포윈도우가 표시될 위치
+                   infowindow.open(map, marker);
+                }
+             })(marker, i));
+     
+       if (marker) {
+          marker.addListener("click", function() {
+             //중심 위치를 클릭된 마커의 위치로 변경
+             map.setCenter(this.getPosition());
+             //마커 클릭 시의 줌 변화
+             map.setZoom(14);
+          })
+
+       }     
+}
 </script>
 
 </html>
