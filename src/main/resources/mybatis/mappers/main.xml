@@ -63,25 +63,6 @@
 	
 
 
-	<!-- 메인페이지 정보 가져오기 -->
-	<select id="getMain" resultType="mainVo">
-		<![CDATA[
-			select  bs.store_no storeNo,
-                    bs.no,
-                    bs.store_name storeName,
-					bs.store_phone storePhone,
-					bs.store_m_adr storeMAdr,
-					bs.store_s_adr storeSAdr,
-					bs.store_lat storeLat,
-					bs.store_lng storeLng,
-					og.order_status orderStatus,
-					og.people
-			from business bs, order_group og
-			where bs.store_no=og.no
-		]]>
-	</select>
-	
-	
 	
 	
 

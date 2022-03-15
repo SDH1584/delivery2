@@ -6,10 +6,10 @@
 	<select id="selectOrderList" parameterType="int" resultType="com.javaex.vo.OrderListVo">
 		<![CDATA[
 			select  b.store_name,
-        			og.people,
     			    to_char(og.order_date, 'YYYY-MM-DD HH:MI') order_date,
+   			        og.people,
    			        og.order_status,
-        			p.no,
+   			        p.p_order_no,
   			        p.final_pay
 			from business b, order_group og, personal_order p
 			where p.no = #{no}
@@ -17,6 +17,26 @@
 			and og.order_no = p.order_no
 			order by order_date desc
 		]]>
+	</select>
+
+	<select id="selectOrderDetail" parameterType="com.javaex.vo.OrderListVo" resultType="com.javaex.vo.OrderListVo">
+			select  b.store_name,
+    			    to_char(og.order_date, 'YYYY-MM-DD HH:MI') order_date,
+  			        p.p_order_no,
+  			        p.final_pay,
+  			        p.p_fee,
+  			        p.store_req,
+  			        p.method,
+        			om.count,
+        			m.menu_name
+			from business b, order_group og, personal_order p, order_menu om, menu m
+			where p.no = #{no}
+            and p.p_order_no = #{p_order_no}
+			and b.store_no = og.store_no
+			and og.order_no = p.order_no
+			and p.p_order_no = om.p_order_no	
+			and om.menu_no = m.menu_no
+			order by order_date desc
 	</select>
 
 </mapper>

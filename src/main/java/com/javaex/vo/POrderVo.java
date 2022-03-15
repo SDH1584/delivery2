@@ -7,18 +7,21 @@ public class POrderVo {
 	private int menuPrice;
 	private String optionName;
 	private int optionPrice;
+	private int orderMenuNo;
 
 	public POrderVo() {
 		super();
 	}
 
-	public POrderVo(String menuImg, String menuName, int menuPrice, String optionName, int optionPrice) {
+	public POrderVo(String menuImg, String menuName, int menuPrice, String optionName, int optionPrice,
+			int orderMenuNo) {
 		super();
 		this.menuImg = menuImg;
 		this.menuName = menuName;
 		this.menuPrice = menuPrice;
 		this.optionName = optionName;
 		this.optionPrice = optionPrice;
+		this.orderMenuNo = orderMenuNo;
 	}
 
 	public String getMenuImg() {
@@ -61,10 +64,18 @@ public class POrderVo {
 		this.optionPrice = optionPrice;
 	}
 
+	public int getOrderMenuNo() {
+		return orderMenuNo;
+	}
+
+	public void setOrderMenuNo(int orderMenuNo) {
+		this.orderMenuNo = orderMenuNo;
+	}
+
 	@Override
 	public String toString() {
-		return "POrderMenu [menuImg=" + menuImg + ", menuName=" + menuName + ", menuPrice=" + menuPrice
-				+ ", optionName=" + optionName + ", optionPrice=" + optionPrice + "]";
+		return "POrderVo [menuImg=" + menuImg + ", menuName=" + menuName + ", menuPrice=" + menuPrice + ", optionName="
+				+ optionName + ", optionPrice=" + optionPrice + ", orderMenuNo=" + orderMenuNo + "]";
 	}
 
 }

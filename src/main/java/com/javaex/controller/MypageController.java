@@ -7,8 +7,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javaex.service.MypageService;
 import com.javaex.vo.OrderListVo;
@@ -28,7 +30,6 @@ public class MypageController {
 		
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
 		int no = authUser.getNo();
-		System.out.println(no);
 		List<OrderListVo> orderList = mypageService.getOrderList(no);
 		model.addAttribute("orderList", orderList);
 		System.out.println(orderList);
@@ -42,11 +43,19 @@ public class MypageController {
 		
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
 		int no = authUser.getNo();
-		System.out.println(no);
 		List<OrderListVo> orderList = mypageService.getOrderList(no);
 		model.addAttribute("orderList", orderList);
 		System.out.println(orderList);
 		return "user-mypage/customer-orderListOld";
+	}
+	
+	// 주문 상세 페이지
+	@ResponseBody
+	@RequestMapping("/orderList-detail")
+	public List<OrderListVo> orderDetail(@ModelAttribute OrderListVo orderListVo) {
+		System.out.println("mypageController/orderDetail");
+		List<OrderListVo> detailList = mypageService.getOrderDetail(orderListVo);
+		return detailList; 
 	}
 	
 	// 회원정보 수정

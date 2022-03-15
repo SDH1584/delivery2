@@ -51,7 +51,7 @@
 									</th>
 									<td><input type="text" id="c_id" name="id" value="" placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합 ">
 										<button type="button" id="modalOpenIdChk" class="btn btn_default">중복확인</button> 
-										<input type="hidden" id="idDuplication" name="idDuplication" value="idUncheck"></td>
+										<input type="text" id="idDuplication" name="idDuplication" value="idUncheck"></td>
 								</tr>
 								<tr>
 									<th>비밀번호 <span class="ico">*</span>
@@ -117,8 +117,9 @@
 				</div>
 				<div id="msg"></div>
 				<div class="modal-footer">
-					<button type="button" id="cancleBtn">닫기</button>
-					<button type="button" id="useBtn">사용</button>
+					<div id="idChkBtn">
+						<button type="button" id="cancleBtn" class="changeBtn">닫기</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -132,8 +133,8 @@
 		$("#modalId").val($("#c_id").val());
 		
 		// 초기화
-		$("#cancleBtn").css("visibility", "visible");
-		$("#useBtn").css("visibility", "hidden");
+		$(".changeBtn").attr('id', 'cancleBtn');
+		$(".changeBtn").html("닫기");
 		$("#msg").html("중복확인 버튼을 눌러주세요.");
 		
 		$("#idChkModal").modal('show');
@@ -168,13 +169,11 @@
 
 					if (result == 0) {
 						console.log("사용불가")
-						$("#cancleBtn").css("visibility", "visible");
-						$("#useBtn").css("visibility", "hidden");
 						$("#msg").html("이미 존재하는 아이디입니다.");
 					} else {
 						console.log("사용가능")
-						$("#cancleBtn").css("visibility", "hidden");
-						$("#useBtn").css("visibility", "visible");
+						$(".changeBtn").attr('id', 'useBtn');
+						$(".changeBtn").html("사용");
 						$("#msg").html("사용 가능한 아이디입니다.");
 					}
 
@@ -189,22 +188,21 @@
 	});
 
 	// 사용하기 클릭시 아이디 값 전달
-	$("#useBtn").on("click", function(){
-		console.log("사용하기 버튼 클릭");
-		
-		$("#idDuplication").val("idCheck");
-		$("#c_id").val($("#modalId").val());
-		
-		$("#idChkModal").modal('hide');
+	$(".changeBtn").on("click", function(){
+		if ($(".changeBtn").attr('id') == "useBtn") {
+			console.log("사용하기 버튼 클릭");
+			
+			$("#idDuplication").val("idCheck");
+			$("#c_id").val($("#modalId").val());
+			
+			$("#idChkModal").modal('hide');
+		} else {
+			console.log("닫기 버튼 클릭");
+			
+			$("#idChkModal").modal('hide');
+		}
 	});
-	
-	// 닫기 버튼 클릭했을 때
-	$("#cancleBtn").on("click", function() {
-		console.log("닫기 버튼 클릭");
-		
-		$("#idChkModal").modal('hide');
-	});
-	
+
 	//첨부파일을 선택했을 때
 	$("#c_profile_img").on("change", function() {
 		console.log("첨부파일 선택")

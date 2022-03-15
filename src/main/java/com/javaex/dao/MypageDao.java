@@ -17,8 +17,13 @@ public class MypageDao {
 	// 주문내역 리스트
 	public List<OrderListVo> selectOrderList(int no) {
 		System.out.println("mypageDao/selectOrderList");
-		System.out.println(no);
 		return sqlSession.selectList("mypage.selectOrderList", no);
+	}
+	
+	// 주문 상세 페이지
+	public List<OrderListVo> selectOrderDetail(OrderListVo orderListVo) {
+		System.out.println("mypageDao/selectOrderDetail");
+		return sqlSession.selectList("mypage.selectOrderDetail", orderListVo);
 	}
 	
 }

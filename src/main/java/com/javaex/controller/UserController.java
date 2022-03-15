@@ -97,14 +97,6 @@ public class UserController {
 		return "redirect:/user/loginForm";
 	}
 
-	// 아이디 중복 확인 폼
-	@RequestMapping("/id-checkForm")
-	public String idCheckForm() {
-		System.out.println("userController/idCheckForm");
-		
-		return "user/idCheckForm";
-	}
-	
 	// 아이디 중복 확인
 	@ResponseBody
 	@RequestMapping("/id-check")
