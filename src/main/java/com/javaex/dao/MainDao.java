@@ -27,13 +27,6 @@ public class MainDao {
 		return sqlSession.selectOne("main.getStore", storeNo);
 	}
 
-	public List<MainVo> selectstoreList2() {
-		System.out.println("MainDao.selectStoreList2()");
-		return sqlSession.selectList("main.storeList");
-		
-	}	
-		
-	
 	
 	// 메인정보가져오기
 	public void getMain() {
@@ -44,7 +37,6 @@ public class MainDao {
 
 	
 	
-
 	// 최근 가게 정보 가져오기
 	public List<MainVo> getRecentStore() {
 		System.out.println("getRecentStore dao");

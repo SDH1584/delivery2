@@ -31,14 +31,6 @@ public class MainService {
 	}
 	
 	
-	public List<MainVo> getStoreList2() {
-		System.out.println("MainService.getStoreList2()");
-
-		List<MainVo> storeList2 =  maindao.selectStoreList();
-		return storeList2;
-	}
-	
-	
 
 
 	public List<MainVo> getRecentStore() {
