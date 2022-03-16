@@ -64,7 +64,7 @@
 												<tr class="modalOrderDetail" data-p_order_no="${orderListVo.p_order_no }">
 													<td>${orderListVo.order_date }</td>
 													<td>${orderListVo.store_name }</td>
-													<td>${orderListVo.final_pay }</td>
+													<td>${orderListVo.final_pay }원</td>
 													<td><c:choose>
 															<c:when test="${orderListVo.order_status == 0 }">
 																예약중(${orderListVo.people }/6)
@@ -84,7 +84,7 @@
 									</c:forEach>
 								</tbody>
 							</table>
-							<input type="text" id="no" value="${authUser.no }">
+							<input type="hidden" id="no" value="${authUser.no }">
 						</div>
 						<!-- //orderList-box -->
 					</div>
@@ -198,13 +198,13 @@
 		str += '			<th>결제 금액</th>';
 		str += '		</tr>';
 		str += '		<tr>';
-		str += '			<td>' + detailList[0].final_pay + '</td>';
+		str += '			<td>' + detailList[0].final_pay + '원</td>';
 		str += '		</tr>';
 		str += '		<tr>';
 		str += '			<th>배달료</th>';
 		str += '		</tr>';
 		str += '		<tr>';
-		str += '			<td>' + detailList[0].p_fee + '</td>';
+		str += '			<td>' + detailList[0].p_fee + '원</td>';
 		str += '		</tr>';
 		str += '		<tr>';
 		str += '			<th>결제방식</th>';

@@ -29,6 +29,16 @@
 	width: 60px;
 }
 
-#mypage tr:hover {
+#mypage .orderList tr:hover {
 	cursor: pointer;
+}
+
+.modal-content {
+	width: 70%;
+}
+
+#orderModal th, #orderModal td {
+	text-align: left;
+	padding: 5px 0; 
+	font-size: 14px;
 }
