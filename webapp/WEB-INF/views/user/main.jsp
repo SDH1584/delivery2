@@ -201,7 +201,7 @@ function initMap() {
 				//중심 위치를 클릭된 마커의 위치로 변경
 				map.setCenter(this.getPosition());
 				//마커 클릭 시의 줌 변화
-				map.setZoom(10);
+				map.setZoom(13);
 				/*	window.open('http://https://www.google.com/');*/
 				console.log("지도마커클릭")
 			
