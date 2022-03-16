@@ -129,7 +129,7 @@ $('.click').on("click", function() {
 			//로고
 			$("#storeLogo").attr("src", storeVo.logoImg);
 			$("#name").text(storeVo.storeName);
-			$("#delivery-num").text(storeVo.countPeople + "/" + storeVo.people);
+			$("#delivery-num").text(storeVo.countPeople + "/" + storeVo.people+"명");
 			$("#delivery-address").text("주소: " + storeVo.storeMAdr +" "+ storeVo.storeSAdr);
 			$("#delivery-hp").text("전화번호: " + storeVo.storePhone);
 			$("#reserve-btn").attr("href", "${pageContext.request.contextPath}/store/"+ storeVo.storeNo +"/reserv");
@@ -171,6 +171,14 @@ function initMap() {
          });
     }
 
+	if (marker) {
+	marker.addListener("click", () => {
+	    map.setZoom(14);
+	    map.setCenter(marker.getPosition());
+		console.log("지도마커클리크")
+		
+	  });   
+	}
 }
 
 //마커용 가게 리스트 가져오기
