@@ -3,8 +3,25 @@
 
 <mapper namespace="Business">
 
-	<!-- 가게정보 -->
-	<select id="getUser" parameterType="int" resultType="BusinessVo">
+	<!-- 유저정보 가져오기 -->
+	<select id="getUser" parameterType="int" resultType="UserVo">
+		<![CDATA[
+			SELECT	no,
+					id,
+					hp,
+					email,
+					profile_img,
+					user_code		
+    		FROM USERS
+    		where no = #{no}
+		]]>
+	</select>
+
+
+
+	<!-- 가게정보 가져오기 -->
+	<select id="getStore" parameterType="int"
+		resultType="BusinessVo">
 		<![CDATA[
 			SELECT
 					store_no as storeNo,
@@ -20,21 +37,42 @@
 					min_price as minPrice,
 					notice,
 					origin as origin,
-					on_off as onOff
+					on_off as onOff,
+					open_time,
+					close_time
 			FROM BUSINESS
 			where store_no = #{store_no}
 		]]>
 	</select>
 
-	<!-- 유저정보 -->
-	<select id="getuser" parameterType="int" resultType="UserVo">
+
+
+	<!-- 배달지역 추가 추가 -->
+	<insert id="saveDeliveryArea" parameterType="DeliveryVo">
+		<selectKey keyProperty="delivery_no" resultType="int"
+			order="BEFORE">
+			select seq_delivery.nextval from dual
+		</selectKey>
+		
 		<![CDATA[
-			SELECT
-    			* FROM USERS
-    		where no = #{no}
+				insert into delivery 
+				values(#{delivery_no}, #{store_no}, #{delivery_area}, #{fee},#{area_code})
+		]]>
+	</insert>
+
+
+	<!-- 배달지역 하나 가져오기 -->
+	<select id="getDeliveryArea" parameterType="int" resultType="DeliveryVo">
+		<![CDATA[
+			SELECT	delivery_no,
+					store_no,
+					delivery_area,
+					fee,
+					area_code	
+    		FROM delivery
+    		where delivery_no = #{delivery_no}
 		]]>
 	</select>
-
 
 
 	<!-- 유저 업데이트 -->
@@ -60,7 +98,9 @@
 					min_price = #{minPrice},
 					origin = #{origin},
 					logo_img = #{logoImg},
-					notice = #{notice}
+					notice = #{notice},
+					open_time = #{open_time},
+					close_time = #{close_time}
 			where  store_no = #{storeNo}
 		]]>
 	</update>
@@ -74,6 +114,25 @@
 		]]>
 	</insert>
 
+
+	<!-- 메뉴 옵션 카테고리 추가 -->
+	<insert id="menuOptioncateadd" parameterType="MenuOptioncateVO">
+		<![CDATA[
+				
+				insert into menu_option_cate 
+				values(seq_menu_option_cate.nextval, #{menu_no}, #{option_cate_name}, #{chk_rdo})
+		]]>
+	</insert>
+
+	<!-- 메뉴 옵션 추가 -->
+	<insert id="cateOption" parameterType="MenuOptionVo">
+		<![CDATA[
+				
+				insert into menu_option 
+				values(seq_menu_option.nextval, #{storeNo}, #{optionName}, #{optionPrice})
+		]]>
+	</insert>
+
 	<!-- 메뉴 카테고리 리스트 -->
 	<select id="menucatelist" parameterType="MenucateVo"
 		resultType="MenucateVo">
@@ -84,6 +143,19 @@
 						menu_cate_name
 			 	from	menu_cate
 			 	where store_no = #{store_no}
+		]]>
+	</select>
+
+	<!-- 메뉴 옵션 카테고리 리스트 -->
+	<select id="menuOptioncateList" parameterType="MenuOptioncateVO"
+		resultType="MenuOptioncateVO">
+		<![CDATA[
+			 	select 
+			 			option_cate_no,
+						menu_no,
+						option_cate_name
+			 	from	menu_option_cate
+			 	where menu_no = #{menu_no}
 		]]>
 	</select>
 
@@ -134,4 +206,20 @@
 				values(seq_biz_store_cate.nextval, #{store_cate_no},#{store_no})
 		]]>
 	</insert>
+
+	<!-- 유저정보 -->
+	<select id="getmenu" parameterType="int" resultType="MenuVo">
+		<![CDATA[
+			 	select 
+			 			menu_no,
+						menu_cate_no,
+						menu_img,
+						menu_name,
+						menu_price,
+						menu_desc
+			 	from	menu
+			 	where menu_no= #{menu_no}
+		]]>
+	</select>
+
 </mapper>
