@@ -61,7 +61,7 @@
 									<c:forEach items="${orderList }" var="orderListVo">
 										<c:if test="${orderListVo.order_status != 2}">
 											<c:if test="${orderListVo.order_status != 4 }">
-												<tr class="modalOrderDetail">
+												<tr class="modalOrderDetail" data-p_order_no="${orderListVo.p_order_no }">
 													<td>${orderListVo.order_date }</td>
 													<td>${orderListVo.store_name }</td>
 													<td>${orderListVo.final_pay }</td>
@@ -76,8 +76,8 @@
 																배달중
 															</c:otherwise>
 														</c:choose>
-														<button class="btn btn_edit">수정</button></td>
-													<input type="text" id="pOrderNo" value="${orderListVo.p_order_no }">
+														<button class="btn btn_edit">수정</button>
+													</td>
 												</tr>
 											</c:if>
 										</c:if>
@@ -131,7 +131,8 @@
 						console.log("주문상세 모달창");
 
 						var no = $("#no").val();
-						var p_order_no = $("#pOrderNo").val();
+						
+						var p_order_no = $(this).data("p_order_no");
 
 						var orderListVo = {
 							no : no,
@@ -214,13 +215,13 @@
 		str += '	</tbody>';
 		str += '</table>';
 
-		$("#menuListArea").append(str);
+		$("#menuListArea").html(str);
 	}
 
 	// 닫기 버튼 클릭했을 때
 	$("#closeBtn").on("click", function() {
 		console.log("닫기 버튼 클릭");
-
+		
 		$("#orderModal").modal('hide');
 	});
 </script>
