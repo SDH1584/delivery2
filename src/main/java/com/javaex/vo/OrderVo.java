@@ -28,6 +28,10 @@ public class OrderVo {
 	private int orderMenuNo;
 	private int count;
 
+	public OrderVo() {
+		super();
+	}
+
 	public OrderVo(int orderNo, int firstNo, int storeNo, int people, int countPeople, String orderDate,
 			int orderStatus, String deliveryMAdr, String deliverySAdr, double deliveryLat, double deliveryLng,
 			String deliveryReq, int pOrderNo, int no, int finalPay, int pFee, String storeReq, String method,
