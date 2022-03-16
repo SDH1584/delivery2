@@ -129,7 +129,7 @@ $('.click').on("click", function() {
 			//로고
 			$("#storeLogo").attr("src", storeVo.logoImg);
 			$("#name").text(storeVo.storeName);
-			$("#delivery-num").text(storeVo.countPeople + "/" + storeVo.people+"명");
+			$("#delivery-num").text(storeVo.countPeople + "/" + storeVo.people);
 			$("#delivery-address").text("주소: " + storeVo.storeMAdr +" "+ storeVo.storeSAdr);
 			$("#delivery-hp").text("전화번호: " + storeVo.storePhone);
 			$("#reserve-btn").attr("href", "${pageContext.request.contextPath}/store/"+ storeVo.storeNo +"/reserv");
@@ -159,26 +159,92 @@ function initMap() {
 		},
 	});
 	
-	
+	var infowindow = new google.maps.InfoWindow();
+
 	//마커 출력
 	var locations = getStoreList();
 	
 	for (var i = 0; i < locations.length; i++) {
-         var marker = new google.maps.Marker({
-             map: map,
-             label: locations[i].place,
-             position: new google.maps.LatLng(locations[i].lat, locations[i].lng),
-         });
-    }
-
-	if (marker) {
-	marker.addListener("click", () => {
-	    map.setZoom(14);
-	    map.setCenter(marker.getPosition());
-		console.log("지도마커클리크")
+		var marker = new google.maps.Marker({
+			map: map,
+			label: locations[i].place,
+			position: new google.maps.LatLng(locations[i].lat, locations[i].lng),
+		});
+    
+		//마커 클릭 할때
+		google.maps.event.addListener(marker, 'click', (function(marker, i) {
+				return function() {
+				
+				var storeVo = locations[i];
+					
+					
+				//html로 표시될 인포 윈도우의 내용
+				infowindow.setContent(storeVo.place);
+				//인포윈도우가 표시될 위치
+				infowindow.open(map, marker);
+				
+				
+				//가게상세보기 에 정보 적용
+				$("#storeLogo").attr("src", storeVo.logoImg);
+				$("#name").text(storeVo.storeName);
+				$("#delivery-num").text(storeVo.countPeople + "/" + storeVo.people);
+				$("#delivery-address").text("주소: " + storeVo.storeMAdr +" "+ storeVo.storeSAdr);
+				$("#delivery-hp").text("전화번호: " + storeVo.storePhone);
+				$("#reserve-btn").attr("href", "${pageContext.request.contextPath}/store/"+ storeVo.storeNo +"/reserv");
+				
+				
+			}
+		})(marker, i));
+         
+        if (marker) {
+			marker.addListener("click", function(getStoreList) {
+				//중심 위치를 클릭된 마커의 위치로 변경
+				map.setCenter(this.getPosition());
+				//마커 클릭 시의 줌 변화
+				map.setZoom(10);
+				/*	window.open('http://https://www.google.com/');*/
+				console.log("지도마커클릭")
+			
+				var orderno = $(this).data("orderno");
+				console.log(orderno);
+				
+				
+				$.ajax({
+					
+					url : "${pageContext.request.contextPath }/getStore",		
+					type : "post",
+					/* contentType : "application/json", */
+					data : {orderNo: orderno}, 
+			 
+					dataType : "json",
+					success : function(storeVo){
+						/*성공시 처리해야될 코드 작성*/
+						
+						console.log(storeVo);
+						//로고
+						$("#storeLogo").attr("src", storeVo.logoImg);
+						$("#name").text(storeVo.storeName);
+						$("#delivery-num").text(storeVo.countPeople + "/" + storeVo.people);
+						$("#delivery-address").text("주소: " + storeVo.storeMAdr +" "+ storeVo.storeSAdr);
+						$("#delivery-hp").text("전화번호: " + storeVo.storePhone);
+						$("#reserve-btn").attr("href", "${pageContext.request.contextPath}/store/"+ storeVo.storeNo +"/reserv");
+						
+						//지도
+						
+					},
+					error : function(XHR, status, error) {
+						console.error(status + " : " + error);
+					}
+				});
+				/* ajax */
+				
+			}); 
+			/* marker.addListener */
+			
+		}/* if */
 		
-	  });   
-	}
+	}/*for */
+
 }
 
 //마커용 가게 리스트 가져오기
@@ -203,7 +269,16 @@ function getStoreList(){
 				var markerVo = {
 					place: storeList[i].storeName,
 					lat: storeList[i].storeLat,
-					lng: storeList[i].storeLng
+					lng: storeList[i].storeLng,
+					orderNo: storeList[i].orderNo,
+					logoImg: storeList[i].logoImg,
+					countPeople: storeList[i].countPeople,
+					people: storeList[i].people,
+					storeMAdr: storeList[i].storeMAdr,
+					storeSAdr: storeList[i].storeSAdr,
+					storePhone: storeList[i].storePhone,
+					storeNo: storeList[i].storeNo,
+					storeName: storeList[i].storeName
 				};
 				
 				locations.push(markerVo);
