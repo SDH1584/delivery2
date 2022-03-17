@@ -13,13 +13,14 @@ public class ReviewVo {
 	private int storeNo;
 	private String reviewImg;
 	private String profileImg;
+	private int reviewCnt;
 
 	public ReviewVo() {
 		super();
 	}
 
 	public ReviewVo(int reviewNo, int pOrderNo, String reviewContent, int recommend, String regDate, int blind,
-			String reply, String replyRegDate, int storeNo, String reviewImg, String profileImg) {
+			String reply, String replyRegDate, int storeNo, String reviewImg, String profileImg, int reviewCnt) {
 		super();
 		this.reviewNo = reviewNo;
 		this.pOrderNo = pOrderNo;
@@ -32,6 +33,7 @@ public class ReviewVo {
 		this.storeNo = storeNo;
 		this.reviewImg = reviewImg;
 		this.profileImg = profileImg;
+		this.reviewCnt = reviewCnt;
 	}
 
 	public int getReviewNo() {
@@ -122,12 +124,20 @@ public class ReviewVo {
 		this.profileImg = profileImg;
 	}
 
+	public int getReviewCnt() {
+		return reviewCnt;
+	}
+
+	public void setReviewCnt(int reviewCnt) {
+		this.reviewCnt = reviewCnt;
+	}
+
 	@Override
 	public String toString() {
 		return "ReviewVo [reviewNo=" + reviewNo + ", pOrderNo=" + pOrderNo + ", reviewContent=" + reviewContent
 				+ ", recommend=" + recommend + ", regDate=" + regDate + ", blind=" + blind + ", reply=" + reply
 				+ ", replyRegDate=" + replyRegDate + ", storeNo=" + storeNo + ", reviewImg=" + reviewImg
-				+ ", profileImg=" + profileImg + "]";
+				+ ", profileImg=" + profileImg + ", reviewCnt=" + reviewCnt + "]";
 	}
 
 }
