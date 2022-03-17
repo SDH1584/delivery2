@@ -390,6 +390,9 @@
 		console.log("btn-ordering");
 		var no = ${sessionScope.authUser.no};
 		var orderNo = ${map.orderVo.orderNo};
+		var deliveryReq = "${map.orderVo.deliveryReq}";
+		var orderDate = "${map.orderVo.orderDate}";
+		var address = "${map.orderVo.deliveryMAdr}"
 		var fee = ${map.orderVo.pFee};
 		var finalPay = totalPrice;
 		var storeReq = $('[name="store-require"]').val();
@@ -400,27 +403,16 @@
 						 finalPay : finalPay,
 						 storeReq : storeReq,
 						 attendVfy : attendVfy,
-						 menuInfoArr : menuInfoArr}
+						 menuInfoArr : menuInfoArr,
+						 address : address,
+						 deliveryReq : deliveryReq,
+						 orderDate : orderDate}
 		console.log(orderInfo);
 		
-		$.ajax({
-
-			/* 요청 */
-			url : "${pageContext.request.contextPath }/store/${map.bizVo.storeNo}/orderInfo2", //요청 보낼 주소		
-			type : "post",
-			contentType : "application/json",
-			data : JSON.stringify(orderInfo), //자바스크립트 객체를 json 형식으로 변경
-
-			/* 응답 */
-			dataType : "json",
-			success : function() {
-				window.location.href="${pageContext.request.contextPath }/mypage/orderList"
-			},
-			error : function(XHR, status, error) {
-				console.error(status + " : " + error);
-			}
-			
-		});
+		localStorage.setItem('orderInfo',JSON.stringify(orderInfo));
+		console.log(orderInfo);
+		
+		location.href = "${pageContext.request.contextPath }/store/${map.bizVo.storeNo}/pay";
 	});
 	
 	

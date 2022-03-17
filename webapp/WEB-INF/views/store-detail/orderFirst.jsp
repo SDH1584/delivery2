@@ -94,8 +94,7 @@
 						<table id="order-detail">
 							<tr>
 								<th>참여인원</th>
-								<td colspan="3"><input type='button' onclick='count("minus")' value='-' class="btn-xs" /> <span id="result">1</span> <input type='button' onclick='count("plus")' value='+' class="btn-xs" /></td>
-							</tr>
+								<td colspan="3"><input type='button' onclick='count("minus")' value='-' class="btn-xs"> <span id="result">1</span> <input type='button' onclick='count("plus")' value='+' class="btn-xs" /></td>
 							<tr>
 								<th>주문 금액</th>
 								<td colspan="3"><span id ="total-price2">0</span> / <span id="min-price">${map.bizVo.minPrice }</span></td>
@@ -127,8 +126,15 @@
 						</div>
 
 						<div id="order-delivery">
-							<div class="order-deli">주문일시</div>
-							<div class="order-deli"><input type="text" id="datetimepicker"></div>
+							<div id = "order-date">
+								<div class="order-deli">주문일</div>
+								<div class="order-deli"><input type="text" id="datepicker"></div>
+							</div>
+							<div id = "order-time">
+								<div class="order-deli">주문시간</div>
+								<div class="order-deli"><input type="text" id="timepicker"></div>
+							</div>
+							
 							<div class="order-deli">배달 주소</div>
 							<div class="order-deli" id="deliveryAdr">${map.orderVo.deliveryMAdr }&nbsp${ map.orderVo.deliverySAdr}</div>
 							<div class="order-deli">
@@ -195,10 +201,24 @@
 	var finalPrice=0;
 	var menuInfoArr = [];
 
-	/* 주문일시선택 */
-	$('#datetimepicker').datetimepicker({
+	
+	var maxmindate ={
+		
+	}
+	
+	/* 주문일선택 */
+	$('#datepicker').datetimepicker({
 		minDate: '-1970/01/01',
-		maxDate: '+1970/01/31'
+		maxDate: '+1970/01/31',
+		disabledWeekDays: [0,6],
+		timepicker:false,
+		format: 'y/m/d'
+	});
+	
+	/* 주문시간선택 */
+	$('#timepicker').datetimepicker({
+		datepicker:false,
+		format:'H:i'
 	});
 
 	/* 참여인원 증감 */
@@ -491,7 +511,12 @@
 		var storeReq = $('[name="store-require"]').val();
 		var deliveryReq = $('[name="deliver-require"]').val();
 		var people = document.getElementById('result').innerText;
-		var orderDate = $("#datetimepicker").val();
+		var date = $("#datepicker").val();
+		var time = $("#timepicker").val();
+		console.log(date)
+		console.log(time)
+		var orderDate = date + " "+time;
+		console.log(orderDate);
 		var orderStatus = 0;
 		var attendVfy = 0;
 		var orderInfo = {no : no,
@@ -506,27 +531,13 @@
 						 orderStatus : orderStatus,
 						 attendVfy : attendVfy,
 						 menuInfoArr : menuInfoArr}
+		
+		localStorage.setItem('orderInfo',JSON.stringify(orderInfo));
 		console.log(orderInfo);
 		
-		$.ajax({
-
-			/* 요청 */
-			url : "${pageContext.request.contextPath }/store/${map.bizVo.storeNo}/orderInfo", //요청 보낼 주소		
-			type : "post",
-			contentType : "application/json",
-			data : JSON.stringify(orderInfo), //자바스크립트 객체를 json 형식으로 변경
-
-			/* 응답 */
-			dataType : "json",
-			success : function() {
-				window.location.href="${pageContext.request.contextPath }/mypage/orderList"
-				
-			},
-			error : function(XHR, status, error) {
-				console.error(status + " : " + error);
-			}
-			
-		});
+		location.href = "${pageContext.request.contextPath }/store/${map.bizVo.storeNo}/pay";
+		
+		
 	});
 	
 	

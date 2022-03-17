@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+h2{ font-size : 28px; text-align : center; padding-top:50px;}
+
+h3 { padding : 74px 0px 16px 0px;
+	 margin-bottom: 10px;
+	 font-size: 20px;
+	 text-align: left;
+	 border-bottom: 1px solid #000;}
+
+th { font-size: 14px;
+	 text-align: left;
+	 vertical-align: top;
+	 width:190px;
+	 padding-top:8px;}	
+td { padding: 8px 0px;
+	 font-size: 14px;
+	 text-align: left;}
+
+/* 주문메뉴 */
+#menu-table{width:100%;}
+.menu-cnt {width: 100px; text-align:center; font-size:14px;}
+.menu-price{width: 120px; text-align:right; font-size:16px; font-weight:bold;}
+.menu-img {width:90px; text-align:center;}	
+.menu-name {font-size:16px; font-weight:bold;}
+.option {font-size:14px; font-weight:bold; color:#999; padding:7px 10px;}
+
+/* 포인트&결제수단 */
+#point-method {float:left; width:685px; font-size:14px;}
+/* 결제금액 */
+#price {float:right; width:285px;}
+
+/* 포인트 */
+#point input {height:18px; width:134px; 
+			  padding: 12px 16px; 
+			  margin:0px 8px 10px 0px; 
+			  border:1px solid #ddd; 
+			  border-radius:3px;}
+#point button { width:98px; height:43px; 
+				padding-top:0px; 
+				background-color : #fff;
+				border:1px solid #ddd;
+				border-radius:3px; 
+				vertical-align:top;}
+#myPoint {font-weight:bold;}
+#point p {font-size:12px; padding-top:10px; color:#666;}
+
+/* 결제수단 */
+select {width:280px; height:43px; font-size:14px; padding:0px 30px 0px 15px; border:1px solid #ddd; margin-top:8px;}
+  
+
+
+.tab_title li {
+  list-style: none;
+  float: left;
+  cursor: pointer;
+  font-size:14px; 
+  width:138px; 
+  height:36px;
+  text-align:center;
+  border: 1px solid #ddd;
+  padding-top: 13px;
+}
+
+.tab_title li.on {
+  background-color: #5f0080;
+  font-weight: bold;
+  color:#fff;
+}
+
+.tab_cont {
+  clear: both;
+  height: auto;
+  padding-top:14px;
+}
+
+.tab_cont div {
+  display: none;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.tab_cont div.on {
+  display: block;
+}
+
+/* 결제금액 */
+#price h3 {border-bottom:1px none #ddd; margin-bottom:0px;}
+#price table {border: 1px solid #f2f2f2; background-color:#fafafa; padding: 18px; width:100%; }
+#price th{width:50%; font-size:16px;}
+#price td{text-align:right; font-size:16px; font-weight:bold;}
+.final-pay{border-top:1px solid #f2f2f2; margin-top:17px; padding-top:15px;}
+.final-pay td{font-size:22px !important; font-weight:400!important}
+#price [colspan="2"]{font-size:12px !important; color:#666; padding-top:16px;}
+
+/* 마무리 */
+#last{text-align:left; margin-top:10px;}
+#last p{margin:10px 2px; line-height:160%;}
+#last button {width:240px; height:54px;
+			  margin: 40px 380px;
+			  font-size:16px;
+			  font-weight:bold;
+			  color:#fff;
+			  background-color: #5f0080;
+			  border: 0 none;
+			  border-radius:3px;}
+#last label {font-size:14px; padding:10px 3px; }
