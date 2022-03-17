@@ -49,5 +49,10 @@ public class PointVo {
 	public void setPointDate(String pointDate) {
 		this.pointDate = pointDate;
 	}
+	@Override
+	public String toString() {
+		return "PointVo [pointNo=" + pointNo + ", no=" + no + ", point=" + point + ", pointDesc=" + pointDesc
+				+ ", pointDate=" + pointDate + "]";
+	}
 	
 }
