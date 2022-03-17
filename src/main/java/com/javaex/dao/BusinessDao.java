@@ -8,6 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import com.javaex.vo.BizstorecateVo;
 import com.javaex.vo.BusinessVo;
+import com.javaex.vo.DeliveryVo;
+import com.javaex.vo.MenuOptionVo;
+import com.javaex.vo.MenuOptioncateVO;
 import com.javaex.vo.MenuVo;
 import com.javaex.vo.MenucateVo;
 import com.javaex.vo.StorecateVo;
@@ -19,18 +22,39 @@ public class BusinessDao {
 	@Autowired
 	private SqlSession sqlSession;
 
-	// 한명 가게 정보 가져오기
-	public BusinessVo getUser(int storeNo) {
-
-		System.out.println("[BusinessDao.getUser");
-		System.out.println(storeNo);
-		return sqlSession.selectOne("Business.getUser", storeNo);
+	// 한명 회원 정보 가져오기
+	public UserVo getUser(int no) {
+		System.out.println("[BusinessDao.getuser");
+		return sqlSession.selectOne("Business.getUser", no);
 	}
 
-	// 한명 회원 정보 가져오기
-	public UserVo getuser(int no) {
-		System.out.println("[BusinessDao.getuser");
-		return sqlSession.selectOne("Business.getuser", no);
+	// 한명 가게 정보 가져오기
+	public BusinessVo getStore(int storeNo) {
+		System.out.println("[BusinessDao.getUser");
+		return sqlSession.selectOne("Business.getStore", storeNo);
+	}
+	
+	//배달지역 추가
+	public int saveDeliveryArea(DeliveryVo deliveryVo) {
+		System.out.println("[BusinessDao.saveDeliveryArea]");
+		int count = sqlSession.insert("Business.saveDeliveryArea", deliveryVo);
+		System.out.println("[" + count + "배달지역이 추가 되었습니다(BusinessDao)");
+		return count;
+	}
+	
+	//배달지역 하나 가져오기
+	public DeliveryVo getDeliveryArea(int deliNo) {
+		System.out.println("[BusinessDao.getDeliveryArea");
+		System.out.println(deliNo);
+		return sqlSession.selectOne("Business.getDeliveryArea", deliNo);
+	}
+	
+	
+	
+	// 메뉴 하나 가져오기
+	public MenuVo getmenu(int menuNo) {
+
+		return sqlSession.selectOne("Business.getmenu", menuNo);
 	}
 
 	// 유저 업데이트
@@ -42,7 +66,7 @@ public class BusinessDao {
 		return count;
 	}
 
-	// 유저 업데이트
+	// 가게 업데이트
 	public int BusinessUpdate(BusinessVo businessVo) {
 		System.out.println("[BusinessDao.BusinessUpdate()]");
 		System.out.println("Business businessVo = " + businessVo);
@@ -60,6 +84,14 @@ public class BusinessDao {
 		return count;
 	}
 
+	// 옵션 카테고리 추가
+	public int menuOptioncateadd(MenuOptioncateVO menuOptioncate) {
+		System.out.println("[BusinessDao.menuOptioncateadd]");
+		int count = sqlSession.insert("Business.menuOptioncateadd", menuOptioncate);
+		System.out.println("[" + count + "건이 메뉴  옵션 카테고리가 추가 되었습니다(BusinessDao)");
+		return count;
+	}
+
 	// 메뉴등록
 	public int menuadd(MenuVo menuVo) {
 		System.out.println("[BusinessDao.menucateadd()]");
@@ -74,7 +106,22 @@ public class BusinessDao {
 		return sqlSession.selectList("Business.menucatelist", menucateVo);
 	}
 
-	// 메뉴 카테고리 리스트
+	// 메뉴 옵션 카테고리 리스트
+	public List<MenuOptioncateVO> menuOptioncateList(MenuOptioncateVO menuOptioncate) {
+		System.out.println("menuOptioncateList Dao");
+		return sqlSession.selectList("Business.menuOptioncateList", menuOptioncate);
+	}
+
+	// 메뉴 옵션 등록
+	public int cateOption(MenuOptionVo mnuOptionVo) {
+		System.out.println("cateOption Dao");
+		System.out.println(mnuOptionVo);
+		int count = sqlSession.insert("Business.cateOption", mnuOptionVo);
+		System.out.println("[" + count + "메뉴옵션이 등록 되었습니다(BusinessDao)");
+		return count;
+	}
+
+	// 메뉴 리스트
 	public List<MenuVo> menulistpar(MenuVo menuVo) {
 		System.out.println("menulist Dao");
 		return sqlSession.selectList("Business.menulistpar", menuVo);

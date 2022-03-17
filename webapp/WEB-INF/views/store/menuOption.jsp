@@ -31,11 +31,11 @@
                         <table id="manu">
                             <tbody>
                                 <tr>
-                                    <td style="width: 150px;" rowspan="3"><a href="https://www.naver.com/"><img id="profile-img" src="${pageContext.request.contextPath}/assets/images/전체.PNG"></a></td>
+                                    <td style="width: 150px;" rowspan="3"><img id="profile-img" src="${pageContext.request.contextPath}/upload/${Menuone.menu_img}"></td>
                                     <th>메뉴이름</th>
-                                    <th>후라이드 치킨</th>
+                                    <th>${requestScope.Menuone.menu_name}</th>
                                     <th>가격</th>
-                                    <th>13000</th>
+                                    <th>${requestScope.Menuone.menu_price}</th>
                                 </tr>
                                 
                                 <tr>
@@ -43,7 +43,7 @@
                                 </tr>
         
                                 <tr>
-                                    <td style="text-align: left;  height: 93px; padding-left: 30px;" colspan="4">원산지 어쩌고 저쩌고 솰라 솰라 </td>
+                                    <td style="text-align: left;  height: 93px; padding-left: 30px;" colspan="4">${requestScope.Menuone.menu_desc}</td>
                                     <td><button type="submit" class="modi">수정</button> </td>
                                 </tr>
                             </tbody>
@@ -57,7 +57,7 @@
                             <li><div class="modal">
 
                                     <div class="modal_body">
-                                        <form action="">
+                                        <form action="${pageContext.request.contextPath}/admin/menuOptioncateadd">
                                             <table style="margin: 0px;">
                                                 <tbody>
                                                     <tr>
@@ -66,11 +66,12 @@
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <input type="text" name="" value="" class="textcate">
+                                                        	<input type="hidden" name="menu_no" value="${requestScope.Menuone.menu_no}" class="textcate">
+                                                            <input type="text" name="option_cate_name" value="" class="textcate">
                                                         </td>
                                                         <td>
                                                             <span>
-                                                                <input type="checkbox" name="color" value="" class="chbtn">
+                                                                <input type="checkbox" name="chk_rdo" value="1" class="chbtn">
                                                             </span>
                                                         </td>
                                                     </tr>
@@ -80,16 +81,17 @@
                                         </form>
                                     </div>
                                 </div>
-                                <button type="button" class="optionadd">+</button></li>    
-                            <li class="category">맵기</li>
-                            <li class="category">음료선택</li>        
+                                <button type="button" class="optionadd">+</button></li>
+                            <c:forEach items="${requestScope.menuOptioncateList}" var="menuOptioncateList">
+                            <li class="category"><a href="${pageContext.request.contextPath}/admin/menuOption?menu_no=${requestScope.Menuone.menu_no}&option_cate_no=${menuOptioncateList.option_cate_no}">${menuOptioncateList.option_cate_name}</a></li>
+                            </c:forEach>        
                         </ul>
                     </div>
                     
                     <div class="modal2">
 
                         <div class="modal_body2">
-                            <form action="">
+                            <form action="${pageContext.request.contextPath}/admin/cateOption">
                                 <table id="optionmodal" style="margin: 0px;">
                                     <tbody>
 
@@ -101,17 +103,21 @@
 
                                         <tr>
                                             <td>
-                                                <select name="km" class="sort">
-                                                    <option value="ll" selected="selected" >선택하세요</option> <!--selected="selected" 미리 선택 가능 -->
-                                                    <option value="sk">세트</option>
-                                                    <option value="sk">단품</option>
+                                                <select name="optionCateNo" class="sort">
+                                                    <c:forEach items="${requestScope.menuOptioncateList}" var="menuOptioncateList">
+                                                    <option value="${menuOptioncateList.option_cate_no}">${menuOptioncateList.option_cate_name}</option>
+                                                	</c:forEach>
                                                 </select>
                                             </td>
                                             <td>
-                                                <input type="text" name="" value="">
+                                                <input type="text" name="optionName" value="">
                                             </td>
                                             <td>
-                                                <input type="text" name="" value="">
+                                                <input type="text" name="optionPrice" value="">
+                                            </td>
+                                            
+                                            <td>
+                                            	<input type="hidden" name="menuNo" value="${requestScope.Menuone.menu_no}">
                                             </td>
                                         </tr>        
                                     </tbody>

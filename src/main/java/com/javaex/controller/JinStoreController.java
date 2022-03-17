@@ -11,12 +11,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.service.BusinessService;
 import com.javaex.service.JinFileService;
 import com.javaex.vo.BizstorecateVo;
 import com.javaex.vo.BusinessVo;
+import com.javaex.vo.DeliveryVo;
+import com.javaex.vo.MenuOptionVo;
+import com.javaex.vo.MenuOptioncateVO;
 import com.javaex.vo.MenuVo;
 import com.javaex.vo.MenucateVo;
 import com.javaex.vo.StorecateVo;
@@ -36,24 +40,97 @@ public class JinStoreController {
 	public String storeEdiForm(HttpSession session, Model model) {
 		System.out.println("JinStoreController/storeEdiForm");
 
-		// 가게정보
-		Map<String, Object> sessionMap = (Map<String, Object>) session.getAttribute("map");
+		// 가게번호
+		Map<String, Object> sessionMap = (Map<String, Object>)session.getAttribute("map");
 		int storeNo = Integer.parseInt(String.valueOf(sessionMap.get("STORE_NO")));
-		BusinessVo businessVo = businessService.storeEdiForm(storeNo);
-		model.addAttribute("businessVo", businessVo);
-
-		// 유저 정보
+		
+		// 유저번호
 		int userNo = Integer.parseInt(String.valueOf(sessionMap.get("NO")));
-		UserVo uservo = businessService.getuser(userNo);
-		model.addAttribute("UserVo", uservo);
 
-		// 영업시간 정보
+
+		//jsp에 포워딩
+		Map<String, Object> storeMap = businessService.storeEdiForm(storeNo, userNo);
+		model.addAttribute("storeMap", storeMap);
 
 		return "store/storeEdiForm";
 
 	}
 	
 	
+	// 배달지역저장(기본, 추가)
+	@ResponseBody
+	@RequestMapping("/saveDeliveryArea")
+	public DeliveryVo saveDeliveryArea(HttpSession session, @ModelAttribute DeliveryVo deliveryVo) {
+		System.out.println("JinStoreController/saveDeliveryArea");
+		
+
+		// 가게번호
+		Map<String, Object> sessionMap = (Map<String, Object>)session.getAttribute("map");
+		int storeNo = Integer.parseInt(String.valueOf(sessionMap.get("STORE_NO")));
+		
+		//배달지역 추가
+		deliveryVo.setStore_no(storeNo);
+		DeliveryVo vo = businessService.saveDeliveryArea(deliveryVo);
+		
+		return vo;
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	// 메뉴 옵션 페이지
+	@RequestMapping("/menuOption")
+	public String menuOption(@RequestParam("menu_no") int menuNo, Model model, MenuOptioncateVO menuOptioncate,
+			MenuOptionVo mnuOptionVo) {
+		System.out.println("JinStoreController/menuOption");
+		// 메뉴 하나 가져오기
+		MenuVo menuvo = businessService.getmenu(menuNo);
+		model.addAttribute("Menuone", menuvo);
+
+		// 메뉴 옵션 카테고리 리스트
+		menuOptioncate.setMenu_no(menuNo);
+		List<MenuOptioncateVO> menuOptioncateList = businessService.menuOptioncateList(menuOptioncate);
+		model.addAttribute("menuOptioncateList", menuOptioncateList);
+
+		// 메뉴 옵션 리스트
+		// mnuOptionVo.setOptionCateNo(opcateno);
+		// List<MenuOptionVo> menuOptionVoList =
+		// businessService.menuOptioncateList(mnuOptionVo);
+
+		return "store/menuOption";
+	}
+
+	// 메뉴 옵션 카테고리 추가
+	@RequestMapping("/menuOptioncateadd")
+	public String menuOptioncateadd(@ModelAttribute MenuOptioncateVO menuOptioncate) {
+
+		// 메뉴 옵션 카테고리 추가
+		
+		System.out.println(menuOptioncate);
+
+		businessService.menuOptioncateadd(menuOptioncate);
+		
+		return "redirect:menuOption?menu_no=" + menuOptioncate.getMenu_no();
+	}
+
+	// 메뉴 옵션 추가
+	@RequestMapping("/cateOption")
+	public String cateOption(@ModelAttribute MenuOptionVo mnuOptionVo,HttpSession session) {
+		
+		//메뉴 옵션 추가
+		System.out.println("controll cateOption");
+		Map<String, Object> sessionMap = (Map<String, Object>) session.getAttribute("map");
+		int storeNo = Integer.parseInt(String.valueOf(sessionMap.get("STORE_NO")));
+		mnuOptionVo.setStoreNo(storeNo);
+		System.out.println(mnuOptionVo);
+		businessService.cateOption(mnuOptionVo);
+		return "redirect:menuOption?menu_no=" + mnuOptionVo.getMenuNo() ;
+	}
+
 	// 가게 수정
 	@RequestMapping("/modify")
 	public String modify(@ModelAttribute UserVo userVo, HttpSession session, @ModelAttribute BusinessVo businessVo,
@@ -82,102 +159,89 @@ public class JinStoreController {
 		return "redirect:editForm";
 
 	}
-	
-	
-	//메뉴 옵션 페이지
-	@RequestMapping("/menuOption")
-	public String menuOption() {
-		System.out.println("JinStoreController/menuOption");
 
-		return "store/menuOption";
-	}
-	
-	
-	//메뉴 리스트
+	// 메뉴 리스트
 	@RequestMapping("/menuManage")
-	public String menuManage(Model model,HttpSession session,MenucateVo menucateVo) {
+	public String menuManage(Model model, HttpSession session, MenucateVo menucateVo) {
 		System.out.println("JinStoreController/menuManage");
-		
+
 		Map<String, Object> sessionMap = (Map<String, Object>) session.getAttribute("map");
 		int storeNo = Integer.parseInt(String.valueOf(sessionMap.get("STORE_NO")));
 		menucateVo.setStore_no(storeNo);
-		
-		//메뉴 카테고리 리스트
+
+		// 메뉴 카테고리 리스트
 		List<MenucateVo> menucateList = businessService.menucatelist(menucateVo);
 		model.addAttribute("menucatelist", menucateList);
-		
+
 		return "store/menuManage";
 
 	}
-	
-	//메뉴 리스트
+
+	// 메뉴 리스트
 	@RequestMapping("/menuManage2")
-	public String menuManage2(@RequestParam("menu_cate_no") int menuCateNo, HttpSession session,Model model,MenuVo menuVo,MenucateVo menucateVo) {
-		
+	public String menuManage2(@RequestParam("menu_cate_no") int menuCateNo, HttpSession session, Model model,
+			MenuVo menuVo, MenucateVo menucateVo) {
+
 		System.out.println("JinStoreController/menuManage");
 		Map<String, Object> sessionMap = (Map<String, Object>) session.getAttribute("map");
 		int storeNo = Integer.parseInt(String.valueOf(sessionMap.get("STORE_NO")));
 		menucateVo.setStore_no(storeNo);
-		//메뉴 카테고리 리스트
-		List<MenucateVo> menucateList = businessService.menucatelist(menucateVo);		
+		// 메뉴 카테고리 리스트
+		List<MenucateVo> menucateList = businessService.menucatelist(menucateVo);
 		model.addAttribute("menucatelist", menucateList);
-		
-		//메뉴 리스트 파라미터로 받기
+
+		// 메뉴 리스트 파라미터로 받기
 		menuVo.setMenu_cate_no(menuCateNo);
 		List<MenuVo> menulist = businessService.menulistpar(menuVo);
 		System.out.println(menulist);
 		model.addAttribute("menulist", menulist);
-		
+
 		return "store/menuManage";
 	}
-	
-	//메뉴 카테고리 등록
+
+	// 메뉴 카테고리 등록
 	@RequestMapping("/menucataadd")
-	public String manucataadd(@ModelAttribute MenucateVo menucateVo,
-			HttpSession session) {
+	public String manucataadd(@ModelAttribute MenucateVo menucateVo, HttpSession session) {
 		System.out.println("JinStoreController/manumodify");
 
 		// 가게번호
 		Map<String, Object> sessionMap = (Map<String, Object>) session.getAttribute("map");
 		int storeNo = Integer.parseInt(String.valueOf(sessionMap.get("STORE_NO")));
-		
-		//메뉴 카테고리 추가
+
+		// 메뉴 카테고리 추가
 		menucateVo.setStore_no(storeNo);
 		System.out.println("메뉴 카테고리 = " + menucateVo);
 		businessService.menucateadd(menucateVo);
-		
+
 		return "redirect:menuManage";
 	}
-	
-	//메뉴등록
+
+	// 메뉴등록
 	@RequestMapping("/menuadd")
-	public String menuadd(@ModelAttribute MenuVo menuVo,
-			@RequestParam("file") MultipartFile file) {
-		
-		//메뉴등록
+	public String menuadd(@ModelAttribute MenuVo menuVo, @RequestParam("file") MultipartFile file) {
+
+		// 메뉴등록
 		String saveName = jinfileService.restore(file);
 		menuVo.setMenu_img(saveName);
 		System.out.println("controller meadd = " + menuVo);
 		businessService.menuadd(menuVo);
-		
+
 		return "redirect:menuManage";
 	}
-	
-	
-	//가게 카테고리 추가
+
+	// 가게 카테고리 추가
 	@RequestMapping("/storecate")
-	public String storecate(@ModelAttribute StorecateVo storecateVo,
-			@ModelAttribute BizstorecateVo BizstorecateVo,
+	public String storecate(@ModelAttribute StorecateVo storecateVo, @ModelAttribute BizstorecateVo BizstorecateVo,
 			HttpSession session) {
-		
+
 		System.out.println("controll storecate");
 		// 가게번호
 		Map<String, Object> sessionMap = (Map<String, Object>) session.getAttribute("map");
 		int storeNo = Integer.parseInt(String.valueOf(sessionMap.get("STORE_NO")));
-		
-		//가게 카테고리추가
+
+		// 가게 카테고리추가
 		BizstorecateVo.setStore_no(storeNo);
-		businessService.storecateadd(storecateVo,BizstorecateVo);
+		businessService.storecateadd(storecateVo, BizstorecateVo);
 
 		return "redirect:editForm";
 	}

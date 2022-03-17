@@ -5,9 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${pageContext.request.contextPath}/assets/css/store/storeEdiForm.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/assets/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/assets/css/total.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/assets/css/store/storeEdiForm.css" rel="stylesheet" type="text/css">
+
+
+
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/assets/bootstrap/js/bootstrap.js"></script>
 </head>
 
 <body>
@@ -28,67 +33,80 @@
 			<div id="main">
 				<form method="post" action="${pageContext.request.contextPath}/admin/modify" enctype="multipart/form-data">
 					<div>
-						<table id="table1">
+						<table id="table1" border="1">
 							<tbody>
 								<tr>
 									<th>사업자등록번호</th>
-									<td><span>${requestScope.businessVo.bizNo}</span></td>
+									<td><span>${storeMap.businessVo.bizNo}</span></td>
 									<th>상호명</th>
-									<td><input type="text" name="storeName" value="${requestScope.businessVo.storeName}"></td>
+									<td><input type="text" name="storeName" value="${storeMap.businessVo.storeName}"></td>
 								</tr>
 								<tr>
 									<th>가게번호</th>
-									<td><span><input type="text" name="storePhone" value="${requestScope.businessVo.storePhone}" style="width: 100px;"></span></td>
+									<td><span><input type="text" name="storePhone" value="${storeMap.businessVo.storePhone}" style="width: 100px;"></span></td>
 									<th>휴대전화</th>
-									<td><input type="text" name="hp" value="${requestScope.UserVo.hp}"></td>
+									<td><input type="text" name="hp" value="${storeMap.userVo.hp}"></td>
 								</tr>
 								<tr>
 									<th>Email</th>
-									<td colspan="3"><input type="text" name="email" value="${requestScope.UserVo.email}"></td>
+									<td colspan="3"><input type="text" name="email" value="${storeMap.userVo.email}"></td>
 								</tr>
 								<tr>
 									<th>주소</th>
-									<td colspan="2"><input type="text" name="storeMAdr" value="${requestScope.businessVo.storeMAdr}"></td>
+									<td colspan="2"><input type="text" name="storeMAdr" value="${storeMap.businessVo.storeMAdr}"></td>
 									<td class="tdpadding"><span class="spancolor"><a href="https://www.naver.com/"><span class="fontcolor">주소검색</span></a></span></td>
 								</tr>
 								<tr>
 									<th>상세주소</th>
-									<td colspan="3"><input type="text" name="storeSAdr" value="${requestScope.businessVo.storeSAdr}"></td>
+									<td colspan="3"><input type="text" name="storeSAdr" value="${storeMap.businessVo.storeSAdr}"></td>
 								</tr>
 								<tr>
 									<th>최소주문금액</th>
-									<td colspan="3"><input type="text" name="minPrice" value="${requestScope.businessVo.minPrice}"></td>
+									<td colspan="3"><input type="text" name="minPrice" value="${storeMap.businessVo.minPrice}"></td>
 								</tr>
 								<tr>
 									<th>기본배달지역</th>
-									<td colspan="3" class="tdpadding"><span class="spancolor"><span class="fontcolor" id="btnOptAdd">배달지추가</span></span></td>
+									<td colspan="3" class="tdpadding">
+										<span class="spancolor"><span class="fontcolor" id="btn_BaseDeliveryAreaModal">배달지추가</span></span>
+										
+										<div id="baseListArea" >
+										  
+										
+										</div>
+									</td>
 								</tr>
-
-                        		<tbody id="memDiv">
-
-                            
-	                        	</tbody>
-
+																
 								<tr>
 									<th>배달가능지역</th>
 									<td colspan="2"><input type="text" name="delivery_area" value="${requestScope.DeliveryVo.delivery_area}"></td>
 									<td class="tdpadding"><span class="spancolor"><a href="https://www.naver.com/"><span class="fontcolor">주소검색</span></a></span></td>
 								</tr>
 								<tr>
-									<th colspan="4">영업시간</th>
-								</tr>
-								<tr>
-									<th>요일</th>
+									<th>영업시간</th>
 									<th>오픈시간</th>
 									<th>마감시간</th>
-									<th style="text-align: center;">휴일체크</th>
+									<th></th>
 								</tr>
 								<tr>
-									<th >월<input type="hidden" name="day" value="월"></th>
-									<td><input type="text" name="store_no" value=""></td>
-									<td><span><input type="text" name="close_time" value=""></span></td>
-									<td><span><input type="checkbox" name="day_off" value="1" class="chbtn"></span></td>
+									<th></th>
+									<td><input type="text" name="open_time" value="${storeMap.businessVo.open_time}"></td>
+									<td><input type="text" name="close_time" value="${storeMap.businessVo.close_time}"></td>
+									<td></td>
 								</tr>
+								<tr>
+									<th>휴일체크</th>
+									<td>월 <input type="checkbox" name="chk_rdo" value="1" class="chbtn"></td>
+									<td>화 <input type="checkbox" name="chk_rdo" value="2" class="chbtn"></td>
+									<td>수 <input type="checkbox" name="chk_rdo" value="3" class="chbtn"></td>
+								</tr>
+								<tr>
+									<th>목 <input type="checkbox" name="chk_rdo" value="4" class="chbtn"></th>
+									<td>금 <input type="checkbox" name="chk_rdo" value="5" class="chbtn"></td>
+									<td>토 <input type="checkbox" name="chk_rdo" value="6" class="chbtn"></td>
+									<td>일 <input type="checkbox" name="chk_rdo" value="0" class="chbtn"></td>
+								</tr>
+								
+								
                                 <tr>
 									<th colspan="2">가게 카테고리</th>
 									<td colspan="2"><button type="button" class="catebtnadd">카테고리 추가</button></td>
@@ -104,7 +122,7 @@
 
 
 					<div class="logoimgline">
-						<img id="logoImg" src="${pageContext.request.contextPath}/upload/${businessVo.logoImg}" class="img2" name="logoImg">
+						<img id="logoImg" src="${pageContext.request.contextPath}/upload/${storeMap.businessVo.logoImg}" class="img2" name="logoImg">
 					</div>
 
 					<div class="upload-btn_wrap">
@@ -124,7 +142,7 @@
 					<div class="textarea">			
 						
 						<div>
-							<input type="text" name="notice" value="${requestScope.businessVo.notice}" style="width: 250px;">
+							<input type="text" name="notice" value="${storeMap.businessVo.notice}" style="width: 250px;">
 						</div>
 					</div>
 					
@@ -137,17 +155,18 @@
 					<div class="textarea">			
 						
 						<div>
-							<input type="text" name="origin" value="${requestScope.businessVo.origin}" style="width: 250px;">
+							<input type="text" name="origin" value="${storeMap.businessVo.origin}" style="width: 250px;">
 						</div>
 					</div>
 
 					<div>
 						<button class="button1" type="submit">수정버튼</button>
 					</div>
-					<input type="text" name="storeNo" value="${requestScope.businessVo.storeNo}"> <input type="text" name="storeNo" value="${requestScope.UserVo.no}">
+					<input type="text" name="storeNo" value="${storeMap.businessVo.storeNo}"> <input type="text" name="storeNo" value="${requestScope.UserVo.no}">
 				</form>
 			</div>
 		</div>
+
 
         <div class="modal">
 
@@ -175,7 +194,146 @@
 	</div>
 	<!-- 푸터 -->
 	<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
+	
+	
+	
+	<!-- --------------------------------------------------------- -->
+	<!-- 모달창--------------------------------------------------------- -->
+	<!-- --------------------------------------------------------- -->
+	
+	<!-- 기본배달지역 등록 모달창--------------------------------------------------------- -->
+	<div id="baseDeliveryAreaModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">기본배달지역 등록 모달창</h4>
+				</div>
+				
+				<div class="modal-body">
+				 
+				 	<label for="txt_delivery_area">기본배달지역명</label><input id="txt_delivery_area" type="text" name="delivery_area" value="">
+				 	<label for="txt_fee">가격</label><input id="txt_fee" type="text" name="fee" value="">
+				 	<input type="text" id="txt_area_code" name="area_code" value="0">
+				 
+				</div>
+
+				<div class="modal-footer">
+					<button id ="btn_baseDeliveryAreaAdd" type="button" class="btn btn-primary">저장</button>
+				
+				
+					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+					
+				</div>
+
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	
+	
+	
+	<!-- 추가배달지역 등록 모달창--------------------------------------------------------- -->
+	<div id="canDeliveryAreaModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">추가배달지역 등록 모달창</h4>
+				</div>
+				
+				<div class="modal-body">
+				 
+					추가배달지역 등록 모달창
+				  
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+					<button id = "modalBtnDel" type="button" class="btn btn-danger">삭제</button>
+				</div>
+
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </body>
+
+
+<script>
+
+
+//기본 배달지 추가 버튼 클릭할때-->기본배달지역 등록 모달창 호출
+$("#btn_BaseDeliveryAreaModal").on("click", function(){
+    console.log("기본 배달지 추가 모달");
+
+    $("#baseDeliveryAreaModal").modal('show');
+});
+
+
+//기본 배달지 추가
+$("#btn_baseDeliveryAreaAdd").on("click", function(){
+	
+	//동네명.가격,코드 가져오기
+	var delivery_area = $("#txt_delivery_area").val();
+	var fee = $("#txt_fee").val();
+	var area_code = $("#txt_area_code").val();
+	
+	var deliveryVo = {
+		delivery_area: delivery_area,
+		fee: fee,
+		area_code: area_code
+	};
+	
+	console.log(deliveryVo);
+	
+	//ajax 통신 저장
+	$.ajax({
+		url : "${pageContext.request.contextPath }/admin/saveDeliveryArea",
+		type : "post",
+		//contentType : "application/json",
+		data : deliveryVo,
+		
+		dataType : "json",
+		success : function(deliveryVo){ //json --> js
+			console.log(deliveryVo)
+			render(deliveryVo);
+			
+		},
+		error : function(XHR, status, error) {
+		console.error(status + " : " + error);
+		}
+	});
+	
+});
+
+
+
+
+
+function render(deliveryVo){
+	
+	var str = '<div>' ;
+	str += deliveryVo.delivery_area+'  ';
+	str += deliveryVo.fee ;
+	str += '</div>' ;
+	
+	$("#baseListArea").append(str);	
+};
+
+</script>
+
+
+
+
+
 
 
 
@@ -188,12 +346,7 @@ $("textarea.autosize").on('keydown keyup', function () {
 
 <script>
 
-    //배달지 추가 클릭할때
-$("#btnOptAdd").on("click", function(){
-    console.log("배달지 추가");
 
-    insertTr();
-});
 
 function insertTr() {
 
@@ -246,5 +399,8 @@ function setThumbnail(event) {
           }
         });
 </script>
+
+
+
 
 </html>

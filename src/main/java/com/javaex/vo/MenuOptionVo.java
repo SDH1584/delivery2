@@ -20,7 +20,7 @@ public class MenuOptionVo {
 	
 	
 	public MenuOptionVo() {
-		super();
+		
 	}
 	
 	public MenuOptionVo(int menuCateNo, int storeNo, String menuCateName, int menuNo, String menuImg, String menuName,

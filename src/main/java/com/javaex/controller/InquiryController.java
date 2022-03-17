@@ -16,10 +16,6 @@ public class InquiryController {
 		System.out.println("mypage.inquiryWriteForm");
 		return "user-mypage/inquiryWriteForm";
 	}
-	@RequestMapping("/point")
-	public String point() {
-		System.out.println("mypage.point");
-		return "user-mypage/point";
-	}
+
 
 }

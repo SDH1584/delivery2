@@ -2,6 +2,7 @@ package com.javaex.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/user")
@@ -17,8 +18,10 @@ public class JinUserController {
 	
 	// 선택 리스트
 	@RequestMapping("/storeList")
-	public String storeList() {
+	public String storeList( @RequestParam("store_cate_name") String storename) {
 		System.out.println("JinUserController/storeList");
+		
+		
 		return "user/storeList";
 	}
 	

@@ -27,9 +27,6 @@ public class MainDao {
 		return sqlSession.selectOne("main.getStore", storeNo);
 	}
 
-		
-		
-	
 	
 	// 메인정보가져오기
 	public void getMain() {
@@ -40,7 +37,6 @@ public class MainDao {
 
 	
 	
-
 	// 최근 가게 정보 가져오기
 	public List<MainVo> getRecentStore() {
 		System.out.println("getRecentStore dao");

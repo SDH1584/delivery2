@@ -11,7 +11,9 @@
 			<typeAlias alias="MenucateVo" type="com.javaex.vo.MenucateVo" />
 			<typeAlias alias="StorecateVo" type="com.javaex.vo.StorecateVo" />
 			<typeAlias alias="MenuVo" type="com.javaex.vo.MenuVo" />
+			<typeAlias alias="MenuOptioncateVO" type="com.javaex.vo.MenuOptioncateVO" />
 			<typeAlias alias="BizstorecateVo" type="com.javaex.vo.BizstorecateVo" />
+			<typeAlias alias="MenuOptionVo" type="com.javaex.vo.MenuOptionVo" />
 	</typeAliases>
 	
 	<mappers>

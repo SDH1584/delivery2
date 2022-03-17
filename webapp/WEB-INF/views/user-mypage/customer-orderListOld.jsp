@@ -60,29 +60,27 @@
 								<tbody>
 									<c:forEach items="${orderList }" var="orderListVo">
 										<c:if test="${orderListVo.order_status == 2 }">
-											<tr class="modalOrderDetail">
+											<tr class="modalOrderDetail" data-p_order_no="${orderListVo.p_order_no }">
 												<td>${orderListVo.order_date }</td>
 												<td>${orderListVo.store_name }</td>
-												<td>${orderListVo.final_pay }</td>
+												<td>${orderListVo.final_pay }원</td>
 												<td>주문취소</td>
 											</tr>
-											<input type="text" id="pOrderNo" value="${orderListVo.p_order_no }">
 										</c:if>
 										<c:if test="${orderListVo.order_status == 4 }">
-											<tr class="modalOrderDetail">
+											<tr class="modalOrderDetail" data-p_order_no="${orderListVo.p_order_no }">
 												<td>${orderListVo.order_date }</td>
 												<td>${orderListVo.store_name }</td>
-												<td>${orderListVo.final_pay }</td>
+												<td>${orderListVo.final_pay }원</td>
 												<td>배달완료
 													<button class="btn btn_review">리뷰작성</button>
 												</td>
 											</tr>
-											<input type="text" id="pOrderNo" value="${orderListVo.p_order_no }">
 										</c:if>
 									</c:forEach>
 								</tbody>
 							</table>
-							<input type="text" id="no" value="${authUser.no }">
+							<input type="hidden" id="no" value="${authUser.no }">
 						</div>
 						<!-- //orderList-box -->
 					</div>
@@ -122,42 +120,39 @@
 </body>
 <script type="text/javascript">
 	// 주문상세 모달창 오픈
-	$(".modalOrderDetail")
-			.on(
-					"click",
-					function() {
-						console.log("주문상세 모달창");
+	$(".modalOrderDetail").on("click", function() {
+		console.log("주문상세 모달창");
 
-						var no = $("#no").val();
-						var p_order_no = $("#pOrderNo").val();
+		var no = $("#no").val();
 
-						var orderListVo = {
-							no : no,
-							p_order_no : p_order_no
-						}
+		var p_order_no =$(this).data("p_order_no");
 
-						$
-								.ajax({
-									url : "${pageContext.request.contextPath }/mypage/orderList-detail",
-									type : "post",
-									data : orderListVo,
-									dataType : "json",
-									success : function(detailList) {
-										console.log(detailList);
-										menuInfo(detailList);
-										$(detailList).each(function() {
-											console.log(this.menu_name);
-											console.log(this.count);
+		var orderListVo = {
+			no : no,
+			p_order_no : p_order_no
+		}
+		
+		$.ajax({
+			url : "${pageContext.request.contextPath }/mypage/orderList-detail",
+			type : "post",
+			data : orderListVo,
+			dataType : "json",
+			success : function(detailList) {
+				console.log(detailList);
+				menuInfo(detailList);
+				$(detailList).each(function() {
+					console.log(this.menu_name);
+					console.log(this.count);
+	
+				});
+			},
+			error : function(XHR, status, error) {
+				console.error(status + ":" + error);
+			}
+		});
 
-										});
-									},
-									error : function(XHR, status, error) {
-										console.error(status + ":" + error);
-									}
-								});
-
-						$("#orderModal").modal('show');
-					});
+		$("#orderModal").modal('show');
+	});
 
 	// 주문상세 모달창 그리기
 	function menuInfo(detailList) {
@@ -195,13 +190,13 @@
 		str += '			<th>결제 금액</th>';
 		str += '		</tr>';
 		str += '		<tr>';
-		str += '			<td>' + detailList[0].final_pay + '</td>';
+		str += '			<td>' + detailList[0].final_pay + '원</td>';
 		str += '		</tr>';
 		str += '		<tr>';
 		str += '			<th>배달료</th>';
 		str += '		</tr>';
 		str += '		<tr>';
-		str += '			<td>' + detailList[0].p_fee + '</td>';
+		str += '			<td>' + detailList[0].p_fee + '원</td>';
 		str += '		</tr>';
 		str += '		<tr>';
 		str += '			<th>결제방식</th>';
@@ -212,7 +207,7 @@
 		str += '	</tbody>';
 		str += '</table>';
 
-		$("#menuListArea").append(str);
+		$("#menuListArea").html(str);
 	}
 
 	// 닫기 버튼 클릭했을 때

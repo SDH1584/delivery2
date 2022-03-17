@@ -31,41 +31,6 @@ public class MainService {
 	}
 	
 	
-	
-	
-	
-	public void getMain() {
-		System.out.println("MainService.getMain()");
-		
-
-		//List<MainVo> storeList = maindao.storeList();
-		
-		
-		
-		/*
-		Map<String, Object> map = new HashMap<String, Object>();
-		// 메인정보가져오기
-		List<MainVo> getMain = maindao.getMain(mainVo);
-		map.put("getMain", getMain);
-		// 가게정보가져오기
-		List<MainVo> storeList = maindao.storeList();
-		map.put("storeList",storeList);
-		// 가장 최근가게 가져오기
-		List<MainVo> getRecentStore = maindao.getRecentStore();
-		map.put("getRecentStore", getRecentStore);
-		map.put("mainVo", mainVo);
-		System.out.println(map);
-		return map;
-//	public List<MainVo> getMain(MainVo mainVo) {
-//		System.out.println("getMain service");
-//		
- * 
- * return maindao.getMain(mainVo);
- */
-//
-	}
-
-	
 
 
 	public List<MainVo> getRecentStore() {

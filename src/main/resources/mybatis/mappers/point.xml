@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="point">
+
+	<!-- 포인트내역 가져오기 -->
+	<select id="pointList" parameterType="int" resultType="com.javaex.PointVo">
+		<![CDATA[
+			select no,
+			       point_desc,
+			       point_date,
+			       point_date + (INTERVAL '1' YEAR)
+			from   point
+			where no=#{no}
+		]]>
+	</select>
+	
+	<!-- 전체포인트 -->
+	<select id="allpoint" parameterType="int" resultType="int">
+		<![CDATA[
+			select sum(point)
+			from point
+			where no=#{no}
+		]]>
+	</select>
+	
+	
+	
+	
+</mapper>
