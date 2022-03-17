@@ -335,20 +335,6 @@
 	/* 예약막기 시간선택 */
 	$('#date-confirm').on('click', function () {
 	    var noDate = $('#datepicker').val();
-	    var openHour = ${map.bizVo.openHour};
-	    var openMin = ${map.bizVo.openMin};
-	    var closeHour = ${map.bizVo.closeHour};
-	    var closeMin = ${map.bizVo.closeMin};
-	    
-	    if (closeHour<openHour){
-	    	closeHour = closeHour + 24;
-	    };
-	    if (closeMin>=30){
-	    	closeHour = closeHour + 1;
-	    }
-	    if(opemMin >=30){
-	    	openHour = openHour + 1;
-	    }
 
 	    
 	});

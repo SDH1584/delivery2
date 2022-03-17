@@ -165,7 +165,7 @@
 			values (#{orderNo},
 			        #{storeNo},
 			        #{people},
-			        TO_DATE(#{orderDate},'yyyy-mm-dd hh24:mi'),
+			        TO_DATE(#{orderDate},'yy-mm-dd hh24:mi'),
 			        0,
 			        #{address},
 			        #{deliveryReq})
