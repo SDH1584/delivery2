@@ -12,6 +12,9 @@
 <link href="${pageContext.request.contextPath}/assets/css/user/user.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/assets/css/mypage.css" rel="stylesheet" type="text/css">
 
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.js"></script>
+
 </head>
 <body>
 	<div id="wrap" class="box-gray clearfix">
@@ -47,43 +50,38 @@
 							<p class="page_sub">
 								<span class="ico">*</span> 필수입력사항
 							</p>
-							<form action="${pageContext.request.contextPath}/mypage/modify" method="get">
+							<form action="${pageContext.request.contextPath}/mypage/edit" method="post" enctype="multipart/form-data">
 								<table class="tbl_edit">
 									<tbody>
 										<tr class="fst">
 											<th>프로필 사진</th>
 											<td>
 												<div class="c_profile_photo">
-													<img id="profile_photo" src="${pageContext.request.contextPath}/assets/images/profile.png">
-												</div> <input type="file" id="c_photo" name="c_photo">
+													<input id="profileImgChk" type="hidden" value="${userVo.profile_img }">
+													<img id="profile_photo" src="">
+												</div> <input type="file" id="c_profile_img" name="file">
 											</td>
 										</tr>
 										<tr>
 											<th>아이디 <span class="ico">*</span>
 											</th>
-											<td><input type="text" readonly name="c_id" value="kim1234" label="아이디"></td>
+											<td><input type="text" readonly id="c_id" name="id" value="${userVo.id }"></td>
 										</tr>
 										<tr>
 											<th>새 비밀번호 <span class="ico">*</span>
 											</th>
-											<td><input type="password" name="c_pass" label="비밀번호" placeholder="새로운 비밀번호를 입력해주세요"></td>
+											<td><input type="password" id="c_password" name="password" placeholder="새로운 비밀번호를 입력해주세요"></td>
 										</tr>
 										<tr>
 											<th>휴대전화 <span class="ico">*</span>
 											</th>
-											<td><input type="text" name="c_phone" label="휴대전화" value="01012341234">
+											<td><input type="text" id="c_hp" name="hp" value="${userVo.hp }">
 												<button type="button" id="" class="btn btn_default">다른번호 인증</button></td>
 										</tr>
 										<tr>
 											<th>이메일</th>
-											<td><input type="text" name="c_email" label="이메일" value="kim1234@gmail.com">
-												<button type="button" id="" class="btn btn_default">중복확인</button></td>
-										</tr>
-										<tr class="lst">
-											<th>주소 <span class="ico">*</span>
-											</th>
-											<td><input type="text" name="c_addr" label="주소" value="서울 관악구 에그옐로우빌딩 14층">
-												<button type="button" id="" class="btn btn_default">주소 검색</button></td>
+											<td><input type="text" id="c_email" name="email" value="${userVo.email }" placeholder="예: marketkurly@kurly.com">
+												<button type="button" id="btn_emailChk" class="btn btn_default">중복확인</button></td>
 										</tr>
 									</tbody>
 								</table>
@@ -103,3 +101,26 @@
 		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 	</div>
 </body>
+<script type="text/javascript">
+
+	var profileImgChk = $("#profileImgChk").val();
+	
+	// 프로필 이미지 예외처리
+	if (!profileImgChk) {
+		// 프로필 이미지가 없을 때
+		$("#profile_photo").attr("src", "${pageContext.request.contextPath}/assets/images/profile.png");
+	} else {
+		// 프로필 이미지가 있을 때
+		$("#profile_photo").attr("src", "${pageContext.request.contextPath}/upload/${userVo.profile_img}");
+	}
+	
+	//첨부파일을 선택했을 때
+	$("#c_profile_img").on("change", function() {
+		console.log("첨부파일 선택")
+		var reader = new FileReader();
+		reader.onload = function(event) {
+			$("#profile_photo").attr("src", event.target.result);
+		}
+		reader.readAsDataURL(event.target.files[0]);
+	});		
+</script>

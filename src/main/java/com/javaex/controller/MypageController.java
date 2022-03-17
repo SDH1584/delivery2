@@ -23,6 +23,22 @@ public class MypageController {
 	@Autowired
 	private MypageService mypageService;
 	
+	// 회원정보 수정폼
+	@RequestMapping(value="/editForm", method= {RequestMethod.GET, RequestMethod.POST})
+	public String editForm(HttpSession session, Model model) {
+		System.out.println("mypageController/editForm");
+		
+		// 세션에서 로그인한 사용자 no값 가져오기
+		int no = ((UserVo) session.getAttribute("authUser")).getNo();
+		
+		// mypageService를 통해 로그인한 유저 정보 가져오기
+		UserVo userVo = mypageService.editForm(no);
+		
+		model.addAttribute("userVo", userVo);
+		
+		return "user-mypage/customer-editForm";
+	}
+
 	// 주문 현황 리스트
 	@RequestMapping(value="/orderList-now", method= {RequestMethod.GET, RequestMethod.POST})
 	public String orderListNow(HttpSession session, Model model) {
@@ -57,15 +73,7 @@ public class MypageController {
 		List<OrderListVo> detailList = mypageService.getOrderDetail(orderListVo);
 		return detailList; 
 	}
-	
-	// 회원정보 수정
-	@RequestMapping(value="/editForm", method= {RequestMethod.GET, RequestMethod.POST})
-	public String editForm(HttpSession session, Model model) {
-		System.out.println("mypageController/editForm");
-		
-		return "user-mypage/customer-editForm";
-	}
-	
+
 	// 주소 등록/수정
 	@RequestMapping(value="/address", method= {RequestMethod.GET, RequestMethod.POST})
 	public String address() {
