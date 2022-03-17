@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mypageReview">
+
+	<select id="reviewList" parameterType="int" resultType="com.javaex.vo.ReviewVo">
+		<![CDATA[
+			select id,
+			       u.no no,
+			       p_order_no pOrderNo,
+			       reg_date regDate,
+			       recommend,
+			       review_content reviewContent,
+			       review_no reviewNo,
+			       review_content reviewContent,
+			       blind,
+			       reply,
+			       reply_reg_date replyRegDate,
+			       store_no storeNo,
+			       review_img reviewImg
+			from review r, users u
+			where r.no = u.no 
+			and r.no = #{no}
+			order by reviewNo desc
+		]]>
+	</select>
+
+	<select id="reviewCnt" parameterType="int" resultType="int">
+		<![CDATA[
+			select count(review_no)
+			from review
+			where no = #{no}
+		]]>
+	</select>
+	
+	<delete id="pReviewDel" parameterType="int">
+		<![CDATA[
+			delete from review
+			where review_no = ${reviewNo}
+		]]>
+	</delete>
+	
+</mapper>
