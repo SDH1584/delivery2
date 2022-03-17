@@ -131,16 +131,11 @@ public class OrderService {
 	}
 	
 	/* 주문정보 저장하기 */
-	public int saveOrderInfo0(OrderInfoVo oVo) {
-		System.out.println("[OrderService.saveOrderInfo0()]");
+	public void saveOrderInfo(OrderInfoVo oVo) {
+		System.out.println("[OrderService.saveOrderInfo()]");
 	
 		orderDao.addOrderGroup(oVo); //주문그룹테이블에 정보 삽입
 		orderDao.addPersonalOrder(oVo); //개인주문정보테이블에 정보 삽입
-		orderDao.addAddPoint(oVo); //결제포인트 적립
-		
-		if(oVo.getPointPay() != 0) {
-			orderDao.addPayPoint(oVo);
-		}//사용포인트 입력
 		
 		List<MenuInfoVo> orderMenuList = oVo.getMenuInfoArr();
 		for(int i=0; i<orderMenuList.size(); i++) {
@@ -164,19 +159,13 @@ public class OrderService {
 				}
 			}	
 		}
-		return oVo.getpOrderNo();
 	}
 	
 	/* 주문정보 저장하기 */
-	public void saveOrderInfo1(OrderInfoVo oVo) {
-		System.out.println("[OrderService.saveOrderInfo1()]");
+	public void saveOrderInfo2(OrderInfoVo oVo) {
+		System.out.println("[OrderService.saveOrderInfo()]");
 	
 		orderDao.addPersonalOrder(oVo); //개인주문정보테이블에 정보 삽입
-		orderDao.addAddPoint(oVo); // 결제포인트 적ㄹ입
-		
-		if(oVo.getPointPay() != 0) {
-			orderDao.addPayPoint(oVo);
-		} //사용포인트 입력
 		
 		List<MenuInfoVo> orderMenuList = oVo.getMenuInfoArr();
 		for(int i=0; i<orderMenuList.size(); i++) {
@@ -200,13 +189,6 @@ public class OrderService {
 				}
 			}	
 		}
-	}
-	
-	/* 회원 포인트 가져오기 */
-	public int getPoint(int no) {
-		System.out.println("[OrderService.getPoint()]");
-		
-		return orderDao.getPoint(no);
 	}
 	
 }

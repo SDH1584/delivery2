@@ -16,10 +16,6 @@ public class BusinessVo {
 	private String origin;
 	private int onOff;
 	private int fee;
-	private String openHour;
-	private String openMin;
-	private String closeHour;
-	private String closeMin;
 
 	public BusinessVo() {
 
@@ -27,7 +23,7 @@ public class BusinessVo {
 
 	public BusinessVo(int storeNo, int no, int bizNo, String storeName, String storePhone, String storeMAdr,
 			String storeSAdr, double storeLat, double sotreLng, String logoImg, int minPrice, String notice,
-			String origin, int onOff, int fee, String openHour, String openMin, String closeHour, String closeMin) {
+			String origin, int onOff, int fee) {
 		super();
 		this.storeNo = storeNo;
 		No = no;
@@ -44,16 +40,7 @@ public class BusinessVo {
 		this.origin = origin;
 		this.onOff = onOff;
 		this.fee = fee;
-		this.openHour = openHour;
-		this.openMin = openMin;
-		this.closeHour = closeHour;
-		this.closeMin = closeMin;
 	}
-
-
-
-
-
 
 	public int getStoreNo() {
 		return storeNo;
@@ -174,50 +161,13 @@ public class BusinessVo {
 	public void setFee(int fee) {
 		this.fee = fee;
 	}
-	
-	public String getOpenHour() {
-		return openHour;
-	}
-
-	public void setOpenHour(String openHour) {
-		this.openHour = openHour;
-	}
-
-	public String getOpenMin() {
-		return openMin;
-	}
-
-	public void setOpenMin(String openMin) {
-		this.openMin = openMin;
-	}
-
-	public String getCloseHour() {
-		return closeHour;
-	}
-
-	public void setCloseHour(String closeHour) {
-		this.closeHour = closeHour;
-	}
-
-	public String getCloseMin() {
-		return closeMin;
-	}
-
-	public void setCloseMin(String closeMin) {
-		this.closeMin = closeMin;
-	}
 
 	@Override
 	public String toString() {
 		return "BusinessVo [storeNo=" + storeNo + ", No=" + No + ", bizNo=" + bizNo + ", storeName=" + storeName
 				+ ", storePhone=" + storePhone + ", storeMAdr=" + storeMAdr + ", storeSAdr=" + storeSAdr + ", storeLat="
 				+ storeLat + ", sotreLng=" + sotreLng + ", logoImg=" + logoImg + ", minPrice=" + minPrice + ", notice="
-				+ notice + ", origin=" + origin + ", onOff=" + onOff + ", fee=" + fee + ", openHour=" + openHour
-				+ ", openMin=" + openMin + ", closeHour=" + closeHour + ", closeMin=" + closeMin + "]";
+				+ notice + ", origin=" + origin + ", onOff=" + onOff + ", fee=" + fee + "]";
 	}
 
-	
-	
-
-	
 }

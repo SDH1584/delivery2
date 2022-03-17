@@ -74,39 +74,25 @@ public class OrderController {
 	
 	/* 주문정보 저장 - 만든사람 */
 	@ResponseBody
-	@RequestMapping("/orderInfo0")
-	public int orderInfo(@RequestBody OrderInfoVo oVo) {
-		System.out.println("[OrderController.orderInfo0]");
-		//System.out.println(oVo);
+	@RequestMapping("/orderInfo")
+	public String orderInfo(@RequestBody OrderInfoVo oVo) {
+		System.out.println("[OrderController.orderInfo]");
+		System.out.println(oVo);
 		
-		int pOrderNo = orderService.saveOrderInfo0(oVo);
-		
-		return pOrderNo;
-	}
-	
-	/* 주문정보 저장 - 참여한 사람 */
-	@ResponseBody
-	@RequestMapping("/orderInfo1")
-	public String orderInfo2(@RequestBody OrderInfoVo oVo) {
-		System.out.println("[OrderController.orderInfo1]");
-		//System.out.println(oVo);
-		
-		orderService.saveOrderInfo1(oVo);
+		orderService.saveOrderInfo(oVo);
 		
 		return "true";
 	}
 	
-	/* 결제 */
-	@RequestMapping("/pay")
-	public String pay(HttpSession session, Model model) {
-		System.out.println("[OrderController.pay]");
+	/* 주문정보 저장 - 참여한 사람 */
+	@ResponseBody
+	@RequestMapping("/orderInfo2")
+	public String orderInfo2(@RequestBody OrderInfoVo oVo) {
+		System.out.println("[OrderController.orderInfo2]");
+		System.out.println(oVo);
 		
-		UserVo authUser = (UserVo)session.getAttribute("authUser");
-		int no = authUser.getNo();
+		orderService.saveOrderInfo2(oVo);
 		
-		int myPoint = orderService.getPoint(no);
-		model.addAttribute("myPoint", myPoint);
-		return "store-detail/pay";
-		
+		return "true";
 	}
 }

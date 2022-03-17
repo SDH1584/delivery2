@@ -16,10 +16,7 @@ public class OrderInfoVo {
 	private String orderDate;
 	private int orderStatus;
 	private List<MenuInfoVo> menuInfoArr;
-	private int method;
-	private int addPoint;
-	private int pointPay;
-	private int attendVfy;
+	
 	
 	
 	public OrderInfoVo() {
@@ -28,7 +25,7 @@ public class OrderInfoVo {
 	
 	public OrderInfoVo(int orderNo, int pOrderNo, int no, int storeNo, int fee, int finalPay, String address,
 			String storeReq, String deliveryReq, int people, String orderDate, int orderStatus,
-			List<MenuInfoVo> menuInfoArr, int method, int addPoint, int pointPay, int attendVfy) {
+			List<MenuInfoVo> menuInfoArr) {
 		super();
 		this.orderNo = orderNo;
 		this.pOrderNo = pOrderNo;
@@ -43,14 +40,7 @@ public class OrderInfoVo {
 		this.orderDate = orderDate;
 		this.orderStatus = orderStatus;
 		this.menuInfoArr = menuInfoArr;
-		this.method = method;
-		this.addPoint = addPoint;
-		this.pointPay = pointPay;
-		this.attendVfy = attendVfy;
 	}
-
-
-
 
 
 
@@ -147,56 +137,13 @@ public class OrderInfoVo {
 		this.menuInfoArr = menuInfoArr;
 	}
 
-	public int getMethod() {
-		return method;
-	}
-
-	public void setMethod(int method) {
-		this.method = method;
-	}
-
-	public int getAddPoint() {
-		return addPoint;
-	}
-
-	public void setAddPoint(int addPoint) {
-		this.addPoint = addPoint;
-	}
-
-	public int getPointPay() {
-		return pointPay;
-	}
-
-	public void setPointPay(int pointPay) {
-		this.pointPay = pointPay;
-	}
-
-	public int getAttendVfy() {
-		return attendVfy;
-	}
-
-	public void setAttendVfy(int attendVfy) {
-		this.attendVfy = attendVfy;
-	}
-
-	
-	
 	@Override
 	public String toString() {
 		return "OrderInfoVo [orderNo=" + orderNo + ", pOrderNo=" + pOrderNo + ", no=" + no + ", storeNo=" + storeNo
 				+ ", fee=" + fee + ", finalPay=" + finalPay + ", address=" + address + ", storeReq=" + storeReq
 				+ ", deliveryReq=" + deliveryReq + ", people=" + people + ", orderDate=" + orderDate + ", orderStatus="
-				+ orderStatus + ", menuInfoArr=" + menuInfoArr + ", method=" + method + ", addPoint=" + addPoint
-				+ ", pointPay=" + pointPay + ", attendVfy=" + attendVfy + "]";
+				+ orderStatus + ", menuInfoArr=" + menuInfoArr + "]";
 	}
-
-	
-	
-	
-
-
-	
-	
 
 	
 	
