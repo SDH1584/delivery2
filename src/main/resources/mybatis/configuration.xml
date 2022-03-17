@@ -24,6 +24,7 @@
 		<mapper resource="mybatis/mappers/address.xml" />
 		<mapper resource="mybatis/mappers/storeDetail.xml" />
 		<mapper resource="mybatis/mappers/mypage.xml" />
+		<mapper resource="mybatis/mappers/mypageReview.xml" />
 	</mappers>
 
 </configuration>
