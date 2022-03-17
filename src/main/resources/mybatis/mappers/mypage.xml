@@ -4,14 +4,40 @@
 
 	<!-- 회원정보 수정폼 -->
 	<select id="selectUserByNo" parameterType="int" resultType="com.javaex.vo.UserVo">
-		select	no,
+		<![CDATA[
+			select	no,
 				id,
+				password,
 				hp,
 				email,
 				profile_img
-		from users
-		where no = #{no}
+			from users
+			where no = #{no}
+		]]>
 	</select>
+
+	<!-- 회원정보 수정 -->
+	<update id="update" parameterType="com.javaex.vo.UserVo">
+		<![CDATA[
+			update users
+			set password = #{password},
+				hp = #{hp},
+				email = #{email},
+				profile_img = #{profile_img}			
+			where no = #{no}
+		]]>
+	</update>
+
+	<!-- 회원정보 수정(프로필 사진 없을 때) -->
+	<update id="updateDefault" parameterType="com.javaex.vo.UserVo">
+		<![CDATA[
+			update users
+			set password = #{password},
+				hp = #{hp},
+				email = #{email}			
+			where no = #{no}
+		]]>
+	</update>
 
 	<!-- 주문내역 가져오기 -->
 	<select id="selectOrderList" parameterType="int" resultType="com.javaex.vo.OrderListVo">

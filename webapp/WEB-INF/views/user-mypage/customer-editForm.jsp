@@ -68,15 +68,15 @@
 											<td><input type="text" readonly id="c_id" name="id" value="${userVo.id }"></td>
 										</tr>
 										<tr>
-											<th>새 비밀번호 <span class="ico">*</span>
+											<th>비밀번호 <span class="ico">*</span>
 											</th>
-											<td><input type="password" id="c_password" name="password" placeholder="새로운 비밀번호를 입력해주세요"></td>
+											<td><input type="password" id="c_password" name="password" value="${userVo.password }" placeholder="새로운 비밀번호를 입력해주세요"></td>
 										</tr>
 										<tr>
 											<th>휴대전화 <span class="ico">*</span>
 											</th>
 											<td><input type="text" id="c_hp" name="hp" value="${userVo.hp }">
-												<button type="button" id="" class="btn btn_default">다른번호 인증</button></td>
+												<button type="button" id="btn_hpChk" class="btn btn_default">다른번호 인증</button></td>
 										</tr>
 										<tr>
 											<th>이메일</th>
