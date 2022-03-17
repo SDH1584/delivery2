@@ -77,6 +77,8 @@ input[type="text"]{width:100%; text-align:left; height:34px; }
 #beforeLogin a{font-size : 20px; margin-bottom:15px;}
 #beforeLogin a:hover{color: #06F;}
 
+#order-date, #order-time {float:left; width:50%;}
+
 button[type="submit"]{
 	margin: 20px 0px 20px 0px; 
 	width:45%; height:56px; 

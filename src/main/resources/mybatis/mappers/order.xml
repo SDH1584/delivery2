@@ -30,7 +30,11 @@
 			select  store_name storeName,
 			        on_off onOff,
 			        store_no storeNo,
-			        min_price minPrice
+			        min_price minPrice,
+			        substr(open_time,1,2) openHour,
+                    substr(open_time,4,2) openMin,
+			        substr(close_time,1,2) closeHour,
+                    substr(close_time,4,2) closeMin
 			from business
 			where store_no = #{storeNo}
 		]]>
@@ -182,8 +186,8 @@
 			        #{finalPay},
 			        #{fee},
 			        #{storeReq},
-			        '',
-			        0)
+			        #{method},
+			        #{attendVfy})
 		]]>
 	</insert>
 	
@@ -224,7 +228,8 @@
 			        po.finalpaysum finalPaySum,
 			        po.p_fee pFee,
 			        to_char(og.order_date,'yyyy-mm-dd hh24:mi') orderDate,
-			        og.delivery_m_adr deliveryMAdr
+			        og.delivery_m_adr deliveryMAdr,
+			        og.delivery_req deliveryReq
 			from order_group og, (select count(*) countPeople, 
 			                             sum(final_pay) finalPaySum, 
 			                             order_no,
@@ -236,4 +241,38 @@
 		]]>
 	</select>
 	
+	<!-- 회원 보유포인트 가져오기 -->
+    <select id="selectPoint" parameterType = "int" resultType="int">
+    	<![CDATA[
+    		select sum(point)
+			from point
+			where no = #{no}
+    	]]>
+    </select>
+    
+    <!-- 적립포인트 삽입 -->
+	<insert id= "insertAddPoint" parameterType = "com.javaex.vo.OrderInfoVo">
+		<![CDATA[
+			insert into point 
+			values (seq_point.nextval, 
+					#{no}, 
+					#{addPoint}, 
+					'결제 적립', 
+					sysdate)
+		]]>
+	</insert>
+	
+	<!-- 사용포인트 삽입 -->
+	<insert id= "insertPayPoint" parameterType = "com.javaex.vo.OrderInfoVo">
+		<![CDATA[
+			insert into point 
+			values (seq_point.nextval, 
+					#{no}, 
+					#{pointPay}*(-1), 
+					'포인트 사용', 
+					sysdate)
+		]]>
+	</insert>
+	
+		
 </mapper>

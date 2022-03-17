@@ -131,6 +131,26 @@ public class OrderDao {
 		return sqlSession.selectOne("order.selectOrderInfo", orderNo); 
 	}
 	
+	/* 회원 포인트 가져오기 */
+	public int getPoint(int no) {
+		System.out.println("[OrderDao.getPoint()]");
+		
+		return sqlSession.selectOne("order.selectPoint", no);
+	}
 	
+	/*결제 포인트 적립*/
+	public void addAddPoint(OrderInfoVo oVo) {
+		System.out.println("[OrderDao.addAddPoint()]");
+		
+		int count = sqlSession.insert("order.insertAddPoint",oVo);
+		System.out.println(count+"건 삽입 성공(포인트적립)");
+	}
+	/* 사용 포인트 입력 */
+	public void addPayPoint(OrderInfoVo oVo) {
+		System.out.println("[OrderDao.addAddPoint()]");
+		
+		int count = sqlSession.insert("order.insertPayPoint",oVo);
+		System.out.println(count+"건 삽입 성공(포인트 사용)");
+	}
 	
 }

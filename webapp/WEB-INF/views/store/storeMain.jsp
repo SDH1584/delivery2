@@ -7,12 +7,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+<link href="${pageContext.request.contextPath}/assets/datetimepicker/jquery.datetimepicker.css" rel="stylesheet" >
 <link href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/assets/css/total.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/assets/css/store/store-main.css" rel="stylesheet">
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/datetimepicker/build/jquery.datetimepicker.full.min.js"></script>
 
 </head>
 <body>
@@ -161,7 +163,16 @@
 					<h4 class="modal-title">예약 막기</h4>
 				</div>
 
-				<div class="modal-body">달력</div>
+				<div class="modal-body">
+					<div id="no-date">
+						<label for="datepicker"> 날짜 선택 </label>
+						<input type="text" id="datepicker">
+						<button type="button" id="date-confirm"> 날짜선택 완료</button>
+					</div>
+					<div id="no-time">
+					</div>
+				</div>
+				<!-- modal-body -->
 
 			</div>
 			<!-- /.modal-content -->
@@ -312,6 +323,35 @@
 
 <script type="text/javascript">
 
+	/* 예약막기 날짜선택 */
+	$('#datepicker').datetimepicker({
+		minDate: '-1970/01/01',
+		maxDate: '+1970/01/31',
+		disabledWeekDays: [0,6],
+		timepicker:false,
+		format: 'y/m/d'
+	});
+	
+	/* 예약막기 시간선택 */
+	$('#date-confirm').on('click', function () {
+	    var noDate = $('#datepicker').val();
+	    var openHour = ${map.bizVo.openHour};
+	    var openMin = ${map.bizVo.openMin};
+	    var closeHour = ${map.bizVo.closeHour};
+	    var closeMin = ${map.bizVo.closeMin};
+	    
+	    if (closeHour<openHour){
+	    	closeHour = closeHour + 24;
+	    };
+	    if (closeMin>=30){
+	    	closeHour = closeHour + 1;
+	    }
+	    if(opemMin >=30){
+	    	openHour = openHour + 1;
+	    }
+
+	    
+	});
 	/* 주문상태변경 버튼 클릭 */
 	$(".btn-agree").on("click", function(e) {
 		e.stopPropagation();

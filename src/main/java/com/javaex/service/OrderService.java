@@ -131,11 +131,52 @@ public class OrderService {
 	}
 	
 	/* 주문정보 저장하기 */
-	public void saveOrderInfo(OrderInfoVo oVo) {
-		System.out.println("[OrderService.saveOrderInfo()]");
+	public int saveOrderInfo0(OrderInfoVo oVo) {
+		System.out.println("[OrderService.saveOrderInfo0()]");
 	
 		orderDao.addOrderGroup(oVo); //주문그룹테이블에 정보 삽입
 		orderDao.addPersonalOrder(oVo); //개인주문정보테이블에 정보 삽입
+		orderDao.addAddPoint(oVo); //결제포인트 적립
+		
+		if(oVo.getPointPay() != 0) {
+			orderDao.addPayPoint(oVo);
+		}//사용포인트 입력
+		
+		List<MenuInfoVo> orderMenuList = oVo.getMenuInfoArr();
+		for(int i=0; i<orderMenuList.size(); i++) {
+			MenuInfoVo orderMenu = orderMenuList.get(i);
+			orderMenu.setpOrderNo(oVo.getpOrderNo());
+			orderDao.addOrderMenu(orderMenu); // 주문메뉴테이블에 정보 삽입
+			System.out.println("menuList");
+			
+			List<OptInfoVo> optCateList = orderMenu.getOptInfoArr();
+			for(int j=0; j<optCateList.size(); j++) {
+				OptInfoVo optCate = optCateList.get(j);
+				System.out.println("cateList");
+				
+				List<SelOptVo> selOptList = optCate.getSelOptArr();
+				for(int k=0; k<selOptList.size(); k++) {
+					SelOptVo selOpt = selOptList.get(k);
+					selOpt.setOrderMenuNo(orderMenu.getOrderMenuNo());
+					selOpt.setOptionCnt(orderMenu.getOrderCount());
+					orderDao.addOrderOpt(selOpt); // 주문옵션테이블에 정보 삽입
+					System.out.println("optionList");
+				}
+			}	
+		}
+		return oVo.getpOrderNo();
+	}
+	
+	/* 주문정보 저장하기 */
+	public void saveOrderInfo1(OrderInfoVo oVo) {
+		System.out.println("[OrderService.saveOrderInfo1()]");
+	
+		orderDao.addPersonalOrder(oVo); //개인주문정보테이블에 정보 삽입
+		orderDao.addAddPoint(oVo); // 결제포인트 적ㄹ입
+		
+		if(oVo.getPointPay() != 0) {
+			orderDao.addPayPoint(oVo);
+		} //사용포인트 입력
 		
 		List<MenuInfoVo> orderMenuList = oVo.getMenuInfoArr();
 		for(int i=0; i<orderMenuList.size(); i++) {
@@ -161,34 +202,11 @@ public class OrderService {
 		}
 	}
 	
-	/* 주문정보 저장하기 */
-	public void saveOrderInfo2(OrderInfoVo oVo) {
-		System.out.println("[OrderService.saveOrderInfo()]");
-	
-		orderDao.addPersonalOrder(oVo); //개인주문정보테이블에 정보 삽입
+	/* 회원 포인트 가져오기 */
+	public int getPoint(int no) {
+		System.out.println("[OrderService.getPoint()]");
 		
-		List<MenuInfoVo> orderMenuList = oVo.getMenuInfoArr();
-		for(int i=0; i<orderMenuList.size(); i++) {
-			MenuInfoVo orderMenu = orderMenuList.get(i);
-			orderMenu.setpOrderNo(oVo.getpOrderNo());
-			orderDao.addOrderMenu(orderMenu); // 주문메뉴테이블에 정보 삽입
-			System.out.println("menuList");
-			
-			List<OptInfoVo> optCateList = orderMenu.getOptInfoArr();
-			for(int j=0; j<optCateList.size(); j++) {
-				OptInfoVo optCate = optCateList.get(j);
-				System.out.println("cateList");
-				
-				List<SelOptVo> selOptList = optCate.getSelOptArr();
-				for(int k=0; k<selOptList.size(); k++) {
-					SelOptVo selOpt = selOptList.get(k);
-					selOpt.setOrderMenuNo(orderMenu.getOrderMenuNo());
-					selOpt.setOptionCnt(orderMenu.getOrderCount());
-					orderDao.addOrderOpt(selOpt); // 주문옵션테이블에 정보 삽입
-					System.out.println("optionList");
-				}
-			}	
-		}
+		return orderDao.getPoint(no);
 	}
 	
 }
