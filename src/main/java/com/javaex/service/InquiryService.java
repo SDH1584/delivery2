@@ -9,7 +9,6 @@ import com.javaex.dao.InquiryDao;
 import com.javaex.vo.InquiryVo;
 
 
-@Service
 public class InquiryService {
 
 @Autowired

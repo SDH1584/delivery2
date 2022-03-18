@@ -13,7 +13,6 @@ import com.javaex.service.InquiryService;
 import com.javaex.vo.InquiryVo;
 import com.javaex.vo.UserVo;
 
-@Controller
 @RequestMapping("/mypage")
 public class InquiryController {
 
