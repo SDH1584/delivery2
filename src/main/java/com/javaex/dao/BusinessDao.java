@@ -51,11 +51,20 @@ public class BusinessDao {
 	}
 	
 	//가게 카테고리 리스트 가져오기
+	public List<BizstorecateVo> bizStorecateList(int storeNo) {
+		System.out.println("[BusinessDao.bizStorecateList");
+		return sqlSession.selectList("Business.bizStorecateList",storeNo);
+	}
+	
 	public List<StorecateVo> StorecateList() {
 		System.out.println("[BusinessDao.StorecateList");
 		return sqlSession.selectList("Business.StorecateList");
 	}
 	
+	public List<DeliveryVo> DeliveryList() {
+		System.out.println("[BusinessDao.DeliveryVo");
+		return sqlSession.selectList("Business.DeliveryList");
+	}
 	// 메뉴 하나 가져오기
 	public MenuVo getmenu(int menuNo) {
 
@@ -151,14 +160,15 @@ public class BusinessDao {
 		return sqlSession.selectList("Business.menulistpar", menuVo);
 	}
 	
-	/*
+	
 	// 가게 카테고리 다대다 추가
 	public int storecate(BizstorecateVo BizstorecateVo) {
-
+		
 		System.out.println("[BusinessDao.storecate()]");
+		System.out.println(BizstorecateVo);
 		int count = sqlSession.insert("Business.storecate", BizstorecateVo);
 		System.out.println("[" + count + "건이 가게 카테고리 다대다가 추가 되었습니다(BusinessDao)");
 		return count;
 	}
-	*/
+	
 }

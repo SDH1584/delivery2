@@ -112,6 +112,12 @@
 									<th colspan="2">가게 카테고리</th>
 									<td colspan="2"><button type="button" class="catebtnadd">카테고리 추가</button></td>
 								</tr>
+								<c:forEach items="${storecate.BizstorecateVo}" var="BizstorecateVo">
+								<tr>
+									<th colspan="2">가게 카테고리</th>
+									<td colspan="2">${BizstorecateVo.store_cate_name}</td>
+								</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>

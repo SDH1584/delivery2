@@ -52,10 +52,16 @@ public class JinStoreController {
 		Map<String, Object> storeMap = businessService.storeEdiForm(storeNo, userNo);
 		model.addAttribute("storeMap", storeMap);
 		
+		//가게 카테고리 출력 가져오기
+		Map<String, Object> storecate = businessService.bizStorecateList(storeNo);
+		model.addAttribute("storecate", storecate);
 		
-		//가게 카테고리 가져오기
+		//카테고리 리스트 출력
 		List<StorecateVo> StorecateList = businessService.StorecateList();
 		model.addAttribute("StorecateList", StorecateList);
+		//영업시간 가져오기
+		List<DeliveryVo> DeliveryList = businessService.DeliveryList();
+		
 		return "store/storeEdiForm";
 
 	}
@@ -234,21 +240,20 @@ public class JinStoreController {
 		return "redirect:menuManage";
 	}
 
+	
 	// 가게 카테고리 추가
 	@RequestMapping("/storecate")
-	public String storecate(@ModelAttribute StorecateVo storecateVo, @ModelAttribute BizstorecateVo BizstorecateVo,
+	public String storecate(@ModelAttribute BizstorecateVo BizstorecateVo,
 			HttpSession session) {
 
 		System.out.println("controll storecate");
 		// 가게번호
 		Map<String, Object> sessionMap = (Map<String, Object>) session.getAttribute("map");
 		int storeNo = Integer.parseInt(String.valueOf(sessionMap.get("STORE_NO")));
-
+		businessService.storecateadd(BizstorecateVo,storeNo);
 		// 가게 카테고리추가
-		/*
-		BizstorecateVo.setStore_no(storeNo);
-		businessService.storecateadd(storecateVo, BizstorecateVo);
-		*/
+		
+		
 		return "redirect:editForm";
 	}
 }

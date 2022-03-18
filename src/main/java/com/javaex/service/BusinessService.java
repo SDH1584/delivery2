@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.javaex.dao.BusinessDao;
+import com.javaex.vo.BizstorecateVo;
 import com.javaex.vo.BusinessVo;
 import com.javaex.vo.DeliveryVo;
 import com.javaex.vo.MenuOptionVo;
@@ -47,6 +48,19 @@ public class BusinessService {
 	}
 	
 	//가게 카테고리 리스트 가져오기
+	public Map<String, Object> bizStorecateList(int streNo) {
+		Map<String, Object> storeMap = new HashMap<String, Object>();
+		
+		List<BizstorecateVo> StorecateList = businessDao.bizStorecateList(streNo);
+		
+		System.out.println(StorecateList);
+		
+		storeMap.put("BizstorecateVo", StorecateList);
+		
+		return storeMap;
+	}
+	
+	// 가게 카테고리 등록 리스트 가져오기
 	public List<StorecateVo> StorecateList() {
 		System.out.println("menucatelist service");
 		return businessDao.StorecateList();
@@ -54,7 +68,10 @@ public class BusinessService {
 	
 	
 	//배달지역 리스트 가져오기
-
+	public List<DeliveryVo> DeliveryList() {
+		System.out.println("menucatelist service");
+		return businessDao.DeliveryList();
+	}
 	// 영업시간
 	public Map<String, Object> storetime(int storeNo,OpentimeVo opentimeVo){
 		
@@ -123,16 +140,14 @@ public class BusinessService {
 		return businessDao.menulistpar(menuVo);
 	}
 	
-	/*
+	
 	// 가게 카테고리 추가
-	public void storecateadd(StorecateVo storecateVo, BizstorecateVo bizstorecateVo) {
-		System.out.println("service storecate = " + storecateVo);
-		System.out.println(bizstorecateVo);
+	public void storecateadd(BizstorecateVo bizstorecateVo,int storen) {
 		// 다대다 넘김
-		bizstorecateVo.setStore_cate_no();
+		bizstorecateVo.setStore_no(storen);
 		businessDao.storecate(bizstorecateVo);
 	}
-	*/
+	
 	// 메뉴 하나 가져오기
 	public MenuVo getmenu(int menuNo) {
 
