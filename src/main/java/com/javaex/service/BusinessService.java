@@ -60,12 +60,24 @@ public class BusinessService {
 		return storeMap;
 	}
 	
+	//휴일 체크
+	public Map<String, Object> OpentimeList(int streNo) {
+		Map<String, Object> storeMap = new HashMap<String, Object>();
+		
+		List<OpentimeVo> Opentime = businessDao.OpentimeList(streNo);
+		
+		System.out.println(Opentime);
+		
+		storeMap.put("OpentimeVO", Opentime);
+		
+		return storeMap;
+	}
+	
 	// 가게 카테고리 등록 리스트 가져오기
 	public List<StorecateVo> StorecateList() {
 		System.out.println("menucatelist service");
 		return businessDao.StorecateList();
 	}
-	
 	
 	//배달지역 리스트 가져오기
 	public Map<String, Object> DeliveryList(int sroreNO) {
@@ -77,7 +89,7 @@ public class BusinessService {
 		
 	}
 	
-	// 영업시간
+	// 휴일 등록하기
 	public Map<String, Object> storetime(int storeNo,OpentimeVo opentimeVo){
 		
 		System.out.println("storetime service");

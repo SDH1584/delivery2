@@ -56,15 +56,23 @@ public class BusinessDao {
 		return sqlSession.selectList("Business.bizStorecateList",storeNo);
 	}
 	
+	//가게 카테고리 등록 리스트 가져오기
 	public List<StorecateVo> StorecateList() {
 		System.out.println("[BusinessDao.StorecateList");
 		return sqlSession.selectList("Business.StorecateList");
 	}
-	
+	//배달 지역 가져오기
 	public List<DeliveryVo> DeliveryList(int sroreNO) {
 		System.out.println("[BusinessDao.DeliveryVo");
 		return sqlSession.selectList("Business.DeliveryList",sroreNO);
 	}
+	
+	//가게 휴일 리스트 가져오기
+	public List<OpentimeVo> OpentimeList(int storeNo) {
+		System.out.println("[BusinessDao.OpentimeList" + storeNo);
+		return sqlSession.selectList("Business.OpentimeList",storeNo);
+	}
+	
 	// 메뉴 하나 가져오기
 	public MenuVo getmenu(int menuNo) {
 

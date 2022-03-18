@@ -127,7 +127,17 @@
 		]]>
 	</insert>
 
-
+	<!-- 휴일 체크 리스트 -->
+	<select id="OpentimeList" parameterType="int"
+		resultType="OpentimeVo">
+		<![CDATA[
+			SELECT  store_no,
+					day_off
+					FROM open_time
+			where store_no = #{store_no}
+		]]>
+	</select>
+	
 	<!-- 가게 카테고리 다대다 추가 -->
 	<insert id="storecate" parameterType="BizstorecateVo">
 		

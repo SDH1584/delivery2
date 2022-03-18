@@ -16,21 +16,28 @@ public class BusinessVo {
 	private String origin;
 	private int onOff;
 	private int fee;
-	private String store_cate_no;
+	private int store_cate_no;
 	private String store_cate_name;
 	private String	open_time;
 	private String	close_time;
-	
+	private int cnt;
 	
 	public BusinessVo() {
 		
 	}
 
 
+
+
+
+
+
+
 	public BusinessVo(int storeNo, int no, int bizNo, String storeName, String storePhone, String storeMAdr,
 			String storeSAdr, double storeLat, double sotreLng, String logoImg, int minPrice, String notice,
-			String origin, int onOff, int fee, String store_cate_no, String store_cate_name, String open_time,
-			String close_time) {
+			String origin, int onOff, int fee, int store_cate_no, String store_cate_name, String open_time,
+			String close_time, int cnt) {
+		super();
 		this.storeNo = storeNo;
 		No = no;
 		this.bizNo = bizNo;
@@ -50,7 +57,39 @@ public class BusinessVo {
 		this.store_cate_name = store_cate_name;
 		this.open_time = open_time;
 		this.close_time = close_time;
+		this.cnt = cnt;
 	}
+
+
+
+
+
+
+
+
+	public void setStore_cate_no(int store_cate_no) {
+		this.store_cate_no = store_cate_no;
+	}
+
+
+
+
+
+
+
+
+	public int getCnt() {
+		return cnt;
+	}
+
+
+
+
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
+
+
 
 
 	public int getStoreNo() {
@@ -203,16 +242,6 @@ public class BusinessVo {
 	}
 
 
-	public String getStore_cate_no() {
-		return store_cate_no;
-	}
-
-
-	public void setStore_cate_no(String store_cate_no) {
-		this.store_cate_no = store_cate_no;
-	}
-
-
 	public String getStore_cate_name() {
 		return store_cate_name;
 	}
@@ -243,6 +272,12 @@ public class BusinessVo {
 	}
 
 
+
+
+
+
+
+
 	@Override
 	public String toString() {
 		return "BusinessVo [storeNo=" + storeNo + ", No=" + No + ", bizNo=" + bizNo + ", storeName=" + storeName
@@ -250,8 +285,15 @@ public class BusinessVo {
 				+ storeLat + ", sotreLng=" + sotreLng + ", logoImg=" + logoImg + ", minPrice=" + minPrice + ", notice="
 				+ notice + ", origin=" + origin + ", onOff=" + onOff + ", fee=" + fee + ", store_cate_no="
 				+ store_cate_no + ", store_cate_name=" + store_cate_name + ", open_time=" + open_time + ", close_time="
-				+ close_time + "]";
+				+ close_time + ", cnt=" + cnt + "]";
 	}
+
+
+
+
+
+
+
 	
 	
 	

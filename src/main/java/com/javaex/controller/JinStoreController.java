@@ -52,17 +52,23 @@ public class JinStoreController {
 		Map<String, Object> storeMap = businessService.storeEdiForm(storeNo, userNo);
 		model.addAttribute("storeMap", storeMap);
 		
-		//가게 카테고리 출력 가져오기
+		//가게 등록한 카테고리 리스트 져오기
 		Map<String, Object> storecate = businessService.bizStorecateList(storeNo);
 		model.addAttribute("storecate", storecate);
 		
 		//카테고리 리스트 출력
 		List<StorecateVo> StorecateList = businessService.StorecateList();
 		model.addAttribute("StorecateList", StorecateList);
-		//영업시간 가져오기
+		//배달지역 가져오기
 		Map<String, Object> DeliveryList = businessService.DeliveryList(storeNo);
-		System.out.println(DeliveryList);
 		model.addAttribute("DeliveryList", DeliveryList);
+		
+		//휴일체크 리스트 가져오기
+		Map<String, Object> Opentime = businessService.OpentimeList(storeNo);
+		System.out.println("controll op"+Opentime);
+		model.addAttribute("OpentimeList", Opentime);
+		
+		//휴일체크 하나 가져오기
 		return "store/storeEdiForm";
 
 	}
