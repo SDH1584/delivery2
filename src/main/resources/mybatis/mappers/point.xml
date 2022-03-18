@@ -15,7 +15,7 @@
 	</select>
 	
 	<!-- 전체포인트 -->
-	<select id="allpoint" parameterType="int" resultType="int">
+	<select id="allPoint" parameterType="int" resultType="int">
 		<![CDATA[
 			select sum(point)
 			from point
@@ -23,7 +23,16 @@
 		]]>
 	</select>
 	
+	<!-- 소멸예정포인트 -->
+	<select id="validityPoint" parameterType="int" resultType="int">
+		<![CDATA[
+			select point
+			from point
+			where trunc(( sysdate -point_date )/365)>=1            
+			and no=#{no}
+		]]>
 	
+	</select>
 	
 	
 </mapper>

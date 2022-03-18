@@ -43,10 +43,10 @@
 
 			<div id="main1" class="clearfix">
 				<div id="mypointcheck" class="clearfix">
-					<span class="pointall">전체 포인트</span> <span class="countpoint">N포인트</span>
+					<span class="pointall">전체 포인트</span> <span class="countpoint">${allPoint }포인트</span>
 				</div>
 				<div id="timelimitpoint" class="clearfix">
-					<span class="pointall">소멸예정포인트</span> <span class="countpoint">N포인트</span>
+					<span class="pointall">소멸예정포인트</span> <span class="countpoint">${validityPoint }포인트</span>
 				</div>
 				<table id="pointlist">
 					<thead>
