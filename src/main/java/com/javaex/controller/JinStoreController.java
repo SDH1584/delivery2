@@ -23,6 +23,7 @@ import com.javaex.vo.MenuOptionVo;
 import com.javaex.vo.MenuOptioncateVO;
 import com.javaex.vo.MenuVo;
 import com.javaex.vo.MenucateVo;
+import com.javaex.vo.OpentimeVo;
 import com.javaex.vo.StorecateVo;
 import com.javaex.vo.UserVo;
 
@@ -46,16 +47,49 @@ public class JinStoreController {
 		
 		// 유저번호
 		int userNo = Integer.parseInt(String.valueOf(sessionMap.get("NO")));
-
-
+		
 		//jsp에 포워딩
 		Map<String, Object> storeMap = businessService.storeEdiForm(storeNo, userNo);
 		model.addAttribute("storeMap", storeMap);
-
+		
+		
+		//가게 카테고리 가져오기
+		List<StorecateVo> StorecateList = businessService.StorecateList();
+		model.addAttribute("StorecateList", StorecateList);
 		return "store/storeEdiForm";
 
 	}
 	
+	// 가게 수정
+		@RequestMapping("/modify")
+		public String modify(@ModelAttribute UserVo userVo, HttpSession session, @ModelAttribute BusinessVo businessVo,
+				@RequestParam("file") MultipartFile file ,@ModelAttribute OpentimeVo opentimeVo) {
+			System.out.println("JinStoreController/modify");
+
+			// 유저 업데이트
+			Map<String, Object> sessionMap = (Map<String, Object>) session.getAttribute("map");
+			int storeNo = Integer.parseInt(String.valueOf(sessionMap.get("STORE_NO")));
+			int userNo = Integer.parseInt(String.valueOf(sessionMap.get("NO")));
+			
+			// 유저 no 가져오기
+			userVo.setNo(userNo);
+			// 가게 storeNo 가져오기
+			businessVo.setStoreNo(storeNo);
+
+			// 유저정보 수정
+			businessService.modify(userVo);
+
+			// 가게정보수정
+			String saveName = jinfileService.restore(file);
+			businessVo.setLogoImg(saveName);
+			businessService.Businessmodify(businessVo);
+			
+			// 영업시간 수정
+			Map<String, Object> storeMap = businessService.storetime(storeNo,opentimeVo);
+			
+			return "redirect:editForm";
+
+		}
 	
 	// 배달지역저장(기본, 추가)
 	@ResponseBody
@@ -129,35 +163,6 @@ public class JinStoreController {
 		System.out.println(mnuOptionVo);
 		businessService.cateOption(mnuOptionVo);
 		return "redirect:menuOption?menu_no=" + mnuOptionVo.getMenuNo() ;
-	}
-
-	// 가게 수정
-	@RequestMapping("/modify")
-	public String modify(@ModelAttribute UserVo userVo, HttpSession session, @ModelAttribute BusinessVo businessVo,
-			@RequestParam("file") MultipartFile file) {
-		System.out.println("JinStoreController/modify");
-
-		// 유저 업데이트
-		Map<String, Object> sessionMap = (Map<String, Object>) session.getAttribute("map");
-		int storeNo = Integer.parseInt(String.valueOf(sessionMap.get("STORE_NO")));
-		int userNo = Integer.parseInt(String.valueOf(sessionMap.get("NO")));
-		// 유저 no 가져오기
-		userVo.setNo(userNo);
-		// 가게 storeNo 가져오기
-		businessVo.setStoreNo(storeNo);
-		System.out.println("BusinessController = " + businessVo);
-
-		// 유저정보 수정
-		businessService.modify(userVo);
-
-		// 가게정보수정
-		String saveName = jinfileService.restore(file);
-		businessVo.setLogoImg(saveName);
-		businessService.Businessmodify(businessVo);
-
-		// 영업시간 수정
-		return "redirect:editForm";
-
 	}
 
 	// 메뉴 리스트
@@ -240,9 +245,10 @@ public class JinStoreController {
 		int storeNo = Integer.parseInt(String.valueOf(sessionMap.get("STORE_NO")));
 
 		// 가게 카테고리추가
+		/*
 		BizstorecateVo.setStore_no(storeNo);
 		businessService.storecateadd(storecateVo, BizstorecateVo);
-
+		*/
 		return "redirect:editForm";
 	}
 }

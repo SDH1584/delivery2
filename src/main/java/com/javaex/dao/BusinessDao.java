@@ -13,6 +13,7 @@ import com.javaex.vo.MenuOptionVo;
 import com.javaex.vo.MenuOptioncateVO;
 import com.javaex.vo.MenuVo;
 import com.javaex.vo.MenucateVo;
+import com.javaex.vo.OpentimeVo;
 import com.javaex.vo.StorecateVo;
 import com.javaex.vo.UserVo;
 
@@ -49,12 +50,35 @@ public class BusinessDao {
 		return sqlSession.selectOne("Business.getDeliveryArea", deliNo);
 	}
 	
-	
+	//가게 카테고리 리스트 가져오기
+	public List<StorecateVo> StorecateList() {
+		System.out.println("[BusinessDao.StorecateList");
+		return sqlSession.selectList("Business.StorecateList");
+	}
 	
 	// 메뉴 하나 가져오기
 	public MenuVo getmenu(int menuNo) {
 
 		return sqlSession.selectOne("Business.getmenu", menuNo);
+	}
+	
+	
+	// 영업시간 삭제
+	public int storetimedelete(int storeno) {
+		System.out.println("[BusinessDao.storetimedelete");
+		int count = sqlSession.delete("Business.storetimedelete", storeno);
+		System.out.println("[" + count + "건이 영업시간이 삭제되었습니다(BusinessDao)");
+		return count;
+	}
+	
+	
+	// 영업시간 추가
+	public int storetimeinsert(OpentimeVo opentimeVo) {
+		System.out.println("[BusinessDao.storetimeinsert");
+		System.out.println(opentimeVo);
+		int count = sqlSession.insert("Business.storetimeinsert", opentimeVo);
+		System.out.println("[" + count + "건이 영업시간이 추가되었습니다(BusinessDao)");
+		return count;
 	}
 
 	// 유저 업데이트
@@ -126,16 +150,8 @@ public class BusinessDao {
 		System.out.println("menulist Dao");
 		return sqlSession.selectList("Business.menulistpar", menuVo);
 	}
-
-	// 가게 카테고리 추가
-	public int storecateadd(StorecateVo storecateVo) {
-
-		System.out.println("[BusinessDao.storecateadd()]");
-		int count = sqlSession.insert("Business.storecateadd", storecateVo);
-		System.out.println("[" + count + "건이 가게 카테고리가 추가 되었습니다(BusinessDao)");
-		return count;
-	}
-
+	
+	/*
 	// 가게 카테고리 다대다 추가
 	public int storecate(BizstorecateVo BizstorecateVo) {
 
@@ -144,4 +160,5 @@ public class BusinessDao {
 		System.out.println("[" + count + "건이 가게 카테고리 다대다가 추가 되었습니다(BusinessDao)");
 		return count;
 	}
+	*/
 }

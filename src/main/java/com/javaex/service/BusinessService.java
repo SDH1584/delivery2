@@ -8,13 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.javaex.dao.BusinessDao;
-import com.javaex.vo.BizstorecateVo;
 import com.javaex.vo.BusinessVo;
 import com.javaex.vo.DeliveryVo;
 import com.javaex.vo.MenuOptionVo;
 import com.javaex.vo.MenuOptioncateVO;
 import com.javaex.vo.MenuVo;
 import com.javaex.vo.MenucateVo;
+import com.javaex.vo.OpentimeVo;
 import com.javaex.vo.StorecateVo;
 import com.javaex.vo.UserVo;
 
@@ -45,9 +45,35 @@ public class BusinessService {
 		return storeMap;
 		
 	}
-
+	
+	//가게 카테고리 리스트 가져오기
+	public List<StorecateVo> StorecateList() {
+		System.out.println("menucatelist service");
+		return businessDao.StorecateList();
+	}
+	
+	
 	//배달지역 리스트 가져오기
 
+	// 영업시간
+	public Map<String, Object> storetime(int storeNo,OpentimeVo opentimeVo){
+		
+		System.out.println("storetime service");
+		Map<String, Object> storeMap = new HashMap<String, Object>();
+		opentimeVo.setStore_no(storeNo);
+		System.out.println(storeNo);
+		System.out.println(opentimeVo);
+		businessDao.storetimedelete(storeNo);
+		
+		for(int i=0; i<opentimeVo.getDay_offs().length; i++) {
+			opentimeVo.setDay_off(opentimeVo.getDay_offs()[i]);
+			businessDao.storetimeinsert(opentimeVo);
+		}
+		
+
+		return storeMap;
+	}
+	
 	// 유저 정보수정
 	public void modify(UserVo userVo) {
 		System.out.println(userVo);
@@ -68,6 +94,7 @@ public class BusinessService {
 		return businessDao.getDeliveryArea(deliveryVo.getDelivery_no());
 	}
 	
+
 	// 메뉴카테고리 추가
 	public void menucateadd(MenucateVo menucateVo) {
 		System.out.println("menucateadd service");
@@ -95,18 +122,17 @@ public class BusinessService {
 		System.out.println("menulist service");
 		return businessDao.menulistpar(menuVo);
 	}
-
+	
+	/*
 	// 가게 카테고리 추가
 	public void storecateadd(StorecateVo storecateVo, BizstorecateVo bizstorecateVo) {
 		System.out.println("service storecate = " + storecateVo);
 		System.out.println(bizstorecateVo);
-
-		businessDao.storecateadd(storecateVo);
 		// 다대다 넘김
-		bizstorecateVo.setStore_cate_no(storecateVo.getStore_cate_no());
+		bizstorecateVo.setStore_cate_no();
 		businessDao.storecate(bizstorecateVo);
 	}
-
+	*/
 	// 메뉴 하나 가져오기
 	public MenuVo getmenu(int menuNo) {
 

@@ -45,7 +45,15 @@
 		]]>
 	</select>
 
-
+	<!-- 가게 카테고리 리스트 -->
+	<select id="StorecateList" parameterType="StorecateVo" resultType="StorecateVo">
+		<![CDATA[
+			 	select 
+						store_cate_no,
+						store_cate_name
+			 	from store_cate
+		]]>
+	</select>
 
 	<!-- 배달지역 추가 추가 -->
 	<insert id="saveDeliveryArea" parameterType="DeliveryVo">
@@ -62,7 +70,8 @@
 
 
 	<!-- 배달지역 하나 가져오기 -->
-	<select id="getDeliveryArea" parameterType="int" resultType="DeliveryVo">
+	<select id="getDeliveryArea" parameterType="int"
+		resultType="DeliveryVo">
 		<![CDATA[
 			SELECT	delivery_no,
 					store_no,
@@ -73,8 +82,23 @@
     		where delivery_no = #{delivery_no}
 		]]>
 	</select>
-
-
+	
+	<!-- 영업시간 삭제 -->	
+	<delete id="storetimedelete" parameterType="int">
+		<![CDATA[
+			DELETE FROM open_time 
+			WHERE store_no = #{store_no}
+		]]>
+	</delete>
+	
+	<!-- 영업추가 추가 -->
+	<insert id="storetimeinsert" parameterType="OpentimeVo">
+		<![CDATA[
+				
+				insert into open_time 
+				values(seq_open_time.nextval, #{store_no}, #{day_off} )
+		]]>
+	</insert>
 	<!-- 유저 업데이트 -->
 
 	<update id="Userupdate" parameterType="UserVo">
@@ -184,20 +208,7 @@
 		]]>
 	</select>
 
-	<!-- 가게 카테고리 등록 -->
-	<insert id="storecateadd" parameterType="StorecateVo">
-		<selectKey keyProperty="store_cate_no" resultType="int"
-			order="BEFORE">
-			select seq_store_cate.nextval from dual
-		</selectKey>
-		<![CDATA[
-				
-				insert into store_cate 
-				values(#{store_cate_no}, #{store_cate_name})
-		]]>
-	</insert>
-
-	<!-- 가게 다대다 키 등록 -->
+	<!-- 가게 
 	<insert id="storecate" parameterType="BizstorecateVo">
 		
 		<![CDATA[
@@ -206,7 +217,7 @@
 				values(seq_biz_store_cate.nextval, #{store_cate_no},#{store_no})
 		]]>
 	</insert>
-
+	다대다 키 등록 -->
 	<!-- 유저정보 -->
 	<select id="getmenu" parameterType="int" resultType="MenuVo">
 		<![CDATA[

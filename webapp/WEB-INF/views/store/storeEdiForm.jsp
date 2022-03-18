@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,15 +96,15 @@
 								</tr>
 								<tr>
 									<th>휴일체크</th>
-									<td>월 <input type="checkbox" name="chk_rdo" value="1" class="chbtn"></td>
-									<td>화 <input type="checkbox" name="chk_rdo" value="2" class="chbtn"></td>
-									<td>수 <input type="checkbox" name="chk_rdo" value="3" class="chbtn"></td>
+									<td>월 <input type="checkbox" name="day_offs" value="1" class="chbtn"></td>
+									<td>화 <input type="checkbox" name="day_offs" value="2" class="chbtn"></td>
+									<td>수 <input type="checkbox" name="day_offs" value="3" class="chbtn"></td>
 								</tr>
 								<tr>
-									<th>목 <input type="checkbox" name="chk_rdo" value="4" class="chbtn"></th>
-									<td>금 <input type="checkbox" name="chk_rdo" value="5" class="chbtn"></td>
-									<td>토 <input type="checkbox" name="chk_rdo" value="6" class="chbtn"></td>
-									<td>일 <input type="checkbox" name="chk_rdo" value="0" class="chbtn"></td>
+									<th>목 <input type="checkbox" name="day_offs" value="4" class="chbtn"></th>
+									<td>금 <input type="checkbox" name="day_offs" value="5" class="chbtn"></td>
+									<td>토 <input type="checkbox" name="day_offs" value="6" class="chbtn"></td>
+									<td>일 <input type="checkbox" name="day_offs" value="0" class="chbtn"></td>
 								</tr>
 								
 								
@@ -172,20 +173,13 @@
 
             <div class="modal_body">
             <form action="${pageContext.request.contextPath}/admin/storecate">
-                <select name="store_cate_name" class="sort">
-                    <option value="one">1인분주문</option>
-                    <option value="Chinese">중국집</option>
-                    <option value="Korean">한식</option>
-                    <option value="chicken">치킨</option>
-                    <option value="jpane">일식/돈가스</option>
-                    <option value="convenience">편의점/마트</option>
-                    <option value="fran">프랜차이즈</option>
-                    <option value="pizza">피자/양식</option>
-                    <option value="night">야식</option>
-                    <option value="jokbal">족발/보쌈</option>
-                    <option value="cafe">카페/디저트</option>
-                    <option value="Koreansnak">카페/분식</option>
+            	
+                <select name="store_cate_no" class="sort">
+                <c:forEach items="${requestScope.StorecateList}" var="StorecateVo">
+                    <option value="${StorecateVo.store_cate_no}">${StorecateVo.store_cate_name}</option>
+                </c:forEach>
                 </select>
+                
                 <button type="submit" class="catebtnadd2">카테고리 등록</button>
             </form>
             </div>
