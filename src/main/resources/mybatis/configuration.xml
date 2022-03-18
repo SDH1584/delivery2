@@ -14,9 +14,14 @@
 			<typeAlias alias="MenuOptioncateVO" type="com.javaex.vo.MenuOptioncateVO" />
 			<typeAlias alias="BizstorecateVo" type="com.javaex.vo.BizstorecateVo" />
 			<typeAlias alias="MenuOptionVo" type="com.javaex.vo.MenuOptionVo" />
+			<typeAlias alias="PointVo" type="com.javaex.vo.PointVo" />
+			<typeAlias alias="InquiryVo" type="com.javaex.vo.PointVo" />
+		
 	</typeAliases>
 	
 	<mappers>
+		<mapper resource="mybatis/mappers/inquiry.xml" />
+		<mapper resource="mybatis/mappers/point.xml" />
 		<mapper resource="mybatis/mappers/Business.xml" />
 		<mapper resource="mybatis/mappers/user.xml" />
 		<mapper resource="mybatis/mappers/main.xml" />
