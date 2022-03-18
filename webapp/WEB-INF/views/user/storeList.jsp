@@ -65,7 +65,9 @@
                 	
                 	<div id="content-body" class="clearfix">
                 		<c:forEach items="${BusinessVo}" var="vo">
+                		
 	                		<div class="storeBox">
+	                		<a href="${pageContext.request.contextPath}/store/${vo.storeNo}/reserv" >
 				                <table>
 				                    <colgroup>
 				                    	<col width="28%">
@@ -93,7 +95,9 @@
 				                        </tr>
 				                    </tbody>
 				                </table>
-				            </div>
+				                </a>
+				            </div> 
+				            
                 		</c:forEach>
                 	
                 	</div>
