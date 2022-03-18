@@ -3,7 +3,7 @@
 <mapper namespace="point">
 
 	<!-- 포인트내역 가져오기 -->
-	<select id="pointList" parameterType="int" resultType="com.javaex.PointVo">
+	<select id="pointList" parameterType="int" resultType="pointVo">
 		<![CDATA[
 			select no,
 			       point_desc,

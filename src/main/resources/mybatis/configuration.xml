@@ -15,7 +15,7 @@
 			<typeAlias alias="BizstorecateVo" type="com.javaex.vo.BizstorecateVo" />
 			<typeAlias alias="MenuOptionVo" type="com.javaex.vo.MenuOptionVo" />
 			<typeAlias alias="PointVo" type="com.javaex.vo.PointVo" />
-			<typeAlias alias="InquiryVo" type="com.javaex.vo.PointVo" />
+			<typeAlias alias="InquiryVo" type="com.javaex.vo.InquiryVo" />
 			<typeAlias alias="OpentimeVo" type="com.javaex.vo.OpentimeVo" />
 	</typeAliases>
 	

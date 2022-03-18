@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="inquiry">
+
+	<select id="inquiryList" parameterType="int" resultType="InquiryVo">
+		<![CDATA[
+			select  no,
+					inquiry_no,
+					inquiry_cate,
+					inquiry_title,
+					inquiry_content,
+					response_person,
+					response_content
+			from   inquiry
+			where no=#{no}
+		]]>
+	</select>
+	
+	
+	
+</mapper>
