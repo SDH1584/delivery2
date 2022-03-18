@@ -61,9 +61,9 @@ public class BusinessDao {
 		return sqlSession.selectList("Business.StorecateList");
 	}
 	
-	public List<DeliveryVo> DeliveryList() {
+	public List<DeliveryVo> DeliveryList(int sroreNO) {
 		System.out.println("[BusinessDao.DeliveryVo");
-		return sqlSession.selectList("Business.DeliveryList");
+		return sqlSession.selectList("Business.DeliveryList",sroreNO);
 	}
 	// 메뉴 하나 가져오기
 	public MenuVo getmenu(int menuNo) {

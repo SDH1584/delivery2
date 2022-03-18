@@ -68,10 +68,15 @@ public class BusinessService {
 	
 	
 	//배달지역 리스트 가져오기
-	public List<DeliveryVo> DeliveryList() {
-		System.out.println("menucatelist service");
-		return businessDao.DeliveryList();
+	public Map<String, Object> DeliveryList(int sroreNO) {
+		System.out.println("DeliveryList service");
+		Map<String, Object> storeMap = new HashMap<String, Object>();
+		List<DeliveryVo> DeliveryList = businessDao.DeliveryList(sroreNO);
+		storeMap.put("DeliveryVo", DeliveryList);
+		return storeMap;
+		
 	}
+	
 	// 영업시간
 	public Map<String, Object> storetime(int storeNo,OpentimeVo opentimeVo){
 		

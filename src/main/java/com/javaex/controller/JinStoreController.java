@@ -60,8 +60,9 @@ public class JinStoreController {
 		List<StorecateVo> StorecateList = businessService.StorecateList();
 		model.addAttribute("StorecateList", StorecateList);
 		//영업시간 가져오기
-		List<DeliveryVo> DeliveryList = businessService.DeliveryList();
-		
+		Map<String, Object> DeliveryList = businessService.DeliveryList(storeNo);
+		System.out.println(DeliveryList);
+		model.addAttribute("DeliveryList", DeliveryList);
 		return "store/storeEdiForm";
 
 	}

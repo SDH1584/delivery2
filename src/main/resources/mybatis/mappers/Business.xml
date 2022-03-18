@@ -45,6 +45,20 @@
 		]]>
 	</select>
 
+	<!-- 배달지역 리스트 -->
+	<select id="DeliveryList" parameterType="int"
+		resultType="DeliveryVo">
+		<![CDATA[
+			SELECT
+        			DELIVERY_NO,
+        			STORE_NO,
+        			DELIVERY_AREA,
+        			FEE,
+        			AREA_CODE
+     		FROM DELIVERY
+     		where STORE_NO = #{store_no}
+		]]>
+	</select>
 	<!-- 가게 카테고리 리스트 -->
 	<select id="bizStorecateList" parameterType="int"
 		resultType="StorecateVo">
@@ -67,7 +81,7 @@
      		FROM store_cate
 		]]>
 	</select>
-	
+
 	<!-- 배달지역 추가 추가 -->
 	<insert id="saveDeliveryArea" parameterType="DeliveryVo">
 		<selectKey keyProperty="delivery_no" resultType="int"
