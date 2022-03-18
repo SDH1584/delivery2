@@ -8,7 +8,7 @@
 			select no,
 			       point_desc,
 			       point_date,
-			       point_date + (INTERVAL '1' YEAR)
+			       point_date + (INTERVAL '1' YEAR)pointVDate
 			from   point
 			where no=#{no}
 		]]>

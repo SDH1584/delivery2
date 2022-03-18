@@ -58,37 +58,14 @@
 						</tr>
 					</thead>
 					<tbody>
+					<c:forEach items="${pointList }" var="pointVo" varStatus="status">
 						<tr>
-							<td>21.02.27</td>
-							<td class="pointcontents2">[구매적립]주문 0.5% 적립</td>
-							<td>23.02.27</td>
-							<td>+434원</td>
+							<td>${pointVo.pointDate }</td>
+							<td class="pointcontents2">${pointVo.pointContent }</td>
+							<td>${pointVo.pointVDate }</td>
+							<td>${pointVo.point }</td>
 						</tr>
-						<tr>
-							<td>21.02.27</td>
-							<td class="pointcontents2">[구매적립]주문 0.5% 적립</td>
-							<td>23.02.27</td>
-							<td>+434원</td>
-						</tr>
-						<tr>
-							<td>21.02.27</td>
-							<td class="pointcontents2">[구매적립]주문 0.5% 적립</td>
-							<td>23.02.27</td>
-							<td>+434원</td>
-						</tr>
-						<tr>
-							<td>21.02.27</td>
-							<td class="pointcontents2">[구매적립]주문 0.5% 적립</td>
-							<td>23.02.27</td>
-							<td>+434원</td>
-						</tr>
-						<tr>
-							<td>21.02.27</td>
-							<td class="pointcontents2">[구매적립]주문 0.5% 적립</td>
-							<td>23.02.27</td>
-							<td>+434원</td>
-						</tr>
-
+					</c:forEach>
 						<tr id="last">
 							<td>2021-02-27</td>
 							<td class="pointcontents2">[사용]주문결제시 할인</td>

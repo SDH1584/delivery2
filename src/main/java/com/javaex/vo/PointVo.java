@@ -7,17 +7,11 @@ public class PointVo {
 	private int point;
 	private int pointDesc;
 	private String pointDate;
+	private String pointVDate;
 	public PointVo() {
+	
 		super();
 		// TODO Auto-generated constructor stub
-	}
-	public PointVo(int pointNo, int no, int point, int pointDesc, String pointDate) {
-		super();
-		this.pointNo = pointNo;
-		this.no = no;
-		this.point = point;
-		this.pointDesc = pointDesc;
-		this.pointDate = pointDate;
 	}
 	public int getPointNo() {
 		return pointNo;
@@ -49,10 +43,25 @@ public class PointVo {
 	public void setPointDate(String pointDate) {
 		this.pointDate = pointDate;
 	}
+	public String getPointVDate() {
+		return pointVDate;
+	}
+	public void setPointVDate(String pointVDate) {
+		this.pointVDate = pointVDate;
+	}
+	public PointVo(int pointNo, int no, int point, int pointDesc, String pointDate, String pointVDate) {
+		super();
+		this.pointNo = pointNo;
+		this.no = no;
+		this.point = point;
+		this.pointDesc = pointDesc;
+		this.pointDate = pointDate;
+		this.pointVDate = pointVDate;
+	}
 	@Override
 	public String toString() {
 		return "PointVo [pointNo=" + pointNo + ", no=" + no + ", point=" + point + ", pointDesc=" + pointDesc
-				+ ", pointDate=" + pointDate + "]";
+				+ ", pointDate=" + pointDate + ", pointVDate=" + pointVDate + "]";
 	}
 	
 }
