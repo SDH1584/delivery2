@@ -106,21 +106,17 @@
 								</tr>
 
 								<tr>
-								<th>휴일체크</th>
-								<td colspan="3">
-								<!--
-								<c:forEach items="${OpentimeList.OpentimeVO}" var="vo">
-										<div>월 <input type="checkbox" name="day_offs" value="1" class="chbtn"></div>
-										<div>화 <input type="checkbox" name="day_offs" value="2" class="chbtn"></div>
-										<div>수 <input type="checkbox" name="day_offs" value="3" class="chbtn"></div>
-										<div>목 <input type="checkbox" name="day_offs" value="4" class="chbtn"></div>
-										<div>금 <input type="checkbox" name="day_offs" value="5" class="chbtn"></div>
-										<div>토 <input type="checkbox" name="day_offs" value="6" class="chbtn"></div>
-										<div>일 <input type="checkbox" name="day_offs" value="0" class="chbtn"></div>
-								</c:forEach>
-								-->
-								</td>
-
+									<th>휴일체크</th>
+									<td>월 <input type="checkbox" name="day_offs" value="1" class="chbtn"></td>
+									<td>화 <input type="checkbox" name="day_offs" value="2" class="chbtn"></td>
+									<td>수 <input type="checkbox" name="day_offs" value="3" class="chbtn"></td>
+								</tr>
+								
+								<tr>
+									<th>목 <input type="checkbox" name="day_offs" value="4" class="chbtn"></th>
+									<td>금 <input type="checkbox" name="day_offs" value="5" class="chbtn"></td>
+									<td>토 <input type="checkbox" name="day_offs" value="6" class="chbtn"></td>
+									<td>일 <input type="checkbox" name="day_offs" value="0" class="chbtn"></td>
 								</tr>
 
 								<tr>
